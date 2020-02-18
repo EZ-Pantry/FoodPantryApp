@@ -408,7 +408,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="48T-gx-oVc"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="HOME" id="ms9-ze-WOx"/>
+                    <tabBarItem key="tabBarItem" title="HOME" image="house.fill" catalog="system" id="ms9-ze-WOx"/>
                     <connections>
                         <outlet property="welcomeNameLbl" destination="uVd-jB-qVN" id="sK8-4E-KPY"/>
                     </connections>
@@ -430,6 +430,7 @@
                     <connections>
                         <segue destination="6zC-U3-2zj" kind="relationship" relationship="viewControllers" id="HLC-EI-gPB"/>
                         <segue destination="oHz-yb-dhY" kind="relationship" relationship="viewControllers" id="jue-31-CKR"/>
+                        <segue destination="lYj-js-UPa" kind="relationship" relationship="viewControllers" id="Mg0-v9-3I5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5R1-uc-UKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -621,7 +622,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oJ5-TF-feG"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="SEARCH" id="obQ-mC-OV2"/>
+                    <tabBarItem key="tabBarItem" title="SEARCH" image="magnifyingglass" catalog="system" id="obQ-mC-OV2"/>
                     <connections>
                         <outlet property="collectionView" destination="VuH-bk-84n" id="Qbz-hB-CBe"/>
                         <outlet property="searchFoodBear" destination="pqI-3A-61J" id="hpI-Le-RYv"/>
@@ -631,12 +632,12 @@
             </objects>
             <point key="canvasLocation" x="3209" y="218"/>
         </scene>
-        <!--Code View Controller-->
+        <!--SCAN-->
         <scene sceneID="RB7-cW-IHs">
             <objects>
-                <viewController id="lYj-js-UPa" customClass="QRCodeViewController" customModule="QRCodeReader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="lYj-js-UPa" customClass="QRCodeViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lAc-Ja-nzY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Is8-3K-5C6">
@@ -713,6 +714,7 @@
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="gmA-Sq-5D5"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="SCAN" image="barcode" catalog="system" id="fyG-JH-ozq"/>
                     <connections>
                         <outlet property="errorLabel" destination="2wZ-XY-V7m" id="jHn-LT-1j0"/>
                         <outlet property="numberTextField" destination="ryN-5w-ly2" id="Fil-Ln-5sV"/>
@@ -722,12 +724,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7V-aQ-GIc" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-884" y="1795"/>
+            <point key="canvasLocation" x="3209" y="1012"/>
         </scene>
         <!--Scanner Controller-->
         <scene sceneID="eYv-dY-9jL">
             <objects>
-                <viewController id="4Pg-Z3-YN5" customClass="QRScannerController" customModule="QRCodeReader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4Pg-Z3-YN5" customClass="QRScannerController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9CC-yY-Hwt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -795,12 +797,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSs-GD-aRI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="3uK-4L-zce" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="809" y="1752"/>
+            <point key="canvasLocation" x="4583" y="1012"/>
         </scene>
         <!--Scrape Controller-->
         <scene sceneID="Nmc-jI-BFb">
             <objects>
-                <viewController storyboardIdentifier="Scrape View" id="efu-PH-rx6" customClass="QRScrapeController" customModule="QRCodeReader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Scrape View" id="efu-PH-rx6" customClass="QRScrapeController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w7X-xo-SKe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -941,21 +943,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpF-Ej-BoC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="107" y="2511"/>
+            <point key="canvasLocation" x="3209" y="1829"/>
         </scene>
     </scenes>
     <resources>
         <image name="backbuttonimage.png" width="256" height="256"/>
+        <image name="barcode" catalog="system" width="64" height="46"/>
         <image name="blackborder" width="500" height="500"/>
         <image name="cross" width="40" height="40"/>
         <image name="focus" width="150" height="150"/>
+        <image name="house.fill" catalog="system" width="64" height="52"/>
+        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="profileavatar.png" width="980" height="982"/>
         <image name="ximage.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ETY-iU-Vqb"/>
+        <segue reference="h3A-UK-47J"/>
         <segue reference="7EZ-Nr-agb"/>
-        <segue reference="ZCT-Uy-Ifi"/>
+        <segue reference="Mg0-v9-3I5"/>
         <segue reference="VPy-iz-QwI"/>
         <segue reference="skv-aV-7d1"/>
     </inferredMetricsTieBreakers>
