@@ -958,10 +958,9 @@
         <image name="ximage.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="h3A-UK-47J"/>
         <segue reference="7EZ-Nr-agb"/>
         <segue reference="Mg0-v9-3I5"/>
-        <segue reference="VPy-iz-QwI"/>
-        <segue reference="skv-aV-7d1"/>
+        <segue reference="ZbA-Fj-Lae"/>
+        <segue reference="Ona-bs-GLF"/>
     </inferredMetricsTieBreakers>
 </document>
