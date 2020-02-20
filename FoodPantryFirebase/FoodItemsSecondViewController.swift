@@ -31,6 +31,7 @@ class FoodItemsSecondViewController: UIViewController {
         
         //initialize storage below
         storage = Storage.storage()
+        print("hello")
 
         
         // Set Delegates
