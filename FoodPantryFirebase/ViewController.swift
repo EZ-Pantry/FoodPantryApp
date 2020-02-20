@@ -37,10 +37,17 @@ class ViewController: UIViewController {
 //        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("1").child("Calories").setValue("75");
 //        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("1").child("Type").setValue("Snack");
 //
-//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("2").child("Name").setValue("Macaroni and Cheese");
-//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("2").child("Quantity").setValue("60");
-//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("2").child("Calories").setValue("45");
-//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("2").child("Type").setValue("Meal");
+//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("375235900").child("Name").setValue("Pasta");
+//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("375235900").child("Quantity").setValue("40");
+//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("375235900").child("Calories").setValue("80");
+//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("375235900").child("Type").setValue("Meal");
+//
+        
+//        self.ref.child("Conant High School").child("Statistics").child("Total Visits").child("2-8-2020").child("Items").setValue("10")
+//         self.ref.child("Conant High School").child("Statistics").child("Total Visits").child("2-8-2020").child("Students Visited").setValue("15")
+//        self.ref.child("Conant High School").child("Statistics").child("Total Visits").child("2-9-2020").child("Items").setValue("8")
+//        self.ref.child("Conant High School").child("Statistics").child("Total Visits").child("2-9-2020").child("Students Visited").setValue("10")
+        
         
         if let user = Auth.auth().currentUser{
             self.performSegue(withIdentifier: "toHomeScreen", sender: self)

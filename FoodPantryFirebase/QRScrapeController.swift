@@ -9,7 +9,7 @@
 import Foundation
 
 import UIKit
-
+import FirebaseDatabase
 class QRScrapeController: UIViewController {
 
     
@@ -33,6 +33,8 @@ class QRScrapeController: UIViewController {
     @IBOutlet var currentLabel: UILabel!
     @IBOutlet var foodView: UIImageView!
     
+    var ref: DatabaseReference!
+    
     var barcode = ""
     var quantity = ""
     
@@ -45,6 +47,7 @@ class QRScrapeController: UIViewController {
         
         print(barcode)
         print(quantity)
+        ref = Database.database().reference()
         
 //        getTitle { (value) in
 //            DispatchQueue.main.async {
@@ -167,7 +170,8 @@ class QRScrapeController: UIViewController {
 //    }
     
     func getData(_ completion: @escaping (String, String, String) -> ()) {
-        let baseUrl = "https://api.upcitemdb.com/prod/trial/lookup?upc="
+//        let baseUrl = "https://api.upcitemdb.com/prod/trial/lookup?upc="
+        let baseUrl = "https://api.barcodespider.com/v1/lookup?token=c35919b64b4aa4c38752&upc="
         
         
         if barcode.count > 12 {
@@ -212,6 +216,28 @@ class QRScrapeController: UIViewController {
         }
         
         task.resume()
+    }
+    
+    func updateDataBase(){
+        //Whenever a student checks out an item, below is what must be updated in the databse
+        //1. Inventory Node-Decrease by amount student has checked out
+        //2. Add that one student visited the food pantry into the Statistics node
+        //3. Add that the student has checked out an item to their personal node with the user ID.
+        
+        
+        //1
+//        let userID = Auth.auth().currentUser?.uid
+//        ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+//          // Get user value
+//          let value = snapshot.value as? NSDictionary
+//          let fullName = value?["Name"] as? String ?? ""
+//          self.welcomeNameLbl.text = "Welcome, \(fullName)"
+//
+//            //all code with snapshot must be in here
+//          // ...
+//          }) { (error) in
+//            print(error.localizedDescription)
+//        }
     }
     
     

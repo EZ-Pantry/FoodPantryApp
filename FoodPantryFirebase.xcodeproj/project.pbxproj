@@ -30,7 +30,6 @@
 		A24F385F23F09C0B00AACC97 /* profileavatar.png in Resources */ = {isa = PBXBuildFile; fileRef = A24F385E23F09C0B00AACC97 /* profileavatar.png */; };
 		A24F386523F225BF00AACC97 /* ximage.png in Resources */ = {isa = PBXBuildFile; fileRef = A24F386423F225BF00AACC97 /* ximage.png */; };
 		A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */; };
-		A24F386B23F495CA00AACC97 /* searchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F386A23F495CA00AACC97 /* searchViewController.swift */; };
 		A24F387B23F60B7D00AACC97 /* FoodItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */; };
 		A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */; };
 		A24F388123F6127A00AACC97 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A24F388023F6127A00AACC97 /* ItemCell.xib */; };
@@ -91,7 +90,6 @@
 		A24F385E23F09C0B00AACC97 /* profileavatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profileavatar.png; path = ../../../Downloads/profileavatar.png; sourceTree = "<group>"; };
 		A24F386423F225BF00AACC97 /* ximage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ximage.png; path = ../../../Downloads/ximage.png; sourceTree = "<group>"; };
 		A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resetPasswordViewController.swift; sourceTree = "<group>"; };
-		A24F386A23F495CA00AACC97 /* searchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchViewController.swift; sourceTree = "<group>"; };
 		A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsViewController.swift; sourceTree = "<group>"; };
 		A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsSecondViewController.swift; sourceTree = "<group>"; };
 		A24F388023F6127A00AACC97 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ItemCell.xib; path = "../../../Downloads/Swift4 - Create GridView using UICollectionView/ItemCell/ItemCell.xib"; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
 				A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */,
 				A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */,
-				A24F386A23F495CA00AACC97 /* searchViewController.swift */,
 				A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */,
 				A24F385C23F09A6F00AACC97 /* profileViewController.swift */,
 				A24F385223EF817900AACC97 /* homeViewController.swift */,
@@ -516,7 +513,6 @@
 				A24F385D23F09A6F00AACC97 /* profileViewController.swift in Sources */,
 				A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */,
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,
-				A24F386B23F495CA00AACC97 /* searchViewController.swift in Sources */,
 				A24F388323F6127E00AACC97 /* ItemCell.swift in Sources */,
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
 				A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */,
