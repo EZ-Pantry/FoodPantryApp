@@ -9,7 +9,7 @@
 import Foundation
 
 import UIKit
-
+import FirebaseDatabase
 class QRScrapeController: UIViewController {
 
     
@@ -33,6 +33,8 @@ class QRScrapeController: UIViewController {
     @IBOutlet var currentLabel: UILabel!
     @IBOutlet var foodView: UIImageView!
     
+    var ref: DatabaseReference!
+    
     var barcode = ""
     var quantity = ""
     
@@ -45,6 +47,7 @@ class QRScrapeController: UIViewController {
         
         print(barcode)
         print(quantity)
+        ref = Database.database().reference()
         
 //        getTitle { (value) in
 //            DispatchQueue.main.async {
@@ -166,53 +169,69 @@ class QRScrapeController: UIViewController {
 //
 //    }
     
-    func getData(_ completion: @escaping (String, String, String) -> ()) {
-        let baseUrl = "https://api.upcitemdb.com/prod/trial/lookup?upc="
-        
-        
-        if barcode.count > 12 {
-            let range = barcode.index(after: barcode.startIndex)..<barcode.endIndex
-            barcode = String(barcode[range])
-            print("changed")
-            print(barcode)
-        }
-        
-        
-        let url = URL(string: baseUrl + barcode)
-        
-        let task = URLSession.shared.dataTask(with: url!) { (data: Data?, response: URLResponse?, error: Error?) in
-            guard let data = data, error == nil else { return }
+     func getData(_ completion: @escaping (String, String, String) -> ()) {
+       //        let baseUrl = "https://api.upcitemdb.com/prod/trial/lookup?upc="
+               let baseUrl = "https://api.barcodespider.com/v1/lookup?token=c35919b64b4aa4c38752&upc="
+               
+               if barcode.count > 12 {
+                   let range = barcode.index(after: barcode.startIndex)..<barcode.endIndex
+                   barcode = String(barcode[range])
+                   print("barcode below")
+                   print(barcode)
+               }
+               
+               print(barcode)
+               let url = URL(string: baseUrl + barcode)
+               
+               let task = URLSession.shared.dataTask(with: url!) { (data: Data?, response: URLResponse?, error: Error?) in
+                   guard let data = data, error == nil else { return }
 
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]
-                print(json)
-                let foods = json?["items"] as? [[String: Any]] ?? []
-                let message = json?["message"] as? String
-                                
-                if message != nil {
-                    completion("error", message!, "none")
-                } else if foods.count == 0 {
-                    completion("no food", "no food item was found", "none")
-                } else {
-                    let title = foods[0]["title"]
-                    let ingredients = foods[0]["description"]
-                    let urls = foods[0]["images"] as? [String]
-                    var url = ""
-                    if urls!.count != 0 {
-                        url = urls![0]
-                    }
-                        
-                    completion(title as! String, ingredients as! String, url)
-                }
-            } catch {
-                print(error)
-                return
-            }
-            
-        }
-        
-        task.resume()
-    }
+                   do {
+                       let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]
+                       print(json)
+                       let foods = json?["item_attributes"] as? [String: Any]
+                       let response = json?["item_response"] as? [String: Any]
+                       let status = response?["status"] as? String
+                       if status != "OK" {
+                           let message = response?["message"] as? String
+                           completion("error", message!, "none")
+                       } else {
+                           let title = foods?["title"] as? String
+                           let ingredients = foods?["description"] as? String
+                           let url = foods?["image"] as? String
+                           completion(title as! String, ingredients as! String, url as! String)
+                       }
+                   } catch {
+                       print(error)
+                       return
+                   }
+                   
+               }
+               
+               task.resume()
+       }
+    
+//    func updateDataBase(){
+//        //Whenever a student checks out an item, below is what must be updated in the databse
+//        //1. Inventory Node-Decrease by amount student has checked out
+//        //2. Add that one student visited the food pantry into the Statistics node
+//        //3. Add that the student has checked out an item to their personal node with the user ID.
+//
+//
+////        1
+//        let userID = Auth.auth().currentUser?.uid
+//        ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+//          // Get user value
+//          let value = snapshot.value as? NSDictionary
+//          let fullName = value?["Name"] as? String ?? ""
+//          self.welcomeNameLbl.text = "Welcome, \(fullName)"
+//
+//            //all code with snapshot must be in here
+//          // ...
+//          }) { (error) in
+//            print(error.localizedDescription)
+//        }
+//    }
     
     
 //    func getTitle(_ completion: @escaping (String) -> ()) {

@@ -134,6 +134,7 @@ class SignUpViewController: UIViewController {
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Password ").setValue(password)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Allergies ").setValue(allergies)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Admin ").setValue("Yes")
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Total Item's Checked Out ").setValue("0")
                     }
                     else{
                     self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Name").setValue(fullname)
@@ -142,6 +143,7 @@ class SignUpViewController: UIViewController {
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Password ").setValue(password)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Allergies ").setValue(allergies)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Admin ").setValue("No")
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Total Item's Checked Out ").setValue("0")
                     }
                     
                     self.dismiss(animated: false, completion: nil)
