@@ -218,14 +218,14 @@ class QRScrapeController: UIViewController {
         task.resume()
     }
     
-    func updateDataBase(){
-        //Whenever a student checks out an item, below is what must be updated in the databse
-        //1. Inventory Node-Decrease by amount student has checked out
-        //2. Add that one student visited the food pantry into the Statistics node
-        //3. Add that the student has checked out an item to their personal node with the user ID.
-        
-        
-        //1
+//    func updateDataBase(){
+//        //Whenever a student checks out an item, below is what must be updated in the databse
+//        //1. Inventory Node-Decrease by amount student has checked out
+//        //2. Add that one student visited the food pantry into the Statistics node
+//        //3. Add that the student has checked out an item to their personal node with the user ID.
+//
+//
+////        1
 //        let userID = Auth.auth().currentUser?.uid
 //        ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
 //          // Get user value
@@ -238,7 +238,7 @@ class QRScrapeController: UIViewController {
 //          }) { (error) in
 //            print(error.localizedDescription)
 //        }
-    }
+//    }
     
     
 //    func getTitle(_ completion: @escaping (String) -> ()) {

@@ -65,6 +65,7 @@ class FoodItemsSecondViewController: UIViewController {
         //handle clicking of element
         print("hello")
         print(indexPath)
+        self.performSegue(withIdentifier: "toItemPopover", sender: self)
     }
 }
 
