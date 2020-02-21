@@ -695,7 +695,7 @@
                                 <rect key="frame" x="128" y="584" width="159" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="continue"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
