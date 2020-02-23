@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C68022A2401E5C1002D0C38 /* ItemCell.swift */; };
+		1C68022D2401E5C1002D0C38 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022B2401E5C1002D0C38 /* ItemCell.xib */; };
+		1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022F2401E825002D0C38 /* GoogleService-Info.plist */; };
 		1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */; };
 		1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */; };
 		1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */; };
@@ -18,22 +21,14 @@
 		A24F382423EF66E100AACC97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A24F382223EF66E100AACC97 /* LaunchScreen.storyboard */; };
 		A24F382F23EF66E100AACC97 /* FoodPantryFirebaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F382E23EF66E100AACC97 /* FoodPantryFirebaseTests.swift */; };
 		A24F383A23EF66E100AACC97 /* FoodPantryFirebaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F383923EF66E100AACC97 /* FoodPantryFirebaseUITests.swift */; };
-		A24F384823EF671700AACC97 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A24F384723EF671700AACC97 /* GoogleService-Info.plist */; };
 		A24F384D23EF759800AACC97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A24F384B23EF759800AACC97 /* Main.storyboard */; };
 		A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F384E23EF79E800AACC97 /* SignUpViewController.swift */; };
 		A24F385123EF79F500AACC97 /* logInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F385023EF79F500AACC97 /* logInViewController.swift */; };
 		A24F385323EF817900AACC97 /* homeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F385223EF817900AACC97 /* homeViewController.swift */; };
-		A24F385723EF87D500AACC97 /* backbuttonimage.png in Resources */ = {isa = PBXBuildFile; fileRef = A24F385623EF87D500AACC97 /* backbuttonimage.png */; };
-		A24F385A23F07C1400AACC97 /* administratorimage.png in Resources */ = {isa = PBXBuildFile; fileRef = A24F385823F07C1400AACC97 /* administratorimage.png */; };
-		A24F385B23F07C1400AACC97 /* studentimage.png in Resources */ = {isa = PBXBuildFile; fileRef = A24F385923F07C1400AACC97 /* studentimage.png */; };
 		A24F385D23F09A6F00AACC97 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F385C23F09A6F00AACC97 /* profileViewController.swift */; };
-		A24F385F23F09C0B00AACC97 /* profileavatar.png in Resources */ = {isa = PBXBuildFile; fileRef = A24F385E23F09C0B00AACC97 /* profileavatar.png */; };
-		A24F386523F225BF00AACC97 /* ximage.png in Resources */ = {isa = PBXBuildFile; fileRef = A24F386423F225BF00AACC97 /* ximage.png */; };
 		A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */; };
 		A24F387B23F60B7D00AACC97 /* FoodItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */; };
 		A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */; };
-		A24F388123F6127A00AACC97 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A24F388023F6127A00AACC97 /* ItemCell.xib */; };
-		A24F388323F6127E00AACC97 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F388223F6127E00AACC97 /* ItemCell.swift */; };
 		A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F388623FF500F00AACC97 /* popUpViewController.swift */; };
 		A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F388823FF52E700AACC97 /* adminViewController.swift */; };
 		D50F4E844ACDBE31BD04E0F9 /* Pods_FoodPantryFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */; };
@@ -60,6 +55,9 @@
 /* Begin PBXFileReference section */
 		128DE22FF4ACEFF0EA0BC003 /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1B7F7AF938DFFB6F1F74C6AB /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1C68022A2401E5C1002D0C38 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		1C68022B2401E5C1002D0C38 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
+		1C68022F2401E825002D0C38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScrapeController.swift; sourceTree = "<group>"; };
 		1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
@@ -80,22 +78,14 @@
 		A24F383523EF66E100AACC97 /* FoodPantryFirebaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodPantryFirebaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24F383923EF66E100AACC97 /* FoodPantryFirebaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPantryFirebaseUITests.swift; sourceTree = "<group>"; };
 		A24F383B23EF66E100AACC97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A24F384723EF671700AACC97 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/FirebaseActualStuffios/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A24F384C23EF759800AACC97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A24F384E23EF79E800AACC97 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A24F385023EF79F500AACC97 /* logInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logInViewController.swift; sourceTree = "<group>"; };
 		A24F385223EF817900AACC97 /* homeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeViewController.swift; sourceTree = "<group>"; };
-		A24F385623EF87D500AACC97 /* backbuttonimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backbuttonimage.png; path = ../../../Downloads/backbuttonimage.png; sourceTree = "<group>"; };
-		A24F385823F07C1400AACC97 /* administratorimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = administratorimage.png; path = ../../../Downloads/administratorimage.png; sourceTree = "<group>"; };
-		A24F385923F07C1400AACC97 /* studentimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = studentimage.png; path = ../../../Downloads/studentimage.png; sourceTree = "<group>"; };
 		A24F385C23F09A6F00AACC97 /* profileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
-		A24F385E23F09C0B00AACC97 /* profileavatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profileavatar.png; path = ../../../Downloads/profileavatar.png; sourceTree = "<group>"; };
-		A24F386423F225BF00AACC97 /* ximage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ximage.png; path = ../../../Downloads/ximage.png; sourceTree = "<group>"; };
 		A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resetPasswordViewController.swift; sourceTree = "<group>"; };
 		A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsViewController.swift; sourceTree = "<group>"; };
 		A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsSecondViewController.swift; sourceTree = "<group>"; };
-		A24F388023F6127A00AACC97 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ItemCell.xib; path = "../../../Downloads/Swift4 - Create GridView using UICollectionView/ItemCell/ItemCell.xib"; sourceTree = "<group>"; };
-		A24F388223F6127E00AACC97 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemCell.swift; path = "../../../Downloads/Swift4 - Create GridView using UICollectionView/ItemCell/ItemCell.swift"; sourceTree = "<group>"; };
 		A24F388623FF500F00AACC97 /* popUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popUpViewController.swift; sourceTree = "<group>"; };
 		A24F388823FF52E700AACC97 /* adminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminViewController.swift; sourceTree = "<group>"; };
 		C5FFF02738E9C4DCF3A1B49B /* Pods-FoodPantryFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,16 +169,12 @@
 		A24F381623EF66E000AACC97 /* FoodPantryFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				1C68022F2401E825002D0C38 /* GoogleService-Info.plist */,
+				1C68022A2401E5C1002D0C38 /* ItemCell.swift */,
+				1C68022B2401E5C1002D0C38 /* ItemCell.xib */,
 				1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */,
 				1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */,
 				1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */,
-				A24F385623EF87D500AACC97 /* backbuttonimage.png */,
-				A24F385823F07C1400AACC97 /* administratorimage.png */,
-				A24F385923F07C1400AACC97 /* studentimage.png */,
-				A24F385E23F09C0B00AACC97 /* profileavatar.png */,
-				A24F386423F225BF00AACC97 /* ximage.png */,
-				A24F388023F6127A00AACC97 /* ItemCell.xib */,
-				A24F388223F6127E00AACC97 /* ItemCell.swift */,
 				A24F381723EF66E000AACC97 /* AppDelegate.swift */,
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
@@ -205,7 +191,6 @@
 				A24F382023EF66E100AACC97 /* Assets.xcassets */,
 				A24F382223EF66E100AACC97 /* LaunchScreen.storyboard */,
 				A24F382523EF66E100AACC97 /* Info.plist */,
-				A24F384723EF671700AACC97 /* GoogleService-Info.plist */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -340,15 +325,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A24F382423EF66E100AACC97 /* LaunchScreen.storyboard in Resources */,
-				A24F385B23F07C1400AACC97 /* studentimage.png in Resources */,
-				A24F388123F6127A00AACC97 /* ItemCell.xib in Resources */,
-				A24F385723EF87D500AACC97 /* backbuttonimage.png in Resources */,
+				1C68022D2401E5C1002D0C38 /* ItemCell.xib in Resources */,
+				1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */,
 				A24F384D23EF759800AACC97 /* Main.storyboard in Resources */,
-				A24F385F23F09C0B00AACC97 /* profileavatar.png in Resources */,
-				A24F384823EF671700AACC97 /* GoogleService-Info.plist in Resources */,
 				A24F382123EF66E100AACC97 /* Assets.xcassets in Resources */,
-				A24F385A23F07C1400AACC97 /* administratorimage.png in Resources */,
-				A24F386523F225BF00AACC97 /* ximage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,9 +498,9 @@
 				A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */,
 				A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */,
 				A24F385D23F09A6F00AACC97 /* profileViewController.swift in Sources */,
+				1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */,
 				A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */,
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,
-				A24F388323F6127E00AACC97 /* ItemCell.swift in Sources */,
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
 				A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */,
 				A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */,

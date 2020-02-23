@@ -14,8 +14,6 @@ class FoodItemsSecondViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchFoodBear: UISearchBar!
     
-    let dataArray = ["Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati"]
-    
     var storage: Storage!
     var foodItemsImageArray = [UIImage]()
     
@@ -26,13 +24,24 @@ class FoodItemsSecondViewController: UIViewController {
     var estimateWidth = 160.0
     var cellMarginSize = 16.0
     
+    
+    let foodItems = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup", "Chicken Soup"]
+    
+    let date : [[String: Any]] =  [
+        ["quantity": 32, "amountCheckedOut": 2, "information": "a", "healthy": "no"],
+        ["quantity": 15, "amountCheckedOut": 3, "information": "b", "healthy":"yes"],
+        ["quantity": 18, "amountCheckedOut": 4, "information": "c", "healthy": "no"],
+        ["quantity": 25, "amountCheckedOut": 1, "information": "d", "healthy":"yes"],
+        ["quantity": 5, "amountCheckedOut": 10, "information": "efhiuhlsajhasfjhl", "healthy":"no"]
+    ]
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //initialize storage below
         storage = Storage.storage()
         print("hello")
-
+        
         
         // Set Delegates
         self.collectionView.delegate = self
@@ -65,7 +74,16 @@ class FoodItemsSecondViewController: UIViewController {
         //handle clicking of element
         print("hello")
         print(indexPath)
+        
         self.performSegue(withIdentifier: "toItemPopover", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toItemPopover"{
+            let destinationVC = segue.destination as? popUpViewController
+            destinationVC?.name = "sample"
+
+        }
     }
 }
 
@@ -75,7 +93,7 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
         if searching {
             return searchedFoodItem.count
         } else {
-            return dataArray.count
+            return foodItems.count
         }
     }
     
@@ -84,12 +102,11 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
 
         if searching {
             cell.setData(text: searchedFoodItem[indexPath.row])
-            cell.setImage(text: "backbuttonimage.png")
+            cell.setImage(text: "soup.jpg")
             print("ran inside here")
         } else {
-            cell.setData(text: dataArray[indexPath.row])
-            cell.setData(text: self.dataArray[indexPath.row])
-            cell.setImage(text: "backbuttonimage.png")
+            cell.setData(text: foodItems[indexPath.row])
+            cell.setImage(text: "soup.jpg")
             print("ran here")
         }
         return cell
@@ -120,7 +137,7 @@ extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
 extension FoodItemsSecondViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchedFoodItem = dataArray.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        searchedFoodItem = foodItems.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
         print(searchText)
         searching = true
         collectionView.reloadData()
