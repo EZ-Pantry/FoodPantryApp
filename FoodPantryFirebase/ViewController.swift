@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
+    
     var ref: DatabaseReference!
     
     override func viewDidLoad() {

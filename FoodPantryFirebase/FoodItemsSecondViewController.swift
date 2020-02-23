@@ -25,6 +25,7 @@ class FoodItemsSecondViewController: UIViewController {
     var foodItemsImageArray = [String]()
     
     var searchedFoodItem = [String]()
+    var searchedFoodItemImage = [String]()
     
     var searching = false
     
@@ -60,7 +61,6 @@ class FoodItemsSecondViewController: UIViewController {
                 //getting each barcode number(1024294) here
                 self.barcodeDataArray.append(key)
             }
-            print(self.barcodeDataArray)
             for i in 0..<self.barcodeDataArray.count{
                 self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.barcodeDataArray[i]).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
@@ -106,15 +106,13 @@ class FoodItemsSecondViewController: UIViewController {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //handle clicking of element
-        print("hello")
-        print(indexPath)
         self.performSegue(withIdentifier: "toItemPopover", sender: self)
     }
     
     @IBAction func refreshButtonTapped(_ sender: UIButton) {
-        print(self.barcodeDataArray)
-        print(self.foodItemsNameDataArray)
-        print(self.foodItemsImageArray)
+//        print(self.barcodeDataArray)
+//        print(self.foodItemsNameDataArray)
+//        print(self.foodItemsImageArray)
         DispatchQueue.main.async {
             self.collectionView.reloadData()
             self.refreshOccurred = true;
@@ -126,6 +124,8 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
+            print("searched food item array count below")
+            print(searchedFoodItem.count)
             return searchedFoodItem.count
         } else {
             if(self.refreshOccurred){
@@ -141,12 +141,16 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as! ItemCell
         
+        //SEARCHED FOOD ITEM ARRAY!!!!!
         if(self.refreshOccurred){
             if searching {
-                cell.setData(text: foodItemsNameDataArray[indexPath.row])
-                cell.load(url: URL(string: foodItemsImageArray[indexPath.row])!);
+                print("food items name array below")
+                print(foodItemsNameDataArray)
+                print("index path below")
+                print(indexPath)
+                cell.setData(text: searchedFoodItem[indexPath.row])
+                cell.load(url: URL(string: searchedFoodItemImage[indexPath.row])!);
             } else {
-//                cell.setData(text: dataArray[indexPath.row])
                 cell.setData(text: foodItemsNameDataArray[indexPath.row])
                 cell.load(url: URL(string: foodItemsImageArray[indexPath.row])!);
             }
@@ -172,7 +176,6 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
 extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWith()
-        print("clicked")
         return CGSize(width: width, height: width)
     }
     
@@ -190,7 +193,21 @@ extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
 extension FoodItemsSecondViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchedFoodItem = dataArray.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        if(self.refreshOccurred){
+            searchedFoodItemImage.removeAll();
+            searchedFoodItem = foodItemsNameDataArray.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+            //for loop and get positions and matchup
+            for i in 0..<self.searchedFoodItem.count{
+                let indexOfSearchedFoodItem = foodItemsNameDataArray.firstIndex(of: searchedFoodItem[i])
+                searchedFoodItemImage.append(foodItemsImageArray[indexOfSearchedFoodItem!])
+            }
+            print("searched food item below")
+            print(searchedFoodItem)
+        }
+        else{
+           searchedFoodItem = dataArray.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        }
+        print("search text below")
         print(searchText)
         searching = true
         collectionView.reloadData()
