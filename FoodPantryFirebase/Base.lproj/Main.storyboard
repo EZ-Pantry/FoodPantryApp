@@ -673,6 +673,7 @@
                     <connections>
                         <outlet property="foodCheckedout" destination="oVq-f1-lWE" id="YOB-M5-3NX"/>
                         <outlet property="foodHealthy" destination="89R-75-aeP" id="sN5-wN-TrG"/>
+                        <outlet property="foodImage" destination="3ga-mM-2eb" id="Ovy-Aa-dXR"/>
                         <outlet property="foodInformation" destination="Yiq-W9-itX" id="iBO-Te-uof"/>
                         <outlet property="foodName" destination="aWc-Xd-peK" id="20n-ep-dvg"/>
                         <outlet property="foodQuantity" destination="ypO-ZA-zZj" id="yVL-0w-wMI"/>

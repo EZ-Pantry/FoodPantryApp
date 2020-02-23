@@ -27,13 +27,17 @@ class FoodItemsSecondViewController: UIViewController {
     
     let foodItems = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup", "Chicken Soup"]
     
-    let date : [[String: Any]] =  [
-        ["quantity": 32, "amountCheckedOut": 2, "information": "a", "healthy": "no"],
-        ["quantity": 15, "amountCheckedOut": 3, "information": "b", "healthy":"yes"],
-        ["quantity": 18, "amountCheckedOut": 4, "information": "c", "healthy": "no"],
-        ["quantity": 25, "amountCheckedOut": 1, "information": "d", "healthy":"yes"],
-        ["quantity": 5, "amountCheckedOut": 10, "information": "efhiuhlsajhasfjhl", "healthy":"no"]
+    let data : [[String: Any]] =  [
+        ["name": "Mac N Cheese", "quantity": "32", "amountCheckedOut": "2", "information": "a", "healthy": "no", "image": "https://www.spendwithpennies.com/wp-content/uploads/2018/03/Instant-Pot-Mac-and-Cheese-23.jpg"],
+        ["name": "Penne Pasta","quantity": "15", "amountCheckedOut": "3", "information": "b", "healthy": "yes",  "image": "https://www.thespruceeats.com/thmb/Bq4rhtzhsh-Mqgb3dSGAjmQCwcM=/1365x2048/filters:fill(auto,1)/easy-penne-pasta-bake-with-tomatoes-3058843-12_preview-5b2bd0f9119fa80037137e25.jpeg"],
+        ["name": "Granola Bars","quantity": "18", "amountCheckedOut": "4", "information": "c", "healthy": "no",  "image": "https://images-na.ssl-images-amazon.com/images/I/913Cm3tsw2L._SX679_.jpg"],
+        ["name": "Veggie Soup","quantity": "25", "amountCheckedOut": "1", "information": "d", "healthy": "yes",  "image": "https://thecozyapron.com/wp-content/uploads/2018/07/vegetable-soup_thecozyapron_1.jpg"],
+        ["name": "Chicken Soup","quantity": "5", "amountCheckedOut": "10", "information": "efhiuhlsajhasfjhl", "healthy": "no",  "image": "https://www.inspiredtaste.net/wp-content/uploads/2018/12/Homemade-Chicken-Noodle-Soup-Recipe-Video.jpg"]
     ]
+        
+    var sortedData : [[String: Any]] =  []
+    
+    var selectedFoodItem: [String: Any]?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,14 +79,27 @@ class FoodItemsSecondViewController: UIViewController {
         print("hello")
         print(indexPath)
         
+        if(searching) {
+            let index = indexPath[1]
+            selectedFoodItem = sortedData[index]
+        } else {
+            let index = indexPath[1]
+            selectedFoodItem = data[index]
+        }
+        
+        
         self.performSegue(withIdentifier: "toItemPopover", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toItemPopover"{
             let destinationVC = segue.destination as? popUpViewController
-            destinationVC?.name = "sample"
-
+            destinationVC?.name = (selectedFoodItem?["name"] as? String)!
+            destinationVC?.quantity = (selectedFoodItem?["quantity"] as? String)!
+            destinationVC?.checkedout = (selectedFoodItem?["amountCheckedOut"] as? String)!
+            destinationVC?.information = (selectedFoodItem?["information"] as? String)!
+            destinationVC?.healthy = (selectedFoodItem?["healthy"] as? String)!
+            destinationVC?.image = (selectedFoodItem?["image"] as? String)!
         }
     }
 }
@@ -102,11 +119,13 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
 
         if searching {
             cell.setData(text: searchedFoodItem[indexPath.row])
-            cell.setImage(text: "soup.jpg")
+            var img: String = sortedData[indexPath.row]["image"] as! String
+            cell.itemImageView.load(url: URL(string: img)!)
             print("ran inside here")
         } else {
             cell.setData(text: foodItems[indexPath.row])
-            cell.setImage(text: "soup.jpg")
+            var img: String = data[indexPath.row]["image"] as! String
+            cell.itemImageView.load(url: URL(string: img)!)
             print("ran here")
         }
         return cell
@@ -137,10 +156,26 @@ extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
 extension FoodItemsSecondViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchedFoodItem = foodItems.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
-        print(searchText)
+//        searchedFoodItem = foodItems.filter({_ in foodItems.contains(searchText)})
+//        date = date.filter({_ in foodItems.contains(searchText)})
+        (searchedFoodItem, sortedData) = filterArray(items: foodItems, dataValues: data, searchText: searchText)
         searching = true
         collectionView.reloadData()
+    }
+
+    func filterArray(items: [String], dataValues: [[String: Any]], searchText: String) -> ([String], [[String: Any]]) {
+        var newItems: [String] = []
+        var newValues: [[String: Any]] = []
+        
+        var count = 0
+        for item in items {
+            if (item.contains(searchText)) {
+                newItems.append(items[count])
+                newValues.append(dataValues[count])
+            }
+            count += 1
+        }
+        return (newItems, newValues)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
