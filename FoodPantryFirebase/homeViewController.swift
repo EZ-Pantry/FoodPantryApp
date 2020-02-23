@@ -23,6 +23,11 @@ class homeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //below is to disable user interaction w/map
+        self.mapView.isZoomEnabled = false;
+        self.mapView.isScrollEnabled = false;
+        self.mapView.isUserInteractionEnabled = false;
+        
         //map config below
         //input any address and within 200 meters are shown
         coordinates(forAddress: "700 E Cougar Trail, Hoffman Estates, IL 60169") {
