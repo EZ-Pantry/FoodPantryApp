@@ -16,6 +16,7 @@ class FoodItemsSecondViewController: UIViewController {
     
     var storage: Storage!
     var foodItemsImageArray = [UIImage]()
+    var ref: DatabaseReference!
     
     var searchedFoodItem = [String]()
     
@@ -25,9 +26,9 @@ class FoodItemsSecondViewController: UIViewController {
     var cellMarginSize = 16.0
     
     
-    let foodItems = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup", "Chicken Soup"]
+    var foodItems = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup", "Chicken Soup"]
     
-    let data : [[String: Any]] =  [
+    var data : [[String: Any]] =  [
         ["name": "Mac N Cheese", "quantity": "32", "amountCheckedOut": "2", "information": "a", "healthy": "no", "image": "https://www.spendwithpennies.com/wp-content/uploads/2018/03/Instant-Pot-Mac-and-Cheese-23.jpg"],
         ["name": "Penne Pasta","quantity": "15", "amountCheckedOut": "3", "information": "b", "healthy": "yes",  "image": "https://www.thespruceeats.com/thmb/Bq4rhtzhsh-Mqgb3dSGAjmQCwcM=/1365x2048/filters:fill(auto,1)/easy-penne-pasta-bake-with-tomatoes-3058843-12_preview-5b2bd0f9119fa80037137e25.jpeg"],
         ["name": "Granola Bars","quantity": "18", "amountCheckedOut": "4", "information": "c", "healthy": "no",  "image": "https://images-na.ssl-images-amazon.com/images/I/913Cm3tsw2L._SX679_.jpg"],
@@ -44,18 +45,62 @@ class FoodItemsSecondViewController: UIViewController {
         
         //initialize storage below
         storage = Storage.storage()
-        print("hello")
+         ref = Database.database().reference()
         
         
-        // Set Delegates
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        searchFoodBear.delegate = self
-        // Register cells
-        self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
+        getDataFromFirebase(callback: {(success)-> Void in
+            if(success) {
+                // Set Delegates
+                self.collectionView.delegate = self
+                self.collectionView.dataSource = self
+                self.searchFoodBear.delegate = self
+                // Register cells
+                self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
+                
+                // SetupGrid view
+                self.setupGridView()
+            } else {
+                print("something went wrong")
+            }
+        })
         
-        // SetupGrid view
-        self.setupGridView()
+    }
+    
+    func getDataFromFirebase(callback: @escaping (_ success: Bool)->Void) {
+        var uidList: [String] = []
+               
+               ref.child("Conant High School").child("Inventory").child("Food Items").observe(.childAdded) { (snapshot) in
+                   for key in [snapshot.key] {
+                       //getting each uid here
+                       uidList.append(key)
+                   }
+                   
+                   var tempData : [[String: Any]] = []
+                   var tempNames: [String] = []
+                   
+                   for i in 0..<uidList.count{
+                       self.ref.child("Conant High School").child("Inventory").child("Food Items").child(uidList[i]).observeSingleEvent(of: .value, with: { (snapshot) in
+                       // Get user value
+                           let value = snapshot.value as? NSDictionary
+                           let name = value?["Name"] as? String ?? ""
+                           let url = value?["URL"] as? String ?? ""
+                           let checked = value?["Checked Out"] as? String ?? ""
+                           let healthy = value?["Healthy"] as? String ?? ""
+                           let quantity = value?["Quantity"] as? String ?? ""
+                           let type = value?["Type"] as? String ?? ""
+                           let info = value?["Information"] as? String ?? ""
+                           tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy])
+                           tempNames.append(name)
+                       })
+                   }
+                   
+                   self.data = tempData
+                   self.foodItems = tempNames
+                
+                 callback(true)
+                   
+               }
+        callback(false)
     }
     
     override func viewDidLayoutSubviews() {
