@@ -45,8 +45,6 @@ class FoodItemsSecondViewController: UIViewController {
         
         //initialize storage below
         storage = Storage.storage()
-         ref = Database.database().reference()
-        
         
         getDataFromFirebase(callback: {(success)-> Void in
             if(success) {
@@ -67,42 +65,61 @@ class FoodItemsSecondViewController: UIViewController {
     }
     
     func getDataFromFirebase(callback: @escaping (_ success: Bool)->Void) {
-        var uidList: [String] = []
-               
-               ref.child("Conant High School").child("Inventory").child("Food Items").observe(.childAdded) { (snapshot) in
-                   for key in [snapshot.key] {
-                       //getting each uid here
-                       uidList.append(key)
-                   }
-                   
-                   var tempData : [[String: Any]] = []
-                   var tempNames: [String] = []
-                   
-                   for i in 0..<uidList.count{
-                       self.ref.child("Conant High School").child("Inventory").child("Food Items").child(uidList[i]).observeSingleEvent(of: .value, with: { (snapshot) in
-                       // Get user value
-                           let value = snapshot.value as? NSDictionary
-                           let name = value?["Name"] as? String ?? ""
-                           let url = value?["URL"] as? String ?? ""
-                           let checked = value?["Checked Out"] as? String ?? ""
-                           let healthy = value?["Healthy"] as? String ?? ""
-                           let quantity = value?["Quantity"] as? String ?? ""
-                           let type = value?["Type"] as? String ?? ""
-                           let info = value?["Information"] as? String ?? ""
-                           tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy])
-                           tempNames.append(name)
-                       })
-                   }
-                   
-                   self.data = tempData
-                   self.foodItems = tempNames
+        self.ref = Database.database().reference()
+        let userID = Auth.auth().currentUser!.uid
+        
+        print(userID)
+        
+        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            var tempData : [[String: Any]] = []
+            var tempNames: [String] = []
+            
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let key = snap.key
+                let value: [String: Any] = snap.value as! [String : Any]
                 
-                 callback(true)
-                   
-               }
-        callback(false)
+                let name = value["Name"] as? String ?? ""
+                let url = value["URL"] as? String ?? ""
+                let checked = value["Checked Out"] as? String ?? ""
+                let healthy = value["Healthy"] as? String ?? ""
+                let quantity = value["Quantity"] as? String ?? ""
+                let type = value["Type"] as? String ?? ""
+                let info = value["Information"] as? String ?? ""
+                
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url])
+                tempNames.append(name)
+                
+            }
+            
+            self.data = tempData
+            self.foodItems = tempNames
+            
+            
+             callback(true)
+        })
     }
     
+    @IBAction func refreshPage(_ sender: Any) {
+        getDataFromFirebase(callback: {(success)-> Void in
+            if(success) {
+                // Set Delegates
+                self.collectionView.delegate = self
+                self.collectionView.dataSource = self
+                self.searchFoodBear.delegate = self
+                // Register cells
+                self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
+                
+                // SetupGrid view
+                self.setupGridView()
+            } else {
+                print("something went wrong")
+            }
+        })
+        
+        
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -170,8 +187,8 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
         } else {
             cell.setData(text: foodItems[indexPath.row])
             var img: String = data[indexPath.row]["image"] as! String
+            print(img)
             cell.itemImageView.load(url: URL(string: img)!)
-            print("ran here")
         }
         return cell
     }
