@@ -22,6 +22,8 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     private var code:String = ""
     
+    var checkedOut = ""
+    
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
     AVMetadataObject.ObjectType.code39,
     AVMetadataObject.ObjectType.code39Mod43,
@@ -135,7 +137,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             let destinationVC = segue.destination as? QRScrapeController
             destinationVC?.barcode = code
             destinationVC?.quantity = "1"
-
+            destinationVC?.checkedOut = checkedOut
         }
     }
 

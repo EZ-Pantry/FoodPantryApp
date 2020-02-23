@@ -703,7 +703,7 @@
                                 <color key="tintColor" red="0.0" green="0.47185860759999998" blue="0.97921389250000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="focus"/>
                                 <connections>
-                                    <segue destination="4Pg-Z3-YN5" kind="presentation" modalPresentationStyle="fullScreen" id="5Wr-Np-bzz"/>
+                                    <segue destination="4Pg-Z3-YN5" kind="presentation" identifier="camera" modalPresentationStyle="fullScreen" id="5Wr-Np-bzz"/>
                                 </connections>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWq-cB-aZh">
@@ -769,14 +769,14 @@
                     <tabBarItem key="tabBarItem" title="SCAN" image="barcode" catalog="system" id="fyG-JH-ozq"/>
                     <connections>
                         <outlet property="errorLabel" destination="2wZ-XY-V7m" id="jHn-LT-1j0"/>
-                        <outlet property="numberTextField" destination="ryN-5w-ly2" id="Fil-Ln-5sV"/>
-                        <outlet property="quantityTextField" destination="D04-se-Cll" id="Aan-p7-5Fl"/>
+                        <outlet property="numberTextField" destination="ryN-5w-ly2" id="5Lf-nk-3HA"/>
+                        <outlet property="quantityTextField" destination="D04-se-Cll" id="xV0-8X-dkb"/>
                         <outlet property="selectButton" destination="aFF-rS-DBS" id="l2H-xF-f75"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7V-aQ-GIc" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3209" y="1012"/>
+            <point key="canvasLocation" x="2967" y="1001"/>
         </scene>
         <!--Scanner Controller-->
         <scene sceneID="eYv-dY-9jL">
@@ -818,7 +818,7 @@
                                     <constraint firstAttribute="bottom" secondItem="pte-UP-zco" secondAttribute="bottom" constant="8" id="gUf-TR-vhO"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No QR code is detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3e-VN-1Et">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Move Barcode Close to the Camera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U3e-VN-1Et">
                                 <rect key="frame" x="0.0" y="822" width="414" height="40"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -971,7 +971,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="lYj-js-UPa" kind="presentation" modalPresentationStyle="fullScreen" id="ZCT-Uy-Ifi"/>
+                                    <segue destination="lYj-js-UPa" kind="presentation" identifier="addMore" modalPresentationStyle="fullScreen" id="ZCT-Uy-Ifi"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -995,7 +995,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpF-Ej-BoC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3209" y="1829"/>
+            <point key="canvasLocation" x="2748" y="1858"/>
         </scene>
         <!--ADMIN-->
         <scene sceneID="bWL-me-LUR">

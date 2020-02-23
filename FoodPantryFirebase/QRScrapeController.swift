@@ -42,9 +42,11 @@ class QRScrapeController: UIViewController {
     
     var errorMessage = "";
     
+    var checkedOut = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("loadig=")
         print(barcode)
         print(quantity)
         ref = Database.database().reference()
@@ -110,16 +112,32 @@ class QRScrapeController: UIViewController {
         quantityField.text = quantity
         quantityField.keyboardType = UIKeyboardType.numberPad
         
-        let defaults = UserDefaults.standard
+//        let defaults = UserDefaults.standard
+//
+//         if let list = defaults.string(forKey: "checkoutInventory") {
+//            print("list")
+//            print(list)
+//            currentLabel.text = "Current Items:\n\n" + list
+//         } else {
+//            currentLabel.text = "Current Items: none"
+//        }
         
-         if let list = defaults.string(forKey: "checkoutInventory") {
-            print("list")
-            print(list)
-            currentLabel.text = "Current Items:\n\n" + list
-         } else {
-            currentLabel.text = "Current Items: none"
+        var text = ""
+        var str: String = checkedOut
+        
+        while str.count > 0 {
+            let food = str.substring(to: str.indexDistance(of: "$")!)
+            str = str.substring(from: str.indexDistance(of: "$")! + 1)
+            let quantity = str.substring(to: str.indexDistance(of: ";")!)
+            text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
+            str = str.substring(from: str.indexDistance(of: ";")! + 1)
         }
+        
+        currentLabel.text = text
+        
     }
+    
+    
     
 //    func getIngredients(_ completion: @escaping (String, String) -> ()) {
 //        let baseUrl = "https://api.nal.usda.gov/fdc/v1/search?api_key=PsxBttjr3pGn4njqbG6WMaVxvcy6atQJCVYqvC6J&generalSearchInput="
@@ -188,7 +206,7 @@ class QRScrapeController: UIViewController {
 
                    do {
                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]
-                       print(json)
+//                       print(json)
                        let foods = json?["item_attributes"] as? [String: Any]
                        let response = json?["item_response"] as? [String: Any]
                        let status = response?["status"] as? String
@@ -280,25 +298,16 @@ class QRScrapeController: UIViewController {
 //    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        checkedOut += food_title + "$" + quantityField.text! + ";"
+
         if segue.identifier == "barcodeError"{
-            
-            //save the current data
-            
-            let defaults = UserDefaults.standard
-           
-            if var list = defaults.string(forKey: "checkoutInventory") {
-                list += "\n" + food_title + "," + quantityField.text!
-                defaults.set(list, forKey: "checkoutInventory")
-            } else {
-                let list = food_title + "," + quantityField.text!
-                defaults.set(list, forKey: "checkoutInventory")
-            }
-            
-            
             
             let destinationVC = segue.destination as? QRCodeViewController
             destinationVC?.error = errorMessage
-
+            destinationVC?.checkedOut = checkedOut
+        } else if(segue.identifier == "addMore") {
+            let destinationVC = segue.destination as? QRCodeViewController
+            destinationVC?.checkedOut = checkedOut
         }
     }
 
@@ -410,3 +419,17 @@ extension UIImageView {
         }
     }
 }
+
+extension StringProtocol {
+    func indexDistance(of element: Element) -> Int? { firstIndex(of: element)?.distance(in: self) }
+    func indexDistance<S: StringProtocol>(of string: S) -> Int? { range(of: string)?.lowerBound.distance(in: self) }
+}
+
+extension Collection {
+    func distance(to index: Index) -> Int { distance(from: startIndex, to: index) }
+}
+
+extension String.Index {
+    func distance<S: StringProtocol>(in string: S) -> Int { string.distance(to: self) }
+}
+
