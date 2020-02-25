@@ -10,6 +10,7 @@ import Foundation
 
 import UIKit
 import FirebaseDatabase
+import FirebaseUI
 class QRScrapeController: UIViewController {
 
     
@@ -182,6 +183,7 @@ class QRScrapeController: UIViewController {
                
                print(barcode)
                let url = URL(string: baseUrl + barcode)
+            //FIREBASE ADDITON OCCUR HERE
                
                let task = URLSession.shared.dataTask(with: url!) { (data: Data?, response: URLResponse?, error: Error?) in
                    guard let data = data, error == nil else { return }
@@ -211,27 +213,55 @@ class QRScrapeController: UIViewController {
                task.resume()
        }
     
-//    func updateDataBase(){
-//        //Whenever a student checks out an item, below is what must be updated in the databse
-//        //1. Inventory Node-Decrease by amount student has checked out
-//        //2. Add that one student visited the food pantry into the Statistics node
-//        //3. Add that the student has checked out an item to their personal node with the user ID.
-//
-//
-////        1
-//        let userID = Auth.auth().currentUser?.uid
-//        ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-//          // Get user value
-//          let value = snapshot.value as? NSDictionary
-//          let fullName = value?["Name"] as? String ?? ""
-//          self.welcomeNameLbl.text = "Welcome, \(fullName)"
-//
-//            //all code with snapshot must be in here
-//          // ...
-//          }) { (error) in
-//            print(error.localizedDescription)
-//        }
-//    }
+
+    
+    @IBAction func addMoreFoodItemsButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    @IBAction func checkOutButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    func updateDataBase(){
+        //Whenever a student checks out an item, below is what must be updated in the databse
+        //1. Inventory Node-Decrease by amount student has checked out
+        //2. Add that one student visited the food pantry into the Statistics node
+        //3. Add that the student has checked out an item to their personal node with the user ID.
+
+
+//        1
+        ref.child("Conant High School").child("Inventory").child("Food Items").child(barcode).observeSingleEvent(of: .value, with: { (snapshot) in
+          // Get user value
+            let value = snapshot.value as? NSDictionary
+            var quantityOfFoodItemString = value?["Quantity"] as? String ?? ""
+            var quantityOfFoodItemInt = Int(quantityOfFoodItemString)
+            quantityOfFoodItemInt! -= 1;//number of items checked out would go here
+            var updatedQuantity = String(quantityOfFoodItemInt!)
+            self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.barcode).child("Quantity").setValue(updatedQuantity);
+            
+          // ...
+          }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
+        //2
+        ref.child("Conant High School").child("Statistics").child("2-9-2020").observeSingleEvent(of: .value, with: { (snapshot) in
+          // Get user value
+            let value = snapshot.value as? NSDictionary
+            var quantityOfStudentsVisitedString = value?["Students Visited"] as? String ?? ""
+            var quantityOfItemsString = value?["Items"] as? String ?? ""
+            var quantityOfStudentsVisitedInt = Int(quantityOfStudentsVisitedString)
+            quantityOfStudentsVisitedInt! += 1;//number of items checked out would go here
+            var updatedQuantity = String(quantityOfStudentsVisitedInt!)
+            self.ref.child("Conant High School").child("Statistics").child("Statistics").child("2-9-2020").child("Students Visited").setValue(updatedQuantity);
+            
+          // ...
+          }) { (error) in
+            print(error.localizedDescription)
+        }
+        let userID = Auth.auth().currentUser?.uid
+    }
     
     
 //    func getTitle(_ completion: @escaping (String) -> ()) {

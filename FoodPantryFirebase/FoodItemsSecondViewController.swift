@@ -1,20 +1,24 @@
 //
-//  ViewController.swift
-//  GridViewExampleApp
+//  FoodItemsSecondViewController.swift
+//  FoodPantryFirebase
 //
-//  Created by Chandimal, Sameera on 12/22/17.
-//  Copyright © 2017 Pearson. All rights reserved.
+//  Created by Rayaan Siddiqi on 2/20/20.
+//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
 //
 
 import UIKit
 import FirebaseUI
 import FirebaseStorage
+var itemClickedName = ""
+var itemClickedImageURL = ""
+var itemClickedQuantity = ""
+var refreshOccurred = false;
 class FoodItemsSecondViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchFoodBear: UISearchBar!
     
-    var refreshOccurred = false;
+    
     var ref: DatabaseReference!
     
     let dataArray = ["Holy See (Vatican City State)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati"]
@@ -23,9 +27,11 @@ class FoodItemsSecondViewController: UIViewController {
     var foodItemsNameDataArray = [String]()
     var storage: Storage!
     var foodItemsImageArray = [String]()
+    var foodItemsQuantityArray = [String]()
     
     var searchedFoodItem = [String]()
     var searchedFoodItemImage = [String]()
+    var searchedFoodItemQuantity = [String]()
     
     var searching = false
     
@@ -41,32 +47,38 @@ class FoodItemsSecondViewController: UIViewController {
         ref = Database.database().reference()
         //initialize storage below
         
-        // Set Delegates
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        searchFoodBear.delegate = self
-        // Register cells
-        self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
-        
-        // SetupGrid view
-        self.setupGridView()
-        populateWithFirebaseData();
+    
+        populateWithFirebaseData(callback: {(success)-> Void in
+            print("all done")
+            print(self.searchedFoodItem)
+            // Set Delegates
+            self.collectionView.delegate = self
+            self.collectionView.dataSource = self
+            self.searchFoodBear.delegate = self
+            // Register cells
+            self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
+            
+            // SetupGrid view
+            self.setupGridView()
+        });
     
     }
     
     var counter = 0 ;
-    func populateWithFirebaseData(){
+    func populateWithFirebaseData(callback: @escaping (_ success: Bool) -> Void){
         ref.child("Conant High School").child("Inventory").child("Food Items").observe(.childAdded) { (snapshot) in
             for key in [snapshot.key] {
                 //getting each barcode number(1024294) here
                 self.barcodeDataArray.append(key)
             }
             for i in 0..<self.barcodeDataArray.count{
+                self.counter += 1;
                 self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.barcodeDataArray[i]).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                     let value = snapshot.value as? NSDictionary
                     let foodItemName = value?["Name"] as? String ?? ""
                     let foodItemURL = value?["URL"] as? String ?? ""
+                    let foodItemQuantity = value?["Quantity"] as? String ?? ""
                     if self.foodItemsNameDataArray.contains(foodItemName) {
                         //dont do anything
                     }
@@ -81,7 +93,14 @@ class FoodItemsSecondViewController: UIViewController {
                         self.foodItemsImageArray.append(foodItemURL)
                     }
                     
+                    //problem area
+                    if self.foodItemsQuantityArray.contains(foodItemQuantity){
 
+                    }
+                    else{
+                        self.foodItemsQuantityArray.append(foodItemQuantity)
+                    }
+                    callback(true)
                 })
             }
         }
@@ -106,16 +125,49 @@ class FoodItemsSecondViewController: UIViewController {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //handle clicking of element
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as! ItemCell
+        if(refreshOccurred){
+                    if searching {
+                        print("food items name array below")
+                        print(foodItemsNameDataArray)
+                        print("index path below")
+                        print(indexPath)
+                        print(searchedFoodItem[indexPath.row])
+                        itemClickedName = searchedFoodItem[indexPath.row]
+                        itemClickedImageURL = searchedFoodItemImage[indexPath.row]
+                        itemClickedQuantity = searchedFoodItemQuantity[indexPath.row]
+                    } else {
+                        print(foodItemsNameDataArray[indexPath.row])
+                        itemClickedName = foodItemsNameDataArray[indexPath.row]
+                        itemClickedImageURL = foodItemsImageArray[indexPath.row]
+                        itemClickedQuantity = foodItemsQuantityArray[indexPath.row]
+                    }
+                }
+                else{
+                    if searching {
+                        print(searchedFoodItem[indexPath.row])
+                        itemClickedName = searchedFoodItem[indexPath.row]
+                        itemClickedImageURL = "backbuttonimage.png"
+                        itemClickedQuantity = ""
+                    } else {
+                        print(dataArray[indexPath.row])
+                        itemClickedName = dataArray[indexPath.row]
+                        itemClickedImageURL = "backbuttonimage.png"
+                        itemClickedQuantity = ""
+                    }
+                }
         self.performSegue(withIdentifier: "toItemPopover", sender: self)
     }
     
     @IBAction func refreshButtonTapped(_ sender: UIButton) {
 //        print(self.barcodeDataArray)
-//        print(self.foodItemsNameDataArray)
+        print(self.foodItemsNameDataArray)
 //        print(self.foodItemsImageArray)
+        print(self.foodItemsQuantityArray)
         DispatchQueue.main.async {
             self.collectionView.reloadData()
-            self.refreshOccurred = true;
+            refreshOccurred = true;
         }
     }
 }
@@ -128,7 +180,7 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
             print(searchedFoodItem.count)
             return searchedFoodItem.count
         } else {
-            if(self.refreshOccurred){
+            if(refreshOccurred){
                 return foodItemsNameDataArray.count
             }
             else{
@@ -142,7 +194,7 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as! ItemCell
         
         //SEARCHED FOOD ITEM ARRAY!!!!!
-        if(self.refreshOccurred){
+        if(refreshOccurred){
             if searching {
                 print("food items name array below")
                 print(foodItemsNameDataArray)
@@ -193,13 +245,14 @@ extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
 extension FoodItemsSecondViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if(self.refreshOccurred){
+        if(refreshOccurred){
             searchedFoodItemImage.removeAll();
             searchedFoodItem = foodItemsNameDataArray.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
             //for loop and get positions and matchup
             for i in 0..<self.searchedFoodItem.count{
                 let indexOfSearchedFoodItem = foodItemsNameDataArray.firstIndex(of: searchedFoodItem[i])
                 searchedFoodItemImage.append(foodItemsImageArray[indexOfSearchedFoodItem!])
+                searchedFoodItemQuantity.append(foodItemsQuantityArray[indexOfSearchedFoodItem!])
             }
             print("searched food item below")
             print(searchedFoodItem)
@@ -221,39 +274,5 @@ extension FoodItemsSecondViewController: UISearchBarDelegate {
     
     
     
-    
-    
-    
-    //        ref.child("Conant High School").child("Inventory").observeSingleEvent(of: .value, with: { (snapshot) in
-    //          // Get user value
-    //          let value = snapshot.value as? NSDictionary
-    //          let itemName = value?["Name"] as? String ?? ""
-    //
-    //            for rest in snapshot.children.allObjects as! [DataSnapshot] {
-    //                print("rst value below")
-    //                print(rest.value)
-    //                self.counter += 1;
-    //
-    //            }
-    //            print("counter below")
-    //            print(self.counter)
-    //            print("item name")
-    //            print(itemName)
-    //            //all code with snapshot must be in here
-    //          // ...
-    //          }) { (error) in
-    //            print(error.localizedDescription)
-    //        }
-            
-            
-            
-    //        ref.child("Conant High School").child("Inventory").child("Food Items").observe(.value, with: { snapshot in
-    //            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
-    //                for child in snapshots {
-    //                    print("Child: ", child)
-    //                }
-    //            }
-    //
-    //        })
-    
 }
+
