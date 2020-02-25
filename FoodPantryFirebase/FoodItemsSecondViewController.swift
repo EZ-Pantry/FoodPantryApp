@@ -14,6 +14,7 @@ class FoodItemsSecondViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchFoodBear: UISearchBar!
     
+    
     var storage: Storage!
     var foodItemsImageArray = [UIImage]()
     var ref: DatabaseReference!
@@ -50,6 +51,7 @@ class FoodItemsSecondViewController: UIViewController {
         self.searchFoodBear.delegate = self
         
         
+        
         // Register cells
         self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
             
@@ -79,6 +81,25 @@ class FoodItemsSecondViewController: UIViewController {
         })
         
     }
+    
+    
+    func sortAtoZ() {
+        data = data.sorted { ($0["name"] as! String).lowercased() < ($1["name"] as! String).lowercased() }
+        foodItems = foodItems.sorted { $0.lowercased() < $1.lowercased() }
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            print("sorted a-z")
+        }
+    }
+    
+    func sortZtoA() {
+           data = data.sorted { ($0["name"] as! String).lowercased() > ($1["name"] as! String).lowercased() }
+           foodItems = foodItems.sorted { $0.lowercased() < $1.lowercased() }
+           DispatchQueue.main.async {
+               self.collectionView.reloadData()
+               print("sorted a-z")
+           }
+       }
     
     func getDataFromFirebase(callback: @escaping (_ success: Bool)->Void) {
         self.ref = Database.database().reference()
