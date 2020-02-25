@@ -65,7 +65,8 @@ class QRScrapeController: UIViewController {
     
         //show loading indicator
     
-        ref = Database.database().reference()
+        
+            ref = Database.database().reference()
         getData { (title, ingredients, url) in
             DispatchQueue.main.async {
                 
