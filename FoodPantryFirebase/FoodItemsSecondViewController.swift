@@ -24,20 +24,18 @@ class FoodItemsSecondViewController: UIViewController {
 
     var estimateWidth = 160.0
     var cellMarginSize = 16.0
-    
-    
-    var foodItems = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup", "Chicken Soup"]
+        
+    var foodItems = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup"]
     
     var data : [[String: Any]] =  [
-        ["name": "Mac N Cheese", "quantity": "32", "amountCheckedOut": "2", "information": "a", "healthy": "no", "image": "https://www.spendwithpennies.com/wp-content/uploads/2018/03/Instant-Pot-Mac-and-Cheese-23.jpg"],
-        ["name": "Penne Pasta","quantity": "15", "amountCheckedOut": "3", "information": "b", "healthy": "yes",  "image": "https://www.thespruceeats.com/thmb/Bq4rhtzhsh-Mqgb3dSGAjmQCwcM=/1365x2048/filters:fill(auto,1)/easy-penne-pasta-bake-with-tomatoes-3058843-12_preview-5b2bd0f9119fa80037137e25.jpeg"],
-        ["name": "Granola Bars","quantity": "18", "amountCheckedOut": "4", "information": "c", "healthy": "no",  "image": "https://images-na.ssl-images-amazon.com/images/I/913Cm3tsw2L._SX679_.jpg"],
-        ["name": "Veggie Soup","quantity": "25", "amountCheckedOut": "1", "information": "d", "healthy": "yes",  "image": "https://thecozyapron.com/wp-content/uploads/2018/07/vegetable-soup_thecozyapron_1.jpg"],
-        ["name": "Chicken Soup","quantity": "5", "amountCheckedOut": "10", "information": "efhiuhlsajhasfjhl", "healthy": "no",  "image": "https://www.inspiredtaste.net/wp-content/uploads/2018/12/Homemade-Chicken-Noodle-Soup-Recipe-Video.jpg"]
+        ["name": "Mac N Cheese", "quantity": "32", "amountCheckedOut": "2", "information": "a", "healthy": "no", "image": "https://www.spendwithpennies.com/wp-content/uploads/2018/03/Instant-Pot-Mac-and-Cheese-23.jpg", "id": "0"],
+        ["name": "Penne Pasta","quantity": "15", "amountCheckedOut": "3", "information": "b", "healthy": "yes",  "image": "https://www.thespruceeats.com/thmb/Bq4rhtzhsh-Mqgb3dSGAjmQCwcM=/1365x2048/filters:fill(auto,1)/easy-penne-pasta-bake-with-tomatoes-3058843-12_preview-5b2bd0f9119fa80037137e25.jpeg", "id": "1"],
+        ["name": "Granola Bars","quantity": "18", "amountCheckedOut": "4", "information": "c", "healthy": "no",  "image": "https://images-na.ssl-images-amazon.com/images/I/913Cm3tsw2L._SX679_.jpg", "id": "2"],
+        ["name": "Veggie Soup","quantity": "25", "amountCheckedOut": "1", "information": "d", "healthy": "yes",  "image": "https://thecozyapron.com/wp-content/uploads/2018/07/vegetable-soup_thecozyapron_1.jpg", "id": "3"]
     ]
-        
+            
     var sortedData : [[String: Any]] =  []
-    
+        
     var selectedFoodItem: [String: Any]?
         
     override func viewDidLoad() {
@@ -46,19 +44,37 @@ class FoodItemsSecondViewController: UIViewController {
         //initialize storage below
         storage = Storage.storage()
         
+        
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.searchFoodBear.delegate = self
+        
+        
+        // Register cells
+        self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
+            
+        // SetupGrid view
+        self.setupGridView()
+        
+        
         getDataFromFirebase(callback: {(success)-> Void in
             if(success) {
-                // Set Delegates
-                self.collectionView.delegate = self
-                self.collectionView.dataSource = self
-                self.searchFoodBear.delegate = self
-                // Register cells
-                self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
-                
-                // SetupGrid view
-                self.setupGridView()
-            } else {
-                print("something went wrong")
+                for i in 0..<self.data.count {
+                    self.loadImageFromFirebase(url: self.data[i]["image"] as! String, order: String(i), callback: {(img, order)-> Void in
+                               print("got " + String(i))
+                               
+                               for i in 0..<self.data.count {
+                                   if (self.data[i]["id"] as! String == order) {
+                                       self.data[i]["view"] = img
+                                   }
+                               }
+                               
+                               DispatchQueue.main.async {
+                                   self.collectionView.reloadData()
+                                   print("all reloaded with the stuff " + String(i))
+                               }
+                           })
+                       }
             }
         })
         
@@ -74,7 +90,7 @@ class FoodItemsSecondViewController: UIViewController {
             
             var tempData : [[String: Any]] = []
             var tempNames: [String] = []
-            
+            var c: Int = 0
             for child in snapshot.children {
                 let snap = child as! DataSnapshot
                 let key = snap.key
@@ -87,10 +103,11 @@ class FoodItemsSecondViewController: UIViewController {
                 let quantity = value["Quantity"] as? String ?? ""
                 let type = value["Type"] as? String ?? ""
                 let info = value["Information"] as? String ?? ""
+                let id = String(c)
                 
-                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url])
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "id": id])
                 tempNames.append(name)
-                
+                c += 1
             }
             
             self.data = tempData
@@ -101,22 +118,40 @@ class FoodItemsSecondViewController: UIViewController {
         })
     }
     
+    func loadImageFromFirebase(url: String, order: String, callback: @escaping (_ img: UIImage,_ order: String)->Void) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: URL(string: url)!) {
+                let image = UIImage(data: data)
+                callback(image!, order)
+            }
+        }
+    }
+    
     @IBAction func refreshPage(_ sender: Any) {
         getDataFromFirebase(callback: {(success)-> Void in
             if(success) {
-                // Set Delegates
-                self.collectionView.delegate = self
-                self.collectionView.dataSource = self
-                self.searchFoodBear.delegate = self
-                // Register cells
-                self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
-                
-                // SetupGrid view
-                self.setupGridView()
-            } else {
-                print("something went wrong")
+                for i in 0..<self.data.count {
+                    self.loadImageFromFirebase(url: self.data[i]["image"] as! String, order: String(i), callback: {(img, order)-> Void in
+                        print("got " + String(i))
+                       
+                        for i in 0..<self.data.count {
+                           if (self.data[i]["id"] as! String == order) {
+                               self.data[i]["view"] = img
+                           }
+                       }
+                       
+                       DispatchQueue.main.async {
+                           self.collectionView.reloadData()
+                           print("all reloaded with the stuff " + String(i))
+                       }
+                   })
+               }
             }
         })
+//
+//        DispatchQueue.main.async {
+//            self.collectionView.reloadData()
+//        }
         
         
     }
@@ -182,14 +217,21 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
         if searching {
             cell.setData(text: searchedFoodItem[indexPath.row])
             var img: String = sortedData[indexPath.row]["image"] as! String
-            cell.itemImageView.load(url: URL(string: img)!)
-            print("ran inside here")
+            if(sortedData[indexPath.row]["view"] != nil) {
+                cell.itemImageView.image = sortedData[indexPath.row]["view"] as! UIImage
+            }
+            
         } else {
             cell.setData(text: foodItems[indexPath.row])
-            var img: String = data[indexPath.row]["image"] as! String
-            print(img)
-            cell.itemImageView.load(url: URL(string: img)!)
-        }
+            let url: String = data[indexPath.row]["image"] as! String
+            let id: String = data[indexPath.row]["id"] as! String
+            
+            if(data[indexPath.row]["view"] != nil) {
+                cell.itemImageView.image = data[indexPath.row]["view"] as! UIImage
+            }
+            
+                
+            }
         return cell
     }
     
@@ -200,7 +242,6 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
 extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWith()
-        print("clicked")
         return CGSize(width: width, height: width)
     }
     
@@ -247,4 +288,19 @@ extension FoodItemsSecondViewController: UISearchBarDelegate {
     }
     
     
+}
+
+extension UIImageView {
+    func loadHeavy(url: URL, callback: @escaping (_ success: Bool)->UICollectionViewCell) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                        callback(true)
+                    }
+                }
+            }
+        }
+    }
 }
