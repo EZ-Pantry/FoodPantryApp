@@ -68,6 +68,10 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         // SetupGrid view
         self.setupGridView()
         
+        showLoadingAlert()
+
+        
+        var imageRecieved: Int = 0
         
         getDataFromFirebase(callback: {(success)-> Void in
             if(success) {
@@ -78,18 +82,36 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                                for i in 0..<self.data.count {
                                    if (self.data[i]["id"] as! String == order) {
                                        self.data[i]["view"] = img
+                                        imageRecieved += 1
                                    }
                                }
                                
-                               DispatchQueue.main.async {
-                                   self.collectionView.reloadData()
-                                   print("all reloaded with the stuff " + String(i))
-                               }
+                        if(imageRecieved == self.data.count) {
+                            DispatchQueue.main.async {
+                                self.dismiss(animated: false)
+                                self.collectionView.reloadData()
+                                print("all reloaded with the stuff " + String(i))
+                            }
+                        }
+                        
+                               
                            })
                        }
             }
         })
         
+    }
+    
+    func showLoadingAlert() {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -190,30 +212,34 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     }
     
     @IBAction func refreshPage(_ sender: Any) {
+        var imageRecieved: Int = 0
+        showLoadingAlert()
         getDataFromFirebase(callback: {(success)-> Void in
             if(success) {
                 for i in 0..<self.data.count {
                     self.loadImageFromFirebase(url: self.data[i]["image"] as! String, order: String(i), callback: {(img, order)-> Void in
-                        print("got " + String(i))
-                       
-                        for i in 0..<self.data.count {
-                           if (self.data[i]["id"] as! String == order) {
-                               self.data[i]["view"] = img
-                           }
+                               print("got " + String(i))
+                               
+                               for i in 0..<self.data.count {
+                                   if (self.data[i]["id"] as! String == order) {
+                                       self.data[i]["view"] = img
+                                        imageRecieved += 1
+                                   }
+                               }
+                               
+                        if(imageRecieved == self.data.count) {
+                            DispatchQueue.main.async {
+                                self.dismiss(animated: false)
+                                self.collectionView.reloadData()
+                                print("all reloaded with the stuff " + String(i))
+                            }
+                        }
+                        
+                               
+                           })
                        }
-                       
-                       DispatchQueue.main.async {
-                           self.collectionView.reloadData()
-                           print("all reloaded with the stuff " + String(i))
-                       }
-                   })
-               }
             }
         })
-//
-//        DispatchQueue.main.async {
-//            self.collectionView.reloadData()
-//        }
         
         
     }
