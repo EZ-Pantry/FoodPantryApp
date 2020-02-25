@@ -14,7 +14,8 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchFoodBear: UISearchBar!
     
-    @IBOutlet var sortPicker: UIPickerView!
+    @IBOutlet var pickerField: UITextField!
+    let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()
     
     var storage: Storage!
@@ -52,11 +53,13 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         self.collectionView.dataSource = self
         self.searchFoodBear.delegate = self
         
-        // Connect data:
-        self.sortPicker.delegate = self
-        self.sortPicker.dataSource = self
         
         //picker view
+        
+        yourPicker.delegate = self
+        yourPicker.dataSource = self
+        pickerField.inputView = yourPicker
+        
         pickerData = ["All Items", "A-Z", "Z-A"]
         
         // Register cells
@@ -89,6 +92,12 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         
     }
     
+    override func didReceiveMemoryWarning() {
+           super.didReceiveMemoryWarning()
+           // Dispose of any resources that can be recreated.
+       }
+    
+    
     // Number of columns of data
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -104,6 +113,16 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         return pickerData[row]
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+       pickerField.text = pickerData[row]
+    
+        if(pickerData[row] == "A-Z") {
+            sortAtoZ()
+        } else if(pickerData[row] == "Z-A") {
+            sortZtoA()
+        }
+        
+    }
     
     func sortAtoZ() {
         data = data.sorted { ($0["name"] as! String).lowercased() < ($1["name"] as! String).lowercased() }
@@ -116,10 +135,10 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     
     func sortZtoA() {
            data = data.sorted { ($0["name"] as! String).lowercased() > ($1["name"] as! String).lowercased() }
-           foodItems = foodItems.sorted { $0.lowercased() < $1.lowercased() }
+           foodItems = foodItems.sorted { $0.lowercased() > $1.lowercased() }
            DispatchQueue.main.async {
                self.collectionView.reloadData()
-               print("sorted a-z")
+               print("sorted z-a")
            }
        }
     
@@ -347,3 +366,5 @@ extension UIImageView {
         }
     }
 }
+
+
