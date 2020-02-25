@@ -51,20 +51,6 @@ class QRScrapeController: UIViewController {
         print(quantity)
         ref = Database.database().reference()
         
-//        getTitle { (value) in
-//            DispatchQueue.main.async {
-//                print(value)
-//                self.nameLabel.text = value
-//            }
-//        }
-//
-//        getIngredients { (ingredients, type) in
-//            DispatchQueue.main.async {
-//                self.typeLabel.text = type;
-//                self.ingredientsLabel.text = ingredients
-//            }
-//        }
-        
         getData { (title, ingredients, url) in
             DispatchQueue.main.async {
                 
@@ -112,15 +98,6 @@ class QRScrapeController: UIViewController {
         quantityField.text = quantity
         quantityField.keyboardType = UIKeyboardType.numberPad
         
-//        let defaults = UserDefaults.standard
-//
-//         if let list = defaults.string(forKey: "checkoutInventory") {
-//            print("list")
-//            print(list)
-//            currentLabel.text = "Current Items:\n\n" + list
-//         } else {
-//            currentLabel.text = "Current Items: none"
-//        }
         
         var text = ""
         var str: String = checkedOut
@@ -137,55 +114,7 @@ class QRScrapeController: UIViewController {
         
     }
     
-    
-    
-//    func getIngredients(_ completion: @escaping (String, String) -> ()) {
-//        let baseUrl = "https://api.nal.usda.gov/fdc/v1/search?api_key=PsxBttjr3pGn4njqbG6WMaVxvcy6atQJCVYqvC6J&generalSearchInput="
-//
-//
-//        if barcode.count > 12 {
-//            let range = barcode.index(after: barcode.startIndex)..<barcode.endIndex
-//            barcode = String(barcode[range])
-//            print("changed")
-//            print(barcode)
-//        }
-//
-//
-//        let url = URL(string: baseUrl + barcode)
-//
-//        let task = URLSession.shared.dataTask(with: url!) { (data: Data?, response: URLResponse?, error: Error?) in
-//            guard let data = data, error == nil else { return }
-//
-//            do {
-//                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]
-//                print(json)
-//                let foods = json?["foods"] as? [[String: Any]] ?? []
-//                let message = json?["message"] as? String
-//                if message != nil {
-//                    completion("error", message!)
-//                } else if foods.count == 0 {
-//                    completion("no food", "no food item was found")
-//                } else {
-//                    let ingredients = foods[0]["ingredients"]
-//                    let type = foods[0]["description"]
-////                    print(foods[0]["scientificName"])
-////                    print(foods[0]["commonNames"])
-////                    print(foods[0]["fdcId"])
-////                    print(foods[0]["brandOwner"])
-//
-//                    completion(ingredients as! String, type as! String)
-//                }
-//            } catch {
-//                print(error)
-//                return
-//            }
-//
-//        }
-//
-//        task.resume()
-//
-//
-//    }
+
     
      func getData(_ completion: @escaping (String, String, String) -> ()) {
        //        let baseUrl = "https://api.upcitemdb.com/prod/trial/lookup?upc="
@@ -229,73 +158,10 @@ class QRScrapeController: UIViewController {
                task.resume()
        }
     
-//    func updateDataBase(){
-//        //Whenever a student checks out an item, below is what must be updated in the databse
-//        //1. Inventory Node-Decrease by amount student has checked out
-//        //2. Add that one student visited the food pantry into the Statistics node
-//        //3. Add that the student has checked out an item to their personal node with the user ID.
-//
-//
-////        1
-//        let userID = Auth.auth().currentUser?.uid
-//        ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-//          // Get user value
-//          let value = snapshot.value as? NSDictionary
-//          let fullName = value?["Name"] as? String ?? ""
-//          self.welcomeNameLbl.text = "Welcome, \(fullName)"
-//
-//            //all code with snapshot must be in here
-//          // ...
-//          }) { (error) in
-//            print(error.localizedDescription)
-//        }
-//    }
     
+    //check if the food item exists
+    //then subtrac
     
-//    func getTitle(_ completion: @escaping (String) -> ()) {
-//
-//        let baseUrl = "https://www.upcitemdb.com/upc/"
-//
-//        let url = URL(string: baseUrl + barcode)
-//
-//
-//        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-//          guard let data = data else {
-//            print("data was nil")
-//            return
-//          }
-//          guard let htmlString = String(data: data, encoding: .utf8) else {
-//            print("couldn't cast data into String")
-//            return
-//          }
-//          //print(htmlString)
-//
-//            let leftSideString = """
-//            <b>
-//            """
-//            let rightSideString = """
-//            </b>
-//            """
-//            guard
-//              let leftSideRange = htmlString.range(of: leftSideString)
-//            else {
-//              print("couldn't find left range")
-//                completion("not found")
-//              return
-//            }
-//            guard
-//              let rightSideRange = htmlString.range(of: rightSideString)
-//            else {
-//              print("couldn't find right range")
-//                completion("not found")
-//              return
-//            }
-//            let rangeOfTheData = leftSideRange.upperBound..<rightSideRange.lowerBound
-//            let valueWeWantToGrab = htmlString[rangeOfTheData]
-//            completion(String(valueWeWantToGrab))
-//        }
-//        task.resume()
-//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         checkedOut += food_title + "$" + quantityField.text! + ";"

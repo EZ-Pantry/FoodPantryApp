@@ -9,11 +9,13 @@
 import UIKit
 import FirebaseUI
 import FirebaseStorage
-class FoodItemsSecondViewController: UIViewController {
+class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchFoodBear: UISearchBar!
     
+    @IBOutlet var sortPicker: UIPickerView!
+    var pickerData: [String] = [String]()
     
     var storage: Storage!
     var foodItemsImageArray = [UIImage]()
@@ -50,7 +52,12 @@ class FoodItemsSecondViewController: UIViewController {
         self.collectionView.dataSource = self
         self.searchFoodBear.delegate = self
         
+        // Connect data:
+        self.sortPicker.delegate = self
+        self.sortPicker.dataSource = self
         
+        //picker view
+        pickerData = ["All Items", "A-Z", "Z-A"]
         
         // Register cells
         self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
@@ -80,6 +87,21 @@ class FoodItemsSecondViewController: UIViewController {
             }
         })
         
+    }
+    
+    // Number of columns of data
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return fopr the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
+        return pickerData[row]
     }
     
     
