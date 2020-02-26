@@ -10,6 +10,7 @@
 		1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C68022A2401E5C1002D0C38 /* ItemCell.swift */; };
 		1C68022D2401E5C1002D0C38 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022B2401E5C1002D0C38 /* ItemCell.xib */; };
 		1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022F2401E825002D0C38 /* GoogleService-Info.plist */; };
+		1C748F322406188800936A05 /* checkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C748F312406188800936A05 /* checkoutViewController.swift */; };
 		1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */; };
 		1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */; };
 		1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */; };
@@ -58,6 +59,7 @@
 		1C68022A2401E5C1002D0C38 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		1C68022B2401E5C1002D0C38 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 		1C68022F2401E825002D0C38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1C748F312406188800936A05 /* checkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutViewController.swift; sourceTree = "<group>"; };
 		1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScrapeController.swift; sourceTree = "<group>"; };
 		1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				A24F385223EF817900AACC97 /* homeViewController.swift */,
 				A24F384E23EF79E800AACC97 /* SignUpViewController.swift */,
 				A24F385023EF79F500AACC97 /* logInViewController.swift */,
+				1C748F312406188800936A05 /* checkoutViewController.swift */,
 				A24F382023EF66E100AACC97 /* Assets.xcassets */,
 				A24F382223EF66E100AACC97 /* LaunchScreen.storyboard */,
 				A24F382523EF66E100AACC97 /* Info.plist */,
@@ -504,6 +507,7 @@
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
 				A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */,
 				A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */,
+				1C748F322406188800936A05 /* checkoutViewController.swift in Sources */,
 				1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */,
 				A24F385123EF79F500AACC97 /* logInViewController.swift in Sources */,
 			);
