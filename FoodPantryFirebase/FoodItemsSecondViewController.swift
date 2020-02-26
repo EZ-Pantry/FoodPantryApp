@@ -64,6 +64,9 @@ class FoodItemsSecondViewController: UIViewController {
     
     }
     
+    
+    
+    
     var counter = 0 ;
     func populateWithFirebaseData(callback: @escaping (_ success: Bool) -> Void){
         ref.child("Conant High School").child("Inventory").child("Food Items").observe(.childAdded) { (snapshot) in
