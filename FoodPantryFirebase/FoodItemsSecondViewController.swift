@@ -1,30 +1,41 @@
 //
-//  ViewController.swift
-//  GridViewExampleApp
+//  FoodItemsSecondViewController.swift
+//  FoodPantryFirebase
 //
-//  Created by Chandimal, Sameera on 12/22/17.
-//  Copyright © 2017 Pearson. All rights reserved.
+//  Created by Rayaan Siddiqi on 2/20/20.
+//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
 //
 
 import UIKit
 import FirebaseUI
 import FirebaseStorage
+
 class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchFoodBear: UISearchBar!
     
+
     @IBOutlet var pickerField: UITextField!
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()
     
+    var barcodeDataArray = [String]()
+    var foodItemsNameDataArray = [String]()
     var storage: Storage!
+
     var foodItemsImageArray = [UIImage]()
     var ref: DatabaseReference!
     
     var searchedFoodItem = [String]()
+    var searchedFoodItemImage = [String]()
+    var searchedFoodItemQuantity = [String]()
     
     var searching = false
+    
+    //when with firebase
+    //need to get all food item names
+    //and food item images through the url
 
     var estimateWidth = 160.0
     var cellMarginSize = 16.0
@@ -44,7 +55,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        ref = Database.database().reference()
         //initialize storage below
         storage = Storage.storage()
         
@@ -261,6 +272,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //handle clicking of element
+
         print("hello")
         print(indexPath)
         
@@ -293,8 +305,11 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
+            print("searched food item array count below")
+            print(searchedFoodItem.count)
             return searchedFoodItem.count
         } else {
+
             return foodItems.count
         }
     }
@@ -347,6 +362,7 @@ extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
 extension FoodItemsSecondViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
 //        searchedFoodItem = foodItems.filter({_ in foodItems.contains(searchText)})
 //        date = date.filter({_ in foodItems.contains(searchText)})
         (searchedFoodItem, sortedData) = filterArray(items: foodItems, dataValues: data, searchText: searchText)
@@ -376,7 +392,9 @@ extension FoodItemsSecondViewController: UISearchBarDelegate {
     }
     
     
+    
 }
+
 
 extension UIImageView {
     func loadHeavy(url: URL, callback: @escaping (_ success: Bool)->UICollectionViewCell) {
@@ -392,5 +410,4 @@ extension UIImageView {
         }
     }
 }
-
 

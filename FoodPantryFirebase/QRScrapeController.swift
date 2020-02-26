@@ -10,6 +10,7 @@ import Foundation
 
 import UIKit
 import FirebaseDatabase
+import FirebaseUI
 class QRScrapeController: UIViewController {
 
     
@@ -208,6 +209,7 @@ class QRScrapeController: UIViewController {
                
                print(barcode)
                let url = URL(string: baseUrl + barcode)
+            //FIREBASE ADDITON OCCUR HERE
                
                let task = URLSession.shared.dataTask(with: url!) { (data: Data?, response: URLResponse?, error: Error?) in
                    guard let data = data, error == nil else { return }
@@ -237,6 +239,7 @@ class QRScrapeController: UIViewController {
                task.resume()
        }
     
+
     
     @IBAction func changedQuantity(_ sender: Any) {
         

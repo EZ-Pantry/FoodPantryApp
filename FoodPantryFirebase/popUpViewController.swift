@@ -9,6 +9,7 @@
 import UIKit
 
 class popUpViewController: UIViewController {
+
         
     @IBOutlet var popOverView: UIView!
     
@@ -43,6 +44,18 @@ class popUpViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func setPopOverProperties(){
+        itemName.text = itemClickedName
+        if(refreshOccurred){
+            itemImage.load(url: URL(string: itemClickedImageURL)!);
+        }
+        else{
+            itemImage.image = UIImage(named: itemClickedImageURL)
+        }
+        itemQuantityLbl.text = "Quantity: \(itemClickedQuantity)";
+        
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //as anothe way of dismissing the view, outside the view
         let touch = touches.first
@@ -57,6 +70,18 @@ class popUpViewController: UIViewController {
     
     @IBAction func dismissToSearchView(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.itemImage.image = image
+                    }
+                }
+            }
+        }
     }
     
 

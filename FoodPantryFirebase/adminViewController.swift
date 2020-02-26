@@ -23,7 +23,7 @@ class adminViewController: UIViewController {
         guard let adminCodeEntered = adminCodeTxtField.text else { return }
         
         if(adminCodeEntered == "SXY106"){
-            
+            self.performSegue(withIdentifier: "toAdminControls", sender: nil)
         }
         else{
             let alert = UIAlertController(title: "Incorrect Credentials", message: "Please try again!", preferredStyle: .alert)

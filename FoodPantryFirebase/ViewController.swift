@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
+    
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
@@ -37,10 +38,10 @@ class ViewController: UIViewController {
 //        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("1").child("Calories").setValue("75");
 //        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("1").child("Type").setValue("Snack");
 //
-//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("375235900").child("Name").setValue("Pasta");
-//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("375235900").child("Quantity").setValue("40");
-//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("375235900").child("Calories").setValue("80");
-//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("375235900").child("Type").setValue("Meal");
+//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("320532750").child("Name").setValue("Pasta");
+//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("320532750").child("Quantity").setValue("40");
+//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("320532750").child("Calories").setValue("80");
+//        self.ref.child("Conant High School").child("Inventory").child("Food Items").child("320532750").child("Type").setValue("Meal");
 //
         
 //        self.ref.child("Conant High School").child("Statistics").child("Total Visits").child("2-8-2020").child("Items").setValue("10")
