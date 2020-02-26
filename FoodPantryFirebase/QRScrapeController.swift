@@ -42,65 +42,113 @@ class QRScrapeController: UIViewController {
     
     var errorMessage = "";
     
+    var checkedOut = ""
+    
+    var maxQuantity: Int = 0
+    
+    override func viewDidAppear(_ animated: Bool) { //https://stackoverflow.com/questions/29257670/alertcontroller-is-not-in-the-window-hierarchy
+        super.viewDidAppear(animated)
+
+//        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+//
+//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+//        loadingIndicator.startAnimating();
+//
+//        alert.view.addSubview(loadingIndicator)
+//        present(alert, animated: true, completion: nil)
+//        print("showed")
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        //show loading indicator
+    
         
-        print(barcode)
-        print(quantity)
-        ref = Database.database().reference()
-        
-//        getTitle { (value) in
-//            DispatchQueue.main.async {
-//                print(value)
-//                self.nameLabel.text = value
-//            }
-//        }
-//
-//        getIngredients { (ingredients, type) in
-//            DispatchQueue.main.async {
-//                self.typeLabel.text = type;
-//                self.ingredientsLabel.text = ingredients
-//            }
-//        }
-        
+            ref = Database.database().reference()
         getData { (title, ingredients, url) in
             DispatchQueue.main.async {
-                
+                print(title)
                 if(title == "no food" || title == "error") {
                     self.errorMessage = ingredients;
                      self.performSegue(withIdentifier: "barcodeError", sender: self)
                 } else {
-                    self.food_title = title;
-                    self.nameLabel.text = title;
-                    self.ingredientsLabel.text = ingredients
-                
-                    var allergies = ["corn", "egg", "fish", "milk", "nut", "soy", "wheat"]
-                
-                    var confirmed = ""
-                
-                    for allergy in allergies {
-                        if title.contains(allergy) {
-                            confirmed += allergy + ","
-                        }  else if(ingredients.contains(allergy)) {
-                            confirmed += allergy + ","
-                        }
-                    }
-                
-                    if confirmed == "" {
-                        confirmed = "none,"
-                    }
-                
-                    self.typeLabel.text = confirmed.substring(to: confirmed.count-1);
                     
-                    if url != "" {
-                        self.foodView.load(url: URL(string: url)!);
-                    }
+                    //check if it is in the database
+                    
+                    self.getFoodDataFromFirebase(callback: {(data, items)-> Void in
+                        
+                        if(items.contains(title)) { //inside data
+                            var index: Int = items.firstIndex(of: title)!
+
+                            let quantity: Int = Int(data[index]["quantity"] as! String) ?? 0
+                            self.maxQuantity = quantity
+                            if(quantity <= 0) {
+                                self.errorMessage = "this food item has ran out";
+                                self.performSegue(withIdentifier: "barcodeError", sender: self)
+                            } else {
+                            
+                            self.food_title = title;
+                            self.nameLabel.text = title;
+                            self.ingredientsLabel.text = data[index]["information"] as! String
+                            
+                            var allergies = ["corn", "egg", "fish", "milk", "nut", "soy", "wheat"]
+                            
+                                var confirmed = ""
+                            
+                                for allergy in allergies {
+                                    if title.contains(allergy) {
+                                        confirmed += allergy + ","
+                                    }  else if(ingredients.contains(allergy)) {
+                                        confirmed += allergy + ","
+                                    }
+                                }
+                            
+                                if confirmed == "" {
+                                    confirmed = "none,"
+                                }
+                            
+                                self.typeLabel.text = confirmed.substring(to: confirmed.count-1);
+                            
+                            
+                                if url != "" {
+                                    self.foodView.load(url: URL(string: url)!);
+                                }
+                            
+                            self.healthyLabel.text = data[index]["healthy"] as! String
+
+                            var text = ""
+                            var str: String = self.checkedOut
+                            
+                            while str.count > 0 {
+                                let food = str.substring(to: str.indexDistance(of: "$")!)
+                                str = str.substring(from: str.indexDistance(of: "$")! + 1)
+                                let quantity = str.substring(to: str.indexDistance(of: ";")!)
+                                text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
+                                str = str.substring(from: str.indexDistance(of: ";")! + 1)
+                            }
+                            
+                            self.currentLabel.text = text
+                            
+                            }
+                        } else {
+                            self.errorMessage = "food item not found in the inventory";
+                            self.performSegue(withIdentifier: "barcodeError", sender: self)
+                        }
+                        
+                        
+                        
+                    })
+                    
+                
+                    
                 }
             }
         }
-        
-        self.healthyLabel.text = "yes"
-        
+                
         checkoutButton.layer.cornerRadius = 15
         checkoutButton.clipsToBounds = true
            
@@ -110,64 +158,42 @@ class QRScrapeController: UIViewController {
         quantityField.text = quantity
         quantityField.keyboardType = UIKeyboardType.numberPad
         
-        let defaults = UserDefaults.standard
         
-         if let list = defaults.string(forKey: "checkoutInventory") {
-            print("list")
-            print(list)
-            currentLabel.text = "Current Items:\n\n" + list
-         } else {
-            currentLabel.text = "Current Items: none"
-        }
+        
     }
     
-//    func getIngredients(_ completion: @escaping (String, String) -> ()) {
-//        let baseUrl = "https://api.nal.usda.gov/fdc/v1/search?api_key=PsxBttjr3pGn4njqbG6WMaVxvcy6atQJCVYqvC6J&generalSearchInput="
-//
-//
-//        if barcode.count > 12 {
-//            let range = barcode.index(after: barcode.startIndex)..<barcode.endIndex
-//            barcode = String(barcode[range])
-//            print("changed")
-//            print(barcode)
-//        }
-//
-//
-//        let url = URL(string: baseUrl + barcode)
-//
-//        let task = URLSession.shared.dataTask(with: url!) { (data: Data?, response: URLResponse?, error: Error?) in
-//            guard let data = data, error == nil else { return }
-//
-//            do {
-//                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]
-//                print(json)
-//                let foods = json?["foods"] as? [[String: Any]] ?? []
-//                let message = json?["message"] as? String
-//                if message != nil {
-//                    completion("error", message!)
-//                } else if foods.count == 0 {
-//                    completion("no food", "no food item was found")
-//                } else {
-//                    let ingredients = foods[0]["ingredients"]
-//                    let type = foods[0]["description"]
-////                    print(foods[0]["scientificName"])
-////                    print(foods[0]["commonNames"])
-////                    print(foods[0]["fdcId"])
-////                    print(foods[0]["brandOwner"])
-//
-//                    completion(ingredients as! String, type as! String)
-//                }
-//            } catch {
-//                print(error)
-//                return
-//            }
-//
-//        }
-//
-//        task.resume()
-//
-//
-//    }
+    func getFoodDataFromFirebase(callback: @escaping (_ data: [[String: Any]], _ names: [String])->Void) {
+        self.ref = Database.database().reference()
+        
+        
+        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            var tempData : [[String: Any]] = []
+            var tempNames: [String] = []
+            var c: Int = 0
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let key = snap.key
+                let value: [String: Any] = snap.value as! [String : Any]
+                
+                let name = value["Name"] as? String ?? ""
+                let url = value["URL"] as? String ?? ""
+                let checked = value["Checked Out"] as? String ?? ""
+                let healthy = value["Healthy"] as? String ?? ""
+                let quantity = value["Quantity"] as? String ?? ""
+                let type = value["Type"] as? String ?? ""
+                let info = value["Information"] as? String ?? ""
+                let id = String(c)
+                
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "id": id])
+                tempNames.append(name)
+                c += 1
+            }
+            
+             callback(tempData, tempNames)
+        })
+    }
+
     
      func getData(_ completion: @escaping (String, String, String) -> ()) {
        //        let baseUrl = "https://api.upcitemdb.com/prod/trial/lookup?upc="
@@ -188,7 +214,7 @@ class QRScrapeController: UIViewController {
 
                    do {
                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any]
-                       print(json)
+//                       print(json)
                        let foods = json?["item_attributes"] as? [String: Any]
                        let response = json?["item_response"] as? [String: Any]
                        let status = response?["status"] as? String
@@ -211,94 +237,100 @@ class QRScrapeController: UIViewController {
                task.resume()
        }
     
-//    func updateDataBase(){
-//        //Whenever a student checks out an item, below is what must be updated in the databse
-//        //1. Inventory Node-Decrease by amount student has checked out
-//        //2. Add that one student visited the food pantry into the Statistics node
-//        //3. Add that the student has checked out an item to their personal node with the user ID.
-//
-//
-////        1
-//        let userID = Auth.auth().currentUser?.uid
-//        ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-//          // Get user value
-//          let value = snapshot.value as? NSDictionary
-//          let fullName = value?["Name"] as? String ?? ""
-//          self.welcomeNameLbl.text = "Welcome, \(fullName)"
-//
-//            //all code with snapshot must be in here
-//          // ...
-//          }) { (error) in
-//            print(error.localizedDescription)
-//        }
-//    }
+    
+    @IBAction func changedQuantity(_ sender: Any) {
+        
+        var currentQuantity: Int = Int(quantityField.text as! String)!
+        
+        if currentQuantity <= 0 {
+            quantityField.text = "1"
+        } else if currentQuantity > maxQuantity {
+            quantityField.text = String(maxQuantity)
+        }
+        
+    }
     
     
-//    func getTitle(_ completion: @escaping (String) -> ()) {
-//
-//        let baseUrl = "https://www.upcitemdb.com/upc/"
-//
-//        let url = URL(string: baseUrl + barcode)
-//
-//
-//        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-//          guard let data = data else {
-//            print("data was nil")
-//            return
-//          }
-//          guard let htmlString = String(data: data, encoding: .utf8) else {
-//            print("couldn't cast data into String")
-//            return
-//          }
-//          //print(htmlString)
-//
-//            let leftSideString = """
-//            <b>
-//            """
-//            let rightSideString = """
-//            </b>
-//            """
-//            guard
-//              let leftSideRange = htmlString.range(of: leftSideString)
-//            else {
-//              print("couldn't find left range")
-//                completion("not found")
-//              return
-//            }
-//            guard
-//              let rightSideRange = htmlString.range(of: rightSideString)
-//            else {
-//              print("couldn't find right range")
-//                completion("not found")
-//              return
-//            }
-//            let rangeOfTheData = leftSideRange.upperBound..<rightSideRange.lowerBound
-//            let valueWeWantToGrab = htmlString[rangeOfTheData]
-//            completion(String(valueWeWantToGrab))
-//        }
-//        task.resume()
-//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "barcodeError"{
+        checkedOut += food_title + "$" + quantityField.text! + ";"
+        
+        //check to see if there are any food titles that are duplictated
+        
+        var items: [String] = []
+        var quantities: [Int] = []
+        
+        var str: String = checkedOut
+        
+        print(checkedOut)
+        
+        while str.count > 0 {
+            let food = str.substring(to: str.indexDistance(of: "$")!)
+            print(food)
+            items.append(food)
+            str = str.substring(from: str.indexDistance(of: "$")! + 1)
+            let quantity = str.substring(to: str.indexDistance(of: ";")!)
+            print(quantity)
+            quantities.append(Int(quantity) ?? 0)
+            str = str.substring(from: str.indexDistance(of: ";")! + 1)
+
+        }
+        
+        var merged : [[String: Any]] = []
+        
+        while items.count > 0 {
+            let food = items[0]
+            var quantity: Int = 0
             
-            //save the current data
+            var matched: [Int] = []
             
-            let defaults = UserDefaults.standard
-           
-            if var list = defaults.string(forKey: "checkoutInventory") {
-                list += "\n" + food_title + "," + quantityField.text!
-                defaults.set(list, forKey: "checkoutInventory")
-            } else {
-                let list = food_title + "," + quantityField.text!
-                defaults.set(list, forKey: "checkoutInventory")
+            for i in 0..<items.count {
+                if items[i] == food {
+                    quantity += quantities[i]
+                    matched.append(i)
+                }
             }
             
+            print(matched)
+            print(items)
             
+            for i in 0..<matched.count{
+                items.remove(at: matched[i])
+                quantities.remove(at: matched[i])
+                matched = matched.map{ $0 - 1 } //subtracts 1 from every match since the array decreased in size
+            }
+            
+            merged.append(["name": food, "quantity": quantity])
+            
+        }
+        
+//        print(checkedOut)
+//        print("changed")
+        checkedOut = ""
+        
+        for val in merged {
+            checkedOut += (val["name"] as! String) + "$" + String(val["quantity"] as! Int) + ";"
+            print(val["name"] as! String)
+            print(String(val["quantity"] as! Int))
+        }
+        
+//        print(checkedOut)
+        
+        
+        //continue with segue
+        if segue.identifier == "barcodeError"{
             
             let destinationVC = segue.destination as? QRCodeViewController
             destinationVC?.error = errorMessage
-
+            destinationVC?.checkedOut = checkedOut
+        } else if(segue.identifier == "addMore") {
+            let destinationVC = segue.destination as? QRCodeViewController
+            destinationVC?.checkedOut = checkedOut
+        } else if(segue.identifier == "checkOut") {
+            let destinationVC = segue.destination as? checkoutViewController
+            print("checking out")
+            destinationVC?.foodItems = checkedOut
+            print("set")
         }
     }
 
@@ -410,3 +442,17 @@ extension UIImageView {
         }
     }
 }
+
+extension StringProtocol {
+    func indexDistance(of element: Element) -> Int? { firstIndex(of: element)?.distance(in: self) }
+    func indexDistance<S: StringProtocol>(of string: S) -> Int? { range(of: string)?.lowerBound.distance(in: self) }
+}
+
+extension Collection {
+    func distance(to index: Index) -> Int { distance(from: startIndex, to: index) }
+}
+
+extension String.Index {
+    func distance<S: StringProtocol>(in string: S) -> Int { string.distance(to: self) }
+}
+

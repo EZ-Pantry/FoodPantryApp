@@ -11,12 +11,15 @@ import Foundation
 
 class QRCodeViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet var quantityTextField: UITextField!
     @IBOutlet var numberTextField: UITextField!
+    @IBOutlet var quantityTextField: UITextField!
+    
     @IBOutlet var selectButton: UIButton!
     @IBOutlet var errorLabel: UILabel!
     
     var error = ""
+    
+    var checkedOut = "" //format fooditem,quantity;fooditem,quantity
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,10 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         if error != "" {
             errorLabel.text = error + "\nplease try again";
         }
+        
+        print("-----------------------")
+        print(checkedOut)
+        
     }
     
     
@@ -41,11 +48,17 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "enterUPC"{
+        if segue.identifier == "GoToScrape"{
             let destinationVC = segue.destination as? QRScrapeController
             destinationVC?.barcode = numberTextField.text!
+            print("before")
+            print(numberTextField.text!)
+            print(quantityTextField.text!)
             destinationVC?.quantity = quantityTextField.text!
-
+            destinationVC?.checkedOut = checkedOut
+        } else if(segue.identifier == "camera") {
+            let destinationVC = segue.destination as? QRScannerController
+            destinationVC?.checkedOut = checkedOut
         }
     }
     

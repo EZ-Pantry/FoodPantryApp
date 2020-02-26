@@ -25,6 +25,8 @@ class homeViewController: UIViewController {
 
         //map config below
         //input any address and within 200 meters are shown
+        
+        
         coordinates(forAddress: "700 E Cougar Trail, Hoffman Estates, IL 60169") {
             (location) in
             guard let location = location else {

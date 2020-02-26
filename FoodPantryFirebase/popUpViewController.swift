@@ -9,13 +9,37 @@
 import UIKit
 
 class popUpViewController: UIViewController {
-    @IBOutlet weak var itemImage: UIImageView!
-    @IBOutlet weak var itemNutritionalImage: UIImageView!
-    @IBOutlet weak var popOverView: UIView!
-    @IBOutlet weak var itemName: UILabel!
+        
+    @IBOutlet var popOverView: UIView!
+    
+    @IBOutlet var foodName: UILabel!
+    @IBOutlet var foodQuantity: UILabel!
+    @IBOutlet var foodInformation: UILabel!
+    @IBOutlet var foodCheckedout: UILabel!
+    @IBOutlet var foodHealthy: UILabel!
+    
+    @IBOutlet var foodImage: UIImageView!
+    var name = ""
+    var quantity = ""
+    var information = ""
+    var checkedout = ""
+    var healthy = ""
+    var image = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        foodName.text = name
+        foodQuantity.text = "Quantity: " + String(quantity)
+        foodInformation.text = "Information: " + String(information)
+        foodCheckedout.text = "Checked out: " + String(checkedout)
+        foodHealthy.text = "Healthy: " + String(healthy)
+        
+        if(image != "") {
+            foodImage.load(url: URL(string: String(image))!)
+        }
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -37,3 +61,4 @@ class popUpViewController: UIViewController {
     
 
 }
+
