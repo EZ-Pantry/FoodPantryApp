@@ -150,5 +150,11 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func dismissViewToBack(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
 
 }
