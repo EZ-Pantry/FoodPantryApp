@@ -152,6 +152,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     */
     
     @IBAction func dismissViewToBack(_ sender: UIButton) {
+        print("yes")
         dismiss(animated: true, completion: nil)
     }
     

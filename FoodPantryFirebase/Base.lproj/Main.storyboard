@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -596,7 +596,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VuH-bk-84n">
                                 <rect key="frame" x="4" y="214" width="414" height="515"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -618,14 +617,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F38-fi-uih">
-                                <rect key="frame" x="191" y="150" width="18" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="arrow.clockwise" catalog="system"/>
-                                <connections>
-                                    <action selector="refreshButtonTapped:" destination="oHz-yb-dhY" eventType="touchUpInside" id="H3P-F2-AF2"/>
-                                </connections>
-                            </button>
                             <searchBar contentMode="redraw" fixedFrame="YES" showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqI-3A-61J">
                                 <rect key="frame" x="0.0" y="66" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -667,7 +658,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X1S-VS-FZd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="3208.6956521739135" y="217.63392857142856"/>
         </scene>
         <!--Pop Up View Controller-->
@@ -691,29 +681,6 @@
                                             <segue destination="oHz-yb-dhY" kind="presentation" modalPresentationStyle="fullScreen" id="U4P-l0-e9D"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cheerios" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWc-Xd-peK">
-                                        <rect key="frame" x="8" y="160" width="347" height="51"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="22"/>
-                                        <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="samplenutritionlvl" translatesAutoresizingMaskIntoConstraints="NO" id="e4g-qn-3cB">
-                                        <rect key="frame" x="21" y="249" width="321" height="137"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity: 50" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SjF-8n-bGU">
-                                        <rect key="frame" x="8" y="190" width="347" height="51"/>
-
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="22"/>
-                                        <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ga-mM-2eb">
-                                        <rect key="frame" x="65" y="191" width="232" height="183"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypO-ZA-zZj">
                                         <rect key="frame" x="103" y="429" width="157" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -742,6 +709,17 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Food Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Kd-SZ-AMf">
+                                        <rect key="frame" x="79" y="80" width="205" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3bU-Zq-0nh">
+                                        <rect key="frame" x="61" y="150" width="240" height="212"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -750,20 +728,18 @@
                         <viewLayoutGuide key="safeArea" id="v8c-0l-zsg"/>
                     </view>
                     <connections>
-
                         <outlet property="foodCheckedout" destination="oVq-f1-lWE" id="YOB-M5-3NX"/>
                         <outlet property="foodHealthy" destination="89R-75-aeP" id="sN5-wN-TrG"/>
-                        <outlet property="foodImage" destination="3ga-mM-2eb" id="Ovy-Aa-dXR"/>
+                        <outlet property="foodImage" destination="3bU-Zq-0nh" id="9JW-87-4Qi"/>
                         <outlet property="foodInformation" destination="Yiq-W9-itX" id="iBO-Te-uof"/>
-                        <outlet property="foodName" destination="aWc-Xd-peK" id="20n-ep-dvg"/>
+                        <outlet property="foodName" destination="9Kd-SZ-AMf" id="CV2-X1-jvH"/>
                         <outlet property="foodQuantity" destination="ypO-ZA-zZj" id="yVL-0w-wMI"/>
                         <outlet property="popOverView" destination="E0C-ot-ePS" id="ZQP-Qo-K8r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHQ-UU-dFL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-
-            <point key="canvasLocation" x="5049" y="218"/>
+            <point key="canvasLocation" x="5047.826086956522" y="217.63392857142856"/>
         </scene>
         <!--SCAN-->
         <scene sceneID="RB7-cW-IHs">
@@ -986,7 +962,6 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-
                                     <segue destination="rQB-fb-O7h" kind="presentation" identifier="checkOut" modalPresentationStyle="fullScreen" id="q7p-P8-aTn"/>
                                 </connections>
                             </button>
@@ -1054,7 +1029,6 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-
                                     <segue destination="lYj-js-UPa" kind="presentation" identifier="addMore" modalPresentationStyle="fullScreen" id="ZCT-Uy-Ifi"/>
                                 </connections>
                             </button>
@@ -1082,7 +1056,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpF-Ej-BoC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="2747.826086956522" y="1857.5892857142856"/>
         </scene>
         <!--Checkout View Controller-->
@@ -1251,7 +1224,6 @@
         <!--SEARCH-->
         <scene sceneID="yKy-sA-1Md">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fTs-Nj-RpF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Bcs-Lr-vOf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="SEARCH" image="magnifyingglass" catalog="system" id="obQ-mC-OV2"/>
                     <toolbarItems/>
@@ -1269,9 +1241,9 @@
                         <segue destination="oHz-yb-dhY" kind="relationship" relationship="rootViewController" id="EoB-ia-61U"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fTs-Nj-RpF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3208.6956521739135" y="217.63392857142856"/>
-
         </scene>
     </scenes>
     <resources>
@@ -1292,13 +1264,13 @@
         <image name="xmark.seal.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kvN-Gh-zzQ"/>
-        <segue reference="7EZ-Nr-agb"/>
-
-        <segue reference="Mg0-v9-3I5"/>
+        <segue reference="BwJ-7g-z4T"/>
         <segue reference="jue-31-CKR"/>
+        <segue reference="H9f-l5-90A"/>
+        <segue reference="Mg0-v9-3I5"/>
+        <segue reference="U4P-l0-e9D"/>
         <segue reference="VPy-iz-QwI"/>
-        <segue reference="HLC-EI-gPB"/>
+        <segue reference="vDY-EW-nOH"/>
         <segue reference="skv-aV-7d1"/>
     </inferredMetricsTieBreakers>
 </document>
