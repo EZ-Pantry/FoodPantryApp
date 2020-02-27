@@ -176,7 +176,7 @@ class QRScrapeController: UIViewController {
                 let snap = child as! DataSnapshot
                 let key = snap.key
                 let value: [String: Any] = snap.value as! [String : Any]
-                
+            
                 let name = value["Name"] as? String ?? ""
                 let url = value["URL"] as? String ?? ""
                 let checked = value["Checked Out"] as? String ?? ""

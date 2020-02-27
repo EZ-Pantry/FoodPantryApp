@@ -14,6 +14,7 @@ class adminViewController: UIViewController {
     @IBOutlet weak var continueButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Create rounded buttons
         continueButton.layer.cornerRadius = 15
         continueButton.clipsToBounds = true
         // Do any additional setup after loading the view.
@@ -23,6 +24,7 @@ class adminViewController: UIViewController {
         guard let adminCodeEntered = adminCodeTxtField.text else { return }
         
         if(adminCodeEntered == "SXY106"){
+            //If correct code entered, then go to admin page
             self.performSegue(withIdentifier: "toAdminControls", sender: nil)
         }
         else{

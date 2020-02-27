@@ -42,6 +42,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Create rounded butons
         continueButton.layer.cornerRadius = 15
         continueButton.clipsToBounds = true
         studentButton.layer.cornerRadius = 5
@@ -55,8 +56,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         pickerField.inputView = yourPicker
         
-        pickerData = ["Conant High School", "Hoffman Estates High School"]
-        // Do any additional setup after loading the view.
+        pickerData = ["Conant High School", "Hoffman Estates High School"]//All schools to choose from
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -75,7 +75,6 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
        pickerField.text = pickerData[row]
-        print("ouched pickerview")
         schoolCodeTextField.isHidden = false;
         if(pickerData[row] == "Conant High School") {
             print("Conant Chosen")
@@ -83,28 +82,6 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         
     }
-    
-    
-//    @IBAction func handleSelection(_ sender: UIButton){
-//        //code below for multiple schools added
-////        firstSchoolButton.forEach { (button) in
-////            butt
-////        }
-//
-//        UIView.animate(withDuration: 0.7, animations: {
-//            self.firstSchoolButton.isHidden = !self.firstSchoolButton.isHidden;//change to opposite state
-//            self.view.layoutIfNeeded()
-//        })
-//    }
-//
-//    @IBAction func schoolTapped(_ sender: UIButton) {
-//        guard let schoolTitle = sender.currentTitle else{
-//            return;
-//        }
-//
-//        schoolName = schoolTitle;
-//        schoolCodeTextField.isHidden = false;
-//    }
     
     
     @IBAction func studentButtonTapped(_ sender: UIButton) {
@@ -137,28 +114,19 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 correctSchoolCodeEntered = true;
                 print("correct1")
             }
-//            else{
-//                let alert = UIAlertController(title: "Incorrect School Code", message: "Please try again!", preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-//                self.present(alert, animated: true, completion: nil);
-//            }
         }
         
         if(adminCodeEntered == adminCode){
             isAdmin = true;
             print("correct2")
         }
-//        else{
-//            let alert = UIAlertController(title: "Incorrect Admin Code", message: "Please try again!", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-//            self.present(alert, animated: true, completion: nil);
-//        }
         
         if(correctSchoolCodeEntered){
             Auth.auth().createUser(withEmail: emailaddress, password: password){ user, error in
                 if error == nil && user != nil{
                     print("User Created")
                     if(self.isAdmin){
+                        //If correct admin code was entered, create a new administrator account who can access the admin page
                     self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Name").setValue(fullname)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("ID Number ").setValue(schoolIDNumber)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
@@ -168,6 +136,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                         
                     }
                     else{
+                        //Else a regular student account
                     self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Name").setValue(fullname)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("ID Number ").setValue(schoolIDNumber)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)

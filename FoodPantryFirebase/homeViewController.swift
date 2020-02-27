@@ -24,22 +24,19 @@ class homeViewController: UIViewController {
         super.viewDidLoad()
 
         
-        //below is to disable user interaction w/map
+        //below is to disable user interaction with the map
         self.mapView.isZoomEnabled = false;
         self.mapView.isScrollEnabled = false;
         self.mapView.isUserInteractionEnabled = false;
         
-        //map config below
         //input any address and within 200 meters are shown
-
-        
         coordinates(forAddress: "700 E Cougar Trail, Hoffman Estates, IL 60169") {
             (location) in
             guard let location = location else {
                 // Handle error here.
                 return
             }
-            self.openMapForPlace(lat: location.latitude, long: location.longitude)//helper function
+            self.openMapForPlace(lat: location.latitude, long: location.longitude)//helper function to show the zooming in of map into address inputed which corresponds with school
         }
         
         ref = Database.database().reference()
@@ -53,16 +50,17 @@ class homeViewController: UIViewController {
     
     
     func getUsersName(){
+        //Purpose of function is to display specific user stats @ home screen
         let userID = Auth.auth().currentUser?.uid
         ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
           let value = snapshot.value as? NSDictionary
           let fullName = value?["Name"] as? String ?? ""
-          let lastCheckedOutDate = value?["Last Date Checked Out"] as? String ?? ""
+          let lastCheckedOutDate = value?["Last Date Visited"] as? String ?? ""
           let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
           self.welcomeNameLbl.text = "Welcome, \(fullName)"
-            self.lastCheckedOutLbl.text = "Last visited: \(lastCheckedOutDate)"
-            self.lastItemCheckedOutLbl.text = "Last Checked Out Item: \(lastItemCheckedOut)"
+            self.lastCheckedOutLbl.text = "Last visited: \(lastCheckedOutDate)"//Display last item user checked out
+            self.lastItemCheckedOutLbl.text = "Last Checked Out Item: \(lastItemCheckedOut)"//And the last date they visited
             
             //all code with snapshot must be in here
           // ...
@@ -73,8 +71,9 @@ class homeViewController: UIViewController {
     }
     
     @IBAction func logOutUser(_ sender: UIButton) {
+        //Purpose is to log out the user
         try!  Auth.auth().signOut()
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: false, completion: nil)//send user back to the login in/sign up view
     }
 
     public func openMapForPlace(lat:Double = 0, long:Double = 0, placeName:String = "") {
@@ -84,11 +83,11 @@ class homeViewController: UIViewController {
         homeLocation = CLLocation(latitude: latitude, longitude: longitude)//GLLocation coordinates of displayment
         
         mapView.showsUserLocation = true
-        centerMapOnLocation(location: homeLocation)
+        centerMapOnLocation(location: homeLocation)//open the map @ desired locaiton
     }
     
     var homeLocation = CLLocation();
-    let regionRadius: CLLocationDistance = 150//distance of zooooom
+    let regionRadius: CLLocationDistance = 150//distance of zoom
     func centerMapOnLocation(location: CLLocation)
     {
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
@@ -97,6 +96,7 @@ class homeViewController: UIViewController {
     }
     
     func coordinates(forAddress address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
+        //Purpose of function is to translate a string address into geocoordinates
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) {
             (placemarks, error) in

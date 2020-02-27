@@ -23,7 +23,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         pickerField.inputView = yourPicker
         
-        pickerData = ["Total ", "Student"]
+        pickerData = ["Total Student Visits", "Indivisual Student Data"]
 
         // Do any additional setup after loading the view.
     }
@@ -46,10 +46,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
        pickerField.text = pickerData[row]
         print("ouched pickerview")
 //        schoolCodeTextField.isHidden = false;
-//        if(pickerData[row] == "Conant High School") {
-//            print("Conant Chosen")
+        if(pickerData[row] == "Conant High School") {
+            print("Conant Chosen")
 //            schoolName = "Conant High School"
-//        }
+        }
         
     }
     

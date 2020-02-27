@@ -26,6 +26,11 @@ class checkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //update with today's date
+        let formatter : DateFormatter = DateFormatter()
+        formatter.dateFormat = "d-M-yyyy"
+        self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
+        
         var text = ""
         var str: String = self.foodItems
         
@@ -102,50 +107,102 @@ class checkoutViewController: UIViewController {
                 
                 
                 //OTHER FIREBASE UPDATES BELOW
-                
-                //update that the student has checked out quantity number more items
-                let userID = Auth.auth().currentUser?.uid
-
-                var totalItemsStudentHasCheckedOut = Int(value?["Total Item's Checked Out"] as? String ?? "") ?? 0
-                totalItemsStudentHasCheckedOut += quantityChanged;//number of items checked out would go here
-                self.ref.child("Conant High School").child("Users").child(userID!).child("Total Item's Checked Out ").setValue(String(totalItemsStudentHasCheckedOut))
-                
-                
-                //update with today's date
-                let formatter : DateFormatter = DateFormatter()
-                formatter.dateFormat = "d-M-yyyy"
-                self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
-                self.ref.child("Conant High School").child("Users").child(userID!).child("Last Date Visited").setValue(self.fullyFormatedDate)
             
                 
                 print("changed " + String(quantityChanged) + " " + (key!))
-                myGroup.leave()
+              // ...
+              }) { (error) in
+                print(error.localizedDescription)
+            }
+            let userID = Auth.auth().currentUser?.uid
+            self.ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+              // Get user value
+                let value = snapshot.value as? NSDictionary
+                //UPDATE Statistics Node
+                
+                //update that the student has checked out quantity number more items
+                
+                var totalItemsStudentHasCheckedOut = Int(value?["Total Item's Checked Out"] as? String ?? "") ?? 0
+                print("total student has: ")
+                print(totalItemsStudentHasCheckedOut)
+                totalItemsStudentHasCheckedOut += quantityChanged;//number of items checked out would go here
+                self.ref.child("Conant High School").child("Users").child(userID!).child("Total Item's Checked Out").setValue(String(totalItemsStudentHasCheckedOut))
+                
+                
+                
+                self.ref.child("Conant High School").child("Users").child(userID!).child("Last Date Visited").setValue(self.fullyFormatedDate)
+                
+                self.ref.child("Conant High School").child("Users").child(userID!).child("Last Item Checked Out").setValue(self.items[self.items.count-1])
+                
+                
+                print("changed " + String(quantityChanged) + " " + (key!))
               // ...
               }) { (error) in
                 print(error.localizedDescription)
             }
             
             //update statistics node with data below
-            self.ref.child("Conant High School").child("Statistics").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
-              // Get user value
-                let value = snapshot.value as? NSDictionary
-                //UPDATE Statistics Node
-                
-                var itemsCheckedOutThatDay = Int(value?["Items"] as? String ?? "") ?? 0
-                var studentsVisitedThatDay = Int(value?["Students Visited"] as? String ?? "") ?? 0
-                itemsCheckedOutThatDay += quantityChanged;//number of items checked out would go here
-                studentsVisitedThatDay+=1;
-                self.ref.child("Conant High School").child("Statistics").child(self.fullyFormatedDate).child("Items").setValue(String(itemsCheckedOutThatDay));
-                self.ref.child("Conant High School").child("Statistics").child(self.fullyFormatedDate).child("Students Visited").setValue(String(studentsVisitedThatDay));
-                
+            print("formatted date below")
+            print(self.fullyFormatedDate)
+
             
+            
+            self.ref.child("Conant High School").child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
                 
+                var dateNodesArray: [String] = [String]()
+                var c: Int = 0
+                for child in snapshot.children {
+                    let snap = child as! DataSnapshot
+                    let key = snap.key as String
+                    dateNodesArray.append(key)
+                    c += 1
+                    //retrieving the keys from total visits
+                }
+                var dateNodeHasBeenFound = false;
+                
+                for i in 0..<dateNodesArray.count{
+                    if(dateNodesArray[i] == self.fullyFormatedDate){
+                        dateNodeHasBeenFound = true;
+                    }
+                }
+                
+                if(!dateNodeHasBeenFound){
+                    print("new node created")
+                    //Create a new node for that day
+                    self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Items").setValue(String(quantityChanged));
+                    self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Students Visited").setValue(String(1));
+                }
+                else{
+                    //Update the created stats node for that day
+                    print("node already created")
+                    print("date below")
+                    print(self.fullyFormatedDate)
+                    self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let value = snapshot.value as? NSDictionary
+                        var itemsCheckedOutThatDay = Int(value?["Items"] as? String ?? "") ?? 0
+                        var studentsVisitedThatDay = Int(value?["Students Visited"] as? String ?? "") ?? 0
+                        print("items checked out that day  \(itemsCheckedOutThatDay)")
+                        print("visited that day \(studentsVisitedThatDay)")
+                        itemsCheckedOutThatDay += quantityChanged;//number of items checked out would go here
+                        studentsVisitedThatDay+=1;
+                        self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Items").setValue(String(itemsCheckedOutThatDay));
+                        self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Students Visited").setValue(String(studentsVisitedThatDay));
+                    })
+                    
+                    
+                    
+                }
+
                 print("changed " + String(quantityChanged) + " " + (key!))
                 myGroup.leave()
               // ...
               }) { (error) in
                 print(error.localizedDescription)
             }
+            
+            
+            
+            
         }
         
         myGroup.notify(queue: .main) {
