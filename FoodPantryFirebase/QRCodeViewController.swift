@@ -12,7 +12,6 @@ import Foundation
 class QRCodeViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var numberTextField: UITextField!
-    @IBOutlet var quantityTextField: UITextField!
     
     @IBOutlet var selectButton: UIButton!
     @IBOutlet var errorLabel: UILabel!
@@ -28,8 +27,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         selectButton.layer.cornerRadius = 15
         selectButton.clipsToBounds = true
         
-        numberTextField.keyboardType = UIKeyboardType.numberPad
-        quantityTextField.keyboardType = UIKeyboardType.numberPad
+        numberTextField.keyboardType = UIKeyboardType.alphabet
         
         if error != "" {
             errorLabel.text = error + "\nplease try again";
@@ -48,13 +46,9 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToScrape"{
-            let destinationVC = segue.destination as? QRScrapeController
-            destinationVC?.barcode = numberTextField.text!
-            print("before")
-            print(numberTextField.text!)
-            print(quantityTextField.text!)
-            destinationVC?.quantity = quantityTextField.text!
+        if segue.identifier == "GoToManual"{
+            let destinationVC = segue.destination as? manualViewController
+            destinationVC?.manualTitle = numberTextField.text!
             destinationVC?.checkedOut = checkedOut
         } else if(segue.identifier == "camera") {
             let destinationVC = segue.destination as? QRScannerController

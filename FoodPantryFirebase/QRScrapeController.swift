@@ -47,6 +47,9 @@ class QRScrapeController: UIViewController {
     
     var maxQuantity: Int = 0
     
+    var manualEnter: Bool = false
+    var manualTitle = ""
+    
     override func viewDidAppear(_ animated: Bool) { //https://stackoverflow.com/questions/29257670/alertcontroller-is-not-in-the-window-hierarchy
         super.viewDidAppear(animated)
 
@@ -68,6 +71,16 @@ class QRScrapeController: UIViewController {
     
         //show loading indicator
     
+        if(manualEnter) { //user manually entered title
+            ref = Database.database().reference()
+            
+            self.getFoodDataFromFirebase(callback: {(data, items)-> Void in
+                
+                
+            })
+            
+        } else { //
+        
         
             ref = Database.database().reference()
         getData { (title, ingredients, url) in
@@ -145,7 +158,7 @@ class QRScrapeController: UIViewController {
                     })
                     
                 
-                    
+                }
                 }
             }
         }

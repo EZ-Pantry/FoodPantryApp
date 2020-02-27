@@ -14,6 +14,7 @@
 		1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */; };
 		1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */; };
 		1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */; };
+		66FB50C7240858CD009A5AE5 /* manualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FB50C6240858CD009A5AE5 /* manualViewController.swift */; };
 		790C13C585DC69A8A6659284 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */; };
 		A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381723EF66E000AACC97 /* AppDelegate.swift */; };
 		A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381923EF66E000AACC97 /* SceneDelegate.swift */; };
@@ -68,6 +69,7 @@
 		3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E1892DB996DB72CE1C59838 /* Pods-FoodPantryFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66FB50C6240858CD009A5AE5 /* manualViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manualViewController.swift; sourceTree = "<group>"; };
 		A24F381423EF66E000AACC97 /* FoodPantryFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPantryFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24F381723EF66E000AACC97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A24F381923EF66E000AACC97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */,
 				1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */,
 				1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */,
+				66FB50C6240858CD009A5AE5 /* manualViewController.swift */,
 				A24F381723EF66E000AACC97 /* AppDelegate.swift */,
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
@@ -510,6 +513,7 @@
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
 				A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */,
 				A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */,
+				66FB50C7240858CD009A5AE5 /* manualViewController.swift in Sources */,
 				A24F388B2401CC8400AACC97 /* adminControlsViewController.swift in Sources */,
 				1C748F322406188800936A05 /* checkoutViewController.swift in Sources */,
 				1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */,
