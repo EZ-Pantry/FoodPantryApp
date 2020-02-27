@@ -66,78 +66,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Full Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3a2-WV-8TN">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Full Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3a2-WV-8TN">
                                 <rect key="frame" x="50" y="110" width="314" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="School ID #" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hiy-l8-ab4">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="School ID #" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hiy-l8-ab4">
                                 <rect key="frame" x="50" y="182" width="314" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" keyboardType="numberPad"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email Address" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c5g-oU-Jcc">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email Address" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c5g-oU-Jcc">
                                 <rect key="frame" x="50" y="258" width="314" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Password" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QJb-pk-1dL">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Password" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QJb-pk-1dL">
                                 <rect key="frame" x="50" y="326" width="314" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" secureTextEntry="YES" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Allergies" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VRt-j3-aCp">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Allergies" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VRt-j3-aCp">
                                 <rect key="frame" x="50" y="399" width="314" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYf-DU-CaL">
-                                <rect key="frame" x="50" y="463" width="314" height="46"/>
-                                <color key="backgroundColor" red="0.22999571630000001" green="0.6761886507" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="29"/>
-                                <state key="normal" title="Select School">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="handleSelection:" destination="Y4h-cv-WDg" eventType="touchUpInside" id="zgF-FA-kdH"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hK7-kx-VmJ">
-                                <rect key="frame" x="50" y="527" width="314" height="38"/>
-                                <color key="backgroundColor" red="0.32744829399999997" green="0.39777773970000002" blue="0.87282729150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
-                                <state key="normal" title="Conant High School">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="schoolTapped:" destination="Y4h-cv-WDg" eventType="touchUpInside" id="DXH-hZ-0ZU"/>
-                                </connections>
-                            </button>
-                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="School Code" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtR-bV-IGj">
-                                <rect key="frame" x="50" y="584" width="314" height="33"/>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="School Code" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtR-bV-IGj">
+                                <rect key="frame" x="50" y="531" width="314" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDx-7c-12l">
-                                <rect key="frame" x="50" y="683" width="69" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgQ-fv-ICI">
+                                <rect key="frame" x="50" y="42" width="314" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
+                                <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose School" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iz5-zR-Lia">
+                                <rect key="frame" x="50" y="461" width="314" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDx-7c-12l">
+                                <rect key="frame" x="50" y="625" width="69" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.22999571630000001" green="0.6761886507" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="STUDENT">
@@ -147,8 +148,9 @@
                                     <action selector="studentButtonTapped:" destination="Y4h-cv-WDg" eventType="touchUpInside" id="gTA-5G-G9I"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wi5-rX-gRi">
-                                <rect key="frame" x="299" y="677" width="65" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wi5-rX-gRi">
+                                <rect key="frame" x="299" y="619" width="65" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.22999571630000001" green="0.6761886507" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="ADMIN">
@@ -158,8 +160,9 @@
                                     <action selector="adminButtonTapped:" destination="Y4h-cv-WDg" eventType="touchUpInside" id="HLK-Vu-JMq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hqh-1g-7PC">
-                                <rect key="frame" x="50" y="786" width="314" height="76"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hqh-1g-7PC">
+                                <rect key="frame" x="50" y="728" width="314" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="53"/>
                                 <state key="normal" title="CONTINUE">
@@ -169,63 +172,17 @@
                                     <action selector="handleContinue:" destination="Y4h-cv-WDg" eventType="touchUpInside" id="cvY-mz-Myc"/>
                                 </connections>
                             </button>
-                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Admin Code" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bot-7P-G0m">
-                                <rect key="frame" x="50" y="745" width="314" height="33"/>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Admin Code" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bot-7P-G0m">
+                                <rect key="frame" x="50" y="687" width="314" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgQ-fv-ICI">
-                                <rect key="frame" x="50" y="42" width="314" height="60"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
-                                <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="CDx-7c-12l" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="139-Oq-ygQ"/>
-                            <constraint firstItem="3a2-WV-8TN" firstAttribute="top" secondItem="QgQ-fv-ICI" secondAttribute="bottom" constant="8" id="1iG-c1-af6"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="dYf-DU-CaL" secondAttribute="trailing" constant="50" id="2ZG-YC-MGW"/>
-                            <constraint firstItem="c5g-oU-Jcc" firstAttribute="top" secondItem="hiy-l8-ab4" secondAttribute="bottom" constant="43" id="2mD-LW-VDp"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="3a2-WV-8TN" secondAttribute="trailing" constant="50" id="37B-GN-Ra2"/>
-                            <constraint firstItem="RtR-bV-IGj" firstAttribute="top" secondItem="hK7-kx-VmJ" secondAttribute="bottom" constant="19" id="3nZ-or-y4y"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="QJb-pk-1dL" secondAttribute="trailing" constant="50" id="5Kq-3l-xZ4"/>
-                            <constraint firstItem="bot-7P-G0m" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="7fA-dy-XEi"/>
-                            <constraint firstItem="Hqh-1g-7PC" firstAttribute="leading" secondItem="6I0-7L-6D9" secondAttribute="leading" constant="50" id="7ue-Bf-SaX"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="hiy-l8-ab4" secondAttribute="trailing" constant="50" id="C5t-By-DNO"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="bot-7P-G0m" secondAttribute="trailing" constant="50" id="DLh-D1-7Tp"/>
-                            <constraint firstItem="VRt-j3-aCp" firstAttribute="top" secondItem="QJb-pk-1dL" secondAttribute="bottom" constant="40" id="Ddt-en-Mui"/>
-                            <constraint firstAttribute="trailing" secondItem="Hqh-1g-7PC" secondAttribute="trailing" constant="50" id="EGL-ca-dA9"/>
-                            <constraint firstItem="Hqh-1g-7PC" firstAttribute="top" secondItem="bot-7P-G0m" secondAttribute="bottom" constant="8" id="HNy-jM-jDJ"/>
-                            <constraint firstItem="hiy-l8-ab4" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="I0A-kl-U2a"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="RtR-bV-IGj" secondAttribute="trailing" constant="50" id="IRa-kr-Cuj"/>
-                            <constraint firstItem="hK7-kx-VmJ" firstAttribute="top" secondItem="dYf-DU-CaL" secondAttribute="bottom" constant="18" id="Ieu-Zu-d8g"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="c5g-oU-Jcc" secondAttribute="trailing" constant="50" id="J28-tu-nOJ"/>
-                            <constraint firstItem="QgQ-fv-ICI" firstAttribute="top" secondItem="6I0-7L-6D9" secondAttribute="top" constant="42" id="Lga-Pn-e8e"/>
-                            <constraint firstItem="RtR-bV-IGj" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="Lxv-vz-gSi"/>
-                            <constraint firstItem="bot-7P-G0m" firstAttribute="top" secondItem="wi5-rX-gRi" secondAttribute="bottom" constant="32" id="MV1-NA-bfI"/>
-                            <constraint firstItem="QJb-pk-1dL" firstAttribute="top" secondItem="c5g-oU-Jcc" secondAttribute="bottom" constant="37" id="PBd-V1-bZC"/>
-                            <constraint firstItem="dYf-DU-CaL" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="Qx7-kY-n6I"/>
-                            <constraint firstItem="bot-7P-G0m" firstAttribute="top" secondItem="CDx-7c-12l" secondAttribute="bottom" constant="32" id="SvM-0F-8sO"/>
-                            <constraint firstItem="wi5-rX-gRi" firstAttribute="top" secondItem="RtR-bV-IGj" secondAttribute="bottom" constant="60" id="UIu-Mo-npP"/>
-                            <constraint firstItem="c5g-oU-Jcc" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="VSQ-7j-Vev"/>
-                            <constraint firstItem="3a2-WV-8TN" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="XwA-lY-8Me"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="QgQ-fv-ICI" secondAttribute="trailing" constant="50" id="bTA-cX-yEr"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="wi5-rX-gRi" secondAttribute="trailing" constant="50" id="cD4-8N-FZ0"/>
-                            <constraint firstItem="dYf-DU-CaL" firstAttribute="top" secondItem="VRt-j3-aCp" secondAttribute="bottom" constant="31" id="duH-FJ-pGE"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="hK7-kx-VmJ" secondAttribute="trailing" constant="50" id="gtR-4f-Tjn"/>
-                            <constraint firstItem="QJb-pk-1dL" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="iPd-Oz-Hzi"/>
-                            <constraint firstItem="Hqh-1g-7PC" firstAttribute="bottom" secondItem="6NN-n6-tSN" secondAttribute="bottom" id="kxT-o2-NV6"/>
-                            <constraint firstItem="VRt-j3-aCp" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="mZt-Zf-zjQ"/>
-                            <constraint firstItem="hK7-kx-VmJ" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="ngO-3R-23h"/>
-                            <constraint firstItem="hiy-l8-ab4" firstAttribute="top" secondItem="3a2-WV-8TN" secondAttribute="bottom" constant="39" id="oNW-ri-ofu"/>
-                            <constraint firstItem="Hqh-1g-7PC" firstAttribute="top" secondItem="bot-7P-G0m" secondAttribute="bottom" constant="8" id="wpe-CQ-IpV"/>
-                            <constraint firstItem="QgQ-fv-ICI" firstAttribute="leading" secondItem="6NN-n6-tSN" secondAttribute="leading" constant="50" id="xpU-Ma-2Bi"/>
-                            <constraint firstItem="6NN-n6-tSN" firstAttribute="trailing" secondItem="VRt-j3-aCp" secondAttribute="trailing" constant="50" id="xuL-VM-gLO"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6NN-n6-tSN"/>
                     </view>
                     <navigationItem key="navigationItem" id="Crr-ih-y6X"/>
@@ -235,12 +192,11 @@
                         <outlet property="allergiesTextField" destination="VRt-j3-aCp" id="bd6-Rk-xsf"/>
                         <outlet property="continueButton" destination="Hqh-1g-7PC" id="Xq2-rp-5AS"/>
                         <outlet property="emailTextField" destination="c5g-oU-Jcc" id="gQ3-4s-nBr"/>
-                        <outlet property="firstSchoolButton" destination="hK7-kx-VmJ" id="xy1-Bs-UrV"/>
                         <outlet property="fullNameTextField" destination="3a2-WV-8TN" id="0Ef-3V-ltl"/>
                         <outlet property="passwordTextField" destination="QJb-pk-1dL" id="HsS-9z-G5S"/>
+                        <outlet property="pickerField" destination="Iz5-zR-Lia" id="00s-ny-0v8"/>
                         <outlet property="schoolCodeTextField" destination="RtR-bV-IGj" id="QLY-41-pXn"/>
                         <outlet property="schoolID" destination="hiy-l8-ab4" id="7vZ-Mn-wll"/>
-                        <outlet property="selectSchoolButton" destination="dYf-DU-CaL" id="SIh-Hk-iYX"/>
                         <outlet property="studentButton" destination="CDx-7c-12l" id="pdE-bh-DY3"/>
                     </connections>
                 </viewController>
@@ -1184,9 +1140,6 @@
                                 <state key="normal" title="VIEW INVENTORY">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Bcs-Lr-vOf" kind="show" id="kvN-Gh-zzQ"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vD6-4u-XD9">
                                 <rect key="frame" x="50" y="540" width="314" height="74"/>
@@ -1196,6 +1149,9 @@
                                 <state key="normal" title="VIEW STATISTICS">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="KNv-eW-BHH" kind="show" id="h5i-zc-uCG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7QI-db-CAM">
                                 <rect key="frame" x="371" y="56" width="23" height="22"/>
@@ -1220,6 +1176,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpj-eZ-7Sr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4092.753623188406" y="2698.6607142857142"/>
+        </scene>
+        <!--View Statistics View Controller-->
+        <scene sceneID="emm-VK-tzb">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="KNv-eW-BHH" customClass="ViewStatisticsViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j0P-Iq-Eh0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adm-g3-Umg">
+                                <rect key="frame" x="371" y="83" width="23" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xmark.seal.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="dismissBack:" destination="KNv-eW-BHH" eventType="touchUpInside" id="Ft0-bM-wgZ"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose Data Type..." borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PYm-C9-ce1">
+                                <rect key="frame" x="82" y="160" width="251" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="STATISTICS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5T-yU-5eb">
+                                <rect key="frame" x="103" y="73" width="209" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Eno-kY-Nic"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="GET-bb-E4g"/>
+                    <connections>
+                        <outlet property="pickerField" destination="PYm-C9-ce1" id="ZNg-2b-Av4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rJt-7r-QY0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5047.826086956522" y="3174.7767857142858"/>
         </scene>
         <!--SEARCH-->
         <scene sceneID="yKy-sA-1Md">
@@ -1264,8 +1265,6 @@
         <image name="xmark.seal.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BwJ-7g-z4T"/>
-        <segue reference="jue-31-CKR"/>
         <segue reference="H9f-l5-90A"/>
         <segue reference="Mg0-v9-3I5"/>
         <segue reference="U4P-l0-e9D"/>

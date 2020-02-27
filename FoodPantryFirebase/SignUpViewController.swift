@@ -10,7 +10,7 @@ import UIKit
 import FirebaseUI
 import Firebase
 import FirebaseDatabase
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var schoolID: UITextField!
@@ -24,10 +24,13 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var studentButton: UIButton!
     @IBOutlet weak var adminButton: UIButton!
     
+    @IBOutlet weak var pickerField: UITextField!
     
     @IBOutlet weak var continueButton: UIButton!
-    @IBOutlet weak var selectSchoolButton: UIButton!
-    @IBOutlet weak var firstSchoolButton: UIButton!
+
+    
+    let yourPicker = UIPickerView()
+    var pickerData: [String] = [String]()
     
     var ref: DatabaseReference!
 
@@ -41,39 +44,67 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         continueButton.layer.cornerRadius = 15
         continueButton.clipsToBounds = true
-        selectSchoolButton.layer.cornerRadius = 15
-        selectSchoolButton.clipsToBounds = true
-        firstSchoolButton.layer.cornerRadius = 15
-        firstSchoolButton.clipsToBounds = true
-        studentButton.layer.cornerRadius = 15
+        studentButton.layer.cornerRadius = 5
         studentButton.clipsToBounds = true
-        adminButton.layer.cornerRadius = 15
+        adminButton.layer.cornerRadius = 5
         adminButton.clipsToBounds = true
         ref = Database.database().reference()
+        
+        yourPicker.delegate = self
+        yourPicker.dataSource = self
+        
+        pickerField.inputView = yourPicker
+        
+        pickerData = ["Conant High School", "Hoffman Estates High School"]
         // Do any additional setup after loading the view.
     }
     
-    
-    @IBAction func handleSelection(_ sender: UIButton){
-        //code below for multiple schools added
-//        firstSchoolButton.forEach { (button) in
-//            butt
-//        }
-        
-        UIView.animate(withDuration: 0.7, animations: {
-            self.firstSchoolButton.isHidden = !self.firstSchoolButton.isHidden;//change to opposite state
-            self.view.layoutIfNeeded()
-        })
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
     
-    @IBAction func schoolTapped(_ sender: UIButton) {
-        guard let schoolTitle = sender.currentTitle else{
-            return;
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return fopr the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+       pickerField.text = pickerData[row]
+        print("ouched pickerview")
+        schoolCodeTextField.isHidden = false;
+        if(pickerData[row] == "Conant High School") {
+            print("Conant Chosen")
+            schoolName = "Conant High School"
         }
         
-        schoolName = schoolTitle;
-        schoolCodeTextField.isHidden = false;
     }
+    
+    
+//    @IBAction func handleSelection(_ sender: UIButton){
+//        //code below for multiple schools added
+////        firstSchoolButton.forEach { (button) in
+////            butt
+////        }
+//
+//        UIView.animate(withDuration: 0.7, animations: {
+//            self.firstSchoolButton.isHidden = !self.firstSchoolButton.isHidden;//change to opposite state
+//            self.view.layoutIfNeeded()
+//        })
+//    }
+//
+//    @IBAction func schoolTapped(_ sender: UIButton) {
+//        guard let schoolTitle = sender.currentTitle else{
+//            return;
+//        }
+//
+//        schoolName = schoolTitle;
+//        schoolCodeTextField.isHidden = false;
+//    }
     
     
     @IBAction func studentButtonTapped(_ sender: UIButton) {
@@ -134,7 +165,7 @@ class SignUpViewController: UIViewController {
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Password ").setValue(password)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Allergies ").setValue(allergies)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Admin ").setValue("Yes")
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Total Item's Checked Out ").setValue("0")
+                        
                     }
                     else{
                     self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Name").setValue(fullname)
@@ -144,6 +175,8 @@ class SignUpViewController: UIViewController {
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Allergies ").setValue(allergies)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Admin ").setValue("No")
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Total Item's Checked Out ").setValue("0")
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Last Item Checked Out").setValue(" ")
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Last Date Visited").setValue(" ")
                     }
                     
                     self.dismiss(animated: false, completion: nil)

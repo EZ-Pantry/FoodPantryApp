@@ -74,6 +74,7 @@ class checkoutViewController: UIViewController {
         })
 }
     
+    var fullyFormatedDate : String = ""
     func updateFirebase(keyList : [[String: Any]], callback: @escaping () -> Void) {
         print("now changing data")
         
@@ -98,6 +99,46 @@ class checkoutViewController: UIViewController {
                 var checkedOut = Int(value?["Checked Out"] as? String ?? "") ?? 0
                 checkedOut += quantityChanged;//number of items checked out would go here
                 self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key!).child("Checked Out").setValue(String(checkedOut));
+                
+                
+                //OTHER FIREBASE UPDATES BELOW
+                
+                //update that the student has checked out quantity number more items
+                let userID = Auth.auth().currentUser?.uid
+
+                var totalItemsStudentHasCheckedOut = Int(value?["Total Item's Checked Out"] as? String ?? "") ?? 0
+                totalItemsStudentHasCheckedOut += quantityChanged;//number of items checked out would go here
+                self.ref.child("Conant High School").child("Users").child(userID!).child("Total Item's Checked Out ").setValue(String(totalItemsStudentHasCheckedOut))
+                
+                
+                //update with today's date
+                let formatter : DateFormatter = DateFormatter()
+                formatter.dateFormat = "d-M-yyyy"
+                self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
+                self.ref.child("Conant High School").child("Users").child(userID!).child("Last Date Visited").setValue(self.fullyFormatedDate)
+            
+                
+                print("changed " + String(quantityChanged) + " " + (key!))
+                myGroup.leave()
+              // ...
+              }) { (error) in
+                print(error.localizedDescription)
+            }
+            
+            //update statistics node with data below
+            self.ref.child("Conant High School").child("Statistics").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
+              // Get user value
+                let value = snapshot.value as? NSDictionary
+                //UPDATE Statistics Node
+                
+                var itemsCheckedOutThatDay = Int(value?["Items"] as? String ?? "") ?? 0
+                var studentsVisitedThatDay = Int(value?["Students Visited"] as? String ?? "") ?? 0
+                itemsCheckedOutThatDay += quantityChanged;//number of items checked out would go here
+                studentsVisitedThatDay+=1;
+                self.ref.child("Conant High School").child("Statistics").child(self.fullyFormatedDate).child("Items").setValue(String(itemsCheckedOutThatDay));
+                self.ref.child("Conant High School").child("Statistics").child(self.fullyFormatedDate).child("Students Visited").setValue(String(studentsVisitedThatDay));
+                
+            
                 
                 print("changed " + String(quantityChanged) + " " + (key!))
                 myGroup.leave()
