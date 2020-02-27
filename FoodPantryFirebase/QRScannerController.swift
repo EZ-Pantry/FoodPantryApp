@@ -41,6 +41,8 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("test")
+        
 //        // Do any additional setup after loading the view.
 
         // Get the back-facing camera for capturing videos
