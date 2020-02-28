@@ -12,19 +12,9 @@ import UIKit
 import FirebaseDatabase
 import FirebaseUI
 class QRScrapeController: UIViewController {
-
     
-    //name
-    //type of food
-    //ingredients
-    //is healthy
-    //quantity
-    
-    //add more
-    //checkout
-    
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var ingredientsLabel: UILabel!
+    @IBOutlet var nameLabel: UILabel! //label for the name of the food item
+    @IBOutlet var ingredientsLabel: UILabel! //
     @IBOutlet var healthyLabel: UILabel!
     @IBOutlet var typeLabel: UILabel!
     
@@ -37,7 +27,7 @@ class QRScrapeController: UIViewController {
     var ref: DatabaseReference!
     
     var barcode = ""
-    var quantity = ""
+    var quantity = "1"
     
     var food_title = ""
     
@@ -48,7 +38,7 @@ class QRScrapeController: UIViewController {
     var maxQuantity: Int = 0
     
     var manualEnter: Bool = false
-    var manualTitle = ""
+    var manualTitle: String = ""
     
     override func viewDidAppear(_ animated: Bool) { //https://stackoverflow.com/questions/29257670/alertcontroller-is-not-in-the-window-hierarchy
         super.viewDidAppear(animated)
@@ -73,9 +63,79 @@ class QRScrapeController: UIViewController {
     
         if(manualEnter) { //user manually entered title
             ref = Database.database().reference()
-            
             self.getFoodDataFromFirebase(callback: {(data, items)-> Void in
-                
+                if(items.contains(self.manualTitle)) { //inside data
+                    
+                    print(self.manualTitle)
+                    
+                    var index: Int = items.firstIndex(of: self.manualTitle)!
+                    
+                    print(index)
+                    print(data)
+                    print(data[index]["name"])
+                    print(data[index]["quantity"])
+                    
+                    let quantity: Int = Int(data[index]["quantity"] as! String) ?? 0
+                    self.maxQuantity = quantity
+                    
+                    print(quantity)
+                    
+                    if(quantity <= 0) {
+                        self.errorMessage = "this food item has ran out";
+                        self.performSegue(withIdentifier: "barcodeError", sender: self)
+                    } else {
+                    
+                        self.food_title = self.manualTitle;
+                        self.nameLabel.text = self.manualTitle;
+                        
+                        var ingredients = data[index]["information"] as! String
+                        var url = data[index]["image"] as! String
+                        
+                    self.ingredientsLabel.text = ingredients
+                    
+                    var allergies = ["corn", "egg", "fish", "milk", "nut", "soy", "wheat"]
+                    
+                        var confirmed = ""
+                    
+                        for allergy in allergies {
+                            if self.manualTitle.contains(allergy) {
+                                confirmed += allergy + ","
+                            }  else if(ingredients.contains(allergy)) {
+                                confirmed += allergy + ","
+                            }
+                        }
+                    
+                        if confirmed == "" {
+                            confirmed = "none,"
+                        }
+                    
+                        self.typeLabel.text = confirmed.substring(to: confirmed.count-1);
+                    
+                    
+                        if url != "" {
+                            self.foodView.load(url: URL(string: url)!);
+                        }
+                    
+                    self.healthyLabel.text = data[index]["healthy"] as! String
+
+                    var text = ""
+                    var str: String = self.checkedOut
+                    
+                    while str.count > 0 {
+                        let food = str.substring(to: str.indexDistance(of: "$")!)
+                        str = str.substring(from: str.indexDistance(of: "$")! + 1)
+                        let quantity = str.substring(to: str.indexDistance(of: ";")!)
+                        text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
+                        str = str.substring(from: str.indexDistance(of: ";")! + 1)
+                    }
+                    
+                    self.currentLabel.text = text
+                    
+                    }
+                } else {
+                    self.errorMessage = "food item not found in the inventory";
+                    self.performSegue(withIdentifier: "barcodeError", sender: self)
+                }
                 
             })
             
@@ -83,11 +143,11 @@ class QRScrapeController: UIViewController {
         
         
             ref = Database.database().reference()
-        getData { (title, ingredients, url) in
+        getData { (title, error) in
             DispatchQueue.main.async {
                 print(title)
-                if(title == "no food" || title == "error") {
-                    self.errorMessage = ingredients;
+                if(error) {
+                    self.errorMessage = title;
                      self.performSegue(withIdentifier: "barcodeError", sender: self)
                 } else {
                     
@@ -107,7 +167,10 @@ class QRScrapeController: UIViewController {
                             
                             self.food_title = title;
                             self.nameLabel.text = title;
-                            self.ingredientsLabel.text = data[index]["information"] as! String
+                                
+                            var ingredients: String = data[index]["information"] as! String
+                            var url: String = data[index]["image"] as! String
+                            self.ingredientsLabel.text = ingredients
                             
                             var allergies = ["corn", "egg", "fish", "milk", "nut", "soy", "wheat"]
                             
@@ -209,7 +272,7 @@ class QRScrapeController: UIViewController {
     }
 
     
-     func getData(_ completion: @escaping (String, String, String) -> ()) {
+     func getData(_ completion: @escaping (String, Bool) -> ()) {
        //        let baseUrl = "https://api.upcitemdb.com/prod/trial/lookup?upc="
                let baseUrl = "https://api.barcodespider.com/v1/lookup?token=c35919b64b4aa4c38752&upc="
                
@@ -235,12 +298,12 @@ class QRScrapeController: UIViewController {
                        let status = response?["status"] as? String
                        if status != "OK" {
                            let message = response?["message"] as? String
-                           completion("error", message!, "none")
+                           completion(message!, true)
                        } else {
                            let title = foods?["title"] as? String
                            let ingredients = foods?["description"] as? String
                            let url = foods?["image"] as? String
-                           completion(title as! String, ingredients as! String, url as! String)
+                           completion(title as! String, false)
                        }
                    } catch {
                        print(error)

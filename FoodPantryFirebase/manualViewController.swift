@@ -25,6 +25,7 @@ class manualViewController: UIViewController {
     @IBOutlet var noButton: UIButton!
     
     var foodTitle = ""
+    var error = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +43,53 @@ class manualViewController: UIViewController {
         self.getFoodDataFromFirebase(callback: {(data, items)-> Void in
             //compare the title the user entered to the items in the database
             
+            var scores: [Int] = []
+            
+            for item in items {
+                scores.append(self.comparePhrases(p1: item, p2: self.manualTitle))
+            }
+            
+            if(scores.max() == 0) {
+                self.error = "item not found, please try again"
+            } else {
+            
+                var index: Int = scores.index(of: scores.max()!)!
+            
+                self.foodTitle = items[index]
+            
+                self.foodName.text = self.foodTitle
+            
+                for d in data {
+                    if d["name"] as! String == self.foodTitle {
+                        self.foodImage.load(url: URL(string: d["image"] as! String)!)
+                        break
+                    }
+                }
+            }
             
         })
         
+        
+    }
+    
+    func comparePhrases(p1: String, p2: String) -> Int {
+        var p1 = p1.lowercased()
+        var p2 = p2.lowercased()
+        
+        //basic approach: split both phrases into words, see how many words match
+        
+        var matches: Int = 0
+        
+        var w1: [String] = p1.components(separatedBy:" ")
+        var w2: [String] = p2.components(separatedBy:" ")
+        
+        for word in w1 {
+            if w2.contains(word) {
+                matches += 1
+            }
+        }
+        
+        return matches
         
     }
     
@@ -83,7 +128,7 @@ class manualViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoBack"{
             let destinationVC = segue.destination as? QRCodeViewController
-            destinationVC?.error = "item not found, please try again"
+            destinationVC?.error = error
             destinationVC?.checkedOut = checkedOut
         } else if(segue.identifier == "GoToScrape") {
             let destinationVC = segue.destination as? QRScrapeController
@@ -98,6 +143,7 @@ class manualViewController: UIViewController {
     }
     
     @IBAction func selectedNo(_ sender: Any) {
+        error = ""
         self.performSegue(withIdentifier: "GoBack", sender: self)
     }
 }

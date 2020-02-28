@@ -1042,11 +1042,12 @@
                         <outlet property="nameLabel" destination="ycr-q6-vtA" id="Qrb-gw-QA9"/>
                         <outlet property="quantityField" destination="gIU-vf-dKy" id="uLx-WW-Alz"/>
                         <outlet property="typeLabel" destination="XTQ-B7-eSt" id="2SK-n5-djq"/>
+                        <segue destination="lYj-js-UPa" kind="presentation" identifier="barcodeError" id="2kQ-ka-yx4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpF-Ej-BoC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2747.826086956522" y="1857.5892857142856"/>
+            <point key="canvasLocation" x="2755" y="1839"/>
         </scene>
         <!--Checkout View Controller-->
         <scene sceneID="erZ-uZ-aXj">
@@ -1130,7 +1131,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectedYes:" destination="ekS-SN-M4g" eventType="touchUpInside" id="Tlv-vR-zIM"/>
+                                    <segue destination="efu-PH-rx6" kind="presentation" identifier="GoToScrape" modalPresentationStyle="fullScreen" id="MjZ-ce-K0b"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Food Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKA-oE-qgW">
@@ -1159,7 +1160,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectedNo:" destination="ekS-SN-M4g" eventType="touchUpInside" id="Sqr-SC-Wln"/>
+                                    <segue destination="lYj-js-UPa" kind="presentation" identifier="GoBack" modalPresentationStyle="fullScreen" id="Mlt-bM-9Uh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1324,7 +1325,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jue-31-CKR"/>
-        <segue reference="ZCT-Uy-Ifi"/>
+        <segue reference="MjZ-ce-K0b"/>
+        <segue reference="2kQ-ka-yx4"/>
         <segue reference="U4P-l0-e9D"/>
         <segue reference="VPy-iz-QwI"/>
         <segue reference="vDY-EW-nOH"/>
