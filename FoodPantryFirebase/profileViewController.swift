@@ -23,10 +23,10 @@ class profileViewController: UIViewController {
         ref = Database.database().reference()
         // Do any additional setup after loading the view.
     }
-    var ref: DatabaseReference!
+    var ref: DatabaseReference!//database reference
     
     @IBAction func saveTapped(_ sender: UIButton) {
-        handleSaving();
+        handleSaving();//calls func
     }
     
     func handleSaving(){
@@ -44,7 +44,7 @@ class profileViewController: UIViewController {
         
         let alert = UIAlertController(title: "Changes Saved!", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil);
+        self.present(alert, animated: true, completion: nil);//presents the alert for completion
     }
     
 }

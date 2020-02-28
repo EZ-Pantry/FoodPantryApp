@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import FirebaseUI
+import FirebaseDatabase
 class adminControlsViewController: UIViewController {
 
     @IBOutlet weak var addItemsButton: UIButton!
@@ -15,7 +16,6 @@ class adminControlsViewController: UIViewController {
     @IBOutlet weak var viewStatisticsButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         addItemsButton.layer.cornerRadius = 15
         addItemsButton.clipsToBounds = true
@@ -26,7 +26,7 @@ class adminControlsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
+
     
 
     @IBAction func dismissButton(_ sender: UIButton) {

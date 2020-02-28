@@ -128,21 +128,21 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                     if(self.isAdmin){
                         //If correct admin code was entered, create a new administrator account who can access the admin page
                     self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Name").setValue(fullname)
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("ID Number ").setValue(schoolIDNumber)
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("ID Number").setValue(schoolIDNumber)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Password ").setValue(password)
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Allergies ").setValue(allergies)
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Admin ").setValue("Yes")
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Password").setValue(password)
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Allergies").setValue(allergies)
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Admin").setValue("Yes")
                         
                     }
                     else{
                         //Else a regular student account
                     self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Name").setValue(fullname)
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("ID Number ").setValue(schoolIDNumber)
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("ID Number").setValue(schoolIDNumber)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Password ").setValue(password)
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Allergies ").setValue(allergies)
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Admin ").setValue("No")
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Password").setValue(password)
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Allergies").setValue(allergies)
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Admin").setValue("No")
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Total Item's Checked Out ").setValue("0")
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Last Item Checked Out").setValue(" ")
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Last Date Visited").setValue(" ")
@@ -161,6 +161,12 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         
     
+    }
+    
+    
+    
+    @IBAction func dismissToLoginScreen(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
     
