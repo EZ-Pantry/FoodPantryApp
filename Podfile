@@ -11,6 +11,7 @@ pod 'Firebase/Auth'
 pod 'FirebaseUI'
 pod 'Firebase/Storage'
 pod 'Firebase/Firestore'
+pod 'Charts'
 
   target 'FoodPantryFirebaseTests' do
     inherit! :search_paths

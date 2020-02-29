@@ -9,18 +9,33 @@
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
+import Charts
 class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var totalStatsButton: UIButton!
     @IBOutlet weak var indivisualStudentButton: UIButton!
     
+    @IBOutlet weak var chooseGraphOrTextSegment: UISegmentedControl!
+    
     @IBOutlet weak var studentNameLbl: UILabel!
+    
+    @IBOutlet weak var studentIDLbl: UILabel!
+    @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
+    @IBOutlet weak var lastDateCheckedOutLbl: UILabel!
     @IBOutlet weak var pickerField: UITextField!
+    @IBOutlet weak var allergiesLbl: UILabel!
+    @IBOutlet weak var totalItemsCheckedOutlbl: UILabel!
+    @IBOutlet weak var chartView: LineChartView!
     var ref: DatabaseReference!
     
+    @IBOutlet weak var backButton: UIButton!
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()
+    var xAxisDataDates: [Int] = [Int]()
+    var yAxisDataNumVisits: [Int] = [Int]()
+    var lineChartEntry = [ChartDataEntry]()
     
+    @IBOutlet weak var nextButton: UIButton!
     
     var studentNames = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup"]
     
@@ -28,6 +43,12 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         ["name": "Lebron James","id": "821209", "isAdmin": "No", "totalCheckedOut": "2", "lastItemCheckedOut": "a", "LastDateCheckedOut": "no", "allergies": "grass"],
         ["name": "Cheese Grader","id": "821209", "isAdmin": "No", "totalCheckedOut": "2", "lastItemCheckedOut": "a", "LastDateCheckedOut": "no", "allergies": "grass"],
         ["name": "Kenton James","id": "821209", "isAdmin": "N", "totalCheckedOut": "2", "lastItemCheckedOut": "a", "LastDateCheckedOut": "no", "allergies": "grass"]
+        
+    ]
+    
+    var chartData : [[String: Any]] =  [
+        ["date": "26-2-20","studentsVisited": "10"],
+        ["date": "27-2-20", "studentsVisited": "10"]
         
     ]
     
@@ -42,22 +63,109 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         ref = Database.database().reference()
         loadStudentNames();
+        loadInXandYAxis();
         totalStatsButton.layer.cornerRadius = 10
         totalStatsButton.clipsToBounds = true
         
         indivisualStudentButton.layer.cornerRadius = 10
         indivisualStudentButton.clipsToBounds = true
         
+        backButton.layer.cornerRadius = 10
+        backButton.clipsToBounds = true
+        
+        nextButton.layer.cornerRadius = 10
+        nextButton.clipsToBounds = true
     }
     
-    var userKeysArray: [String] = [String]()
-    var userKeysArrayOfficial: [String] = [String]()
+    var studentsVisitedNumberArray: [Double] = [Double]()
     @IBAction func totalStatsButtonTapped(_ sender: UIButton) {
+        pickerField.isHidden = true;
+        chooseGraphOrTextSegment.isHidden = false;
+        studentNameLbl.isHidden = true;
+        studentIDLbl.isHidden = true;
+        lastItemCheckedOutLbl.isHidden = true;
+        lastDateCheckedOutLbl.isHidden = true;
+        totalItemsCheckedOutlbl.isHidden = true;
+        allergiesLbl.isHidden = true;
+        
         
     }
     @IBAction func indivisualStudentButtonTapped(_ sender: UIButton) {
+        pickerField.isHidden = false;
+        chooseGraphOrTextSegment.isHidden = true;
+        chartView.isHidden = true;
+        studentNameLbl.isHidden = false;
+        studentIDLbl.isHidden = false;
+        lastItemCheckedOutLbl.isHidden = false;
+        lastDateCheckedOutLbl.isHidden = false;
+        totalItemsCheckedOutlbl.isHidden = false;
+        allergiesLbl.isHidden = false;
+        
         sortWhetherUser();
         
+    }
+    
+    @IBAction func segmentControlChanged(_ sender: Any) {
+        let getIndex = chooseGraphOrTextSegment.selectedSegmentIndex;
+        if(getIndex == 0){
+            backButton.isHidden = true;
+            nextButton.isHidden = true;
+            updateGraph()
+            chartView.isHidden = false;
+            studentNameLbl.isHidden = true;
+            studentIDLbl.isHidden = true;
+            lastItemCheckedOutLbl.isHidden = true;
+            lastDateCheckedOutLbl.isHidden = true;
+            totalItemsCheckedOutlbl.isHidden = true;
+            allergiesLbl.isHidden = true;
+        }
+        else if(getIndex == 1){
+            backButton.isHidden = false;
+            nextButton.isHidden = false;
+            chartView.isHidden = true;
+            studentNameLbl.isHidden = false;
+            studentNameLbl.text = ""
+            //display date at top and students visited nd number of items checked out at bottom
+            
+            //use \n
+        }
+    }
+    
+    @IBAction func backButtonClicked(_ sender: UIButton) {
+    }
+    
+    @IBAction func nextButtonClicked(_ sender: UIButton) {
+    }
+    
+    
+    var numbers : [Double] = [1,2,3,4,5,6,7,8,9]
+    
+    func updateGraph(){
+        var lineChartEntry  = [ChartDataEntry]() //this is the Array that will eventually be displayed on the graph.
+        //here is the for loop
+        for i in 0..<studentsVisitedNumberArray.count {
+            var currentNum = Double(i)
+            let lastChar = String(currentNum).last!
+            if(lastChar == "0"){
+                print("i val let through: \(Double(i))")
+                let value = ChartDataEntry(x: Double(i), y: studentsVisitedNumberArray[i]) // here we set the X and Y status in a data chart entry
+                lineChartEntry.append(value) // here we add it to the data set
+            }
+            
+        }
+
+        let line1 = LineChartDataSet(entries: lineChartEntry, label: "Students Visited") //Here we convert lineChartEntry to a LineChartDataSet
+        line1.colors = [NSUIColor.blue] //Sets the color to blue
+        
+        self.chartView.rightAxis.enabled = true
+        self.chartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
+
+        let data = LineChartData() //This is the object that will be added to the chart
+        data.addDataSet(line1) //Adds the line to the dataSet
+        
+
+        chartView.data = data //finally - it adds the chart data to the chart and causes an update
+        chartView.chartDescription?.text = "Students visits per day " // Here we set the description for the graph
     }
     
     func sortWhetherUser(){
@@ -115,6 +223,33 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
     }
     
+    func loadInXandYAxis(){
+        self.ref.child("Conant High School").child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
+
+            var tempData : [[String: Any]] = []
+            var c: Int = 0
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let key = snap.key
+                let value: [String: Any] = snap.value as! [String : Any]
+                
+                let studentsVisitedNum = value["Students Visited"] as? String ?? ""
+                let studentsVisitedNumDouble = Double(value["Students Visited"] as? String ?? "") ?? 0
+                print(studentsVisitedNumDouble)
+                tempData.append(["date": key, "studentsVisited": studentsVisitedNum])
+                self.studentsVisitedNumberArray.append(studentsVisitedNumDouble)
+                c += 1
+            }
+            
+            self.chartData = tempData
+            
+            print("newest data array below")
+            print(self.chartData)
+            
+        })
+        
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -142,7 +277,12 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 var totalItemsCheckedOut = self.data[i]["totalItemsCheckedOut"]
                 var allergies = self.data[i]["allergies"]
                 
-                studentNameLbl.text = studentName as! String;
+                studentNameLbl.text = studentName! as! String;
+                studentIDLbl.text = "ID: \(studentIDNumber!)"
+                lastItemCheckedOutLbl.text = "Last Item Checked Out: \(lastItemCheckedOut!)"
+                lastDateCheckedOutLbl.text = "Last Date Checked Out: \(lastDateCheckedOut!)"
+                totalItemsCheckedOutlbl.text = "Total Items Checked Out: \(totalItemsCheckedOut!)"
+                allergiesLbl.text = "Allergies: \(allergies!)"
             }
         }
         
