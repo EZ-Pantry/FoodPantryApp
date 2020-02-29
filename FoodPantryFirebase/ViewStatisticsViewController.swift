@@ -31,11 +31,14 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var backButton: UIButton!
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()
+    var datesData: [String] = [String]()
     var xAxisDataDates: [Int] = [Int]()
     var yAxisDataNumVisits: [Int] = [Int]()
     var lineChartEntry = [ChartDataEntry]()
     
     @IBOutlet weak var nextButton: UIButton!
+    
+    var indexAtDataArray = 0;
     
     var studentNames = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup"]
     
@@ -95,8 +98,11 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         chooseGraphOrTextSegment.isHidden = true;
         chartView.isHidden = true;
         studentNameLbl.isHidden = false;
+        studentNameLbl.text = ""
         studentIDLbl.isHidden = false;
+        studentIDLbl.text = ""
         lastItemCheckedOutLbl.isHidden = false;
+        lastItemCheckedOutLbl.text = ""
         lastDateCheckedOutLbl.isHidden = false;
         totalItemsCheckedOutlbl.isHidden = false;
         allergiesLbl.isHidden = false;
@@ -123,18 +129,73 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             backButton.isHidden = false;
             nextButton.isHidden = false;
             chartView.isHidden = true;
+            
             studentNameLbl.isHidden = false;
             studentNameLbl.text = ""
+            studentIDLbl.isHidden = false;
+            studentIDLbl.text = ""
+            lastItemCheckedOutLbl.isHidden = false;
+            lastItemCheckedOutLbl.text = ""
             //display date at top and students visited nd number of items checked out at bottom
-            
+            backButton.isHidden = true;
+            print(chartData.count)
+            showCorrespondingTextStatisticsData();
             //use \n
         }
     }
     
     @IBAction func backButtonClicked(_ sender: UIButton) {
+        checkIfAvailableBack();
+        showCorrespondingTextStatisticsData();
+        
     }
     
     @IBAction func nextButtonClicked(_ sender: UIButton) {
+        checkIfAvialableNext();
+        showCorrespondingTextStatisticsData();
+    }
+    
+    func checkIfAvialableNext(){
+        //purpose to check if you can advance ahead
+        indexAtDataArray += 1;
+        if(indexAtDataArray-1 != -1 && indexAtDataArray+1 != chartData.count){
+            nextButton.isHidden = false;
+            backButton.isHidden = false;
+            
+        }
+        else if(indexAtDataArray-1 != -1 && indexAtDataArray+1 == chartData.count){
+            nextButton.isHidden = true;
+            backButton.isHidden = false;
+            
+        }
+        else if(indexAtDataArray-1 == -1){
+            nextButton.isHidden = false;
+            backButton.isHidden = true;
+        }
+        print("inside the next: \(indexAtDataArray)")
+    }
+    
+    func checkIfAvailableBack(){
+        indexAtDataArray -= 1;
+        if(indexAtDataArray+1 != chartData.count && indexAtDataArray-1 != -1){
+            nextButton.isHidden = false;
+            backButton.isHidden = false;
+        }
+        else if(indexAtDataArray+1 != chartData.count && indexAtDataArray-1 == -1){
+            nextButton.isHidden = false;
+            backButton.isHidden = true;
+        }
+        else if(indexAtDataArray+1 == chartData.count){
+            nextButton.isHidden = true;
+            backButton.isHidden = false;
+        }
+        print("inside the next: \(indexAtDataArray)")
+    }
+    
+    func showCorrespondingTextStatisticsData(){
+        studentNameLbl.text = "Date: \(chartData[indexAtDataArray]["date"]! as! String)";
+        studentIDLbl.text = "Students Visited: \(chartData[indexAtDataArray]["studentsVisited"]!)";
+        lastItemCheckedOutLbl.text = "Items Checked out: \(chartData[indexAtDataArray]["itemsCheckedOut"]!)";
     }
     
     
@@ -235,8 +296,9 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 
                 let studentsVisitedNum = value["Students Visited"] as? String ?? ""
                 let studentsVisitedNumDouble = Double(value["Students Visited"] as? String ?? "") ?? 0
+                let itemsCheckedOutDouble = Double(value["Items"] as? String ?? "") ?? 0
                 print(studentsVisitedNumDouble)
-                tempData.append(["date": key, "studentsVisited": studentsVisitedNum])
+                tempData.append(["date": key, "studentsVisited": studentsVisitedNum, "itemsCheckedOut": itemsCheckedOutDouble])
                 self.studentsVisitedNumberArray.append(studentsVisitedNumDouble)
                 c += 1
             }
