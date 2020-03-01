@@ -1,18 +1,21 @@
 //
-//  QRScannerController.swift
-//  QRCodeReader
+//  addItemViewController.swift
+//  FoodPantryFirebase
 //
-//  Created by Ashay Parikh on 2/8/20.
-//  Copyright © 2020 Ashay Parikh. All rights reserved.
+//  Created by Ashay Parikh on 3/1/20.
+//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import FirebaseUI
+import FirebaseDatabase
 import AVFoundation
 
-class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class addItemViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
-    @IBOutlet var messageLabel:UILabel! //message at the bottom of the screen
-    @IBOutlet var topbar: UIView! //message at the top of the screen
+    @IBOutlet var topbar: UIView!
+    @IBOutlet var messageLabel: UILabel!
     
     //code for capturing a live stream using the camera
     var captureSession:AVCaptureSession = AVCaptureSession()
@@ -22,8 +25,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     var sent:Bool = false //if the barcode has been sent to the next view
     
     private var code:String = "" //barcode
-    
-    var checkedOut = "" //previous checked out items, data is transferred between views: QRScanner, QRScrape, QRCodeView
     
     //all the supported types
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
@@ -42,9 +43,9 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        // Do any additional setup after loading the view.
 
+        // Do any additional setup after loading the view.
+        
         // Get the back-facing camera for capturing videos
         let deviceDiscoverySession = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: .back)
 
@@ -98,8 +99,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             view.addSubview(qrCodeFrameView)
             view.bringSubviewToFront(qrCodeFrameView)
         }
-        
-    
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
@@ -121,40 +120,28 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             if metadataObj.stringValue != nil && !sent {
                 messageLabel.text = metadataObj.stringValue
                 code = metadataObj.stringValue!
-                self.performSegue(withIdentifier: "GoToScrape", sender: self)
+                self.performSegue(withIdentifier: "GoToAdd", sender: self)
                 sent = true
             }
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToScrape"{ //go to the scrapecontroller
-            let destinationVC = segue.destination as? QRScrapeController
+        if segue.identifier == "GoToAdd"{ //go to the scrapecontroller
+            let destinationVC = segue.destination as? addMainViewController
             destinationVC?.barcode = code //send the code
-            destinationVC?.quantity = "1" //send the quantity of items (default)
-            destinationVC?.checkedOut = checkedOut //send the current items checkout out
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
-    @IBAction func dismissViewToBack(_ sender: UIButton) {
+    @IBAction func dismissView(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     
-
+    
 }

@@ -142,7 +142,7 @@ class QRScrapeController: UIViewController {
                     self.getFoodDataFromFirebase(callback: {(data, items)-> Void in //get data from the database
                         
                         if(items.contains(title)) { //inside data
-                            var index: Int = items.firstIndex(of: title)! //gets index of the food item
+                            let index: Int = items.firstIndex(of: title)! //gets index of the food item
 
                             let quantity: Int = Int(data[index]["quantity"] as! String) ?? 0 //gets the max quantity
                             self.maxQuantity = quantity //sets to var
@@ -156,31 +156,19 @@ class QRScrapeController: UIViewController {
                             self.nameLabel.text = title;
                                 
                             //even more setting
-                            var ingredients: String = data[index]["information"] as! String
-                            var url: String = data[index]["image"] as! String
+                            let ingredients: String = data[index]["information"] as! String
+                            let url: String = data[index]["image"] as! String
                             self.ingredientsLabel.text = ingredients
                             
-                             //determines allergies based on the information in ingredients
-                            var allergies = ["corn", "egg", "fish", "milk", "nut", "soy", "wheat"]
-                                               
-                            var confirmed = ""
-                                                   
-                            //checks to see if the title or ingredients contain an allergy
-                            for allergy in allergies {
-                                if self.manualTitle.contains(allergy) { //title
-                                    confirmed += allergy + ","
-                                }  else if(ingredients.contains(allergy)) { //ingredients
-                                    confirmed += allergy + ","
-                                }
-                            }
-                                               
-                            //none confirmed
-                            if confirmed == "" {
-                                confirmed = "none,"
-                            }
-                                               
-                            self.typeLabel.text = confirmed.substring(to: confirmed.count-1); //removes the comma at the end, puts on the screen
                             
+                            var allergies = data[index]["allergies"] as! String
+                            
+                            if allergies == "" {
+                                allergies = "none"
+                            }
+                                
+                            self.typeLabel.text = allergies
+                                
                             
                             if url != "" {
                                 self.foodView.load(url: URL(string: url)!);
@@ -260,10 +248,11 @@ class QRScrapeController: UIViewController {
                 let quantity = value["Quantity"] as? String ?? ""
                 let type = value["Type"] as? String ?? ""
                 let info = value["Information"] as? String ?? ""
+                let allergies = value["Allergies"] as? String ?? ""
                 let id = String(c)
                 
                 //adds to the arrays
-                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "id": id])
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "allergies": allergies, "id": id])
                 tempNames.append(name)
                 c += 1 //increments id counter
             }

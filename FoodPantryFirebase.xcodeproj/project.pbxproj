@@ -11,6 +11,9 @@
 		1C68022D2401E5C1002D0C38 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022B2401E5C1002D0C38 /* ItemCell.xib */; };
 		1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022F2401E825002D0C38 /* GoogleService-Info.plist */; };
 		1C748F322406188800936A05 /* checkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C748F312406188800936A05 /* checkoutViewController.swift */; };
+		1CBDDC8A240C521300AC53A9 /* addItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC89240C521300AC53A9 /* addItemViewController.swift */; };
+		1CBDDC8C240C523A00AC53A9 /* QRAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC8B240C523A00AC53A9 /* QRAddViewController.swift */; };
+		1CBDDC90240C681300AC53A9 /* addMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC8F240C681300AC53A9 /* addMainViewController.swift */; };
 		1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */; };
 		1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */; };
 		1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */; };
@@ -61,6 +64,9 @@
 		1C68022B2401E5C1002D0C38 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 		1C68022F2401E825002D0C38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C748F312406188800936A05 /* checkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutViewController.swift; sourceTree = "<group>"; };
+		1CBDDC89240C521300AC53A9 /* addItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addItemViewController.swift; sourceTree = "<group>"; };
+		1CBDDC8B240C523A00AC53A9 /* QRAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRAddViewController.swift; sourceTree = "<group>"; };
+		1CBDDC8F240C681300AC53A9 /* addMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addMainViewController.swift; sourceTree = "<group>"; };
 		1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScrapeController.swift; sourceTree = "<group>"; };
 		1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
@@ -194,6 +200,9 @@
 				A24F384E23EF79E800AACC97 /* SignUpViewController.swift */,
 				A24F385023EF79F500AACC97 /* logInViewController.swift */,
 				1C748F312406188800936A05 /* checkoutViewController.swift */,
+				1CBDDC89240C521300AC53A9 /* addItemViewController.swift */,
+				1CBDDC8B240C523A00AC53A9 /* QRAddViewController.swift */,
+				1CBDDC8F240C681300AC53A9 /* addMainViewController.swift */,
 				A24F382023EF66E100AACC97 /* Assets.xcassets */,
 				A24F382223EF66E100AACC97 /* LaunchScreen.storyboard */,
 				A24F382523EF66E100AACC97 /* Info.plist */,
@@ -499,8 +508,10 @@
 				A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */,
 				1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */,
 				1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */,
+				1CBDDC8C240C523A00AC53A9 /* QRAddViewController.swift in Sources */,
 				A24F385323EF817900AACC97 /* homeViewController.swift in Sources */,
 				A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */,
+				1CBDDC8A240C521300AC53A9 /* addItemViewController.swift in Sources */,
 				A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */,
 				A24F385D23F09A6F00AACC97 /* profileViewController.swift in Sources */,
 				1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */,
@@ -508,6 +519,7 @@
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
 				A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */,
+				1CBDDC90240C681300AC53A9 /* addMainViewController.swift in Sources */,
 				A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */,
 				66FB50C7240858CD009A5AE5 /* manualViewController.swift in Sources */,
 				A24F388B2401CC8400AACC97 /* adminControlsViewController.swift in Sources */,

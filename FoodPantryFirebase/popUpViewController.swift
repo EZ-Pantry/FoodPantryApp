@@ -18,6 +18,8 @@ class popUpViewController: UIViewController {
     @IBOutlet var foodInformation: UILabel!
     @IBOutlet var foodCheckedout: UILabel!
     @IBOutlet var foodHealthy: UILabel!
+    @IBOutlet var foodAllergy: UILabel!
+    @IBOutlet var foodType: UILabel!
     
     @IBOutlet var foodImage: UIImageView!
     
@@ -28,6 +30,8 @@ class popUpViewController: UIViewController {
     var checkedout = ""
     var healthy = ""
     var image = ""
+    var allergies = ""
+    var type = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +42,8 @@ class popUpViewController: UIViewController {
         foodInformation.text = "Information: " + String(information)
         foodCheckedout.text = "Checked out: " + String(checkedout)
         foodHealthy.text = "Healthy: " + String(healthy)
+        foodAllergy.text = "Allergies: " + String(allergies)
+        foodType.text = "Type: " + String(type)
         
         if(image != "") {
             foodImage.load(url: URL(string: String(image))!)

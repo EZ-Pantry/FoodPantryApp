@@ -160,7 +160,6 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         foodItems = foodItems.sorted { $0.lowercased() < $1.lowercased() }
         DispatchQueue.main.async {
             self.collectionView.reloadData()
-            print("sorted a-z")
         }
     }
     
@@ -169,7 +168,6 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
            foodItems = foodItems.sorted { $0.lowercased() > $1.lowercased() }
            DispatchQueue.main.async {
                self.collectionView.reloadData()
-               print("sorted z-a")
            }
        }
     
@@ -178,9 +176,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     func getDataFromFirebase(callback: @escaping (_ success: Bool)->Void) {
         self.ref = Database.database().reference()
         let userID = Auth.auth().currentUser!.uid
-        
-        print(userID)
-        
+                
         self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             var tempData : [[String: Any]] = []
@@ -198,10 +194,11 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                 let quantity = value["Quantity"] as? String ?? ""
                 let type = value["Type"] as? String ?? ""
                 let info = value["Information"] as? String ?? ""
+                let allergies = value["Allergies"] as? String ?? ""
                 let id = String(c)
                 
                 //adds to array
-                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "id": id])
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "type": type, "allergies": allergies, "id": id])
                 tempNames.append(name)
                 c += 1 //increments id count
             }
@@ -233,7 +230,6 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
             if(success) { //same as the code in the viewDidLoad()
                 for i in 0..<self.data.count {
                     self.loadImageFromFirebase(url: self.data[i]["image"] as! String, order: String(i), callback: {(img, order)-> Void in
-                               print("got " + String(i))
                                
                                for i in 0..<self.data.count {
                                    if (self.data[i]["id"] as! String == order) {
@@ -303,6 +299,9 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
             destinationVC?.information = (selectedFoodItem?["information"] as? String)!
             destinationVC?.healthy = (selectedFoodItem?["healthy"] as? String)!
             destinationVC?.image = (selectedFoodItem?["image"] as? String)!
+            destinationVC?.type = (selectedFoodItem?["type"] as? String)!
+            destinationVC?.allergies = (selectedFoodItem?["allergies"] as? String)!
+
         }
     }
 }
@@ -311,8 +310,6 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
-            print("searched food item array count below")
-            print(searchedFoodItem.count)
             return searchedFoodItem.count
         } else {
 
