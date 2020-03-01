@@ -33,7 +33,7 @@ class resetPasswordViewController: UIViewController {
                 //above shows alert for successfull sent of message
             }
             else{
-                let alert = UIAlertController(title: "Error Occurred!", message: "Please try again!", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error Occurred!", message: "Please try again!", preferredStyle: .alert)//displays alert of erRor!
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil);
                 //If email does not exist, then error message appears

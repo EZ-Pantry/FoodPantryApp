@@ -81,6 +81,9 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     var studentsVisitedNumberArray: [Double] = [Double]()
+    var itemsCheckedOutNumberAray: [Double] = [Double]()
+    var editedstudentsVisitedNumberArray: [Double] = [Double]()
+    var editeditemsCheckedOutNumberAray: [Double] = [Double]()
     @IBAction func totalStatsButtonTapped(_ sender: UIButton) {
         pickerField.isHidden = true;
         chooseGraphOrTextSegment.isHidden = false;
@@ -107,13 +110,14 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         totalItemsCheckedOutlbl.isHidden = false;
         allergiesLbl.isHidden = false;
         
-        sortWhetherUser();
+        sortWhetherUser();//function which sorts out all students names only in pickerview
         
     }
     
     @IBAction func segmentControlChanged(_ sender: Any) {
         let getIndex = chooseGraphOrTextSegment.selectedSegmentIndex;
         if(getIndex == 0){
+            //make changes depending on which segemnt control is selected
             backButton.isHidden = true;
             nextButton.isHidden = true;
             updateGraph()
@@ -126,10 +130,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             allergiesLbl.isHidden = true;
         }
         else if(getIndex == 1){
+            
             backButton.isHidden = false;
             nextButton.isHidden = false;
             chartView.isHidden = true;
-            
             studentNameLbl.isHidden = false;
             studentNameLbl.text = ""
             studentIDLbl.isHidden = false;
@@ -193,40 +197,62 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func showCorrespondingTextStatisticsData(){
-        studentNameLbl.text = "Date: \(chartData[indexAtDataArray]["date"]! as! String)";
-        studentIDLbl.text = "Students Visited: \(chartData[indexAtDataArray]["studentsVisited"]!)";
-        lastItemCheckedOutLbl.text = "Items Checked out: \(chartData[indexAtDataArray]["itemsCheckedOut"]!)";
+        if(canDisplayMap){
+            //displaying what the graph shows in text format
+            studentNameLbl.text = "Date: \(chartData[indexAtDataArray]["date"]! as! String)";
+            studentIDLbl.text = "Students Visited: \(chartData[indexAtDataArray]["studentsVisited"]!)";
+            lastItemCheckedOutLbl.text = "Items Checked out: \(chartData[indexAtDataArray]["itemsCheckedOut"]!)";
+        }
+        else{
+            studentNameLbl.isHidden = false;
+            studentNameLbl.text = "NO DATA TO DISPLAY"
+        }
+        
     }
     
     
     var numbers : [Double] = [1,2,3,4,5,6,7,8,9]
     
     func updateGraph(){
-        var lineChartEntry  = [ChartDataEntry]() //this is the Array that will eventually be displayed on the graph.
-        //here is the for loop
-        for i in 0..<studentsVisitedNumberArray.count {
-            var currentNum = Double(i)
-            let lastChar = String(currentNum).last!
-            if(lastChar == "0"){
-                print("i val let through: \(Double(i))")
-                let value = ChartDataEntry(x: Double(i), y: studentsVisitedNumberArray[i]) // here we set the X and Y status in a data chart entry
-                lineChartEntry.append(value) // here we add it to the data set
+        //Purpose is to make the line graph composed of last five days data
+        if(canDisplayMap){
+            var lineChartEntry  = [ChartDataEntry]()
+            var lineChartEntry2 = [ChartDataEntry]()//this is the Array that will eventually be displayed on the graph.
+            //here is the for loop
+            for i in 0..<studentsVisitedNumberArray.count {
+                var currentNum = Double(i)
+                let lastChar = String(currentNum).last!
+                if(lastChar == "0"){
+                    print("i val let through: \(Double(i))")
+                    let value = ChartDataEntry(x: Double(i), y: studentsVisitedNumberArray[i]) // here we set the X and Y status in a data chart entry
+                    lineChartEntry.append(value) // here we add it to the data set
+                    let value2 = ChartDataEntry(x: Double(i), y: itemsCheckedOutNumberAray[i]) // here we set the X and Y status in a data chart entry
+                    lineChartEntry2.append(value2) // here we add it to the data set
+                }
+                
             }
+
+            let line1 = LineChartDataSet(entries: lineChartEntry, label: "Students Visited") //Here we convert lineChartEntry to a LineChartDataSet
+            line1.colors = [NSUIColor.blue] //Sets the color to blue
             
+            let line2 = LineChartDataSet(entries: lineChartEntry2, label: "Items Checked Out") //Here we convert lineChartEntry to a LineChartDataSet
+            line2.colors = [NSUIColor.red] //Sets the color to blue
+            
+            self.chartView.rightAxis.enabled = true
+            self.chartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
+
+            let data = LineChartData() //This is the object that will be added to the chart
+            data.addDataSet(line1) //Adds the line to the dataSet
+            data.addDataSet(line2)
+
+            chartView.data = data //finally - it adds the chart data to the chart and causes an update
+            chartView.chartDescription?.text = "Students visits per day " // Here we set the description for the graph
         }
-
-        let line1 = LineChartDataSet(entries: lineChartEntry, label: "Students Visited") //Here we convert lineChartEntry to a LineChartDataSet
-        line1.colors = [NSUIColor.blue] //Sets the color to blue
+        else{
+            studentNameLbl.isHidden = false;
+            studentNameLbl.text = "NO DATA TO DISPLAY"
+        }
         
-        self.chartView.rightAxis.enabled = true
-        self.chartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
-
-        let data = LineChartData() //This is the object that will be added to the chart
-        data.addDataSet(line1) //Adds the line to the dataSet
-        
-
-        chartView.data = data //finally - it adds the chart data to the chart and causes an update
-        chartView.chartDescription?.text = "Students visits per day " // Here we set the description for the graph
     }
     
     func sortWhetherUser(){
@@ -266,7 +292,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 let adminValue = value["Admin"] as? String ?? ""
                 let id = String(c)
                 
-                tempData.append(["name": name, "idNumber": idNumber, "lastDateCheckedOut": lastDateCheckedOut, "lastItemCheckedOut": lastItemCheckedOut, "totalItemsCheckedOut": totalItemsCheckedOut, "allergies": allergies, "Admin": adminValue, "id": id])
+                tempData.append(["name": name, "idNumber": idNumber, "lastDateCheckedOut": lastDateCheckedOut, "lastItemCheckedOut": lastItemCheckedOut, "totalItemsCheckedOut": totalItemsCheckedOut, "allergies": allergies, "Admin": adminValue, "id": id])//adding each students atrributes to array
                 tempNames.append(name)
                 c += 1
             }
@@ -294,12 +320,13 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 let key = snap.key
                 let value: [String: Any] = snap.value as! [String : Any]
                 
-                let studentsVisitedNum = value["Students Visited"] as? String ?? ""
-                let studentsVisitedNumDouble = Double(value["Students Visited"] as? String ?? "") ?? 0
-                let itemsCheckedOutDouble = Double(value["Items"] as? String ?? "") ?? 0
+                let studentsVisitedNum = value["Students Visited"] as? String ?? ""//getting students visited from firebase
+                let studentsVisitedNumDouble = Double(value["Students Visited"] as? String ?? "") ?? 0//getting students visited from firebase
+                let itemsCheckedOutDouble = Double(value["Items"] as? String ?? "") ?? 0//getting items checked out  from firebase
                 print(studentsVisitedNumDouble)
                 tempData.append(["date": key, "studentsVisited": studentsVisitedNum, "itemsCheckedOut": itemsCheckedOutDouble])
                 self.studentsVisitedNumberArray.append(studentsVisitedNumDouble)
+                self.itemsCheckedOutNumberAray.append(itemsCheckedOutDouble)
                 c += 1
             }
             
@@ -308,9 +335,32 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             print("newest data array below")
             print(self.chartData)
             
+            if(self.studentsVisitedNumberArray.count == 0){
+                //length is 0 means that a map cannot be formed, so will display NO DATA
+                self.canDisplayMap = false;
+            }
+            else if(self.studentsVisitedNumberArray.count >= 5){
+                //since we need to display last 5 days of data, if length is larger than 5, display that last five
+                self.canDisplayMap = true;
+                self.editedstudentsVisitedNumberArray[0] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-1]
+                self.editedstudentsVisitedNumberArray[1] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-2]
+                self.editedstudentsVisitedNumberArray[2] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-3]
+                self.editedstudentsVisitedNumberArray[3] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-4]
+                self.editedstudentsVisitedNumberArray[4] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-5]
+                
+                //and other edits
+                self.editeditemsCheckedOutNumberAray[0] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-1]
+                self.editeditemsCheckedOutNumberAray[1] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-2]
+                self.editeditemsCheckedOutNumberAray[2] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-3]
+                self.editeditemsCheckedOutNumberAray[3] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-4]
+                self.editeditemsCheckedOutNumberAray[4] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-5]
+            }
+            
         })
         
     }
+    
+    var canDisplayMap = true;
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -328,10 +378,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerField.text = pickerData[row]
-//        studentNameLbl
         var studentNameChosen = pickerData[row];
         for i in 0..<data.count{
             if(self.data[i]["name"] as! String == studentNameChosen){
+                //displaying corresponding data to that student
                 var studentName = self.data[i]["name"]
                 var studentIDNumber = self.data[i]["idNumber"]
                 var lastDateCheckedOut = self.data[i]["lastDateCheckedOut"]
@@ -351,6 +401,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     @IBAction func dismissBack(_ sender: UIButton) {
+        //go back to selection page for admin controls
         dismiss(animated: true, completion: nil)
     }
     

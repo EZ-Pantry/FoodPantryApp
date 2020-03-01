@@ -388,6 +388,13 @@
                                                 </connections>
                                             </button>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="B1e-aC-euo">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pVX-eJ-NR0">
+                                                <rect key="frame" x="302" y="13" width="92" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -465,90 +472,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5R1-uc-UKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="912" y="118"/>
-        </scene>
-        <!--Profile View Controller-->
-        <scene sceneID="nDI-Oz-tMT">
-            <objects>
-                <viewController modalPresentationStyle="fullScreen" id="7bj-G0-BW9" customClass="profileViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cLL-Me-CJM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROFILE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fo5-AZ-wXm">
-                                <rect key="frame" x="50" y="79" width="314" height="60"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
-                                <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6v-wx-kPK">
-                                <rect key="frame" x="50" y="527" width="314" height="84"/>
-                                <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="60"/>
-                                <state key="normal" title="SAVE">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveTapped:" destination="7bj-G0-BW9" eventType="touchUpInside" id="BVw-8R-Jr9"/>
-                                    <segue destination="hdj-aB-iKU" kind="show" id="VPy-iz-QwI"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Full Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y06-LO-Oca">
-                                <rect key="frame" x="50" y="212" width="314" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="School ID #" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Ii-1N-Yxk">
-                                <rect key="frame" x="50" y="318" width="314" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" keyboardType="numberPad"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Allergies" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lu8-BC-nNB">
-                                <rect key="frame" x="50" y="431" width="314" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="RTt-t3-Aql" firstAttribute="trailing" secondItem="7Ii-1N-Yxk" secondAttribute="trailing" constant="50" id="6eQ-5n-fie"/>
-                            <constraint firstItem="Y06-LO-Oca" firstAttribute="top" secondItem="Fo5-AZ-wXm" secondAttribute="bottom" constant="73" id="9xD-Sr-g3c"/>
-                            <constraint firstItem="Lu8-BC-nNB" firstAttribute="top" secondItem="7Ii-1N-Yxk" secondAttribute="bottom" constant="80" id="C8r-Cn-O8p"/>
-                            <constraint firstItem="Fo5-AZ-wXm" firstAttribute="leading" secondItem="RTt-t3-Aql" secondAttribute="leading" constant="50" id="DuW-9D-AuX"/>
-                            <constraint firstItem="RTt-t3-Aql" firstAttribute="bottom" secondItem="W6v-wx-kPK" secondAttribute="bottom" constant="251" id="F3x-8c-Tis"/>
-                            <constraint firstItem="Fo5-AZ-wXm" firstAttribute="top" secondItem="RTt-t3-Aql" secondAttribute="top" constant="35" id="HI9-H0-Pyx"/>
-                            <constraint firstItem="RTt-t3-Aql" firstAttribute="trailing" secondItem="Y06-LO-Oca" secondAttribute="trailing" constant="50" id="Ivl-JD-7FC"/>
-                            <constraint firstItem="Y06-LO-Oca" firstAttribute="leading" secondItem="RTt-t3-Aql" secondAttribute="leading" constant="50" id="PFI-t7-lmE"/>
-                            <constraint firstItem="Lu8-BC-nNB" firstAttribute="leading" secondItem="RTt-t3-Aql" secondAttribute="leading" constant="50" id="YIr-rO-MQc"/>
-                            <constraint firstItem="7Ii-1N-Yxk" firstAttribute="top" secondItem="Y06-LO-Oca" secondAttribute="bottom" constant="73" id="a7G-5S-dhH"/>
-                            <constraint firstItem="RTt-t3-Aql" firstAttribute="trailing" secondItem="Fo5-AZ-wXm" secondAttribute="trailing" constant="50" id="f1i-6e-QIF"/>
-                            <constraint firstItem="RTt-t3-Aql" firstAttribute="trailing" secondItem="W6v-wx-kPK" secondAttribute="trailing" constant="50" id="fwl-qB-ABe"/>
-                            <constraint firstItem="7Ii-1N-Yxk" firstAttribute="leading" secondItem="RTt-t3-Aql" secondAttribute="leading" constant="50" id="gzj-06-P6E"/>
-                            <constraint firstItem="W6v-wx-kPK" firstAttribute="top" secondItem="Lu8-BC-nNB" secondAttribute="bottom" constant="63" id="hm9-r0-xei"/>
-                            <constraint firstItem="W6v-wx-kPK" firstAttribute="leading" secondItem="RTt-t3-Aql" secondAttribute="leading" constant="50" id="sGB-wM-Q2D"/>
-                            <constraint firstItem="RTt-t3-Aql" firstAttribute="trailing" secondItem="Lu8-BC-nNB" secondAttribute="trailing" constant="50" id="sQH-yO-3YR"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="RTt-t3-Aql"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="QRa-Lp-RYb"/>
-                    <connections>
-                        <outlet property="allergiesTextField" destination="Lu8-BC-nNB" id="33q-yX-8O5"/>
-                        <outlet property="fullNameTextField" destination="Y06-LO-Oca" id="ML4-5J-Up2"/>
-                        <outlet property="saveButton" destination="W6v-wx-kPK" id="OSi-Pz-S36"/>
-                        <outlet property="schoolIDTextField" destination="7Ii-1N-Yxk" id="yfZ-sz-cz9"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="axp-2p-Ya1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="808.69565217391312" y="-583.25892857142856"/>
         </scene>
         <!--Food Items Second View Controller-->
         <scene sceneID="JRd-Al-eta">
@@ -1110,7 +1033,6 @@
                                 </state>
                                 <connections>
                                     <action selector="saveButtonTapped:" destination="oim-iw-eXS" eventType="touchUpInside" id="eQs-3a-OW5"/>
-                                    <action selector="saveTapped:" destination="7bj-G0-BW9" eventType="touchUpInside" id="lt0-GV-exC"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Full Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mbv-h9-n54">
@@ -1441,7 +1363,6 @@
         <segue reference="H9f-l5-90A"/>
         <segue reference="ZCT-Uy-Ifi"/>
         <segue reference="EoB-ia-61U"/>
-        <segue reference="VPy-iz-QwI"/>
         <segue reference="HLC-EI-gPB"/>
         <segue reference="skv-aV-7d1"/>
     </inferredMetricsTieBreakers>

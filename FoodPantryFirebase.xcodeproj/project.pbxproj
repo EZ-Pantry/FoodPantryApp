@@ -26,7 +26,6 @@
 		A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F384E23EF79E800AACC97 /* SignUpViewController.swift */; };
 		A24F385123EF79F500AACC97 /* logInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F385023EF79F500AACC97 /* logInViewController.swift */; };
 		A24F385323EF817900AACC97 /* homeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F385223EF817900AACC97 /* homeViewController.swift */; };
-		A24F385D23F09A6F00AACC97 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F385C23F09A6F00AACC97 /* profileViewController.swift */; };
 		A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */; };
 		A24F387B23F60B7D00AACC97 /* FoodItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */; };
 		A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */; };
@@ -86,7 +85,6 @@
 		A24F384E23EF79E800AACC97 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A24F385023EF79F500AACC97 /* logInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logInViewController.swift; sourceTree = "<group>"; };
 		A24F385223EF817900AACC97 /* homeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeViewController.swift; sourceTree = "<group>"; };
-		A24F385C23F09A6F00AACC97 /* profileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
 		A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resetPasswordViewController.swift; sourceTree = "<group>"; };
 		A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsViewController.swift; sourceTree = "<group>"; };
 		A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsSecondViewController.swift; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 				A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */,
 				A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */,
 				A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */,
-				A24F385C23F09A6F00AACC97 /* profileViewController.swift */,
 				A24F385223EF817900AACC97 /* homeViewController.swift */,
 				A24F384E23EF79E800AACC97 /* SignUpViewController.swift */,
 				A24F385023EF79F500AACC97 /* logInViewController.swift */,
@@ -506,7 +503,6 @@
 				A24F385323EF817900AACC97 /* homeViewController.swift in Sources */,
 				A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */,
 				A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */,
-				A24F385D23F09A6F00AACC97 /* profileViewController.swift in Sources */,
 				1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */,
 				A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */,
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,
