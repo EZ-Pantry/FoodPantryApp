@@ -29,7 +29,6 @@
 		A24F385323EF817900AACC97 /* homeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F385223EF817900AACC97 /* homeViewController.swift */; };
 		A24F385D23F09A6F00AACC97 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F385C23F09A6F00AACC97 /* profileViewController.swift */; };
 		A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */; };
-		A24F387B23F60B7D00AACC97 /* FoodItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */; };
 		A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */; };
 		A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F388623FF500F00AACC97 /* popUpViewController.swift */; };
 		A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F388823FF52E700AACC97 /* adminViewController.swift */; };
@@ -89,7 +88,6 @@
 		A24F385223EF817900AACC97 /* homeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeViewController.swift; sourceTree = "<group>"; };
 		A24F385C23F09A6F00AACC97 /* profileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
 		A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resetPasswordViewController.swift; sourceTree = "<group>"; };
-		A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsViewController.swift; sourceTree = "<group>"; };
 		A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsSecondViewController.swift; sourceTree = "<group>"; };
 		A24F388623FF500F00AACC97 /* popUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popUpViewController.swift; sourceTree = "<group>"; };
 		A24F388823FF52E700AACC97 /* adminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminViewController.swift; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 				A24F388823FF52E700AACC97 /* adminViewController.swift */,
 				A24F388623FF500F00AACC97 /* popUpViewController.swift */,
 				A24F387C23F6109B00AACC97 /* FoodItemsSecondViewController.swift */,
-				A24F387A23F60B7D00AACC97 /* FoodItemsViewController.swift */,
 				A24F386623F2269C00AACC97 /* resetPasswordViewController.swift */,
 				A24F385C23F09A6F00AACC97 /* profileViewController.swift */,
 				A24F385223EF817900AACC97 /* homeViewController.swift */,
@@ -499,7 +496,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A24F387B23F60B7D00AACC97 /* FoodItemsViewController.swift in Sources */,
 				A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */,
 				1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */,
 				1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */,

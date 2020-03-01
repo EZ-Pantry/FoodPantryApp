@@ -339,6 +339,7 @@ class QRScrapeController: UIViewController {
         
         var str: String = checkedOut
         
+        //splits up the string into items and their quantities
         while str.count > 0 {
             let food = str.substring(to: str.indexDistance(of: "$")!)
             items.append(food)
@@ -349,8 +350,9 @@ class QRScrapeController: UIViewController {
 
         }
         
-        var merged : [[String: Any]] = []
+        var merged : [[String: Any]] = [] //all items, no duplicates
         
+        //removes duplicates (could be more efficent code)
         while items.count > 0 {
             let food = items[0]
             var quantity: Int = 0
@@ -364,21 +366,18 @@ class QRScrapeController: UIViewController {
                 }
             }
             
-            print(matched)
-            print(items)
-            
             for i in 0..<matched.count{
                 items.remove(at: matched[i])
                 quantities.remove(at: matched[i])
                 matched = matched.map{ $0 - 1 } //subtracts 1 from every match since the array decreased in size
             }
             
-            merged.append(["name": food, "quantity": quantity])
+            merged.append(["name": food, "quantity": quantity]) //adds tp the dict
             
         }
         
-//        print(checkedOut)
-//        print("changed")
+        //convert dict back to string format
+        
         checkedOut = ""
         
         for val in merged {
@@ -386,9 +385,7 @@ class QRScrapeController: UIViewController {
             print(val["name"] as! String)
             print(String(val["quantity"] as! Int))
         }
-        
-//        print(checkedOut)
-        
+                
         
         //continue with segue
         if segue.identifier == "barcodeError"{
@@ -415,6 +412,8 @@ class QRScrapeController: UIViewController {
 
 
 }
+
+//extensions for substring, done buttons, and loading images
 
 extension String {
     func index(from: Int) -> Index {
