@@ -18,6 +18,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchFoodBear: UISearchBar! //search bar
     
+
     //picker view for deciding sorting of the food items
     @IBOutlet var pickerField: UITextField!
     let yourPicker = UIPickerView()

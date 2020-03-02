@@ -17,33 +17,34 @@ class profileViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Creating rounded buttons
         saveButton.layer.cornerRadius = 15
         saveButton.clipsToBounds = true
         ref = Database.database().reference()
         // Do any additional setup after loading the view.
     }
-    var ref: DatabaseReference!
+    var ref: DatabaseReference!//database reference
     
     @IBAction func saveTapped(_ sender: UIButton) {
-        handleSaving();
-        
+        handleSaving();//calls func
     }
     
     func handleSaving(){
-        let userID = Auth.auth().currentUser?.uid
+        //Purpose of function is to set the new changes in firebase under Users Node
+        let userID = Auth.auth().currentUser?.uid//get logged in user
         
         guard let fullname = fullNameTextField.text else { return }
         guard let schoolIDNumber = schoolIDTextField.text else { return }
         guard let allergies = allergiesTextField.text else { return }
         
         
-        self.ref.child("Conant High School").child("Users").child(userID!).child("Name").setValue(fullname)
-        self.ref.child("Conant High School").child("Users").child(userID!).child("ID Number ").setValue(schoolIDNumber)
-        self.ref.child("Conant High School").child("Users").child(userID!).child("Allergies ").setValue(allergies)
+        self.ref.child("Conant High School").child("Users").child(userID!).child("Name").setValue(fullname)//set new name
+        self.ref.child("Conant High School").child("Users").child(userID!).child("ID Number ").setValue(schoolIDNumber)//set new id #
+        self.ref.child("Conant High School").child("Users").child(userID!).child("Allergies ").setValue(allergies)//set any new allergies in list format(i.e grass, roots, plants).
         
         let alert = UIAlertController(title: "Changes Saved!", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil);
+        self.present(alert, animated: true, completion: nil);//presents the alert for completion
     }
     
 }
