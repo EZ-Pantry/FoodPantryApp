@@ -56,7 +56,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         pickerField.inputView = yourPicker
         
-        pickerData = ["Conant High School", "Hoffman Estates High School"]//All schools to choose from
+        pickerData = ["Conant High School", "Hoffman Estates High School"]//All schools to choose from array
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -166,6 +166,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     
     @IBAction func dismissToLoginScreen(_ sender: UIButton) {
+        //user is sent back to sign up or login
         dismiss(animated: true, completion: nil)
     }
     

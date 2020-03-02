@@ -90,8 +90,7 @@ class homeViewController: UIViewController {
     let regionRadius: CLLocationDistance = 150//distance of zoom
     func centerMapOnLocation(location: CLLocation)
     {
-        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
-                                                  latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)//Locates where the reigion where the longitude and latitude put it
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,latitudinalMeters: regionRadius * 2.0, longitudinalMeters: regionRadius * 2.0)//Locates where the reigion where the longitude and latitude put it
         mapView.setRegion(coordinateRegion, animated: true)
     }
     

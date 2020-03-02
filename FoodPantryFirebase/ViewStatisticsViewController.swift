@@ -40,7 +40,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var indexAtDataArray = 0;
     
-    var studentNames = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup"]
+    var studentNames = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup"]//indivisual names array
     
     var data : [[String: Any]] =  [
         ["name": "Lebron James","id": "821209", "isAdmin": "No", "totalCheckedOut": "2", "lastItemCheckedOut": "a", "LastDateCheckedOut": "no", "allergies": "grass"],
@@ -65,7 +65,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         pickerField.inputView = yourPicker
         
         ref = Database.database().reference()
-        loadStudentNames();
+        loadStudentNames();//loading the names right when view is loaded
+        
         loadInXandYAxis();
         totalStatsButton.layer.cornerRadius = 10
         totalStatsButton.clipsToBounds = true
@@ -262,8 +263,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         for i in 0..<data.count{
             print(self.data[i]["Admin"])
             if(self.data[i]["Admin"] as! String == "No"){
-                print("checknboi")
-                tempNames.append(self.data[i]["name"] as! String)
+                tempNames.append(self.data[i]["name"] as! String)//only adding students, not admins to the visible array
             }
         }
         self.studentNames = tempNames;

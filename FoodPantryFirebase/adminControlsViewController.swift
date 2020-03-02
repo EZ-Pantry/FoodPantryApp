@@ -17,8 +17,8 @@ class adminControlsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //make buttons rounded
-        addItemsButton.layer.cornerRadius = 15
+        //make buttons rounded below
+        addItemsButton.layer.cornerRadius = 15//15px
         addItemsButton.clipsToBounds = true
         viewInventoryButton.layer.cornerRadius = 15
         viewInventoryButton.clipsToBounds = true

@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         if let user = Auth.auth().currentUser{
             //checks if the user is already signed if
             //If so, then the user is directed directly to the home screen to prevent them from having to sign in multiple times
-            self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue
+            self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
         }
     }
 

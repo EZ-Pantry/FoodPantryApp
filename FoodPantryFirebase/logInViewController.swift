@@ -52,6 +52,7 @@ class logInViewController: UIViewController {
     
     @IBAction func dismissToLoginScreen(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+        //send back to login or signup screen
     }
     
 }
