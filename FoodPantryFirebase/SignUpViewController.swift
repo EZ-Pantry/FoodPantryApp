@@ -12,17 +12,17 @@ import Firebase
 import FirebaseDatabase
 class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    @IBOutlet weak var fullNameTextField: UITextField!
-    @IBOutlet weak var schoolID: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var allergiesTextField: UITextField!
+    @IBOutlet weak var fullNameTextField: UITextField!//where user enters their full name(i.e John Smith)
+    @IBOutlet weak var schoolID: UITextField!//where user enters their school ID #(i.e 912111)
+    @IBOutlet weak var emailTextField: UITextField!//where user enters their email address(jake@students.d211.org)
+    @IBOutlet weak var passwordTextField: UITextField!//where user enters their password they want to use w/account
+    @IBOutlet weak var allergiesTextField: UITextField!//where user enters any allergies they have
     
-    @IBOutlet weak var schoolCodeTextField: UITextField!
+    @IBOutlet weak var schoolCodeTextField: UITextField!//where user enters the school code they have been provided by Food Pantry
     
-    @IBOutlet weak var adminCodeTextField: UITextField!
+    @IBOutlet weak var adminCodeTextField: UITextField!//where admin enters their admin code to validate they have an admin aaccount
     @IBOutlet weak var studentButton: UIButton!
-    @IBOutlet weak var adminButton: UIButton!
+    @IBOutlet weak var adminButton: UIButton!//where admin clicks to enter the code
     
     @IBOutlet weak var pickerField: UITextField!
     
@@ -30,11 +30,11 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     
     let yourPicker = UIPickerView()
-    var pickerData: [String] = [String]()
+    var pickerData: [String] = [String]()//data which can be selected via pickerView
     
     var ref: DatabaseReference!
 
-    var schoolName: String = ""
+    var schoolName: String = ""//The school name which user belongs to
     
     var correctSchoolCodeEntered = false;
     var isAdmin = false;
@@ -101,13 +101,13 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     
     @IBAction func handleContinue(_ sender: UIButton) {
-        guard let fullname = fullNameTextField.text else { return }
-        guard let schoolIDNumber = schoolID.text else { return }
-        guard let emailaddress = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        guard let allergies = allergiesTextField.text else { return }
-        guard let schoolCodeEntered = schoolCodeTextField.text else { return }
-        guard let adminCodeEntered = adminCodeTextField.text else { return }
+        guard let fullname = fullNameTextField.text else { return }//get users name
+        guard let schoolIDNumber = schoolID.text else { return }//get users ID
+        guard let emailaddress = emailTextField.text else { return }//get users email
+        guard let password = passwordTextField.text else { return }//get users password
+        guard let allergies = allergiesTextField.text else { return }//get users allergies
+        guard let schoolCodeEntered = schoolCodeTextField.text else { return }//get users school code
+        guard let adminCodeEntered = adminCodeTextField.text else { return }//get admins code
         
         if(schoolName == "Conant High School"){
             if(schoolCodeEntered == conantSchoolCode){
@@ -127,7 +127,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                     print("User Created")
                     if(self.isAdmin){
                         //If correct admin code was entered, create a new administrator account who can access the admin page
-                    self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Name").setValue(fullname)
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Name").setValue(fullname)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("ID Number").setValue(schoolIDNumber)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Password").setValue(password)

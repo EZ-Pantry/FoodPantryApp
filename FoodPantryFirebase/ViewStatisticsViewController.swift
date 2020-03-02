@@ -12,12 +12,12 @@ import FirebaseDatabase
 import Charts
 class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    @IBOutlet weak var totalStatsButton: UIButton!
-    @IBOutlet weak var indivisualStudentButton: UIButton!
+    @IBOutlet weak var totalStatsButton: UIButton!//see total statistics
+    @IBOutlet weak var indivisualStudentButton: UIButton!//see indivisual student stats
     
-    @IBOutlet weak var chooseGraphOrTextSegment: UISegmentedControl!
+    @IBOutlet weak var chooseGraphOrTextSegment: UISegmentedControl!//segment control to choose text or graph format
     
-    @IBOutlet weak var studentNameLbl: UILabel!
+    @IBOutlet weak var studentNameLbl: UILabel!//main header
     
     @IBOutlet weak var studentIDLbl: UILabel!
     @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
@@ -30,15 +30,15 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBOutlet weak var backButton: UIButton!
     let yourPicker = UIPickerView()
-    var pickerData: [String] = [String]()
-    var datesData: [String] = [String]()
-    var xAxisDataDates: [Int] = [Int]()
-    var yAxisDataNumVisits: [Int] = [Int]()
-    var lineChartEntry = [ChartDataEntry]()
+    var pickerData: [String] = [String]()//where the choosable students names go
+    var datesData: [String] = [String]()//where the dates of checking out go array
+    var xAxisDataDates: [Int] = [Int]()//x axis on graph data
+    var yAxisDataNumVisits: [Int] = [Int]()//y axis on graph data array
+    var lineChartEntry = [ChartDataEntry]()//line Chart object array to plot points of entry
     
     @IBOutlet weak var nextButton: UIButton!
     
-    var indexAtDataArray = 0;
+    var indexAtDataArray = 0;//this will be used to keep track of where at in array when back/next button is clicked
     
     var studentNames = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup"]//indivisual names array
     
@@ -52,7 +52,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     var chartData : [[String: Any]] =  [
         ["date": "26-2-20","studentsVisited": "10"],
         ["date": "27-2-20", "studentsVisited": "10"]
-        
     ]
     
     
@@ -81,10 +80,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         nextButton.clipsToBounds = true
     }
     
-    var studentsVisitedNumberArray: [Double] = [Double]()
-    var itemsCheckedOutNumberAray: [Double] = [Double]()
-    var editedstudentsVisitedNumberArray: [Double] = [Double]()
-    var editeditemsCheckedOutNumberAray: [Double] = [Double]()
+    var studentsVisitedNumberArray: [Double] = [Double]()//how many students visited indivisual array
+    var itemsCheckedOutNumberAray: [Double] = [Double]()//how many items checked out indivisual array
+    var editedstudentsVisitedNumberArray: [Double] = [Double]()//the last 5 days of students visited
+    var editeditemsCheckedOutNumberAray: [Double] = [Double]()//the last 5 days of items checked out
     @IBAction func totalStatsButtonTapped(_ sender: UIButton) {
         pickerField.isHidden = true;
         chooseGraphOrTextSegment.isHidden = false;
@@ -98,6 +97,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
     }
     @IBAction func indivisualStudentButtonTapped(_ sender: UIButton) {
+        //changing what is able to be seen depending on which button is clicked
         pickerField.isHidden = false;
         chooseGraphOrTextSegment.isHidden = true;
         chartView.isHidden = true;
@@ -150,6 +150,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     @IBAction func backButtonClicked(_ sender: UIButton) {
+        //moves one spot back in array to show previous day data
         checkIfAvailableBack();
         showCorrespondingTextStatisticsData();
         
@@ -360,7 +361,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
     }
     
-    var canDisplayMap = true;
+    var canDisplayMap = true;//boolean to make sure that map has data to be displayed
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

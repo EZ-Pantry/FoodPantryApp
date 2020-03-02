@@ -19,7 +19,7 @@ class adminViewController: UIViewController {
     
     
     var ref: DatabaseReference!//referncing the database
-    var isActuallyAdmin = false;
+    var isActuallyAdmin = false;//boolean to check if the admin controls button is visible
     
     override func viewDidLoad() {
         super.viewDidLoad()

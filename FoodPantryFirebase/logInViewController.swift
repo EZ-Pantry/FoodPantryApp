@@ -11,9 +11,9 @@ import FirebaseUI
 import FirebaseDatabase
 class logInViewController: UIViewController {
 
-    @IBOutlet weak var emailAddressTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var emailAddressTextField: UITextField!//where user inputs their school email address
+    @IBOutlet weak var passwordTextField: UITextField!//where user inputs the password
+    @IBOutlet weak var continueButton: UIButton!//where user clicks to continue to home screen
     
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class logInViewController: UIViewController {
         print(password)
         Auth.auth().signIn(withEmail: emailaddress, password: password){ user, error in
             if error == nil && user != nil{
-                self.dismiss(animated: false, completion: nil)
+                self.dismiss(animated: false, completion: nil)//sends user to home screen animation
                 //If email & password exist, then sign in
             }
             else{

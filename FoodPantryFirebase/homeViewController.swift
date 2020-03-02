@@ -15,15 +15,12 @@ class homeViewController: UIViewController {
     @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
     @IBOutlet weak var lastCheckedOutLbl: UILabel!
     @IBOutlet weak var welcomeNameLbl: UILabel!
-    @IBOutlet weak var mapView: MKMapView!
-    fileprivate let locationManager: CLLocationManager = CLLocationManager()
+    @IBOutlet weak var mapView: MKMapView!//the map object
     
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
+        super.viewDidLoad()        
         //below is to disable user interaction with the map
         self.mapView.isZoomEnabled = false;
         self.mapView.isScrollEnabled = false;
@@ -40,9 +37,7 @@ class homeViewController: UIViewController {
         }
         
         ref = Database.database().reference()
-        getUsersName()
-        
-        
+        getUsersName()//helper function to display user data about last time they came
         
     }
     
