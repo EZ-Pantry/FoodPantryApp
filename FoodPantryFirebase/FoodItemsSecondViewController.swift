@@ -11,46 +11,46 @@ import FirebaseUI
 import FirebaseStorage
 
 class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UIPickerViewDataSource {
-
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchFoodBear: UISearchBar!
     
-    //Picker view declarations
+    //inventory page
+    
+    //colletion view
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchFoodBear: UISearchBar! //search bar
+    
+
+    //picker view for deciding sorting of the food items
     @IBOutlet var pickerField: UITextField!
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()
     
-    var barcodeDataArray = [String]()
-    var foodItemsNameDataArray = [String]()
-    var storage: Storage!
+    
+    var foodItemsNameDataArray = [String]() //names of all the food items
+    var storage: Storage! //storage
 
-    var foodItemsImageArray = [UIImage]()
-    var ref: DatabaseReference!
+    var foodItemsImageArray = [UIImage]() //array of images of all the food items, loaded in the beginning
+    var ref: DatabaseReference! //ref to db
     
-    var searchedFoodItem = [String]()
-    var searchedFoodItemImage = [String]()
-    var searchedFoodItemQuantity = [String]()
+    var searchedFoodItem = [String]() //array of food items that have been searched
+    var searchedFoodItemImage = [String]() //same as above, but images
+    var searchedFoodItemQuantity = [String]() //same as above, but max quantities
     
-    var searching = false
+    var searching = false //if the user is searching for a food item
     
-    //when with firebase
-    //need to get all food item names
-    //and food item images through the url
-
+    //properties of the item cell
     var estimateWidth = 160.0
     var cellMarginSize = 16.0
-        
-    var foodItems = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup"]
     
-    var data : [[String: Any]] =  [
-        ["name": "Mac N Cheese", "quantity": "32", "amountCheckedOut": "2", "information": "a", "healthy": "no", "image": "https://www.spendwithpennies.com/wp-content/uploads/2018/03/Instant-Pot-Mac-and-Cheese-23.jpg", "id": "0"],
-        ["name": "Penne Pasta","quantity": "15", "amountCheckedOut": "3", "information": "b", "healthy": "yes",  "image": "https://www.thespruceeats.com/thmb/Bq4rhtzhsh-Mqgb3dSGAjmQCwcM=/1365x2048/filters:fill(auto,1)/easy-penne-pasta-bake-with-tomatoes-3058843-12_preview-5b2bd0f9119fa80037137e25.jpeg", "id": "1"],
-        ["name": "Granola Bars","quantity": "18", "amountCheckedOut": "4", "information": "c", "healthy": "no",  "image": "https://images-na.ssl-images-amazon.com/images/I/913Cm3tsw2L._SX679_.jpg", "id": "2"],
-        ["name": "Veggie Soup","quantity": "25", "amountCheckedOut": "1", "information": "d", "healthy": "yes",  "image": "https://thecozyapron.com/wp-content/uploads/2018/07/vegetable-soup_thecozyapron_1.jpg", "id": "3"]
-    ]
-            
+    //all the food item names/titles
+    var foodItems: [String] = []
+    
+    //all the data for the food items
+    var data : [[String: Any]] =  []
+    
+    //sorted data
     var sortedData : [[String: Any]] =  []
-        
+    
+    //selected food items after they have been searched for
     var selectedFoodItem: [String: Any]?
         
     override func viewDidLoad() {
@@ -71,7 +71,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         yourPicker.dataSource = self
         pickerField.inputView = yourPicker
         
-        pickerData = ["All Items", "A-Z", "Z-A"]
+        pickerData = ["All Items", "A-Z", "Z-A"] //sets the values for the picker view
         
         // Register cells
         self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
@@ -82,26 +82,23 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         showLoadingAlert()
 
         
-        var imageRecieved: Int = 0
+        var imageRecieved: Int = 0 //number of images recieved
         
-        getDataFromFirebase(callback: {(success)-> Void in
-            if(success) {
-                for i in 0..<self.data.count {
-                    self.loadImageFromFirebase(url: self.data[i]["image"] as! String, order: String(i), callback: {(img, order)-> Void in
-                               print("got " + String(i))
-                               
+        getDataFromFirebase(callback: {(success)-> Void in //gets data from the db
+            if(success) { //success
+                for i in 0..<self.data.count { //async loop
+                    self.loadImageFromFirebase(url: self.data[i]["image"] as! String, order: String(i), callback: {(img, order)-> Void in //loads an image from the firebase data
                                for i in 0..<self.data.count {
-                                   if (self.data[i]["id"] as! String == order) {
-                                       self.data[i]["view"] = img
-                                        imageRecieved += 1
+                                   if (self.data[i]["id"] as! String == order) { //compares the id of the image to the id of the current data
+                                       self.data[i]["view"] = img //correct id, set the view key of the food item to the ui image
+                                        imageRecieved += 1 //one more image recieved
                                    }
                                }
                                
-                        if(imageRecieved == self.data.count) {
-                            DispatchQueue.main.async {
+                        if(imageRecieved == self.data.count) { //checks to see if all the images have been recieved
+                            DispatchQueue.main.async { //reload page
                                 self.dismiss(animated: false)
                                 self.collectionView.reloadData()
-                                print("all reloaded with the stuff " + String(i))
                             }
                         }
                         
@@ -113,7 +110,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         
     }
     
-    func showLoadingAlert() {
+    func showLoadingAlert() { //shows a loading indicator on the screen
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
 
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -146,23 +143,24 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         return pickerData[row]
     }
     
+    //when the picker view is changed
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
        pickerField.text = pickerData[row]
     
-        if(pickerData[row] == "A-Z") {
+        if(pickerData[row] == "A-Z") { //sorted a to z
             sortAtoZ()
-        } else if(pickerData[row] == "Z-A") {
+        } else if(pickerData[row] == "Z-A") { //sorted z to a
             sortZtoA()
         }
         
     }
     
+    //sorts the food items alphabetically using swifts sorting operators
     func sortAtoZ() {
         data = data.sorted { ($0["name"] as! String).lowercased() < ($1["name"] as! String).lowercased() }
         foodItems = foodItems.sorted { $0.lowercased() < $1.lowercased() }
         DispatchQueue.main.async {
             self.collectionView.reloadData()
-            print("sorted a-z")
         }
     }
     
@@ -171,26 +169,25 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
            foodItems = foodItems.sorted { $0.lowercased() > $1.lowercased() }
            DispatchQueue.main.async {
                self.collectionView.reloadData()
-               print("sorted z-a")
            }
        }
+    
+    //gets data from firebase (found in other views)
     
     func getDataFromFirebase(callback: @escaping (_ success: Bool)->Void) {
         self.ref = Database.database().reference()
         let userID = Auth.auth().currentUser!.uid
-        
-        print(userID)
-        
+                
         self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             var tempData : [[String: Any]] = []
             var tempNames: [String] = []
             var c: Int = 0
-            for child in snapshot.children {
+            for child in snapshot.children { //iterates through all the food items
                 let snap = child as! DataSnapshot
                 let key = snap.key
                 let value: [String: Any] = snap.value as! [String : Any]
-                
+                //get the food item's data
                 let name = value["Name"] as? String ?? ""
                 let url = value["URL"] as? String ?? ""
                 let checked = value["Checked Out"] as? String ?? ""
@@ -198,13 +195,16 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                 let quantity = value["Quantity"] as? String ?? ""
                 let type = value["Type"] as? String ?? ""
                 let info = value["Information"] as? String ?? ""
+                let allergies = value["Allergies"] as? String ?? ""
                 let id = String(c)
                 
-                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "id": id])
+                //adds to array
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "type": type, "allergies": allergies, "id": id])
                 tempNames.append(name)
-                c += 1
+                c += 1 //increments id count
             }
             
+            //sets to instance field
             self.data = tempData
             self.foodItems = tempNames
             
@@ -213,23 +213,24 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         })
     }
     
-    func loadImageFromFirebase(url: String, order: String, callback: @escaping (_ img: UIImage,_ order: String)->Void) {
+    //loads an image
+    func loadImageFromFirebase(url: String, order: String, callback: @escaping (_ img: UIImage,_ order: String)->Void) { //loads an image based on the url, passed in an id and url
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: URL(string: url)!) {
                 let image = UIImage(data: data)
-                callback(image!, order)
+                callback(image!, order) //returns a ui image
             }
         }
     }
     
+    //page is refreshed
     @IBAction func refreshPage(_ sender: Any) {
         var imageRecieved: Int = 0
         showLoadingAlert()
-        getDataFromFirebase(callback: {(success)-> Void in
-            if(success) {
+        getDataFromFirebase(callback: {(success)-> Void in //gets data from firebase
+            if(success) { //same as the code in the viewDidLoad()
                 for i in 0..<self.data.count {
                     self.loadImageFromFirebase(url: self.data[i]["image"] as! String, order: String(i), callback: {(img, order)-> Void in
-                               print("got " + String(i))
                                
                                for i in 0..<self.data.count {
                                    if (self.data[i]["id"] as! String == order) {
@@ -242,7 +243,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                             DispatchQueue.main.async {
                                 self.dismiss(animated: false)
                                 self.collectionView.reloadData()
-                                print("all reloaded with the stuff " + String(i))
+                                self.pickerField.text = "All Items"
                             }
                         }
                         
@@ -254,6 +255,10 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         
         
     }
+    
+    
+    //item cell methods
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -273,21 +278,19 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //handle clicking of element
 
-        print("hello")
-        print(indexPath)
-        
-        if(searching) {
+        if(searching) { //searching
+            let index = indexPath[1] //gets the row value
+            selectedFoodItem = sortedData[index] //since searchinng, the data for the item cells is mirrored in sorted data
+        } else { //not searching for a food item
             let index = indexPath[1]
-            selectedFoodItem = sortedData[index]
-        } else {
-            let index = indexPath[1]
-            selectedFoodItem = data[index]
+            selectedFoodItem = data[index] //data is based on the selected food item
         }
         
         
-        self.performSegue(withIdentifier: "toItemPopover", sender: self)
+        self.performSegue(withIdentifier: "toItemPopover", sender: self) //shows pop up view
     }
     
+    //segue handler
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toItemPopover"{
             let destinationVC = segue.destination as? popUpViewController
@@ -297,6 +300,9 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
             destinationVC?.information = (selectedFoodItem?["information"] as? String)!
             destinationVC?.healthy = (selectedFoodItem?["healthy"] as? String)!
             destinationVC?.image = (selectedFoodItem?["image"] as? String)!
+            destinationVC?.type = (selectedFoodItem?["type"] as? String)!
+            destinationVC?.allergies = (selectedFoodItem?["allergies"] as? String)!
+
         }
     }
 }
@@ -305,8 +311,6 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
-            print("searched food item array count below")
-            print(searchedFoodItem.count)
             return searchedFoodItem.count
         } else {
 

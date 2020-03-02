@@ -11,13 +11,12 @@ import Foundation
 
 class QRCodeViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet var numberTextField: UITextField!
-    @IBOutlet var quantityTextField: UITextField!
+    @IBOutlet var numberTextField: UITextField! //quantity text field on the screen
     
-    @IBOutlet var selectButton: UIButton!
-    @IBOutlet var errorLabel: UILabel!
+    @IBOutlet var selectButton: UIButton! //button for selecting
+    @IBOutlet var errorLabel: UILabel! //label with an error (red)
     
-    var error = ""
+    var error = "" //error message
     
     var checkedOut = "" //format fooditem,quantity;fooditem,quantity
     
@@ -28,15 +27,12 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         selectButton.layer.cornerRadius = 15
         selectButton.clipsToBounds = true
         
-        numberTextField.keyboardType = UIKeyboardType.numberPad
-        quantityTextField.keyboardType = UIKeyboardType.numberPad
+        numberTextField.keyboardType = UIKeyboardType.alphabet
         
-        if error != "" {
+        if error != "" { //redirected from a different view and there is an error
             errorLabel.text = error + "\nplease try again";
         }
         
-        print("-----------------------")
-        print(checkedOut)
         
     }
     
@@ -47,27 +43,17 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    //segue handler
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToScrape"{
-            let destinationVC = segue.destination as? QRScrapeController
-            destinationVC?.barcode = numberTextField.text!
-            print("before")
-            print(numberTextField.text!)
-            print(quantityTextField.text!)
-            destinationVC?.quantity = quantityTextField.text!
+        if segue.identifier == "GoToManual"{ //person manually entered title
+            let destinationVC = segue.destination as? manualViewController
+            destinationVC?.manualTitle = numberTextField.text!
             destinationVC?.checkedOut = checkedOut
-        } else if(segue.identifier == "camera") {
+        } else if(segue.identifier == "camera") { //person wants to scan barcode
             let destinationVC = segue.destination as? QRScannerController
             destinationVC?.checkedOut = checkedOut
         }
     }
-    
-    //to add
-    //long enough upc
-    //not found, go back
-    //move text field up to see
-    //healthy
-    //display number of products
     
 
     
