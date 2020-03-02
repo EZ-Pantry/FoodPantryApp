@@ -11,19 +11,21 @@ import AVFoundation
 
 class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
-    @IBOutlet var messageLabel:UILabel!
-    @IBOutlet var topbar: UIView!
+    @IBOutlet var messageLabel:UILabel! //message at the bottom of the screen
+    @IBOutlet var topbar: UIView! //message at the top of the screen
     
+    //code for capturing a live stream using the camera
     var captureSession:AVCaptureSession = AVCaptureSession()
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
     
-    var sent:Bool = false
+    var sent:Bool = false //if the barcode has been sent to the next view
     
-    private var code:String = ""
+    private var code:String = "" //barcode
     
-    var checkedOut = ""
+    var checkedOut = "" //previous checked out items, data is transferred between views: QRScanner, QRScrape, QRCodeView
     
+    //all the supported types
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
     AVMetadataObject.ObjectType.code39,
     AVMetadataObject.ObjectType.code39Mod43,
@@ -40,7 +42,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
 //        // Do any additional setup after loading the view.
 
         // Get the back-facing camera for capturing videos
@@ -65,7 +67,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
                     // Set delegate and use the default dispatch queue to execute the call back
                     captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
                     captureMetadataOutput.metadataObjectTypes = supportedCodeTypes
-        //            captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
 
                 } catch {
                     // If any error occurs, simply print it out and don't continue any more.
@@ -86,7 +87,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         view.bringSubviewToFront(messageLabel)
         view.bringSubviewToFront(topbar)
 
-        messageLabel.text = "No code is detected"
+        messageLabel.text = "Move the camera close to the barcode"
 
         // Initialize QR Code Frame to highlight the QR code
         qrCodeFrameView = UIView()
@@ -132,12 +133,11 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToScrape"{
-            print("yes")
+        if segue.identifier == "GoToScrape"{ //go to the scrapecontroller
             let destinationVC = segue.destination as? QRScrapeController
-            destinationVC?.barcode = code
-            destinationVC?.quantity = "1"
-            destinationVC?.checkedOut = checkedOut
+            destinationVC?.barcode = code //send the code
+            destinationVC?.quantity = "1" //send the quantity of items (default)
+            destinationVC?.checkedOut = checkedOut //send the current items checkout out
         }
     }
 
@@ -152,7 +152,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     */
     
     @IBAction func dismissViewToBack(_ sender: UIButton) {
-        print("yes")
         dismiss(animated: true, completion: nil)
     }
     
