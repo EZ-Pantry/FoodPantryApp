@@ -237,7 +237,6 @@ class QRScrapeController: UIViewController {
             var c: Int = 0 //assigns an id to each food item
             for child in snapshot.children { //each food item
                 let snap = child as! DataSnapshot
-
                 let key = snap.key //key
                 let value: [String: Any] = snap.value as! [String : Any] //values
                 

@@ -31,5 +31,8 @@ class QRAddViewController: UIViewController {
         addManualButton.clipsToBounds = true
     }
     
+    @IBAction func dismissBack(_ sender: Any) {
+         dismiss(animated: true, completion: nil)
+    }
     
 }

@@ -46,8 +46,11 @@ class adminViewController: UIViewController {
         ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
             let value = snapshot.value as? NSDictionary
+            print(value)
             let adminValue = value?["Admin"] as? String ?? ""
+            print("here")
             if(adminValue == "Yes"){
+                print("admin")
                 self.adminControlsButton.isHidden = false;//that admin controls button only appears if the user entered the admin code when signing up
             }
           // ...

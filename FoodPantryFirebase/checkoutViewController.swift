@@ -11,17 +11,12 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 class checkoutViewController: UIViewController {
-    
-    
-    //view for when a user is checking out
-    
-    //the label for the food item data
+
     @IBOutlet var fooditemLabel: UILabel!
-    @IBOutlet var finishButton: UIButton! //finish button
+    @IBOutlet var finishButton: UIButton!
     
-    var foodItems = "" //food items that the user chose
+    var foodItems = ""
     
-    //items and their quantities
     var items: [String] = []
     var quantities: [Int] = []
     
@@ -30,19 +25,16 @@ class checkoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         //update with today's date
         let formatter : DateFormatter = DateFormatter()
         formatter.dateFormat = "d-M-yyyy"
         self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
         
-
-        //takes the string and formats it into cleaner text
         var text = ""
         var str: String = self.foodItems
         
         while str.count > 0 {
-            //substring based on $ and ; delimiters
             let food = str.substring(to: str.indexDistance(of: "$")!)
             items.append(food)
             str = str.substring(from: str.indexDistance(of: "$")! + 1)
@@ -52,28 +44,33 @@ class checkoutViewController: UIViewController {
             str = str.substring(from: str.indexDistance(of: ";")! + 1)
         }
         
-        //rounds buttons
+        print("done adding")
+        print(items)
+        print(quantities)
+        
         self.fooditemLabel.text = text
         self.finishButton.layer.cornerRadius = 15
         self.finishButton.clipsToBounds = true
 
+        // Do any additional setup after loading the view.
     }
     
 
-    @IBAction func finish(_ sender: Any) { //user selects finish
+    @IBAction func finish(_ sender: Any) {
         //update firebase database
        self.getFoodDataFromFirebase(callback: {(data)-> Void in
             print("recieved data")
             print(data)
         
-        var keyList: [[String: Any]] = [] //gets the keys for each individual item
+        var keyList: [[String: Any]] = []
         
             for i in 0..<self.items.count {
-                var key: String = self.getIdFromTitle(title: self.items[i], data: data) //gets the keys of each food item based on the title
-                keyList.append(["key": key, "quantity": self.quantities[i]]) //appends keys
+                var key: String = self.getIdFromTitle(title: self.items[i], data: data)
+                keyList.append(["key": key, "quantity": self.quantities[i]])
             }
         
-            self.updateFirebase(keyList: keyList, callback: {() -> Void in //done updating the keys
+            self.updateFirebase(keyList: keyList, callback: {() -> Void in
+                print("done changing")
                 self.performSegue(withIdentifier: "menu", sender: self)
             })
         })
@@ -81,20 +78,21 @@ class checkoutViewController: UIViewController {
     
     var fullyFormatedDate : String = ""
     func updateFirebase(keyList : [[String: Any]], callback: @escaping () -> Void) {
-
-        let myGroup = DispatchGroup() //dispatch group, needed because the for loop is async
+        print("now changing data")
+        
+        let myGroup = DispatchGroup()
         
         for value in keyList {
             
             myGroup.enter() //https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing
             
-            //ges the key and the quantity changed
             let key = value["key"] as? String
             let quantityChanged = value["quantity"] as! Int
             
             self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
               // Get user value
                 let value = snapshot.value as? NSDictionary
+                
                 
                 var quantity = Int(value?["Quantity"] as? String ?? "") ?? 0
                 quantity -= quantityChanged;//number of items checked out would go here
@@ -194,7 +192,6 @@ class checkoutViewController: UIViewController {
 
                 print("changed " + String(quantityChanged) + " " + (key!))
                 myGroup.leave()
-
               // ...
               }) { (error) in
                 print(error.localizedDescription)
@@ -205,14 +202,14 @@ class checkoutViewController: UIViewController {
             
         }
         
-        myGroup.notify(queue: .main) { //all loops finished, can do the call back
+        myGroup.notify(queue: .main) {
             print("Finished all requests.")
             callback()
         }
         
     }
     
-    func getIdFromTitle(title: String, data: [[String: Any]]) -> String { //returns the key of a food item based on its name
+    func getIdFromTitle(title: String, data: [[String: Any]]) -> String {
         
         for i in 0..<data.count {
             if ((data[i]["name"] as? String) == title) {
@@ -224,7 +221,6 @@ class checkoutViewController: UIViewController {
         
     }
     
-    //returns data from firebase, only data about the food item and no titles
     func getFoodDataFromFirebase(callback: @escaping (_ data: [[String: Any]]) -> Void) {
         self.ref = Database.database().reference()
         
@@ -249,7 +245,7 @@ class checkoutViewController: UIViewController {
     }
     
 
-    //segue handler
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
            if segue.identifier == "menu"{

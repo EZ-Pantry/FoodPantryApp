@@ -39,6 +39,10 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var correctSchoolCodeEntered = false;
     var isAdmin = false;
     
+    //codes
+    var schoolCode: String = "CHSGO10"
+    var adminCode: String = "SXY106"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +60,23 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         pickerField.inputView = yourPicker
         
-        pickerData = ["Conant High School", "Hoffman Estates High School"]//All schools to choose from array
+        pickerData = ["Conant High School"]//All schools to choose from array
+        
+        print("here taking snapshot")
+        
+        ref.child("Conant High School").observeSingleEvent(of: .value, with: { (snapshot) in
+          // Get user value
+          let value = snapshot.value as? NSDictionary
+            print(value)
+        self.adminCode = value?["Admin Code"] as? String ?? ""
+        self.schoolCode = value?["School Code"] as? String ?? ""
+            
+          // ...
+          }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -93,13 +113,6 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     
-    //Codes Below
-    //Conant: CHSGO10
-    //Admin: SXY106
-    let conantSchoolCode = "CHSGO10"
-    let adminCode = "SXY106"
-    
-    
     @IBAction func handleContinue(_ sender: UIButton) {
         guard let fullname = fullNameTextField.text else { return }//get users name
         guard let schoolIDNumber = schoolID.text else { return }//get users ID
@@ -110,7 +123,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         guard let adminCodeEntered = adminCodeTextField.text else { return }//get admins code
         
         if(schoolName == "Conant High School"){
-            if(schoolCodeEntered == conantSchoolCode){
+            if(schoolCodeEntered == schoolCode){
                 correctSchoolCodeEntered = true;
                 print("correct1")
             }
@@ -143,7 +156,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Password").setValue(password)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Allergies").setValue(allergies)
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Admin").setValue("No")
-                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Total Item's Checked Out ").setValue("0")
+                        self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Total Item's Checked Out").setValue("0")
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Last Item Checked Out").setValue(" ")
                         self.ref.child(self.schoolName).child("Users").child(user!.user.uid).child("Last Date Visited").setValue(" ")
                     }

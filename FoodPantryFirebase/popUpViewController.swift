@@ -42,8 +42,8 @@ class popUpViewController: UIViewController {
         foodInformation.text = "Information: " + String(information)
         foodCheckedout.text = "Checked out: " + String(checkedout)
         foodHealthy.text = "Healthy: " + String(healthy)
-        foodAllergy.text = "Allergies: " + String(allergies)
-        foodType.text = "Type: " + String(type)
+//        foodAllergy.text = "Allergies: " + String(allergies)
+//        foodType.text = "Type: " + String(type)
         
         if(image != "") {
             foodImage.load(url: URL(string: String(image))!)
