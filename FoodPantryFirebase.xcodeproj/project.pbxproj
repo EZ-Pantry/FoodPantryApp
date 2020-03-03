@@ -15,6 +15,7 @@
 		1CBDDC94240DFABD00AC53A9 /* addItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC93240DFABD00AC53A9 /* addItemViewController.swift */; };
 		1CBDDC96240DFAD300AC53A9 /* QRAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC95240DFAD300AC53A9 /* QRAddViewController.swift */; };
 		1CBDDC98240DFAEA00AC53A9 /* addMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC97240DFAEA00AC53A9 /* addMainViewController.swift */; };
+		1CBDDC9A240E072D00AC53A9 /* chooseManualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC99240E072D00AC53A9 /* chooseManualViewController.swift */; };
 		1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */; };
 		1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */; };
 		1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */; };
@@ -69,6 +70,7 @@
 		1CBDDC93240DFABD00AC53A9 /* addItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addItemViewController.swift; sourceTree = "<group>"; };
 		1CBDDC95240DFAD300AC53A9 /* QRAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRAddViewController.swift; sourceTree = "<group>"; };
 		1CBDDC97240DFAEA00AC53A9 /* addMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addMainViewController.swift; sourceTree = "<group>"; };
+		1CBDDC99240E072D00AC53A9 /* chooseManualViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseManualViewController.swift; sourceTree = "<group>"; };
 		1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScrapeController.swift; sourceTree = "<group>"; };
 		1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				A24F382023EF66E100AACC97 /* Assets.xcassets */,
 				A24F382223EF66E100AACC97 /* LaunchScreen.storyboard */,
 				A24F382523EF66E100AACC97 /* Info.plist */,
+				1CBDDC99240E072D00AC53A9 /* chooseManualViewController.swift */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */,
 				A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */,
 				1CBDDC96240DFAD300AC53A9 /* QRAddViewController.swift in Sources */,
+				1CBDDC9A240E072D00AC53A9 /* chooseManualViewController.swift in Sources */,
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
 				1CBDDC98240DFAEA00AC53A9 /* addMainViewController.swift in Sources */,

@@ -1,25 +1,33 @@
 //
-//  manualViewController.swift
+//  chooseManualViewController.swift
 //  FoodPantryFirebase
 //
-//  Created by Conant High on 2/27/20.
+//  Created by Ashay Parikh on 3/2/20.
 //  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
 //
 
 import Foundation
 
+//
+//  popUpViewController.swift
+//  FoodPantryFirebase
+//
+//  Created by Rayaan Siddiqi on 2/20/20.
+//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
+//
+
 import Foundation
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
-class manualViewController: UIViewController {
-    
+
+class chooseManualViewController: UIViewController {
+
     var manualTitle = "" //manual title that the person entered
     var quantity = "" //quantity
     var checkedOut = "" //checked out string, passed between views
     var ref: DatabaseReference! //ref to db
     
-    //labels and buttons on the screen
     
     @IBOutlet var foodName: UILabel!
     @IBOutlet var foodImage: UIImageView!
@@ -30,8 +38,13 @@ class manualViewController: UIViewController {
     var foodTitle = ""
     var error = "" //error message
     
+    var food_data: [String: Any] = [:]
+    var found: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
         
         ref = Database.database().reference()
         
@@ -42,8 +55,6 @@ class manualViewController: UIViewController {
         self.noButton.layer.cornerRadius = 15
         self.noButton.clipsToBounds = true
         
-        //check to see match
-        
         self.getFoodDataFromFirebase(callback: {(data, items)-> Void in
             //compare the title the user entered to the items in the database
             var scores: [Int] = [] //match score, the higher it is the closer the match
@@ -53,7 +64,8 @@ class manualViewController: UIViewController {
             }
             
             if(scores.max() == 0) { //no item found
-                self.error = "item not found, please try again"
+                self.found = false
+                self.performSegue(withIdentifier: "GoToAdding", sender: self) //go to qr scrape controller
             } else {
                 
                 var index: Int = scores.index(of: scores.max()!)! //get the index of the matched item
@@ -64,6 +76,7 @@ class manualViewController: UIViewController {
             
                 for d in data {
                     if d["name"] as! String == self.foodTitle { //if the name is equal to the title
+                        self.food_data = d
                         self.foodImage.load(url: URL(string: d["image"] as! String)!) //load the image
                         break
                     }
@@ -119,9 +132,11 @@ class manualViewController: UIViewController {
                 let quantity = value["Quantity"] as? String ?? ""
                 let type = value["Type"] as? String ?? ""
                 let info = value["Information"] as? String ?? ""
+                let allergies = value["Allergies"] as? String ?? ""
+                
                 let id = String(c)
                 //adds to the array
-                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "id": id])
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "allergies": allergies, "type": type, "image": url, "id": id, "key": key])
                 tempNames.append(name)
                 c += 1
             }
@@ -130,33 +145,27 @@ class manualViewController: UIViewController {
         })
     }
     
-    //segue handler
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoBack"{
-            let destinationVC = segue.destination as? QRCodeViewController
-            destinationVC?.error = error
-            destinationVC?.checkedOut = checkedOut
-        } else if(segue.identifier == "GoToScrape") {
-            let destinationVC = segue.destination as? QRScrapeController
-            destinationVC?.checkedOut = checkedOut
+        if(segue.identifier == "GoToAdding") {
+            let destinationVC = segue.destination as? addMainViewController
             destinationVC?.manualEnter = true
             destinationVC?.manualTitle = foodTitle
+            destinationVC?.found = found
+            destinationVC?.food_data = food_data
         }
     }
     
-    //selected yes, correct food item
-    
-    @IBAction func selectYes(_ sender: Any) {
-        self.performSegue(withIdentifier: "GoToScrape", sender: self) //go to qr scrape controller
+    @IBAction func selectedYes(_ sender: Any) {
+        found = true
+        self.performSegue(withIdentifier: "GoToAdding", sender: self) //go to qr scrape controller
+
     }
-    
     
     @IBAction func selectedNo(_ sender: Any) {
-        //in correct food item
-        error = ""
-        self.performSegue(withIdentifier: "GoBack", sender: self) //go back to codeview
+        found = false
+        self.performSegue(withIdentifier: "GoToAdding", sender: self) //go to qr scrape controller
+
     }
-    
-    
 }
+

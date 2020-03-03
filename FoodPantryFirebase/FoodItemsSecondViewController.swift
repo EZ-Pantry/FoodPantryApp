@@ -86,7 +86,15 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         getDataFromFirebase(callback: {(success)-> Void in //gets data from the db
             if(success) { //success
                 for i in 0..<self.data.count { //async loop
-                    self.loadImageFromFirebase(url: self.data[i]["image"] as! String, order: String(i), callback: {(img, order)-> Void in //loads an image from the firebase data
+                    
+                    let imageURL = self.data[i]["image"] as! String
+                    
+                    if(imageURL == "") {
+                        imageRecieved += 1
+                        continue
+                    }
+                    
+                    self.loadImageFromFirebase(url: imageURL, order: String(i), callback: {(img, order)-> Void in //loads an image from the firebase data
                                for i in 0..<self.data.count {
                                    if (self.data[i]["id"] as! String == order) { //compares the id of the image to the id of the current data
                                        self.data[i]["view"] = img //correct id, set the view key of the food item to the ui image
@@ -228,8 +236,17 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         showLoadingAlert()
         getDataFromFirebase(callback: {(success)-> Void in //gets data from firebase
             if(success) { //same as the code in the viewDidLoad()
+                                
                 for i in 0..<self.data.count {
-                    self.loadImageFromFirebase(url: self.data[i]["image"] as! String, order: String(i), callback: {(img, order)-> Void in
+                    
+                    let imageURL = self.data[i]["image"] as! String
+                                       
+                    if(imageURL == "") {
+                        imageRecieved += 1
+                        continue
+                    }
+                    
+                    self.loadImageFromFirebase(url: imageURL, order: String(i), callback: {(img, order)-> Void in
                                
                                for i in 0..<self.data.count {
                                    if (self.data[i]["id"] as! String == order) {
