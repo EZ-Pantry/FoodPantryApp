@@ -13,7 +13,7 @@ import FirebaseDatabase
 
 class addMainViewController: UIViewController {
 
-    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var nameLabel: UITextField!
     @IBOutlet var ingredientsLabel: UITextField!
     @IBOutlet var allergiesLabel: UITextField!
     @IBOutlet var typeLabel: UITextField!
@@ -37,22 +37,44 @@ class addMainViewController: UIViewController {
     
     var ref: DatabaseReference! //reference to the firebase database
     
-    var existing: Bool = false
+    var existing: Bool = false //exists in the db
     
-    var food_data: [String: Any] = [:]
+    var food_data: [String: Any] = [:] //data for the food item
+    var found: Bool = false //if found the database, used for manual enter in previus view
     
-    //cases:
-//    1.) barcode, not added done
-//    2.) barcode, added done
-//    3.) manual, not added
-//    4.) manual, added
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref = Database.database().reference()
+        
+        nameLabel.isUserInteractionEnabled = false
+        
         if (manualEnter) { //manually entered food item
-            
+            if(found) {
+                
+                print(food_data)
+                
+                self.existing = true
+                self.nameLabel.text = food_data["name"] as! String
+                self.ingredientsLabel.text = food_data["information"] as! String
+                self.allergiesLabel.text = food_data["allergies"] as! String
+                self.typeLabel.text = food_data["type"] as! String
+                self.healthyLabel.text = food_data["healthy"] as! String
+                let url = food_data["image"] as! String
+                self.food_url = url
+                
+                if url != "" {
+                    self.foodView.load(url: URL(string: url)!);
+                }
+                
+                self.adminDirections.text = "Existing Item\nEdit the Following"
+            } else {
+                self.existing = false
+                nameLabel.isUserInteractionEnabled = true
+                self.adminDirections.text = "New Item\nAdd the Following"
+            }
         } else { //used barcode
             getData { (title, error, image) in //gets the title (string) and error (boolean)
                 DispatchQueue.main.async { //async thread
@@ -213,6 +235,9 @@ class addMainViewController: UIViewController {
                     myGroup.enter()
                     
                     let key = food_data["key"] as! String
+                    
+                    print("key")
+                    print(key)
                     
                     self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
                         
