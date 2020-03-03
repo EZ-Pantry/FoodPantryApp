@@ -340,21 +340,16 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 //length is 0 means that a map cannot be formed, so will display NO DATA
                 self.canDisplayMap = false;
             }
-            else if(self.studentsVisitedNumberArray.count >= 5){
+            else if(self.studentsVisitedNumberArray.count > 5){
                 //since we need to display last 5 days of data, if length is larger than 5, display that last five
                 self.canDisplayMap = true;
-                self.editedstudentsVisitedNumberArray[0] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-1]
-                self.editedstudentsVisitedNumberArray[1] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-2]
-                self.editedstudentsVisitedNumberArray[2] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-3]
-                self.editedstudentsVisitedNumberArray[3] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-4]
-                self.editedstudentsVisitedNumberArray[4] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-5]
                 
-                //and other edits
-                self.editeditemsCheckedOutNumberAray[0] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-1]
-                self.editeditemsCheckedOutNumberAray[1] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-2]
-                self.editeditemsCheckedOutNumberAray[2] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-3]
-                self.editeditemsCheckedOutNumberAray[3] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-4]
-                self.editeditemsCheckedOutNumberAray[4] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-5]
+                
+                for i in 0..<6 {
+                    self.editedstudentsVisitedNumberArray[i] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-(i+1)]
+                        self.editeditemsCheckedOutNumberAray[i] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-(i+1)]
+                }
+                
             }
             
         })

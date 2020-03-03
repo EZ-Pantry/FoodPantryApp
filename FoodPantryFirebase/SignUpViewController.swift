@@ -62,7 +62,6 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         pickerData = ["Conant High School"]//All schools to choose from array
         
-        print("here taking snapshot")
         
         ref.child("Conant High School").observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
