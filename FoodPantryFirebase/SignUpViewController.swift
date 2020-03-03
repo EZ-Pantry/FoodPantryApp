@@ -40,8 +40,8 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var isAdmin = false;
     
     //codes
-    var schoolCode: String = "CHSGO10"
-    var adminCode: String = "SXY106"
+    var schoolCode: String = ""
+    var adminCode: String = ""
     
     
     override func viewDidLoad() {
