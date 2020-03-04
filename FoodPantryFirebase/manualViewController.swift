@@ -64,7 +64,15 @@ class manualViewController: UIViewController {
             
                 for d in data {
                     if d["name"] as! String == self.foodTitle { //if the name is equal to the title
-                        self.foodImage.load(url: URL(string: d["image"] as! String)!) //load the image
+                        
+                        let url = d["image"] as! String
+                        
+                        if(url != "") {
+                            self.foodImage.load(url: URL(string: url)!) //load the image
+                        } else {
+                            self.foodImage.image = UIImage(named: "foodplaceholder.jpeg")
+                        }
+                        
                         break
                     }
                 }
