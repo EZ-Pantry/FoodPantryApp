@@ -20,12 +20,12 @@ class homeViewController: UIViewController {
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         //below is to disable user interaction with the map
         self.mapView.isZoomEnabled = false;
         self.mapView.isScrollEnabled = false;
         self.mapView.isUserInteractionEnabled = false;
-        
+        setUpNotications();
         //input any address and within 200 meters are shown
         coordinates(forAddress: "700 E Cougar Trail, Hoffman Estates, IL 60169") {
             (location) in
@@ -41,6 +41,27 @@ class homeViewController: UIViewController {
         
     }
     
+    @IBAction func helperA(_ sender: UIButton) {
+        sendingOut();
+    }
+    
+    func setUpNotications(){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {didAllow,  error in
+            if didAllow{
+                
+            }
+            else{
+                
+            }
+        })
+    }
+    
+    func sendingOut(){
+        let content = UNMutableNotificationContent();
+        content.body = "Looks like this item is running low on supply! Be sure to purchase more"
+        content.badge = 1;
+        let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: nil)
+    }
     var fullName: String = "";
     
     
@@ -71,6 +92,8 @@ class homeViewController: UIViewController {
         self.dismiss(animated: false, completion: nil)//send user back to the login in/sign up view
     }
 
+    
+    
     public func openMapForPlace(lat:Double = 0, long:Double = 0, placeName:String = "") {
         let latitude: CLLocationDegrees = lat//latitude
         let longitude: CLLocationDegrees = long//longitutde

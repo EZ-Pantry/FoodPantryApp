@@ -73,11 +73,21 @@ class checkoutViewController: UIViewController {
             print(keyList)
         
             self.updateFirebase(keyList: keyList, callback: {() -> Void in
-                print("done changing")
-                self.performSegue(withIdentifier: "menu", sender: self)
+//                print("done changing")
+//                self.performSegue(withIdentifier: "menu", sender: self)
+                
             })
         })
 }
+    func dismissBack(){
+        guard let vc = self.presentingViewController else { return }
+        var x = 3;
+        while (x>0) {
+            vc.dismiss(animated: true, completion: nil)
+            x-=1;
+            
+        }
+    }
     
     var fullyFormatedDate : String = ""
     func updateFirebase(keyList : [[String: Any]], callback: @escaping () -> Void) {

@@ -340,7 +340,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 //length is 0 means that a map cannot be formed, so will display NO DATA
                 self.canDisplayMap = false;
             }
-            else if(self.studentsVisitedNumberArray.count >= 5){
+            else if(self.studentsVisitedNumberArray.count > 5){
                 //since we need to display last 5 days of data, if length is larger than 5, display that last five
                 self.canDisplayMap = true;
                 self.editedstudentsVisitedNumberArray[0] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-1]
