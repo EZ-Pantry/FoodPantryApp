@@ -67,6 +67,8 @@ class addMainViewController: UIViewController {
                 
                 if url != "" {
                     self.foodView.load(url: URL(string: url)!);
+                } else {
+                    self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
                 }
                 
                 self.adminDirections.text = "Existing Item\nEdit the Following"
@@ -109,6 +111,8 @@ class addMainViewController: UIViewController {
                                 
                                 if url != "" {
                                     self.foodView.load(url: URL(string: url)!);
+                                } else {
+                                    self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
                                 }
                                 
                                 self.adminDirections.text = "Existing Item\nEdit the Following"

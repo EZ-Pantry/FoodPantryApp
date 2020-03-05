@@ -90,6 +90,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                     let imageURL = self.data[i]["image"] as! String
                     
                     if(imageURL == "") {
+                        self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
                         imageRecieved += 1
                         continue
                     }
@@ -242,6 +243,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                     let imageURL = self.data[i]["image"] as! String
                                        
                     if(imageURL == "") {
+                        self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
                         imageRecieved += 1
                         continue
                     }

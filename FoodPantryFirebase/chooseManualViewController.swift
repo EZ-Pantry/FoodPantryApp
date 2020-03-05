@@ -82,6 +82,8 @@ class chooseManualViewController: UIViewController {
                         
                         if(url != "") {
                             self.foodImage.load(url: URL(string: url)!) //load the image
+                        } else {
+                            self.foodImage.image = UIImage(named: "foodplaceholder.jpeg")
                         }
                         
                         break
