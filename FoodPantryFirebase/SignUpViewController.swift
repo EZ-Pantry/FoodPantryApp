@@ -102,12 +102,17 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func handleContinue(_ sender: UIButton) {
         guard let fullname = fullNameTextField.text else { return }//get users name
-        guard let schoolIDNumber = schoolID.text else { return }//get users ID
+        guard var schoolIDNumber = schoolID.text else { return }//get users ID
         guard let emailaddress = emailTextField.text else { return }//get users email
         guard let password = passwordTextField.text else { return }//get users password
         guard let allergies = allergiesTextField.text else { return }//get users allergies
         guard let schoolCodeEntered = schoolCodeTextField.text else { return }//get users school code
         guard let adminCodeEntered = adminCodeTextField.text else { return }//get admins code
+        
+        if((schoolIDNumber.substring(with: 0..<3)) == "000"){
+            //makes sure ID number is just the numbers without the zeroes
+            schoolIDNumber = schoolIDNumber.substring(from: 3);
+        }
         
         if(schoolName == "Conant High School"){
             if(schoolCodeEntered == conantSchoolCode){

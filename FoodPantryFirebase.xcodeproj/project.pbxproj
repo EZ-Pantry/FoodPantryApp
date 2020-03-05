@@ -38,6 +38,8 @@
 		A24F3893240DC6B200AACC97 /* QRAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F3890240DC6B200AACC97 /* QRAddViewController.swift */; };
 		A24F3895240DC6E700AACC97 /* manualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F3894240DC6E600AACC97 /* manualViewController.swift */; };
 		A24F3897240DFF0B00AACC97 /* settingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F3896240DFF0B00AACC97 /* settingsPageViewController.swift */; };
+		A24F389A240F429300AACC97 /* sendfeedbackcontrolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F3899240F429300AACC97 /* sendfeedbackcontrolsViewController.swift */; };
+		A24F389C24103F2800AACC97 /* emailFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F389B24103F2800AACC97 /* emailFeedbackViewController.swift */; };
 		D50F4E844ACDBE31BD04E0F9 /* Pods_FoodPantryFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */; };
 		F84117738F0E079EE27ACA36 /* Pods_FoodPantryFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7ED3C37AF6642BA667F233 /* Pods_FoodPantryFirebase.framework */; };
 /* End PBXBuildFile section */
@@ -103,6 +105,8 @@
 		A24F3894240DC6E600AACC97 /* manualViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = manualViewController.swift; path = "../../FoodPantryApp-ashay/FoodPantryFirebase/manualViewController.swift"; sourceTree = "<group>"; };
 		A24F3896240DFF0B00AACC97 /* settingsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsPageViewController.swift; sourceTree = "<group>"; };
 		A24F3898240EC0DC00AACC97 /* FoodPantryFirebase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FoodPantryFirebase.entitlements; sourceTree = "<group>"; };
+		A24F3899240F429300AACC97 /* sendfeedbackcontrolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendfeedbackcontrolsViewController.swift; sourceTree = "<group>"; };
+		A24F389B24103F2800AACC97 /* emailFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailFeedbackViewController.swift; sourceTree = "<group>"; };
 		C5FFF02738E9C4DCF3A1B49B /* Pods-FoodPantryFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		CAB18081389E8C52423833BA /* Pods-FoodPantryFirebaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED60645AD577D91FDDFED4AB /* Pods-FoodPantryFirebaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
+				A24F389B24103F2800AACC97 /* emailFeedbackViewController.swift */,
+				A24F3899240F429300AACC97 /* sendfeedbackcontrolsViewController.swift */,
 				A24F3896240DFF0B00AACC97 /* settingsPageViewController.swift */,
 				A24F388C2407497400AACC97 /* ViewStatisticsViewController.swift */,
 				A24F388A2401CC8400AACC97 /* adminControlsViewController.swift */,
@@ -517,6 +523,7 @@
 				A24F3892240DC6B200AACC97 /* addItemViewController.swift in Sources */,
 				A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */,
 				1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */,
+				A24F389C24103F2800AACC97 /* emailFeedbackViewController.swift in Sources */,
 				1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */,
 				A24F385323EF817900AACC97 /* homeViewController.swift in Sources */,
 				A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */,
@@ -534,6 +541,7 @@
 				1C748F322406188800936A05 /* checkoutViewController.swift in Sources */,
 				1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */,
 				A24F3897240DFF0B00AACC97 /* settingsPageViewController.swift in Sources */,
+				A24F389A240F429300AACC97 /* sendfeedbackcontrolsViewController.swift in Sources */,
 				A24F3895240DC6E700AACC97 /* manualViewController.swift in Sources */,
 				A24F385123EF79F500AACC97 /* logInViewController.swift in Sources */,
 			);

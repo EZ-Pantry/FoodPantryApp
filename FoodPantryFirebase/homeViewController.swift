@@ -38,12 +38,10 @@ class homeViewController: UIViewController {
         
         ref = Database.database().reference()
         getUsersName()//helper function to display user data about last time they came
-        
+
     }
     
-    @IBAction func helperA(_ sender: UIButton) {
-        sendingOut();
-    }
+    
     
     func setUpNotications(){
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {didAllow,  error in
@@ -62,6 +60,7 @@ class homeViewController: UIViewController {
         content.badge = 1;
         let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: nil)
     }
+    
     var fullName: String = "";
     
     

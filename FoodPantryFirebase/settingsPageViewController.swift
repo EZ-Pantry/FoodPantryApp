@@ -10,12 +10,16 @@ import UIKit
 import FirebaseUI
 class settingsPageViewController: UIViewController {
 
+    @IBOutlet weak var sendFeedBackButton: UIButton!
     @IBOutlet weak var logOutButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         logOutButton.layer.cornerRadius = 15
         logOutButton.clipsToBounds = true
+        
+        sendFeedBackButton.layer.cornerRadius = 15
+        sendFeedBackButton.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
@@ -26,7 +30,7 @@ class settingsPageViewController: UIViewController {
     @IBAction func logOutButtonTapped(_ sender: UIButton) {
         //Purpose is to log out the user
         try!  Auth.auth().signOut()
-        self.dismiss(animated: false, completion: nil)//send user back to the login in/sign up view
+        self.dismiss(animated: true, completion: nil)//send user back to the login in/sign up view
     }
     
 }
