@@ -12,7 +12,6 @@ Available on the App Store: `app store link`
 ## Table of Contents 
 - [View Controllers Descriptions](#View-Controllers'-Descriptions)
 - [Features](#features)
-- [Contributing](#contributing)
 - [Team](#team)
 - [FAQ](#faq)
 - [Contact](#contact)
