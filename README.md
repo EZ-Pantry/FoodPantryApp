@@ -17,8 +17,8 @@ Programming Language: Swift
 
 ## FAQ
 
-- **How do I do *specifically* so and so?**
-    - No problem! Just do this.
+- **How do I do download the app**
+    - Click the green clone & download button. Then, either clone the repo from terminal or download a zip!
 
 ---
 
