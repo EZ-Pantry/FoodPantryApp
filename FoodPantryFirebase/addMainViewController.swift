@@ -1,10 +1,6 @@
-//
-//  addItemViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Ashay Parikh on 3/1/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import Foundation
 import UIKit
@@ -12,25 +8,28 @@ import FirebaseUI
 import FirebaseDatabase
 
 class addMainViewController: UIViewController {
-
+    
+    //all the a=labels
     @IBOutlet var nameLabel: UITextField!
     @IBOutlet var ingredientsLabel: UITextField!
     @IBOutlet var allergiesLabel: UITextField!
     @IBOutlet var typeLabel: UITextField!
     @IBOutlet var quantityLabel: UITextField!
     @IBOutlet var healthyLabel: UITextField!
-    
-    @IBOutlet var foodView: UIImageView!
-    @IBOutlet var adminDirections: UILabel!
-    @IBOutlet var addMoreBtn: UIButton!
     @IBOutlet var finishBtn: UIButton!
     
-    var barcode = ""
+    //options for the admin: adding more button
+    @IBOutlet var addMoreBtn: UIButton!
+    @IBOutlet var foodView: UIImageView!
+    @IBOutlet var adminDirections: UILabel!
+
     
-    var food_title = "" //the food title
-    var food_url = ""
+    var barcode = "" //food item barcode
     
-    var errorMessage = ""
+    var food_title = "" //the actual food title
+    var food_url = "" //url
+    
+    var errorMessage = "" //error message
     
     var manualEnter: Bool = false //true if the food item is manually loaded
     var manualTitle: String = "" //manual title that the user entered on the manualview (matches one of the titles in the database)
@@ -49,13 +48,12 @@ class addMainViewController: UIViewController {
         
         ref = Database.database().reference()
         
-        nameLabel.isUserInteractionEnabled = false
+        nameLabel.isUserInteractionEnabled = false //cannot edit the food item name
         
         if (manualEnter) { //manually entered food item
-            if(found) {
-                
-                print(food_data)
-                
+            if(found) { //item exists in the db
+                         
+                //update screem
                 self.existing = true
                 self.nameLabel.text = food_data["name"] as! String
                 self.ingredientsLabel.text = food_data["information"] as! String
@@ -65,6 +63,7 @@ class addMainViewController: UIViewController {
                 let url = food_data["image"] as! String
                 self.food_url = url
                 
+                //load image
                 if url != "" {
                     self.foodView.load(url: URL(string: url)!);
                 } else {
@@ -94,13 +93,13 @@ class addMainViewController: UIViewController {
                                 
                                 self.food_title = title
                                 self.food_data = data[index]
-                                
+                                //set to local variables
                                 let ingredients: String = data[index]["information"] as! String
                                 let url: String = data[index]["image"] as! String
                                 let allergies = data[index]["allergies"] as! String
                                 let type = data[index]["type"] as! String
                                 let healthy = data[index]["healthy"] as! String
-                                
+                                //put on screen
                                 self.nameLabel.text = title
                                 self.ingredientsLabel.text = ingredients
                                 self.allergiesLabel.text = allergies
@@ -122,7 +121,7 @@ class addMainViewController: UIViewController {
                                 self.food_url = image
                                 self.food_title = title
                                 
-                                
+                                //admin sets the rest
                                 self.nameLabel.text = title
 
                                 if image != "" {
@@ -233,7 +232,7 @@ class addMainViewController: UIViewController {
                 let myGroup = DispatchGroup() //dispatch group, needed because the for loop is async
 
             
-                if(existing) {
+            if(existing) { //edit the current food item
                     //update the current data in firebase
                     
                     myGroup.enter()
@@ -291,7 +290,7 @@ class addMainViewController: UIViewController {
                       }) { (error) in
                         print(error.localizedDescription)
                     }
-                } else {
+                } else { //need to add in a new food item
                     //create new data
                     
                     var newTitle = self.nameLabel.text!
@@ -348,7 +347,129 @@ class addMainViewController: UIViewController {
                 }
 
         }
-    
+     
+    @IBAction func finishSelected(_ sender: Any) { //same code as above
+        
+        //update firebase
+                       
+                       let myGroup = DispatchGroup() //dispatch group, needed because the for loop is async
+
+                   
+                       if(existing) {
+                           //update the current data in firebase
+                           
+                           myGroup.enter()
+                           
+                           let key = food_data["key"] as! String
+                           
+                           print("key")
+                           print(key)
+                           
+                           self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                               
+                               
+                               //updating ingredients, allergies, type and quantity
+                               
+                               var newIngredients: String = self.ingredientsLabel.text!
+                               var newAllergies: String = self.allergiesLabel.text!
+                               var newType: String = self.typeLabel.text!
+                               var additionalQuantity: String = self.quantityLabel.text!
+                               var currentQuantity = self.food_data["quantity"] as! String
+                               var newQuantity = Int(additionalQuantity)! + Int(currentQuantity)!
+                               var newQuantity2 = String(newQuantity)
+                               var newHealthy = self.healthyLabel.text!
+                               
+                               //check for blanks
+                               if(newIngredients == "") {
+                                   newIngredients = "not listed"
+                               }
+                               
+                               if(newAllergies == "") {
+                                   newAllergies = "not listed"
+                               }
+                               
+                               if(newType == "") {
+                                   newType = "not listed"
+                               }
+                               
+                               if(newHealthy == "") {
+                                   newHealthy = "not listed"
+                               }
+                               
+                               //now update
+
+                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients);
+                               
+                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2);
+                               
+                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Type").setValue(newType);
+                               
+                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies);
+                               
+                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy);
+                               
+                               myGroup.leave() //all done, can leave the group
+                             // ...
+                             }) { (error) in
+                               print(error.localizedDescription)
+                           }
+                       } else {
+                           //create new data
+                           
+                           var newTitle = self.nameLabel.text!
+                           var newIngredients: String = self.ingredientsLabel.text!
+                           var newAllergies: String = self.allergiesLabel.text!
+                           var newType: String = self.typeLabel.text!
+                           var newQuantity: String = self.quantityLabel.text!
+                           var newURL = food_url
+                           var checkedOut = "0"
+                           var newHealthy = self.healthyLabel.text!
+                           
+                           //check for blanks
+                           if(newIngredients == "") {
+                               newIngredients = "not listed"
+                           }
+                           
+                           if(newAllergies == "") {
+                               newAllergies = "not listed"
+                           }
+                           
+                           if(newType == "") {
+                               newType = "not listed"
+                           }
+                           
+                           let dic = NSMutableDictionary()
+                           dic.setValue(newTitle, forKey: "Name")
+                           dic.setValue(newIngredients, forKey: "Information")
+                           dic.setValue(newAllergies, forKey: "Allergies")
+                           dic.setValue(newType, forKey: "Type")
+                           dic.setValue(newQuantity, forKey: "Quantity")
+                           dic.setValue(newURL, forKey: "URL")
+                           dic.setValue(checkedOut, forKey: "Checked Out")
+                           dic.setValue(newHealthy, forKey: "Healthy")
+                           
+                           myGroup.enter()
+                           
+                           let refChild = self.ref.child("Conant High School").child("Inventory").child("Food Items").childByAutoId()
+                           
+                           refChild.updateChildValues(dic as [NSObject : AnyObject]) { (error, ref) in
+                               if(error != nil){
+                                   print("Error",error)
+                                   myGroup.leave() //all done, can leave the group
+                               } else{
+                                   print("\n\n\n\n\nAdded successfully...")
+                                   myGroup.leave() //all done, can leave the group
+                               }
+                           }
+                           
+                       }
+                       
+                       myGroup.notify(queue: .main) { //all loops finished, can do the call back
+                           print("Finished all requests.")
+                            self.performSegue(withIdentifier: "BackToHome", sender: self)
+                        }
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
           

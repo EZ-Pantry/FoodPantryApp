@@ -39,16 +39,9 @@ class QRScrapeController: UIViewController {
     var manualEnter: Bool = false //true if the food item is manually loaded
     var manualTitle: String = "" //manual title that the user entered on the manualview (matches one of the titles in the database)
     
-    override func viewDidAppear(_ animated: Bool) {
-        //https://stackoverflow.com/questions/29257670/alertcontroller-is-not-in-the-window-hierarchy
-        super.viewDidAppear(animated)
-        //see source above
-
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        print("did load")
         //show loading indicator
         if(manualEnter) { //user manually entered title
             ref = Database.database().reference() //sets the reference
@@ -315,6 +308,9 @@ class QRScrapeController: UIViewController {
         }
         
     }
+    @IBAction func doAddMore(_ sender: Any) {
+        self.performSegue(withIdentifier: "addMore", sender: self)
+    }
     
     
     //segue method
@@ -378,11 +374,11 @@ class QRScrapeController: UIViewController {
         
         //continue with segue
         if segue.identifier == "barcodeError"{
-            
             let destinationVC = segue.destination as? QRCodeViewController
             destinationVC?.error = errorMessage
             destinationVC?.checkedOut = checkedOut
         } else if(segue.identifier == "addMore") {
+            print("adding more")
             let destinationVC = segue.destination as? QRCodeViewController
             destinationVC?.checkedOut = checkedOut
         } else if(segue.identifier == "checkOut") {

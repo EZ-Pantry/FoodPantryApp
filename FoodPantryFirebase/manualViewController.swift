@@ -1,10 +1,5 @@
-//
-//  manualViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Conant High on 2/27/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import Foundation
 
@@ -54,6 +49,7 @@ class manualViewController: UIViewController {
             
             if(scores.max() == 0) { //no item found
                 self.error = "item not found, please try again"
+                self.performSegue(withIdentifier: "GoBack", sender: self) //go back to codeview
             } else {
                 
                 var index: Int = scores.index(of: scores.max()!)! //get the index of the matched item

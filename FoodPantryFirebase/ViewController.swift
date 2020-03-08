@@ -1,18 +1,14 @@
-//
-//  ViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Rayaan Siddiqi on 2/8/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
 class ViewController: UIViewController {
 
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var signUpButton: UIButton!
+
+    @IBOutlet var loginButton: UIButton!
+    @IBOutlet var signupButton: UIButton!
     
     
     var ref: DatabaseReference!
@@ -22,8 +18,8 @@ class ViewController: UIViewController {
         //creating rounded edges for buttons below
         loginButton.layer.cornerRadius = 15
         loginButton.clipsToBounds = true
-        signUpButton.layer.cornerRadius = 15;
-        signUpButton.clipsToBounds = true;
+        signupButton.layer.cornerRadius = 15;
+        signupButton.clipsToBounds = true;
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -35,7 +31,11 @@ class ViewController: UIViewController {
             self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
         }
     }
-
+    
+    @IBAction func unwindToFirst(_ unwindSegue: UIStoryboardSegue) {
+        let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+    }
     
     
 }

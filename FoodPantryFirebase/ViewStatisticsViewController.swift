@@ -1,10 +1,5 @@
-//
-//  ViewStatisticsViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Rayaan Siddiqi on 2/26/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import UIKit
 import FirebaseUI
@@ -40,19 +35,11 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var indexAtDataArray = 0;//this will be used to keep track of where at in array when back/next button is clicked
     
-    var studentNames = ["Mac N Cheese", "Penne Pasta", "Granola Bars", "Veggie Soup"]//indivisual names array
+    var studentNames: [String] = []//indivisual names array
     
-    var data : [[String: Any]] =  [
-        ["name": "Lebron James","id": "821209", "isAdmin": "No", "totalCheckedOut": "2", "lastItemCheckedOut": "a", "LastDateCheckedOut": "no", "allergies": "grass"],
-        ["name": "Cheese Grader","id": "821209", "isAdmin": "No", "totalCheckedOut": "2", "lastItemCheckedOut": "a", "LastDateCheckedOut": "no", "allergies": "grass"],
-        ["name": "Kenton James","id": "821209", "isAdmin": "N", "totalCheckedOut": "2", "lastItemCheckedOut": "a", "LastDateCheckedOut": "no", "allergies": "grass"]
-        
-    ]
+    var data : [[String: Any]] =  []
     
-    var chartData : [[String: Any]] =  [
-        ["date": "26-2-20","studentsVisited": "10"],
-        ["date": "27-2-20", "studentsVisited": "10"]
-    ]
+    var chartData : [[String: Any]] =  []
     
     
     override func viewDidLoad() {

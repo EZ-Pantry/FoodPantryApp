@@ -1,10 +1,5 @@
-//
-//  logInViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Rayaan Siddiqi on 2/8/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import UIKit
 import FirebaseUI
@@ -49,6 +44,7 @@ class logInViewController: UIViewController {
         
     }
     
+    @IBAction func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {}
     
     @IBAction func dismissToLoginScreen(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)

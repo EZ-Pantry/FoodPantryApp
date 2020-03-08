@@ -1,10 +1,5 @@
-//
-//  checkoutViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Ashay Parikh on 2/25/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import Foundation
 import UIKit
@@ -71,7 +66,7 @@ class checkoutViewController: UIViewController {
         
             self.updateFirebase(keyList: keyList, callback: {() -> Void in
                 print("done changing")
-                self.performSegue(withIdentifier: "menu", sender: self)
+                self.performSegue(withIdentifier: "GoToHome", sender: self)
             })
         })
 }

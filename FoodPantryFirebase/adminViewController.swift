@@ -1,22 +1,25 @@
-//
-//  adminViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Rayaan Siddiqi on 2/20/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
 class adminViewController: UIViewController {
 
+    @IBOutlet var firstNameField: UITextField!
+    @IBOutlet var lastNameField: UITextField!
     @IBOutlet weak var adminControlsButton: UIButton!
-    @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var schoolIDTextField: UITextField!
     @IBOutlet weak var allergiesTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
+    @IBOutlet var schoolIDLabel: UILabel!
+    @IBOutlet var allergiesLabel: UILabel!
+    
+    var current_schoolID = ""
+    var currentFirstName = ""
+    var currentLastName = ""
+    var currentAllergies = ""
     
     var ref: DatabaseReference!//referncing the database
     var isActuallyAdmin = false;//boolean to check if the admin controls button is visible
@@ -46,12 +49,24 @@ class adminViewController: UIViewController {
         ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
             let value = snapshot.value as? NSDictionary
-            print(value)
+            self.currentFirstName = value?["First Name"] as? String ?? ""
+            self.currentLastName = value?["Last Name"] as? String ?? ""
+            self.current_schoolID = value?["ID Number"] as? String ?? ""
+            self.currentAllergies = value?["Allergies"] as? String ?? ""
+            
+            self.firstNameField.text = self.currentFirstName
+            self.lastNameField.text = self.currentLastName
+            self.schoolIDTextField.text = self.current_schoolID
+            self.allergiesTextField.text = self.currentAllergies
+            
             let adminValue = value?["Admin"] as? String ?? ""
-            print("here")
+            
             if(adminValue == "Yes"){
-                print("admin")
                 self.adminControlsButton.isHidden = false;//that admin controls button only appears if the user entered the admin code when signing up
+                self.schoolIDTextField.isHidden = true
+                self.allergiesTextField.isHidden = true
+                self.schoolIDLabel.isHidden = true
+                self.allergiesLabel.isHidden = true
             }
           // ...
           }) { (error) in
@@ -63,17 +78,36 @@ class adminViewController: UIViewController {
         //Purpose of function is to set the new changes in firebase under Users Node
         let userID = Auth.auth().currentUser?.uid//get logged in user
         
-        guard let fullname = fullNameTextField.text else { return }
-        guard let schoolIDNumber = schoolIDTextField.text else { return }
-        guard let allergies = allergiesTextField.text else { return }
+        guard let firstName = firstNameField.text else { return }
+        guard let lastName = lastNameField.text else { return }
+        guard var schoolIDNumber = schoolIDTextField.text else { return }
+        guard var allergies = allergiesTextField.text else { return }
         
-        if(fullname == ""){
-            self.ref.child("Conant High School").child("Users").child(userID!).child("Name").setValue(fullname)//set new name
+        if(schoolIDNumber.count >= 4) {
+            if((schoolIDNumber.substring(with: 0..<3)) == "000"){
+                //makes sure ID number is just the numbers without the zeroes
+                schoolIDNumber = schoolIDNumber.substring(from: 3);
+            }
         }
-        if(schoolIDNumber == ""){
+        
+        if allergies == "" {
+            allergies = "none"
+        }
+        
+        if(firstName != currentFirstName){
+            self.ref.child("Conant High School").child("Users").child(userID!).child("First Name").setValue(firstName)//set new name
+            currentFirstName = firstName
+        }
+        
+        if(lastName != currentLastName){
+            self.ref.child("Conant High School").child("Users").child(userID!).child("Last Name").setValue(lastName)//set new name
+            currentLastName = lastName
+        }
+        
+        if(schoolIDNumber != current_schoolID){
             self.ref.child("Conant High School").child("Users").child(userID!).child("ID Number ").setValue(schoolIDNumber)//set new id #
         }
-        if(allergies == ""){
+        if(allergies != currentAllergies){
             self.ref.child("Conant High School").child("Users").child(userID!).child("Allergies ").setValue(allergies)//set any new allergies in list format(i.e grass, roots, plants).
         }
         

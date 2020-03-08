@@ -11,6 +11,8 @@
 		1C68022D2401E5C1002D0C38 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022B2401E5C1002D0C38 /* ItemCell.xib */; };
 		1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022F2401E825002D0C38 /* GoogleService-Info.plist */; };
 		1C748F322406188800936A05 /* checkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C748F312406188800936A05 /* checkoutViewController.swift */; };
+		1CBD01C52414095400AC53A9 /* chooseUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */; };
+		1CBD01C724140B7700AC53A9 /* chooseSchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */; };
 		1CBDDC92240DFA7B00AC53A9 /* manualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC91240DFA7B00AC53A9 /* manualViewController.swift */; };
 		1CBDDC94240DFABD00AC53A9 /* addItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC93240DFABD00AC53A9 /* addItemViewController.swift */; };
 		1CBDDC96240DFAD300AC53A9 /* QRAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC95240DFAD300AC53A9 /* QRAddViewController.swift */; };
@@ -20,6 +22,9 @@
 		1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */; };
 		1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */; };
 		790C13C585DC69A8A6659284 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */; };
+		A239DC0F2413156B003CFF0C /* settingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC0E2413156B003CFF0C /* settingsPageViewController.swift */; };
+		A239DC1124131589003CFF0C /* sendfeedbackcontrolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC1024131589003CFF0C /* sendfeedbackcontrolsViewController.swift */; };
+		A239DC132413159F003CFF0C /* emailFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC122413159F003CFF0C /* emailFeedbackViewController.swift */; };
 		A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381723EF66E000AACC97 /* AppDelegate.swift */; };
 		A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381923EF66E000AACC97 /* SceneDelegate.swift */; };
 		A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381B23EF66E000AACC97 /* ViewController.swift */; };
@@ -66,6 +71,8 @@
 		1C68022B2401E5C1002D0C38 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 		1C68022F2401E825002D0C38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C748F312406188800936A05 /* checkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutViewController.swift; sourceTree = "<group>"; };
+		1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseUserViewController.swift; sourceTree = "<group>"; };
+		1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseSchoolViewController.swift; sourceTree = "<group>"; };
 		1CBDDC91240DFA7B00AC53A9 /* manualViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = manualViewController.swift; sourceTree = "<group>"; };
 		1CBDDC93240DFABD00AC53A9 /* addItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addItemViewController.swift; sourceTree = "<group>"; };
 		1CBDDC95240DFAD300AC53A9 /* QRAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRAddViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +85,9 @@
 		3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E1892DB996DB72CE1C59838 /* Pods-FoodPantryFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A239DC0E2413156B003CFF0C /* settingsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsPageViewController.swift; sourceTree = "<group>"; };
+		A239DC1024131589003CFF0C /* sendfeedbackcontrolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendfeedbackcontrolsViewController.swift; sourceTree = "<group>"; };
+		A239DC122413159F003CFF0C /* emailFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailFeedbackViewController.swift; sourceTree = "<group>"; };
 		A24F381423EF66E000AACC97 /* FoodPantryFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPantryFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24F381723EF66E000AACC97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A24F381923EF66E000AACC97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -197,6 +207,9 @@
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
+				A239DC0E2413156B003CFF0C /* settingsPageViewController.swift */,
+				A239DC1024131589003CFF0C /* sendfeedbackcontrolsViewController.swift */,
+				A239DC122413159F003CFF0C /* emailFeedbackViewController.swift */,
 				A24F388C2407497400AACC97 /* ViewStatisticsViewController.swift */,
 				A24F388A2401CC8400AACC97 /* adminControlsViewController.swift */,
 				A24F388823FF52E700AACC97 /* adminViewController.swift */,
@@ -212,6 +225,8 @@
 				A24F382223EF66E100AACC97 /* LaunchScreen.storyboard */,
 				A24F382523EF66E100AACC97 /* Info.plist */,
 				1CBDDC99240E072D00AC53A9 /* chooseManualViewController.swift */,
+				1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */,
+				1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -514,13 +529,18 @@
 				A24F387B23F60B7D00AACC97 /* FoodItemsViewController.swift in Sources */,
 				1CBDDC94240DFABD00AC53A9 /* addItemViewController.swift in Sources */,
 				A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */,
+				A239DC1124131589003CFF0C /* sendfeedbackcontrolsViewController.swift in Sources */,
 				1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */,
 				1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */,
+				A239DC132413159F003CFF0C /* emailFeedbackViewController.swift in Sources */,
 				A24F385323EF817900AACC97 /* homeViewController.swift in Sources */,
 				A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */,
+				1CBD01C52414095400AC53A9 /* chooseUserViewController.swift in Sources */,
 				A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */,
+				A239DC0F2413156B003CFF0C /* settingsPageViewController.swift in Sources */,
 				1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */,
 				A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */,
+				1CBD01C724140B7700AC53A9 /* chooseSchoolViewController.swift in Sources */,
 				1CBDDC96240DFAD300AC53A9 /* QRAddViewController.swift in Sources */,
 				1CBDDC9A240E072D00AC53A9 /* chooseManualViewController.swift in Sources */,
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,

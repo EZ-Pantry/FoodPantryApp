@@ -1,10 +1,5 @@
-//
-//  QRCodeViewController.swift
-//  QRCodeReader
-//
-//  Created by Ashay Parikh on 2/8/20.
 //  Copyright © 2020 Ashay Parikh. All rights reserved.
-//
+
 
 import UIKit
 import Foundation
@@ -14,7 +9,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var numberTextField: UITextField! //quantity text field on the screen
     
     @IBOutlet var selectButton: UIButton! //button for selecting
-    @IBOutlet var errorLabel: UILabel! //label with an error (red)
+    @IBOutlet var errorLabel: UILabel!
     
     var error = "" //error message
     
@@ -28,13 +23,14 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         selectButton.clipsToBounds = true
         
         numberTextField.keyboardType = UIKeyboardType.alphabet
-        
+                
         if error != "" { //redirected from a different view and there is an error
             errorLabel.text = error + "\nplease try again";
         }
-        
-        
+                
     }
+    
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -55,6 +51,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func unwindToQRCode(_ unwindSegue: UIStoryboardSegue) {}
 
     
     // MARK: - Navigation

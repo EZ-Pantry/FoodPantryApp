@@ -1,10 +1,5 @@
-//
-//  addItemViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Ashay Parikh on 3/1/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import Foundation
 import UIKit
@@ -12,7 +7,9 @@ import FirebaseUI
 import FirebaseDatabase
 
 class QRAddViewController: UIViewController {
-
+    
+    //first screen admin sees when adding items 
+    
     @IBOutlet var addManualButton: UIButton!
     @IBOutlet var errorLabel: UILabel!
     @IBOutlet var foodTitle: UITextField!
@@ -45,5 +42,7 @@ class QRAddViewController: UIViewController {
             destinationVC?.manualTitle = self.foodTitle.text as! String
         }
     }
+    
+    @IBAction func unwindToQRAdd(_ unwindSegue: UIStoryboardSegue) {}
     
 }

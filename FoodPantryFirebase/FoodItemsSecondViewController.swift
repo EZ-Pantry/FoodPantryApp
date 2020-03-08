@@ -1,10 +1,5 @@
-//
-//  FoodItemsSecondViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Rayaan Siddiqi on 2/20/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import UIKit
 import FirebaseUI
@@ -54,6 +49,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         ref = Database.database().reference()
         //initialize storage below
         storage = Storage.storage()
@@ -115,7 +111,12 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                        }
             }
         })
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //This view will appear function notifies the view controller that its view is about to be added to a view hierarchy.
+        //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
+        refresh()
     }
     
     func showLoadingAlert() { //shows a loading indicator on the screen
@@ -233,6 +234,11 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     
     //page is refreshed
     @IBAction func refreshPage(_ sender: Any) {
+        refresh()
+        
+    }
+    
+    func refresh() {
         var imageRecieved: Int = 0
         showLoadingAlert()
         getDataFromFirebase(callback: {(success)-> Void in //gets data from firebase
@@ -270,8 +276,6 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                        }
             }
         })
-        
-        
     }
     
     
@@ -307,6 +311,8 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         
         self.performSegue(withIdentifier: "toItemPopover", sender: self) //shows pop up view
     }
+    
+    @IBAction func unwindToFoodItemsSecond(_ unwindSegue: UIStoryboardSegue) {}
     
     //segue handler
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -384,9 +390,6 @@ extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
 extension FoodItemsSecondViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-//        searchedFoodItem = foodItems.filter({_ in foodItems.contains(searchText)})
-//        date = date.filter({_ in foodItems.contains(searchText)})
         (searchedFoodItem, sortedData) = filterArray(items: foodItems, dataValues: data, searchText: searchText)
         searching = true
         collectionView.reloadData()
@@ -432,4 +435,11 @@ extension UIImageView {
         }
     }
 }
+
+extension UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+}
+
 

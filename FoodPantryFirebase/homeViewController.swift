@@ -1,10 +1,5 @@
-//
-//  homeViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Rayaan Siddiqi on 2/8/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import UIKit
 import FirebaseUI
@@ -15,17 +10,19 @@ class homeViewController: UIViewController {
     @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
     @IBOutlet weak var lastCheckedOutLbl: UILabel!
     @IBOutlet weak var welcomeNameLbl: UILabel!
-    @IBOutlet weak var mapView: MKMapView!//the map object
+    @IBOutlet var mapView: MKMapView!
+    
     
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
-        //below is to disable user interaction with the map
+
+        super.viewDidLoad()
+        
         self.mapView.isZoomEnabled = false;
         self.mapView.isScrollEnabled = false;
         self.mapView.isUserInteractionEnabled = false;
-        
+        setUpNotications();
         //input any address and within 200 meters are shown
         coordinates(forAddress: "700 E Cougar Trail, Hoffman Estates, IL 60169") {
             (location) in
@@ -37,8 +34,42 @@ class homeViewController: UIViewController {
         }
         
         ref = Database.database().reference()
+        
+        
         getUsersName()//helper function to display user data about last time they came
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //This view will appear function notifies the view controller that its view is about to be added to a view hierarchy.
+        //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
+        
+        print("here appear")
+        ref = Database.database().reference()
+        if Auth.auth().currentUser != nil {
+            getUsersName()//helper function to display user data about last time they came
+        }
+        
+    }
+    
+    
+    
+    func setUpNotications(){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {didAllow,  error in
+            if didAllow{
+                
+            }
+            else{
+                
+            }
+        })
+    }
+    
+    func sendingOut(){
+        let content = UNMutableNotificationContent();
+        content.body = "Looks like this item is running low on supply! Be sure to purchase more"
+        content.badge = 1;
+        let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: nil)
     }
     
     var fullName: String = "";
@@ -50,7 +81,10 @@ class homeViewController: UIViewController {
         ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
           let value = snapshot.value as? NSDictionary
-          let fullName = value?["Name"] as? String ?? ""
+          let firstName = value?["First Name"] as? String ?? ""
+            let lastName = value?["Last Name"] as? String ?? ""
+            let fullName = firstName + lastName
+            print(fullName)
           let lastCheckedOutDate = value?["Last Date Visited"] as? String ?? ""
           let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
           self.welcomeNameLbl.text = "Welcome, \(fullName)"
@@ -65,12 +99,15 @@ class homeViewController: UIViewController {
         
     }
     
+    
     @IBAction func logOutUser(_ sender: UIButton) {
         //Purpose is to log out the user
         try!  Auth.auth().signOut()
         self.dismiss(animated: false, completion: nil)//send user back to the login in/sign up view
     }
 
+    
+    
     public func openMapForPlace(lat:Double = 0, long:Double = 0, placeName:String = "") {
         let latitude: CLLocationDegrees = lat//latitude
         let longitude: CLLocationDegrees = long//longitutde
@@ -103,4 +140,42 @@ class homeViewController: UIViewController {
         }
     }
     
+    @IBAction func unwindToHome(_ sender: UIStoryboardSegue) {}
+    
+}
+
+private var kAssociationKeyMaxLength: Int = 0
+private var kAssociationKeyMaxLengthTextView: Int = 0
+extension UITextField {
+
+
+    @IBInspectable var maxLength: Int {
+        get {
+            if let length = objc_getAssociatedObject(self, &kAssociationKeyMaxLength) as? Int {
+                return length
+            } else {
+                return Int.max
+            }
+        }
+        set {
+            objc_setAssociatedObject(self, &kAssociationKeyMaxLength, newValue, .OBJC_ASSOCIATION_RETAIN)
+            addTarget(self, action: #selector(checkMaxLength), for: .editingChanged)
+        }
+    }
+
+    @objc func checkMaxLength(textField: UITextField) {
+        guard let prospectiveText = self.text,
+            prospectiveText.count > maxLength
+            else {
+                return
+        }
+
+        let selection = selectedTextRange
+
+        let indexEndOfText = prospectiveText.index(prospectiveText.startIndex, offsetBy: maxLength)
+        let substring = prospectiveText[..<indexEndOfText]
+        text = String(substring)
+
+        selectedTextRange = selection
+    }
 }

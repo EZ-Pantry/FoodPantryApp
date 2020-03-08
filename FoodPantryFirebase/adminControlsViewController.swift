@@ -1,10 +1,5 @@
-//
-//  adminControlsViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Rayaan Siddiqi on 2/22/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import UIKit
 import FirebaseUI
@@ -12,7 +7,6 @@ import FirebaseDatabase
 class adminControlsViewController: UIViewController {
 
     @IBOutlet weak var addItemsButton: UIButton!
-    @IBOutlet weak var viewInventoryButton: UIButton!
     @IBOutlet weak var viewStatisticsButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +14,7 @@ class adminControlsViewController: UIViewController {
         //make buttons rounded below
         addItemsButton.layer.cornerRadius = 15//15px
         addItemsButton.clipsToBounds = true
-        viewInventoryButton.layer.cornerRadius = 15
-        viewInventoryButton.clipsToBounds = true
+
         viewStatisticsButton.layer.cornerRadius = 15
         viewStatisticsButton.clipsToBounds = true
 

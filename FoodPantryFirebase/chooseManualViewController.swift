@@ -1,20 +1,5 @@
-//
-//  chooseManualViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Ashay Parikh on 3/2/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
 
-import Foundation
-
-//
-//  popUpViewController.swift
-//  FoodPantryFirebase
-//
-//  Created by Rayaan Siddiqi on 2/20/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
 
 import Foundation
 import UIKit
