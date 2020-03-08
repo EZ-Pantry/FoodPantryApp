@@ -10,7 +10,7 @@ Available on the App Store: `app store link`
 ---
 
 ## Table of Contents 
-- [View Controllers Descriptions](#View Controllers Descriptions)
+- [View Controllers Descriptions](#ViewControllersDescriptions)
 - [Features](#features)
 - [Contributing](#contributing)
 - [Team](#team)
