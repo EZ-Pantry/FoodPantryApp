@@ -26,6 +26,8 @@ class checkoutViewController: UIViewController {
         formatter.dateFormat = "d-M-yyyy"
         self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
         
+        //converts the string of food items into readeable text using the delimiters
+        
         var text = ""
         var str: String = self.foodItems
         
@@ -38,10 +40,6 @@ class checkoutViewController: UIViewController {
             text += "Item: " + food + "\nQuantity: " + quantity + "\n\n"
             str = str.substring(from: str.indexDistance(of: ";")! + 1)
         }
-        
-        print("done adding")
-        print(items)
-        print(quantities)
         
         self.fooditemLabel.text = text
         self.finishButton.layer.cornerRadius = 15
