@@ -21,6 +21,7 @@ Programming Language: Swift
 
 - **How do I do download the zip version of the app**
     - Click the green clone & download button. Then, either clone the repo from terminal or download a zip!
+        - Clone this repo to your local machine using `https://github.com/fvcproductions/SOMEREPO`
 
 ---
 
