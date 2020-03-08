@@ -5,6 +5,8 @@ Platform: iOS
 
 Programming Language: Swift
 
+
+
 ## Team
 
 | <a href="https://rayaancodes.weebly.com" target="_blank">**Rayaan Siddiqi**</a> | <a href="https://ashayp.com" target="_blank">**Ashay Parikh**</a>| 
@@ -19,6 +21,15 @@ Programming Language: Swift
 
 - **How do I do download the zip version of the app**
     - Click the green clone & download button. Then, either clone the repo from terminal or download a zip!
+
+---
+
+## Support
+
+Reach out to me at one of the following places!
+
+- Website at <a href="https://adc.d211.org/Domain/10" target="_blank">`https://adc.d211.org/Domain/10`</a>
+- Insert more social links here.
 
 ---
 
