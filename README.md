@@ -10,12 +10,12 @@ Available on the App Store: `app store link`
 ---
 
 ## Table of Contents 
-- [View Controllers Descriptions](#View-Controllers-Descriptions)
+- [View Controllers Descriptions](#View-Controllers'-Descriptions)
 - [Features](#features)
 - [Contributing](#contributing)
 - [Team](#team)
 - [FAQ](#faq)
-- [Support](#support)
+- [Contact](#contact)
 - [License](#license)
 
 
@@ -32,7 +32,7 @@ Made by two high school juniors: Rayaan Siddiqi and Ashay Parikh
 
 ---
 
-## View Controllers Descriptions
+## View Controllers' Descriptions
 
 - **Sign Up View Controller**
     - It does x y and z
@@ -59,10 +59,11 @@ Made by two high school juniors: Rayaan Siddiqi and Ashay Parikh
 - **How do I do download the zip version of the app**
     - Click the green clone & download button. Then, either clone the repo from terminal or download a zip!
         - Clone this repo to your local machine using `https://github.com/FoodPantry/FoodPantryApp.git`
-
+- **How can I get this implemented at my school?**
+    - [Contact](#Contact)
 ---
 
-## Support
+## Contact
 
 Reach out to us at one of the following places!
 
