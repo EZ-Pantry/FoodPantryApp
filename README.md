@@ -4,7 +4,7 @@ Descrption: An app which helps schools keep inventory of food items in their foo
 Platform: iOS
 
 Programming Language: Swift
-
+---
 
 ## Table of Contents 
 - [Installation](#installation)
