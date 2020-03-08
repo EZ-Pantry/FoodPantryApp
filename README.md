@@ -15,4 +15,10 @@ Programming Language: Swift
 
 ---
 
+## FAQ
+
+- **How do I do *specifically* so and so?**
+    - No problem! Just do this.
+
+---
 
