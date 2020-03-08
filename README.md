@@ -5,6 +5,8 @@ Platform: iOS
 
 Programming Language: Swift
 
+Available on the App Store: `app store link` 
+
 ---
 
 ## Table of Contents 
