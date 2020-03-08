@@ -16,6 +16,13 @@ Programming Language: Swift
 
 ---
 
+## View Controllers Descriptions
+
+- **Home View Controller**
+    - It does x y and z
+
+---
+
 ## FAQ
 
 - **How do I do download the zip version of the app**
