@@ -10,7 +10,7 @@ Available on the App Store: `app store link`
 ---
 
 ## Table of Contents 
-- [Installation](#installation)
+- [View Controllers Descriptions](#View Controllers Descriptions)
 - [Features](#features)
 - [Contributing](#contributing)
 - [Team](#team)
@@ -34,9 +34,24 @@ Made by two high school juniors: Rayaan Siddiqi and Ashay Parikh
 
 ## View Controllers Descriptions
 
+- **Sign Up View Controller**
+    - It does x y and z
+- **Log In View Controller**
+    - It does x y and z    
 - **Home View Controller**
     - It does x y and z
-
+- **Food Item Search View Controller**
+    - It does x y and z   
+- **Checkout(Student) View Controller**
+    - It does x y and z
+- **Profile View Controller**
+    - It does x y and z   
+- **Admin Controls View Controller**
+    - It does x y and z
+- **Add Items(Admin) View Controller**
+    - It does x y and z      
+- **View Statistics(Admin) View Controller**
+    - It does x y and z   
 ---
 
 ## FAQ
