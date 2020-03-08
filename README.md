@@ -6,6 +6,18 @@ Platform: iOS
 Programming Language: Swift
 
 
+## Table of Contents 
+- [Installation](#installation)
+- [Features](#features)
+- [Contributing](#contributing)
+- [Team](#team)
+- [FAQ](#faq)
+- [Support](#support)
+- [License](#license)
+
+
+---
+
 
 ## Team
 | <a href="https://rayaancodes.weebly.com" target="_blank">**Rayaan Siddiqi**</a> | <a href="https://ashayp.com" target="_blank">**Ashay Parikh**</a>| 
