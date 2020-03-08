@@ -7,6 +7,6 @@ Programming Language: Swift
 
 
 
-##Team
+## Team
 
 Food Pantry App - Created by Ashay Parikh and Rayaan Siddiqi
