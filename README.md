@@ -8,7 +8,6 @@ Programming Language: Swift
 
 
 ## Team
-> Made by two Conant High School Juniors: Rayaan Siddiqi & Ashay Parikh
 | <a href="https://rayaancodes.weebly.com" target="_blank">**Rayaan Siddiqi**</a> | <a href="https://ashayp.com" target="_blank">**Ashay Parikh**</a>| 
 | :---: |:---:
 | [![Rayaan Siddiqi](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](https://rayaancodes.weebly.com)    | [![Ashay Parikh](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](https://ashayp.com) | 
