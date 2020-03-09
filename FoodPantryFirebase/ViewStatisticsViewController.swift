@@ -80,6 +80,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         lastDateCheckedOutLbl.isHidden = true;
         totalItemsCheckedOutlbl.isHidden = true;
         allergiesLbl.isHidden = true;
+        chooseGraphOrTextSegment.selectedSegmentIndex = -1;//make sure graph is loaded initially
         
         
     }

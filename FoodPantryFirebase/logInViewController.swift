@@ -21,16 +21,14 @@ class logInViewController: UIViewController {
     }
     
 
-    
-    
-
     @IBAction func handleContinue(_ sender: UIButton) {
         guard let emailaddress = emailAddressTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
         print(password)
         Auth.auth().signIn(withEmail: emailaddress, password: password){ user, error in
-            if error == nil && user != nil{
+            var isValidated = user?.user.isEmailVerified;
+            if error == nil && user != nil && (isValidated!){
                 self.dismiss(animated: false, completion: nil)//sends user to home screen animation
                 //If email & password exist, then sign in
             }

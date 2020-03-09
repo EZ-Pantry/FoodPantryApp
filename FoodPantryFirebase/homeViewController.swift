@@ -11,6 +11,7 @@ class homeViewController: UIViewController {
     @IBOutlet weak var lastCheckedOutLbl: UILabel!
     @IBOutlet weak var welcomeNameLbl: UILabel!
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet weak var schoolImageView: UIImageView!
     
     
     var ref: DatabaseReference!
@@ -37,6 +38,7 @@ class homeViewController: UIViewController {
         
         
         getUsersName()//helper function to display user data about last time they came
+        displayMascotURL();
         
     }
     
@@ -50,6 +52,23 @@ class homeViewController: UIViewController {
             getUsersName()//helper function to display user data about last time they came
         }
         
+    }
+    
+    var mascotURL = "";
+    func displayMascotURL(){
+        ref.child("Conant High School").observeSingleEvent(of: .value, with: { (snapshot) in
+          // Get user value
+            let value = snapshot.value as? NSDictionary
+            print(value)
+            
+            
+            self.mascotURL = value?["School Image"] as? String ?? ""
+            self.schoolImageView.load(url: URL(string: String(self.mascotURL))!)
+            
+          // ...
+          }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     
