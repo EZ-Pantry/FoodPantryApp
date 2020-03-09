@@ -118,6 +118,12 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
         refresh()
     }
     
+    
+    @IBAction func dismissBack(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     func showLoadingAlert() { //shows a loading indicator on the screen
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
 
@@ -308,7 +314,7 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
         }
         
         
-        self.performSegue(withIdentifier: "toItemPopover", sender: self) //shows pop up view
+        self.performSegue(withIdentifier: "toItemPopover2", sender: self) //shows pop up view
     }
     
     @IBAction func unwindToFoodItemsSecond(_ unwindSegue: UIStoryboardSegue) {
@@ -317,8 +323,8 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     
     //segue handler
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toItemPopover"{
-            let destinationVC = segue.destination as? popUpViewController
+        if segue.identifier == "toItemPopover2"{
+            let destinationVC = segue.destination as? adminEditPopUpViewController
             destinationVC?.name = (selectedFoodItem?["name"] as? String)!
             destinationVC?.quantity = (selectedFoodItem?["quantity"] as? String)!
             destinationVC?.checkedout = (selectedFoodItem?["amountCheckedOut"] as? String)!
