@@ -27,8 +27,8 @@ class logInViewController: UIViewController {
         
         print(password)
         Auth.auth().signIn(withEmail: emailaddress, password: password){ user, error in
-            var isValidated = user?.user.isEmailVerified;
-            if error == nil && user != nil && (isValidated!){
+//            var isValidated = user?.user.isEmailVerified;
+            if error == nil && user != nil{
                 self.dismiss(animated: false, completion: nil)//sends user to home screen animation
                 //If email & password exist, then sign in
             }

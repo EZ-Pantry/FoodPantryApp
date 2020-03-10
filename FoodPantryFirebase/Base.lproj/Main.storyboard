@@ -1474,7 +1474,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
-                                <state key="normal" title="EDIT ITEM DATA">
+                                <state key="normal" title="VIEW INVENTORY">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -2386,6 +2386,7 @@
                                 <state key="normal" image="xmark.octagon" catalog="system"/>
                                 <connections>
                                     <action selector="dismissBack:" destination="ggt-BT-bn5" eventType="touchUpInside" id="Ov9-Un-4Wf"/>
+                                    <action selector="dismissBackToControls:" destination="ggt-BT-bn5" eventType="touchUpInside" id="OK0-Dl-2MR"/>
                                     <action selector="dismissToSearchView:" destination="eF5-yX-IfH" eventType="touchUpInside" id="Arz-Ka-X9m"/>
                                 </connections>
                             </button>

@@ -336,6 +336,11 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
 
         }
     }
+    
+    @IBAction func dismissBackToControls(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension adminFirstEditItemsViewController: UICollectionViewDataSource {
