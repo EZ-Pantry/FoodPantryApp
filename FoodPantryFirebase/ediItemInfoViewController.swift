@@ -33,7 +33,7 @@ class ediItemInfoViewController: UIViewController {
     
     var ref: DatabaseReference! //ref to db
     
-    var itemBeingEditedBarcode = "";//barcode number letters associated with item
+    var itemBeingEditedID = "";//barcode number letters associated with item
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,29 +71,29 @@ class ediItemInfoViewController: UIViewController {
                 
                 let nameOfItem = value["Name"] as? String ?? ""
                 if(nameOfItem == self.name){
-                    self.itemBeingEditedBarcode = key;//get the barcode/id for the item to set it's data later
-//                    self.itemBeingEditedBarcode = self.itemBeingEditedBarcode.substring(from: 1);
-//                    print("the one found: \(self.itemBeingEditedBarcode)")
+                    self.itemBeingEditedID = key;//get the barcode/id for the item to set it's data later
+//                    self.itemBeingEditedID = "-" + self.itemBeingEditedID
+                    //set all the fields which admin changed
+                    guard let editedName = self.itemNameTextField.text else { return }
+                    guard let editedInfo = self.itemInfoTextField.text else { return }
+                    guard let editedAllergies = self.itemAllergiesTextField.text else { return }
+                    guard let editedType = self.itemTypeTextField.text else { return }
+                    guard let editedHealthy = self.itemHealthyTextField.text else { return }
+                    guard let editedQuantity = self.itemQuantityTextField.text else { return }
+                    
+                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Name").setValue(editedName);
+                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Information").setValue(editedInfo);
+                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Allergies").setValue(editedAllergies);
+                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Type").setValue(editedType);
+                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Healthy").setValue(editedHealthy);
+                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Quantity").setValue(editedQuantity);
                 }
                 c += 1
             }
             
         })
         
-        //set all the fields which admin changed
-        guard let editedName = itemNameTextField.text else { return }
-        guard let editedInfo = itemInfoTextField.text else { return }
-        guard let editedAllergies = itemAllergiesTextField.text else { return }
-        guard let editedType = itemTypeTextField.text else { return }
-        guard let editedHealthy = itemHealthyTextField.text else { return }
-        guard let editedQuantity = itemQuantityTextField.text else { return }
         
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedBarcode).child("Name").setValue(editedName);
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedBarcode).child("Information").setValue(editedInfo);
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedBarcode).child("Allergies").setValue(editedAllergies);
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedBarcode).child("Type").setValue(editedType);
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedBarcode).child("Healthy").setValue(editedHealthy);
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedBarcode).child("Quantity").setValue(editedHealthy);
         
     }
     
