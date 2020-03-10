@@ -5,6 +5,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 import MapKit
+
 class homeViewController: UIViewController {
 
     @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
@@ -18,6 +19,8 @@ class homeViewController: UIViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        
+
         
         self.mapView.isZoomEnabled = false;
         self.mapView.isScrollEnabled = false;
