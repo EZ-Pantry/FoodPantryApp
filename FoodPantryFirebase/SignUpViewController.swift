@@ -132,7 +132,11 @@ class SignUpViewController: UIViewController {
                 
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Admin").setValue("Yes")
                         
-                        print("added")
+                        
+                            self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
+                        
+                            let defaults = UserDefaults.standard
+                            defaults.set(self.pantryName, forKey: "Pantry Code")
                         
                     }
                     else if (self.userType == "student"){
@@ -147,12 +151,14 @@ class SignUpViewController: UIViewController {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Total Item's Checked Out").setValue("0")
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Item Checked Out").setValue(" ")
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Date Visited").setValue(" ")
+                        
+                            self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
+                        
+                            let defaults = UserDefaults.standard
+                            defaults.set(self.pantryName, forKey: "Pantry Code")
+                        
                     }
                     
-//                    self.dismiss(animated: false, completion: nil)
-//                        let vc = homeViewController()
-//                    vc.modalPresentationStyle = .fullScreen
-//                    self.present(vc, animated: true, completion: nil)
                         self.performSegue(withIdentifier: "toHome", sender: self)
 
                 }  else{

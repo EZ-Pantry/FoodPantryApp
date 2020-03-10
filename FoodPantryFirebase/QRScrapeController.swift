@@ -378,14 +378,11 @@ class QRScrapeController: UIViewController {
             destinationVC?.error = errorMessage
             destinationVC?.checkedOut = checkedOut
         } else if(segue.identifier == "addMore") {
-            print("adding more")
             let destinationVC = segue.destination as? QRCodeViewController
             destinationVC?.checkedOut = checkedOut
         } else if(segue.identifier == "checkOut") {
             let destinationVC = segue.destination as? checkoutViewController
-            print("checking out")
             destinationVC?.foodItems = checkedOut
-            print("set")
         }
     }
 
