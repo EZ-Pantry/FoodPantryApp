@@ -74,43 +74,6 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         // SetupGrid view
         self.setupGridView()
         
-        showLoadingAlert()
-
-        
-        var imageRecieved: Int = 0 //number of images recieved
-        
-        getDataFromFirebase(callback: {(success)-> Void in //gets data from the db
-            if(success) { //success
-                for i in 0..<self.data.count { //async loop
-                    
-                    let imageURL = self.data[i]["image"] as! String
-                    
-                    if(imageURL == "") {
-                        self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
-                        imageRecieved += 1
-                        continue
-                    }
-                    
-                    self.loadImageFromFirebase(url: imageURL, order: String(i), callback: {(img, order)-> Void in //loads an image from the firebase data
-                               for i in 0..<self.data.count {
-                                   if (self.data[i]["id"] as! String == order) { //compares the id of the image to the id of the current data
-                                       self.data[i]["view"] = img //correct id, set the view key of the food item to the ui image
-                                        imageRecieved += 1 //one more image recieved
-                                   }
-                               }
-                               
-                        if(imageRecieved == self.data.count) { //checks to see if all the images have been recieved
-                            DispatchQueue.main.async { //reload page
-                                self.dismiss(animated: false)
-                                self.collectionView.reloadData()
-                            }
-                        }
-                        
-                               
-                           })
-                       }
-            }
-        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
