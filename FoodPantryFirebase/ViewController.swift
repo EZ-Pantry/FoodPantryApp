@@ -48,14 +48,11 @@ class ViewController: UIViewController {
                 print("No connection.")
             }
 
-            print(path.isExpensive)
         }
         
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
-        
-        print("d")
-        
+                
         //creating rounded edges for buttons below
         loginButton.layer.cornerRadius = 15
         loginButton.clipsToBounds = true

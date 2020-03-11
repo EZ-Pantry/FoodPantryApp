@@ -25,6 +25,7 @@ class manualViewController: UIViewController {
     var foodTitle = ""
     var error = "" //error message
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

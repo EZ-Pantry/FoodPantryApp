@@ -135,9 +135,8 @@ class SignUpViewController: UIViewController {
                         
                             self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
                         
-                            let defaults = UserDefaults.standard
-                            defaults.set(self.pantryName, forKey: "Pantry Code")
-                        
+                            UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
+
                     }
                     else if (self.userType == "student"){
                         //Else a regular student account
@@ -154,8 +153,7 @@ class SignUpViewController: UIViewController {
                         
                             self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
                         
-                            let defaults = UserDefaults.standard
-                            defaults.set(self.pantryName, forKey: "Pantry Code")
+                            UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
                         
                     }
                     

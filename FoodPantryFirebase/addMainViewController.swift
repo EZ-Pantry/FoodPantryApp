@@ -42,7 +42,6 @@ class addMainViewController: UIViewController {
     var found: Bool = false //if found the database, used for manual enter in previus view
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

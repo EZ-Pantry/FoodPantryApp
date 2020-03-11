@@ -37,9 +37,9 @@ class logInViewController: UIViewController {
                              let value = snapshot.value as? NSDictionary
                                let pantry = value?["Pantry Code"] as? String ?? "" //loads in the code from firebase
                                 //save pantry name to internal data
-                            let defaults = UserDefaults.standard
-                            defaults.set(pantry, forKey: "Pantry Code")
-                                
+                            UserDefaults.standard.set(pantry, forKey: "Pantry Name")
+                            print(pantry)
+                        print(UserDefaults.standard.object(forKey:"Pantry Name") as! String)
                     
                              }) { (error) in
                                print(error.localizedDescription)
