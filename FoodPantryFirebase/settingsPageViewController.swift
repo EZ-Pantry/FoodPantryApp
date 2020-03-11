@@ -7,6 +7,9 @@ class settingsPageViewController: UIViewController {
 
     @IBOutlet weak var sendFeedBackButton: UIButton!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var contactAdminButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -15,7 +18,10 @@ class settingsPageViewController: UIViewController {
         
         sendFeedBackButton.layer.cornerRadius = 15
         sendFeedBackButton.clipsToBounds = true
-
+        
+        contactAdminButton.layer.cornerRadius = 15
+        contactAdminButton.clipsToBounds = true
+        
         // Do any additional setup after loading the view.
     }
     

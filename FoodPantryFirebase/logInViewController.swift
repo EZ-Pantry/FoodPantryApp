@@ -26,9 +26,12 @@ class logInViewController: UIViewController {
         guard let password = passwordTextField.text else { return }
         
         print(password)
+        isAccountVerified = UserDefaults.standard.integer(forKey: "isAccountVerified")
         Auth.auth().signIn(withEmail: emailaddress, password: password){ user, error in
 //            var isValidated = user?.user.isEmailVerified;
             if error == nil && user != nil{
+                isAccountVerified+=1;
+                UserDefaults.standard.set(isAccountVerified, forKey: "isAccountVerified");
                 self.dismiss(animated: false, completion: nil)//sends user to home screen animation
                 //If email & password exist, then sign in
             }
