@@ -83,3 +83,30 @@ class contactAdminViewController: UIViewController {
 
 }
 
+extension contactAdminViewController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        if let _ = error {
+            //Show error alert
+            controller.dismiss(animated: true)
+            return
+        }
+        
+        switch result {
+            //cases below
+        case .cancelled:
+            print("Cancelled")
+        case .failed:
+            print("Failed to send")
+        case .saved:
+            print("Saved")
+        case .sent:
+            print("Email Sent")
+        @unknown default:
+            break
+        }
+        
+        controller.dismiss(animated: true)
+    }
+}

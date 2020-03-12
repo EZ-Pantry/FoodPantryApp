@@ -274,7 +274,9 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 let key = snap.key
                 let value: [String: Any] = snap.value as! [String : Any]
                 
-                let name = value["Name"] as? String ?? ""
+                let first = value["First Name"] as? String ?? ""
+                let last = value["Last Name"] as? String ?? ""
+                let name = first + last
                 let idNumber = value["ID Number"] as? String ?? ""
                 let lastDateCheckedOut = value["Last Date Checked Out"] as? String ?? ""
                 let lastItemCheckedOut = value["Last Item Checked Out"] as? String ?? ""

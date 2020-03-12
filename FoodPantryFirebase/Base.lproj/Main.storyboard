@@ -77,6 +77,9 @@
                                 <rect key="frame" x="50" y="44" width="21" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="xmark.octagon" catalog="system"/>
+                                <connections>
+                                    <action selector="dismissBackTapped:" destination="S3S-kd-YLK" eventType="touchUpInside" id="aZY-O2-oB3"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose Pantry" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eBX-rp-azD">
                                 <rect key="frame" x="50" y="322" width="314" height="34"/>
@@ -2467,6 +2470,7 @@
                                 <state key="normal" image="xmark.octagon" catalog="system"/>
                                 <connections>
                                     <action selector="dismissBack:" destination="ggt-BT-bn5" eventType="touchUpInside" id="Ov9-Un-4Wf"/>
+                                    <action selector="dismissBackTapped:" destination="ggt-BT-bn5" eventType="touchUpInside" id="iB2-Bl-o1t"/>
                                     <action selector="dismissBackToControls:" destination="ggt-BT-bn5" eventType="touchUpInside" id="OK0-Dl-2MR"/>
                                     <action selector="dismissToSearchView:" destination="eF5-yX-IfH" eventType="touchUpInside" id="Arz-Ka-X9m"/>
                                 </connections>

@@ -48,6 +48,11 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
         errorLabel.isHidden = true
     }
     
+    @IBAction func dismissBackTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion:  nil)
+    }
+    
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
            return 1
        }
