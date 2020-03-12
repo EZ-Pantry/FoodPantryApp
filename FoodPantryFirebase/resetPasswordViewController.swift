@@ -36,5 +36,11 @@ class resetPasswordViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func dismissBackButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
 
 }

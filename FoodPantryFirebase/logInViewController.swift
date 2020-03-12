@@ -29,8 +29,9 @@ class logInViewController: UIViewController {
         
         print(password)
         Auth.auth().signIn(withEmail: emailaddress, password: password){ user, error in
-            if error == nil && user != nil{
-                
+           var isValidated = user?.user.isEmailVerified;
+            if error == nil && user != nil && isValidated! {
+  
                 let uid = Auth.auth().currentUser!.uid
                 self.ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                              // Get user value
@@ -49,8 +50,7 @@ class logInViewController: UIViewController {
                       
                 
             
-        
-                //If email & password exist, then sign in
+                 //If email & password exist, then sign in
             } else{
                 //else show error message
                 let alert = UIAlertController(title: "Error Logging In", message: "Please try again!", preferredStyle: .alert)

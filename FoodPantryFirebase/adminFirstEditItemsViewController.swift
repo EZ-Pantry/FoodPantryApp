@@ -5,7 +5,7 @@ import UIKit
 import FirebaseUI
 import FirebaseStorage
 
-class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UIPickerViewDataSource {
+class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate, UIPickerViewDataSource {
     
     //inventory page
     
@@ -21,6 +21,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     
     var foodItemsNameDataArray = [String]() //names of all the food items
     var storage: Storage! //storage
+
     var foodItemsImageArray = [UIImage]() //array of images of all the food items, loaded in the beginning
     var ref: DatabaseReference! //ref to db
     
@@ -45,12 +46,16 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     
     //selected food items after they have been searched for
     var selectedFoodItem: [String: Any]?
-        var PantryName: String = ""
-
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
-
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //This view will appear function notifies the view controller that its view is about to be added to a view hierarchy.
+        //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
         ref = Database.database().reference()
         //initialize storage below
         storage = Storage.storage()
@@ -75,13 +80,49 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         // SetupGrid view
         self.setupGridView()
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        //This view will appear function notifies the view controller that its view is about to be added to a view hierarchy.
-        //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
+        
+        var imageRecieved: Int = 0 //number of images recieved
+        
+        getDataFromFirebase(callback: {(success)-> Void in //gets data from the db
+            if(success) { //success
+                for i in 0..<self.data.count { //async loop
+                    
+                    let imageURL = self.data[i]["image"] as! String
+                    
+                    if(imageURL == "") {
+                        self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
+                        imageRecieved += 1
+                        continue
+                    }
+                    
+                    self.loadImageFromFirebase(url: imageURL, order: String(i), callback: {(img, order)-> Void in //loads an image from the firebase data
+                               for i in 0..<self.data.count {
+                                   if (self.data[i]["id"] as! String == order) { //compares the id of the image to the id of the current data
+                                       self.data[i]["view"] = img //correct id, set the view key of the food item to the ui image
+                                        imageRecieved += 1 //one more image recieved
+                                   }
+                               }
+                               
+                        if(imageRecieved == self.data.count) { //checks to see if all the images have been recieved
+                            DispatchQueue.main.async { //reload page
+                                self.dismiss(animated: false)
+                                self.collectionView.reloadData()
+                            }
+                        }
+                        
+                               
+                           })
+                       }
+            }
+        })
         refresh()
     }
+    
+    
+    @IBAction func dismissBack(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     func showLoadingAlert() { //shows a loading indicator on the screen
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
@@ -151,7 +192,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         self.ref = Database.database().reference()
         let userID = Auth.auth().currentUser!.uid
                 
-        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             var tempData : [[String: Any]] = []
             var tempNames: [String] = []
@@ -263,6 +304,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //handle clicking of element
+
         if(searching) { //searching
             let index = indexPath[1] //gets the row value
             selectedFoodItem = sortedData[index] //since searchinng, the data for the item cells is mirrored in sorted data
@@ -272,15 +314,17 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         }
         
         
-        self.performSegue(withIdentifier: "toItemPopover", sender: self) //shows pop up view
+        self.performSegue(withIdentifier: "toItemPopover2", sender: self) //shows pop up view
     }
     
-    @IBAction func unwindToFoodItemsSecond(_ unwindSegue: UIStoryboardSegue) {}
+    @IBAction func unwindToFoodItemsSecond(_ unwindSegue: UIStoryboardSegue) {
+        
+    }
     
     //segue handler
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toItemPopover"{
-            let destinationVC = segue.destination as? popUpViewController
+        if segue.identifier == "toItemPopover2"{
+            let destinationVC = segue.destination as? adminEditPopUpViewController
             destinationVC?.name = (selectedFoodItem?["name"] as? String)!
             destinationVC?.quantity = (selectedFoodItem?["quantity"] as? String)!
             destinationVC?.checkedout = (selectedFoodItem?["amountCheckedOut"] as? String)!
@@ -292,9 +336,14 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
 
         }
     }
+    
+    @IBAction func dismissBackToControls(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
-extension FoodItemsSecondViewController: UICollectionViewDataSource {
+extension adminFirstEditItemsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
@@ -333,7 +382,7 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
 }
 
 
-extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
+extension adminFirstEditItemsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWith()
         return CGSize(width: width, height: width)
@@ -350,7 +399,7 @@ extension FoodItemsSecondViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension FoodItemsSecondViewController: UISearchBarDelegate {
+extension adminFirstEditItemsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         (searchedFoodItem, sortedData) = filterArray(items: foodItems, dataValues: data, searchText: searchText)
@@ -384,23 +433,6 @@ extension FoodItemsSecondViewController: UISearchBarDelegate {
 }
 
 
-extension UIImageView {
-    func loadHeavy(url: URL, callback: @escaping (_ success: Bool)->UICollectionViewCell) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                        callback(true)
-                    }
-                }
-            }
-        }
-    }
-}
 
-extension UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-    }
-}
+
+
