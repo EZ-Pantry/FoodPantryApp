@@ -6,6 +6,7 @@ import FirebaseUI
 import FirebaseDatabase
 import MapKit
 import UserNotifications
+
 class homeViewController: UIViewController {
 
     @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
@@ -14,6 +15,7 @@ class homeViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var schoolImageView: UIImageView!
     
+    var PantryName: String = ""
     
     var ref: DatabaseReference!
     
@@ -23,6 +25,8 @@ class homeViewController: UIViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
+         
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
         
         self.mapView.isZoomEnabled = false;
         self.mapView.isScrollEnabled = false;
@@ -153,7 +157,6 @@ class homeViewController: UIViewController {
         //This view will appear function notifies the view controller that its view is about to be added to a view hierarchy.
         //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
         
-        print("here appear")
         ref = Database.database().reference()
         if Auth.auth().currentUser != nil {
             getUsersName()//helper function to display user data about last time they came
@@ -196,29 +199,28 @@ class homeViewController: UIViewController {
     var fullName: String = "";
     
     
-    func getUsersName(){
-        //Purpose of function is to display specific user stats @ home screen
-        let userID = Auth.auth().currentUser?.uid
-        ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-          // Get user value
-          let value = snapshot.value as? NSDictionary
-          let firstName = value?["First Name"] as? String ?? ""
-            let lastName = value?["Last Name"] as? String ?? ""
-            let fullName = firstName + lastName
-            print(fullName)
-          let lastCheckedOutDate = value?["Last Date Visited"] as? String ?? ""
-          let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
-          self.welcomeNameLbl.text = "Welcome, \(fullName)"
-            self.lastCheckedOutLbl.text = "Last visited: \(lastCheckedOutDate)"//Display last item user checked out
-            self.lastItemCheckedOutLbl.text = "Last Checked Out Item: \(lastItemCheckedOut)"//And the last date they visited
-            
-            //all code with snapshot must be in here
-          // ...
-          }) { (error) in
-            print(error.localizedDescription)
-        }
-        
-    }
+     func getUsersName(){
+          //Purpose of function is to display specific user stats @ home screen
+          let userID = Auth.auth().currentUser?.uid
+          ref.child(PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let firstName = value?["First Name"] as? String ?? ""
+              let lastName = value?["Last Name"] as? String ?? ""
+              let fullName = firstName + lastName
+            let lastCheckedOutDate = value?["Last Date Visited"] as? String ?? ""
+            let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
+            self.welcomeNameLbl.text = "Welcome, \(fullName)"
+              self.lastCheckedOutLbl.text = "Last visited: \(lastCheckedOutDate)"//Display last item user checked out
+              self.lastItemCheckedOutLbl.text = "Last Checked Out Item: \(lastItemCheckedOut)"//And the last date they visited
+              
+              //all code with snapshot must be in here
+            // ...
+            }) { (error) in
+              print(error.localizedDescription)
+          }
+          
+      }
     
     
     @IBAction func logOutUser(_ sender: UIButton) {
