@@ -20,12 +20,15 @@ class adminViewController: UIViewController {
     var currentFirstName = ""
     var currentLastName = ""
     var currentAllergies = ""
-    
+    var PantryName: String = ""
+
     var ref: DatabaseReference!//referncing the database
     var isActuallyAdmin = false;//boolean to check if the admin controls button is visible
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         //Create rounded buttons
         saveButton.layer.cornerRadius = 15
         saveButton.clipsToBounds = true
@@ -46,7 +49,7 @@ class adminViewController: UIViewController {
     
     func prepareButton(){
         let userID = Auth.auth().currentUser?.uid
-        ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
             let value = snapshot.value as? NSDictionary
             self.currentFirstName = value?["First Name"] as? String ?? ""
@@ -95,20 +98,20 @@ class adminViewController: UIViewController {
         }
         
         if(firstName != currentFirstName){
-            self.ref.child("Conant High School").child("Users").child(userID!).child("First Name").setValue(firstName)//set new name
+            self.ref.child(self.PantryName).child("Users").child(userID!).child("First Name").setValue(firstName)//set new name
             currentFirstName = firstName
         }
         
         if(lastName != currentLastName){
-            self.ref.child("Conant High School").child("Users").child(userID!).child("Last Name").setValue(lastName)//set new name
+            self.ref.child(self.PantryName).child("Users").child(userID!).child("Last Name").setValue(lastName)//set new name
             currentLastName = lastName
         }
         
         if(schoolIDNumber != current_schoolID){
-            self.ref.child("Conant High School").child("Users").child(userID!).child("ID Number ").setValue(schoolIDNumber)//set new id #
+            self.ref.child(self.PantryName).child("Users").child(userID!).child("ID Number ").setValue(schoolIDNumber)//set new id #
         }
         if(allergies != currentAllergies){
-            self.ref.child("Conant High School").child("Users").child(userID!).child("Allergies ").setValue(allergies)//set any new allergies in list format(i.e grass, roots, plants).
+            self.ref.child(self.PantryName).child("Users").child(userID!).child("Allergies ").setValue(allergies)//set any new allergies in list format(i.e grass, roots, plants).
         }
         
         let alert = UIAlertController(title: "Changes Saved!", message: nil, preferredStyle: .alert)

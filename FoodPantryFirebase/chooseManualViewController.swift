@@ -25,10 +25,12 @@ class chooseManualViewController: UIViewController {
     
     var food_data: [String: Any] = [:]
     var found: Bool = false
-    
+    var PantryName: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         // Do any additional setup after loading the view.
         
         ref = Database.database().reference()
@@ -108,7 +110,7 @@ class chooseManualViewController: UIViewController {
         self.ref = Database.database().reference()
         
         
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             //data about the food item, and its titles
             var tempData : [[String: Any]] = []
             var tempNames: [String] = []

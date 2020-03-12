@@ -46,10 +46,12 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     
     //selected food items after they have been searched for
     var selectedFoodItem: [String: Any]?
-        
+        var PantryName: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         ref = Database.database().reference()
         //initialize storage below
         storage = Storage.storage()
@@ -74,43 +76,6 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         // SetupGrid view
         self.setupGridView()
         
-        showLoadingAlert()
-
-        
-        var imageRecieved: Int = 0 //number of images recieved
-        
-        getDataFromFirebase(callback: {(success)-> Void in //gets data from the db
-            if(success) { //success
-                for i in 0..<self.data.count { //async loop
-                    
-                    let imageURL = self.data[i]["image"] as! String
-                    
-                    if(imageURL == "") {
-                        self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
-                        imageRecieved += 1
-                        continue
-                    }
-                    
-                    self.loadImageFromFirebase(url: imageURL, order: String(i), callback: {(img, order)-> Void in //loads an image from the firebase data
-                               for i in 0..<self.data.count {
-                                   if (self.data[i]["id"] as! String == order) { //compares the id of the image to the id of the current data
-                                       self.data[i]["view"] = img //correct id, set the view key of the food item to the ui image
-                                        imageRecieved += 1 //one more image recieved
-                                   }
-                               }
-                               
-                        if(imageRecieved == self.data.count) { //checks to see if all the images have been recieved
-                            DispatchQueue.main.async { //reload page
-                                self.dismiss(animated: false)
-                                self.collectionView.reloadData()
-                            }
-                        }
-                        
-                               
-                           })
-                       }
-            }
-        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -187,7 +152,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         self.ref = Database.database().reference()
         let userID = Auth.auth().currentUser!.uid
                 
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             var tempData : [[String: Any]] = []
             var tempNames: [String] = []

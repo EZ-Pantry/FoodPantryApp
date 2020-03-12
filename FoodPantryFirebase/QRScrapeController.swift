@@ -38,10 +38,12 @@ class QRScrapeController: UIViewController {
     
     var manualEnter: Bool = false //true if the food item is manually loaded
     var manualTitle: String = "" //manual title that the user entered on the manualview (matches one of the titles in the database)
-    
+    var PantryName: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("did load")
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         //show loading indicator
         if(manualEnter) { //user manually entered title
             ref = Database.database().reference() //sets the reference
@@ -222,7 +224,7 @@ class QRScrapeController: UIViewController {
         self.ref = Database.database().reference() //gets a reference
         
         //read the database
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             //temp data and names
             var tempData : [[String: Any]] = [] //return 1
@@ -378,14 +380,11 @@ class QRScrapeController: UIViewController {
             destinationVC?.error = errorMessage
             destinationVC?.checkedOut = checkedOut
         } else if(segue.identifier == "addMore") {
-            print("adding more")
             let destinationVC = segue.destination as? QRCodeViewController
             destinationVC?.checkedOut = checkedOut
         } else if(segue.identifier == "checkOut") {
             let destinationVC = segue.destination as? checkoutViewController
-            print("checking out")
             destinationVC?.foodItems = checkedOut
-            print("set")
         }
     }
 

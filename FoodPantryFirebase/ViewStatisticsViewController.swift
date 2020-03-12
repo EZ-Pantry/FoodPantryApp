@@ -40,11 +40,13 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     var data : [[String: Any]] =  []
     
     var chartData : [[String: Any]] =  []
-    
+    var PantryName: String = ""
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         yourPicker.delegate = self
         yourPicker.dataSource = self
         
@@ -261,7 +263,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     func loadStudentNames(){
         let userID = Auth.auth().currentUser?.uid
-        self.ref.child("Conant High School").child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
 
             var tempData : [[String: Any]] = []
             var tempNames: [String] = []
@@ -299,7 +301,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func loadInXandYAxis(){
-        self.ref.child("Conant High School").child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
 
             var tempData : [[String: Any]] = []
             var c: Int = 0

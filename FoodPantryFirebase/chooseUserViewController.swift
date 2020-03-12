@@ -30,11 +30,14 @@ class chooseUserViewController: UIViewController {
     var correctAdminCode = "" //the correct admin code
     var ref: DatabaseReference!
     var user = "" //type of user
-    
+    var PantryName: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
 
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+        
         studentBtn.layer.cornerRadius = 15
         studentBtn.clipsToBounds = true
         
