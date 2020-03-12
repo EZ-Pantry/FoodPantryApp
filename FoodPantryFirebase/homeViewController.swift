@@ -87,7 +87,6 @@ class homeViewController: UIViewController {
             let firstName = value?["First Name"] as? String ?? ""
               let lastName = value?["Last Name"] as? String ?? ""
               let fullName = firstName + lastName
-              print(fullName)
             let lastCheckedOutDate = value?["Last Date Visited"] as? String ?? ""
             let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
             self.welcomeNameLbl.text = "Welcome, \(fullName)"

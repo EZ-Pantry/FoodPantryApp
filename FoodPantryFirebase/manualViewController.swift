@@ -25,10 +25,13 @@ class manualViewController: UIViewController {
     var foodTitle = ""
     var error = "" //error message
     
+    var PantryName: String = ""
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         ref = Database.database().reference()
         
         //make buttons round
@@ -107,7 +110,7 @@ class manualViewController: UIViewController {
         self.ref = Database.database().reference()
         
         
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             //data about the food item, and its titles
             var tempData : [[String: Any]] = []
             var tempNames: [String] = []

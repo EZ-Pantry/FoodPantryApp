@@ -35,21 +35,21 @@ class logInViewController: UIViewController {
                 self.ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                              // Get user value
                              let value = snapshot.value as? NSDictionary
-                               let pantry = value?["Pantry Code"] as? String ?? "" //loads in the code from firebase
+                               let pantry = value?["Pantry Name"] as? String ?? "" //loads in the code from firebase
                                 //save pantry name to internal data
                             UserDefaults.standard.set(pantry, forKey: "Pantry Name")
                             print(pantry)
                         print(UserDefaults.standard.object(forKey:"Pantry Name") as! String)
-                    
+                            self.dismiss(animated: false, completion: nil)//sends user to home screen animation
+
                              }) { (error) in
+                                print("error!!")
                                print(error.localizedDescription)
                            }
                       
                 
             
         
-                
-                self.dismiss(animated: false, completion: nil)//sends user to home screen animation
                 //If email & password exist, then sign in
             } else{
                 //else show error message

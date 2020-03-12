@@ -39,7 +39,6 @@ class ViewController: UIViewController {
                 
                 if(!self.showingAlert) {
                      DispatchQueue.main.async {
-                        print("yeet2")
                         self.showLoadingAlert();
                         self.showingAlert = true;
                         self.canceled = false;

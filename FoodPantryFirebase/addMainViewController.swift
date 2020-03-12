@@ -23,6 +23,8 @@ class addMainViewController: UIViewController {
     @IBOutlet var foodView: UIImageView!
     @IBOutlet var adminDirections: UILabel!
 
+    var PantryName: String = ""
+
     
     var barcode = "" //food item barcode
     
@@ -46,7 +48,8 @@ class addMainViewController: UIViewController {
         super.viewDidLoad()
         
         ref = Database.database().reference()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         nameLabel.isUserInteractionEnabled = false //cannot edit the food item name
         
         if (manualEnter) { //manually entered food item
@@ -152,7 +155,7 @@ class addMainViewController: UIViewController {
         self.ref = Database.database().reference() //gets a reference
         
         //read the database
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             //temp data and names
             var tempData : [[String: Any]] = [] //return 1
@@ -241,7 +244,7 @@ class addMainViewController: UIViewController {
                     print("key")
                     print(key)
                     
-                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
                         
                         
                         //updating ingredients, allergies, type and quantity
@@ -274,15 +277,15 @@ class addMainViewController: UIViewController {
                         
                         //now update
 
-                        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients);
                         
-                        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2);
                         
-                        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Type").setValue(newType);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Type").setValue(newType);
                         
-                        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies);
                         
-                        self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy);
                         
                         myGroup.leave() //all done, can leave the group
                       // ...
@@ -326,7 +329,7 @@ class addMainViewController: UIViewController {
                     
                     myGroup.enter()
                     
-                    let refChild = self.ref.child("Conant High School").child("Inventory").child("Food Items").childByAutoId()
+                    let refChild = self.ref.child(self.PantryName).child("Inventory").child("Food Items").childByAutoId()
                     
                     refChild.updateChildValues(dic as [NSObject : AnyObject]) { (error, ref) in
                         if(error != nil){
@@ -364,7 +367,7 @@ class addMainViewController: UIViewController {
                            print("key")
                            print(key)
                            
-                           self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                           self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
                                
                                
                                //updating ingredients, allergies, type and quantity
@@ -397,15 +400,15 @@ class addMainViewController: UIViewController {
                                
                                //now update
 
-                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients);
+                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients);
                                
-                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2);
+                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2);
                                
-                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Type").setValue(newType);
+                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Type").setValue(newType);
                                
-                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies);
+                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies);
                                
-                               self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy);
+                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy);
                                
                                myGroup.leave() //all done, can leave the group
                              // ...
@@ -449,7 +452,7 @@ class addMainViewController: UIViewController {
                            
                            myGroup.enter()
                            
-                           let refChild = self.ref.child("Conant High School").child("Inventory").child("Food Items").childByAutoId()
+                           let refChild = self.ref.child(self.PantryName).child("Inventory").child("Food Items").childByAutoId()
                            
                            refChild.updateChildValues(dic as [NSObject : AnyObject]) { (error, ref) in
                                if(error != nil){
