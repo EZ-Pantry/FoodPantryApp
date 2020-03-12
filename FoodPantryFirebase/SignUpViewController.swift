@@ -133,8 +133,11 @@ class SignUpViewController: UIViewController {
                 
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Admin").setValue("Yes")
                         
-                        print("added")
                         
+                            self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
+                        
+                            UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
+
                     }
                     else if (self.userType == "student"){
                         //Else a regular student account
@@ -148,6 +151,11 @@ class SignUpViewController: UIViewController {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Total Item's Checked Out").setValue("0")
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Item Checked Out").setValue(" ")
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Date Visited").setValue(" ")
+                        
+                            self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
+                        
+                            UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
+                        
                     }
                     
                     self.sendVerificationMail();

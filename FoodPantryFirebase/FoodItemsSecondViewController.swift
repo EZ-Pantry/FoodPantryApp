@@ -45,10 +45,12 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     
     //selected food items after they have been searched for
     var selectedFoodItem: [String: Any]?
-        
+        var PantryName: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         ref = Database.database().reference()
         //initialize storage below
         storage = Storage.storage()
@@ -149,7 +151,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         self.ref = Database.database().reference()
         let userID = Auth.auth().currentUser!.uid
                 
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             var tempData : [[String: Any]] = []
             var tempNames: [String] = []

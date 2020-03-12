@@ -78,7 +78,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="xmark.octagon" catalog="system"/>
                                 <connections>
-                                    <action selector="dismissBackTapped:" destination="S3S-kd-YLK" eventType="touchUpInside" id="v51-hK-Q2E"/>
+                                    <action selector="dismissBackTapped:" destination="S3S-kd-YLK" eventType="touchUpInside" id="aZY-O2-oB3"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose Pantry" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eBX-rp-azD">
@@ -484,7 +484,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="xmark.octagon" catalog="system"/>
                                 <connections>
-                                    <action selector="dismissToLoginScreen:" destination="AYO-Xv-RKr" eventType="touchUpInside" id="nCA-K6-B8f"/>
+                                    <action selector="dismissToLoginScreen:" destination="AYO-Xv-RKr" eventType="touchUpInside" id="51M-pc-x4T"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2039,6 +2039,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCP-i0-mtC">
                                 <rect key="frame" x="129" y="757" width="157" height="36"/>
@@ -2468,6 +2471,7 @@
                                 <state key="normal" image="xmark.octagon" catalog="system"/>
                                 <connections>
                                     <action selector="dismissBack:" destination="ggt-BT-bn5" eventType="touchUpInside" id="Ov9-Un-4Wf"/>
+                                    <action selector="dismissBackTapped:" destination="ggt-BT-bn5" eventType="touchUpInside" id="iB2-Bl-o1t"/>
                                     <action selector="dismissBackToControls:" destination="ggt-BT-bn5" eventType="touchUpInside" id="OK0-Dl-2MR"/>
                                     <action selector="dismissToSearchView:" destination="eF5-yX-IfH" eventType="touchUpInside" id="Arz-Ka-X9m"/>
                                 </connections>
@@ -2793,6 +2797,6 @@
         <segue reference="Ya6-8G-W4l"/>
         <segue reference="H9f-l5-90A"/>
         <segue reference="EWc-7U-1jR"/>
-        <segue reference="ETY-iU-Vqb"/>
+        <segue reference="ecB-Fx-w8c"/>
     </inferredMetricsTieBreakers>
 </document>

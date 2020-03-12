@@ -40,11 +40,13 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     var data : [[String: Any]] =  []
     
     var chartData : [[String: Any]] =  []
-    
+    var PantryName: String = ""
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         yourPicker.delegate = self
         yourPicker.dataSource = self
         
@@ -262,7 +264,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     func loadStudentNames(){
         let userID = Auth.auth().currentUser?.uid
-        self.ref.child("Conant High School").child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
 
             var tempData : [[String: Any]] = []
             var tempNames: [String] = []
@@ -272,7 +274,9 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 let key = snap.key
                 let value: [String: Any] = snap.value as! [String : Any]
                 
-                let name = value["Name"] as? String ?? ""
+                let first = value["First Name"] as? String ?? ""
+                let last = value["Last Name"] as? String ?? ""
+                let name = first + last
                 let idNumber = value["ID Number"] as? String ?? ""
                 let lastDateCheckedOut = value["Last Date Checked Out"] as? String ?? ""
                 let lastItemCheckedOut = value["Last Item Checked Out"] as? String ?? ""
@@ -300,7 +304,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func loadInXandYAxis(){
-        self.ref.child("Conant High School").child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
 
             var tempData : [[String: Any]] = []
             var c: Int = 0

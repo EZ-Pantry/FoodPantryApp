@@ -1,11 +1,11 @@
 //  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
-
-
+ 
+ 
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
 class logInViewController: UIViewController {
-
+ 
     @IBOutlet weak var emailAddressTextField: UITextField!//where user inputs their school email address
     @IBOutlet weak var passwordTextField: UITextField!//where user inputs the password
     @IBOutlet weak var continueButton: UIButton!//where user clicks to continue to home screen
@@ -16,11 +16,11 @@ class logInViewController: UIViewController {
         //Create rounded buttons
         continueButton.layer.cornerRadius = 15
         continueButton.clipsToBounds = true
-
+ 
         // Do any additional setup after loading the view.
     }
     
-
+ 
     @IBAction func handleContinue(_ sender: UIButton) {
         guard let emailaddress = emailAddressTextField.text else { return }
         guard let password = passwordTextField.text else { return }

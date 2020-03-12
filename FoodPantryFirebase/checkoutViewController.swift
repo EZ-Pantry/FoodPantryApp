@@ -16,15 +16,19 @@ class checkoutViewController: UIViewController {
     var quantities: [Int] = []
     
     var ref: DatabaseReference!
+    var PantryName: String = ""
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         //update with today's date
         let formatter : DateFormatter = DateFormatter()
         formatter.dateFormat = "d-M-yyyy"
         self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
+        
+        //converts the string of food items into readeable text using the delimiters
         
         var text = ""
         var str: String = self.foodItems
@@ -38,10 +42,6 @@ class checkoutViewController: UIViewController {
             text += "Item: " + food + "\nQuantity: " + quantity + "\n\n"
             str = str.substring(from: str.indexDistance(of: ";")! + 1)
         }
-        
-        print("done adding")
-        print(items)
-        print(quantities)
         
         self.fooditemLabel.text = text
         self.finishButton.layer.cornerRadius = 15
@@ -84,18 +84,18 @@ class checkoutViewController: UIViewController {
             let key = value["key"] as? String
             let quantityChanged = value["quantity"] as! Int
             
-            self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
+            self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
               // Get user value
                 let value = snapshot.value as? NSDictionary
                 
                 
                 var quantity = Int(value?["Quantity"] as? String ?? "") ?? 0
                 quantity -= quantityChanged;//number of items checked out would go here
-                self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key!).child("Quantity").setValue(String(quantity));
+                self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key!).child("Quantity").setValue(String(quantity));
                 
                 var checkedOut = Int(value?["Checked Out"] as? String ?? "") ?? 0
                 checkedOut += quantityChanged;//number of items checked out would go here
-                self.ref.child("Conant High School").child("Inventory").child("Food Items").child(key!).child("Checked Out").setValue(String(checkedOut));
+                self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key!).child("Checked Out").setValue(String(checkedOut));
                 
                 
                 //OTHER FIREBASE UPDATES BELOW
@@ -107,7 +107,7 @@ class checkoutViewController: UIViewController {
                 print(error.localizedDescription)
             }
             let userID = Auth.auth().currentUser?.uid
-            self.ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
               // Get user value
                 let value = snapshot.value as? NSDictionary
                 //UPDATE Statistics Node
@@ -118,13 +118,13 @@ class checkoutViewController: UIViewController {
                 print("total student has: ")
                 print(totalItemsStudentHasCheckedOut)
                 totalItemsStudentHasCheckedOut += quantityChanged;//number of items checked out would go here
-                self.ref.child("Conant High School").child("Users").child(userID!).child("Total Item's Checked Out").setValue(String(totalItemsStudentHasCheckedOut))
+                self.ref.child(self.PantryName).child("Users").child(userID!).child("Total Item's Checked Out").setValue(String(totalItemsStudentHasCheckedOut))
                 
                 
                 
-                self.ref.child("Conant High School").child("Users").child(userID!).child("Last Date Visited").setValue(self.fullyFormatedDate)
+                self.ref.child(self.PantryName).child("Users").child(userID!).child("Last Date Visited").setValue(self.fullyFormatedDate)
                 
-                self.ref.child("Conant High School").child("Users").child(userID!).child("Last Item Checked Out").setValue(self.items[self.items.count-1])
+                self.ref.child(self.PantryName).child("Users").child(userID!).child("Last Item Checked Out").setValue(self.items[self.items.count-1])
                 
                 
                 print("changed " + String(quantityChanged) + " " + (key!))
@@ -139,7 +139,7 @@ class checkoutViewController: UIViewController {
 
             
             
-            self.ref.child("Conant High School").child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
+            self.ref.child(self.PantryName).child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 var dateNodesArray: [String] = [String]()
                 var c: Int = 0
@@ -161,15 +161,15 @@ class checkoutViewController: UIViewController {
                 if(!dateNodeHasBeenFound){
                     print("new node created")
                     //Create a new node for that day
-                    self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Items").setValue(String(quantityChanged));
-                    self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Students Visited").setValue(String(1));
+                    self.ref.child(self.PantryName).child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Items").setValue(String(quantityChanged));
+                    self.ref.child(self.PantryName).child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Students Visited").setValue(String(1));
                 }
                 else{
                     //Update the created stats node for that day
                     print("node already created")
                     print("date below")
                     print(self.fullyFormatedDate)
-                    self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).observeSingleEvent(of: .value, with: { (snapshot) in
+                    self.ref.child(self.PantryName).child("Statistics").child("Total Visits").child(self.fullyFormatedDate).observeSingleEvent(of: .value, with: { (snapshot) in
                         let value = snapshot.value as? NSDictionary
                         var itemsCheckedOutThatDay = Int(value?["Items"] as? String ?? "") ?? 0
                         var studentsVisitedThatDay = Int(value?["Students Visited"] as? String ?? "") ?? 0
@@ -177,8 +177,8 @@ class checkoutViewController: UIViewController {
                         print("visited that day \(studentsVisitedThatDay)")
                         itemsCheckedOutThatDay += quantityChanged;//number of items checked out would go here
                         studentsVisitedThatDay+=1;
-                        self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Items").setValue(String(itemsCheckedOutThatDay));
-                        self.ref.child("Conant High School").child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Students Visited").setValue(String(studentsVisitedThatDay));
+                        self.ref.child(self.PantryName).child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Items").setValue(String(itemsCheckedOutThatDay));
+                        self.ref.child(self.PantryName).child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Students Visited").setValue(String(studentsVisitedThatDay));
                     })
                     
                     
@@ -220,7 +220,7 @@ class checkoutViewController: UIViewController {
         self.ref = Database.database().reference()
         
         
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             var tempData : [[String: Any]] = []
             var c: Int = 0

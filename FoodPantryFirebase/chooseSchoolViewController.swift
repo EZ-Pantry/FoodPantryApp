@@ -47,6 +47,8 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         errorLabel.isHidden = true
     }
+
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
            return 1
