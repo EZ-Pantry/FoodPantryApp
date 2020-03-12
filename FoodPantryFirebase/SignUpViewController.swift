@@ -191,7 +191,7 @@ class SignUpViewController: UIViewController {
                    let alert = UIAlertController(title: "Sign up successful", message: "Please verify your email!", preferredStyle: UIAlertController.Style.alert)
                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)
                    }))
-                   UserDefaults.standard.set(isAccountVerified, forKey: "isAccountVerified");//action for click
+//                   UserDefaults.standard.set(isAccountVerified, forKey: "isAccountVerified");//action for click
                })
                
            }

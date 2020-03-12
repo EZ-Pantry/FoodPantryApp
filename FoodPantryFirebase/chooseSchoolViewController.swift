@@ -76,6 +76,11 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
             }
        }
     
+    
+    @IBAction func dismissBackTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func userContinue(_ sender: Any) {
         
         let userCode: String = pantryField.text!

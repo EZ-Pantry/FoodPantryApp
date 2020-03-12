@@ -24,12 +24,12 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if let user = Auth.auth().currentUser{
-            //checks if the user is already signed if
-            //If so, then the user is directed directly to the home screen to prevent them from having to sign in multiple times
-            self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
-        }
+//        var isValidated = user?.user.isEmailVerified;
+//        if let user = Auth.auth().currentUser{
+//            //checks if the user is already signed if
+//            //If so, then the user is directed directly to the home screen to prevent them from having to sign in multiple times
+//            self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
+//        }
     }
     
     @IBAction func unwindToFirst(_ unwindSegue: UIStoryboardSegue) {

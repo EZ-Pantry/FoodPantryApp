@@ -59,6 +59,11 @@ class chooseUserViewController: UIViewController {
          }
         
     }
+    
+    @IBAction func dismissBackTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
      
     @IBAction func choseStudent(_ sender: Any) { //user choose to be a student
         adminCode.isHidden = true
