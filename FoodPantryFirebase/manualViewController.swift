@@ -135,7 +135,10 @@ class manualViewController: UIViewController {
             }
             
              callback(tempData, tempNames) //calls callback
-        })
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
     }
     
     //segue handler

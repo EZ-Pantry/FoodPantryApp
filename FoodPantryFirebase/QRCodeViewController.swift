@@ -43,7 +43,11 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToManual"{ //person manually entered title
             let destinationVC = segue.destination as? manualViewController
-            destinationVC?.manualTitle = numberTextField.text!
+            
+            var title = numberTextField.text! ?? ""
+            title = title.filterEmoji
+            
+            destinationVC?.manualTitle = title
             destinationVC?.checkedOut = checkedOut
         } else if(segue.identifier == "camera") { //person wants to scan barcode
             let destinationVC = segue.destination as? QRScannerController

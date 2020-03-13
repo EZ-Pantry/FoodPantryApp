@@ -183,7 +183,10 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
             
             
              callback(true)
-        })
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
     }
     
     //loads an image

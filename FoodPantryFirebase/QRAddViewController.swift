@@ -39,7 +39,11 @@ class QRAddViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToManual"{
             let destinationVC = segue.destination as? chooseManualViewController
-            destinationVC?.manualTitle = self.foodTitle.text as! String
+            
+            var title = self.foodTitle.text as! String
+            title = title.filterEmoji
+            
+            destinationVC?.manualTitle = title
         }
     }
     
