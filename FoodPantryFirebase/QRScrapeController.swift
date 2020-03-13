@@ -290,6 +290,7 @@ class QRScrapeController: UIViewController {
                        }
                    } catch {
                        print(error)
+                        RequestError().showError()
                        return
                    }
                    

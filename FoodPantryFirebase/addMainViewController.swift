@@ -221,7 +221,7 @@ class addMainViewController: UIViewController {
                            completion(title, false, url)
                        }
                    } catch {
-                       print(error)
+                       RequestError().showError()
                        return
                    }
                    
