@@ -22,6 +22,8 @@ class ediItemInfoViewController: UIViewController {
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var finishButton: UIButton!
     
+    var PantryName: String = ""
+    
     var name = ""
     var quantity = ""
     var information = ""
@@ -37,7 +39,8 @@ class ediItemInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+
         ref = Database.database().reference()
         
         finishButton.layer.cornerRadius = 15
@@ -62,7 +65,7 @@ class ediItemInfoViewController: UIViewController {
     
     
     func setFirebaseData(){
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             var c: Int = 0
             for child in snapshot.children {
                 let snap = child as! DataSnapshot
@@ -81,17 +84,20 @@ class ediItemInfoViewController: UIViewController {
                     guard let editedHealthy = self.itemHealthyTextField.text else { return }
                     guard let editedQuantity = self.itemQuantityTextField.text else { return }
                     
-                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Name").setValue(editedName);
-                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Information").setValue(editedInfo);
-                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Allergies").setValue(editedAllergies);
-                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Type").setValue(editedType);
-                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Healthy").setValue(editedHealthy);
-                    self.ref.child("Conant High School").child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Quantity").setValue(editedQuantity);
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Name").setValue(editedName);
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Information").setValue(editedInfo);
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Allergies").setValue(editedAllergies);
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Type").setValue(editedType);
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Healthy").setValue(editedHealthy);
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Quantity").setValue(editedQuantity);
                 }
                 c += 1
             }
             
-        })
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
         
         
         

@@ -104,8 +104,9 @@ class checkoutViewController: UIViewController {
                 print("changed " + String(quantityChanged) + " " + (key!))
               // ...
               }) { (error) in
-                print(error.localizedDescription)
-            }
+                  RequestError().showError()
+                  print(error.localizedDescription)
+              }
             let userID = Auth.auth().currentUser?.uid
             self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
               // Get user value
@@ -130,8 +131,9 @@ class checkoutViewController: UIViewController {
                 print("changed " + String(quantityChanged) + " " + (key!))
               // ...
               }) { (error) in
-                print(error.localizedDescription)
-            }
+                  RequestError().showError()
+                  print(error.localizedDescription)
+              }
             
             //update statistics node with data below
             print("formatted date below")
@@ -179,7 +181,10 @@ class checkoutViewController: UIViewController {
                         studentsVisitedThatDay+=1;
                         self.ref.child(self.PantryName).child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Items").setValue(String(itemsCheckedOutThatDay));
                         self.ref.child(self.PantryName).child("Statistics").child("Total Visits").child(self.fullyFormatedDate).child("Students Visited").setValue(String(studentsVisitedThatDay));
-                    })
+                    }) { (error) in
+                        RequestError().showError()
+                        print(error.localizedDescription)
+                    }
                     
                     
                     
@@ -189,8 +194,9 @@ class checkoutViewController: UIViewController {
                 myGroup.leave()
               // ...
               }) { (error) in
-                print(error.localizedDescription)
-            }
+                  RequestError().showError()
+                  print(error.localizedDescription)
+              }
             
             
             
@@ -236,7 +242,10 @@ class checkoutViewController: UIViewController {
             }
             
              callback(tempData)
-        })
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
     }
     
 

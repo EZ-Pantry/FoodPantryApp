@@ -33,7 +33,7 @@ class resetPasswordViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil);
                 //If email does not exist, then error message appears
             }
-        }
+        } 
     }
     
     

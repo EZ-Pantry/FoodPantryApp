@@ -58,8 +58,9 @@ class chooseUserViewController: UIViewController {
              
            // ...
            }) { (error) in
-             print(error.localizedDescription)
-         }
+               RequestError().showError()
+               print(error.localizedDescription)
+           }
         
     }
      
@@ -78,7 +79,9 @@ class chooseUserViewController: UIViewController {
     @IBAction func changedAdminCode(_ sender: Any) {
         let userCode = adminCode.text
         
-        let trimmedString = userCode!.trimmingCharacters(in: .whitespaces) //removes spaces
+        var trimmedString = userCode!.trimmingCharacters(in: .whitespaces) //removes spaces
+        
+        trimmedString = trimmedString.filterEmoji
         
         if trimmedString == correctAdminCode { //correct admin code entered
             incorrectAdminLabel.isHidden = true

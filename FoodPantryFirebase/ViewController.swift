@@ -22,7 +22,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //check for connection
-        
         let monitor = NWPathMonitor()
         
         monitor.pathUpdateHandler = { path in
