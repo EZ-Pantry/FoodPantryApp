@@ -276,17 +276,17 @@ class QRScrapeController: UIViewController {
                    guard let data = data, error == nil else { return }
 
                    do {
-                       let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any] //converts response to dict
+                       let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:Any] ?? [:] //converts response to dict
                         //see https://devapi.barcodespider.com/documentation for api documentation
-                       let foods = json?["item_attributes"] as? [String: Any] //gets
-                       let response = json?["item_response"] as? [String: Any]
-                       let status = response?["status"] as? String
+                    let foods = json["item_attributes"] as? [String: Any] ?? [:]//gets
+                    let response = json["item_response"] as? [String: Any] ?? [:]
+                    let status = response["status"] as? String ?? ""
                        if status != "OK" { //bad status
-                           let message = response?["message"] as? String
-                           completion(message!, true) //returns the message and error = true
+                        let message = response["message"] as? String ?? ""
+                           completion(message, true) //returns the message and error = true
                        } else { //good status, returns the title
-                           let title = foods?["title"] as? String
-                           completion(title as! String, false)
+                        let title = foods["title"] as? String ?? ""
+                           completion(title, false)
                        }
                    } catch {
                        print(error)
