@@ -280,15 +280,15 @@ class addMainViewController: UIViewController {
                         
                         //now update
 
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients.filterEmoji);
                         
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2.filterEmoji);
                         
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Type").setValue(newType);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Type").setValue(newType.filterEmoji);
                         
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies.filterEmoji);
                         
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy.filterEmoji);
                         
                         myGroup.leave() //all done, can leave the group
                       // ...
@@ -322,14 +322,14 @@ class addMainViewController: UIViewController {
                     }
                     
                     let dic = NSMutableDictionary()
-                    dic.setValue(newTitle, forKey: "Name")
-                    dic.setValue(newIngredients, forKey: "Information")
-                    dic.setValue(newAllergies, forKey: "Allergies")
-                    dic.setValue(newType, forKey: "Type")
-                    dic.setValue(newQuantity, forKey: "Quantity")
-                    dic.setValue(newURL, forKey: "URL")
-                    dic.setValue(checkedOut, forKey: "Checked Out")
-                    dic.setValue(newHealthy, forKey: "Healthy")
+                    dic.setValue(newTitle.filterEmoji, forKey: "Name")
+                    dic.setValue(newIngredients.filterEmoji, forKey: "Information")
+                    dic.setValue(newAllergies.filterEmoji, forKey: "Allergies")
+                    dic.setValue(newType.filterEmoji, forKey: "Type")
+                    dic.setValue(newQuantity.filterEmoji, forKey: "Quantity")
+                    dic.setValue(newURL.filterEmoji, forKey: "URL")
+                    dic.setValue(checkedOut.filterEmoji, forKey: "Checked Out")
+                    dic.setValue(newHealthy.filterEmoji, forKey: "Healthy")
                     
                     myGroup.enter()
                     
