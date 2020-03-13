@@ -24,49 +24,142 @@ class homeViewController: UIViewController {
     var stringOfLowFoodItems: [String] = []
     override func viewDidLoad() {
 
+        
         super.viewDidLoad()
         
-        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+        //firebase persistance is great in that if you delete the app, the user will still stay logged in.
+        //this isn't helpful when you sign in with your account, delete the app, and then get brought
+        //to the home screen and an error pops up saying that pantry name doesn't exist
         
-        self.mapView.isZoomEnabled = false;
-        self.mapView.isScrollEnabled = false;
-        self.mapView.isUserInteractionEnabled = false;
-        setUpNotications();
-        //input any address and within 200 meters are shown
-        coordinates(forAddress: "700 E Cougar Trail, Hoffman Estates, IL 60169") {
-            (location) in
-            guard let location = location else {
-                // Handle error here.
-                return
-            }
-            self.openMapForPlace(lat: location.latitude, long: location.longitude)//helper function to show the zooming in of map into address inputed which corresponds with school
-        }
-        
-        ref = Database.database().reference()
+        self.ref = Database.database().reference()
         
         
-        getUsersName()//helper function to display user data about last time they came
-        displayMascotURL();
-        
-        //replace school name below
-        let userID = Auth.auth().currentUser?.uid
-        ref.child("Conant High School").child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            var adminValue = value?["Admin"] as? String ?? "" //loads in the code from firebase
-            if(adminValue == "Yes"){
-                print("alloweeed")
-                self.sendOutNotification();
+        let myGroup = DispatchGroup()
+                
+        if(!UserDefaults.contains("Pantry Name")) {
+            myGroup.enter()
+            let uid = Auth.auth().currentUser!.uid
+            
+            ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                let pantry = value?["Pantry Name"] as? String ?? "" //load in the admin code
+              self.PantryName = pantry
+                UserDefaults.standard.set(pantry, forKey: "Pantry Name")
+                myGroup.leave()
+            // ...
+            }) { (error) in
+                RequestError().showError()
+                print(error.localizedDescription)
             }
             
-          }) { (error) in
-            print(error.localizedDescription)
+        } else {
+             myGroup.enter()
+            self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+             myGroup.leave()
         }
         
-        getPermissionForNotifications();
+        myGroup.notify(queue: .main) {
+           
+            print("we in")
+            
+            self.setUpNotications();
+            //input any address and within 200 meters are shown
+                        
+            self.getPantryLocation(callback: {(success, location)-> Void in
+                
+                if(success) {
+                    print("location")
+                    print(location)
+                    self.coordinates(forAddress: location) {
+                                       (location) in
+                                       guard let location = location else {
+                                           // Handle error here.
+                                           return
+                                       }
+                                       self.openMapForPlace(lat: location.latitude, long: location.longitude)//helper function to show the zooming in of map into address inputed which corresponds with school
+                                   }
+                    
+                    self.mapView.isZoomEnabled = false;
+                    self.mapView.isScrollEnabled = false;
+                    self.mapView.isUserInteractionEnabled = false;
+                }
+               
+            })
+            
+                        
+            
+            self.getUsersName()//helper function to display user data about last time they came
+            self.displayMascotURL();
+            
+            //replace school name below
+            let userID = Auth.auth().currentUser?.uid
+            self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                var adminValue = value?["Admin"] as? String ?? "" //loads in the code from firebase
+                if(adminValue == "Yes"){
+                    self.sendOutNotification();
+                }
+                
+              }) { (error) in
+                print(error.localizedDescription)
+            }
+            
+            self.getPermissionForNotifications();
+        }
         
-   
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //This view will appear function notifies the view controller that its view is about to be added to a view hierarchy.
+        //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
         
+        ref = Database.database().reference()
+        if Auth.auth().currentUser != nil {
+            
+            if(!UserDefaults.contains("Pantry Name")) {
+                let uid = Auth.auth().currentUser!.uid
+                
+                ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    let value = snapshot.value as? NSDictionary
+                      let pantry = value?["Pantry Name"] as? String ?? "" //load in the admin code
+                    self.PantryName = pantry
+                      UserDefaults.standard.set(pantry, forKey: "Pantry Name")
+                    self.getUsersName()//helper function to display user data about last time they came
+                    self.sendOutNotification()
+
+                // ...
+                }) { (error) in
+                    RequestError().showError()
+                    print(error.localizedDescription)
+                }
+                
+            } else {
+                self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+                self.getUsersName()//helper function to display user data about last time they came
+                self.sendOutNotification()
+            }
+            
+            
+        }
+        
+    }
+    
+    func getPantryLocation(callback: @escaping (_ success: Bool,_ location: String)-> Void) {
+        ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            print("got")
+            let value = snapshot.value as? NSDictionary
+            let location = value?["Location"] as? String ?? "" //load in the admin code
+            callback(true, location)
+        // ...
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+            callback(false, "")
+        }
     }
     
     func getPermissionForNotifications(){
@@ -105,7 +198,7 @@ class homeViewController: UIViewController {
     }
     
     func getDataFromFirebase(callback: @escaping (_ success: Bool)->Void) {
-        self.ref.child("Conant High School").child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             var tempData : [[String: Any]] = []
             var tempQuantityNums: [Int] = []
@@ -153,21 +246,11 @@ class homeViewController: UIViewController {
                 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        //This view will appear function notifies the view controller that its view is about to be added to a view hierarchy.
-        //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
-        
-        ref = Database.database().reference()
-        if Auth.auth().currentUser != nil {
-            getUsersName()//helper function to display user data about last time they came
-        }
-        
-        sendOutNotification()
-    }
+    
     
     var mascotURL = "";
     func displayMascotURL(){
-        ref.child("Conant High School").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
             let value = snapshot.value as? NSDictionary
             print(value)
@@ -300,5 +383,65 @@ extension UITextField {
         text = String(substring)
 
         selectedTextRange = selection
+    }
+}
+
+
+extension UserDefaults {
+    static func contains(_ key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
+}
+
+extension Character {
+    /// A simple emoji is one scalar and presented to the user as an Emoji
+    var isSimpleEmoji: Bool {
+        guard let firstProperties = unicodeScalars.first?.properties else {
+            return false
+        }
+        return unicodeScalars.count == 1 &&
+            (firstProperties.isEmojiPresentation ||
+                firstProperties.generalCategory == .otherSymbol)
+    }
+
+    /// Checks if the scalars will be merged into an emoji
+    var isCombinedIntoEmoji: Bool {
+        return (unicodeScalars.count > 1 &&
+               unicodeScalars.contains { $0.properties.isJoinControl || $0.properties.isVariationSelector })
+            || unicodeScalars.allSatisfy({ $0.properties.isEmojiPresentation })
+    }
+
+    var isEmoji: Bool {
+        return isSimpleEmoji || isCombinedIntoEmoji
+    }
+}
+
+extension String {
+    var isSingleEmoji: Bool {
+        return count == 1 && containsEmoji
+    }
+
+    var containsEmoji: Bool {
+        return contains { $0.isEmoji }
+    }
+
+    var containsOnlyEmoji: Bool {
+        return !isEmpty && !contains { !$0.isEmoji }
+    }
+
+    var emojiString: String {
+        return emojis.map { String($0) }.reduce("", +)
+    }
+    
+    var filterEmoji: String {
+        return filter { !($0.isEmoji) }
+    }
+
+    var emojis: [Character] {
+        return filter { $0.isEmoji }
+    }
+
+    var emojiScalars: [UnicodeScalar] {
+        return filter{ $0.isEmoji }.flatMap { $0.unicodeScalars }
     }
 }

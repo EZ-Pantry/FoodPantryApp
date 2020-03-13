@@ -86,8 +86,10 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         let userCode: String = pantryField.text!
         
-        let trimmedString = userCode.trimmingCharacters(in: .whitespaces) //removes spaces
+        var trimmedString: String = userCode.trimmingCharacters(in: .whitespaces) //removes spaces
 
+        trimmedString = trimmedString.filterEmoji
+        
         if chosenPantry && trimmedString == correctPantryCode { //pantry code matches the code entered by the user
             errorLabel.isHidden = true
             self.performSegue(withIdentifier: "GoToUser", sender: self)
