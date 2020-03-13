@@ -96,7 +96,11 @@ class homeViewController: UIViewController {
                         }
                     }
                 }
-                self.prepareNotification();
+                if(self.foodItemsOfLowQuantity.count != 0){
+                    print("func called")
+                    self.prepareNotification();
+                }
+                
                 
                                 
             }
@@ -141,11 +145,15 @@ class homeViewController: UIViewController {
         let content = UNMutableNotificationContent()
         content.title = "Check Food Items Inventory"
         content.subtitle = "Looks like there are some items less than 10 quantity"
-        content.body = "Items: \(self.stringOfLowFoodItems)"
+        var stringOfItemsBelowQuantity = ""
+        for i in 0..<self.stringOfLowFoodItems.count{
+            stringOfItemsBelowQuantity = self.stringOfLowFoodItems[i] + ", " + stringOfItemsBelowQuantity
+        }
+        content.body = "Items: \(stringOfItemsBelowQuantity)"
                 
                 
         // An UNNotificationRequest is generated which will trigger at the timeinterval of 180 seconds.
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
                 
         // Notification is scheduled for delivery.
