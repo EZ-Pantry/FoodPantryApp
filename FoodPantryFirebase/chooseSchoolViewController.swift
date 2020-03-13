@@ -74,8 +74,9 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
                 self.correctPantryCode = value?["Pantry Code"] as? String ?? "" //loads in the code from firebase
                 self.chosenPantry = true
               }) { (error) in
-                print(error.localizedDescription)
-            }
+                  RequestError().showError()
+                  print(error.localizedDescription)
+              }
        }
     
     
@@ -87,8 +88,10 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         let userCode: String = pantryField.text!
         
-        let trimmedString = userCode.trimmingCharacters(in: .whitespaces) //removes spaces
+        var trimmedString: String = userCode.trimmingCharacters(in: .whitespaces) //removes spaces
 
+        trimmedString = trimmedString.filterEmoji
+        
         if chosenPantry && trimmedString == correctPantryCode { //pantry code matches the code entered by the user
             errorLabel.isHidden = true
             self.performSegue(withIdentifier: "GoToUser", sender: self)

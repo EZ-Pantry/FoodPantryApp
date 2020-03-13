@@ -317,7 +317,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 
                 let first = value["First Name"] as? String ?? ""
                 let last = value["Last Name"] as? String ?? ""
-                let name = first + last
+                let name = first + " " + last
                 let idNumber = value["ID Number"] as? String ?? ""
                 let lastDateCheckedOut = value["Last Date Checked Out"] as? String ?? ""
                 let lastItemCheckedOut = value["Last Item Checked Out"] as? String ?? ""
@@ -334,12 +334,11 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             self.data = tempData
             self.studentNames = tempNames
             
-            print("data array below")
-            print(self.data)
-            print("studentNames below")
-            print(self.studentNames)
             
-        })
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
                 
         
     }
@@ -385,7 +384,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 
             }
             
-        })
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
         
     }
     

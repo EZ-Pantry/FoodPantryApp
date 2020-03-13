@@ -81,14 +81,14 @@ class SignUpViewController: UIViewController {
         
         var userError = false
         
-        if firstName == "" {
+        if firstName == "" || firstName.containsEmoji {
             firstNameErrorLabel.isHidden = false
             userError = true
         } else {
             firstNameErrorLabel.isHidden = true
         }
         
-        if lastName == "" {
+        if lastName == "" || lastName.containsEmoji {
             lastNameErrorLabel.isHidden = false
             userError = true
         } else {
@@ -102,21 +102,21 @@ class SignUpViewController: UIViewController {
             idErrorLabel.isHidden = true
         }
         
-        if !isValidEmail(emailaddress) {
+        if !isValidEmail(emailaddress) || emailaddress.containsEmoji {
             emailErrorLabel.isHidden = false
             userError = true
         } else {
             emailErrorLabel.isHidden = true
         }
         
-        if !isValidPassword(password) {
+        if !isValidPassword(password) || password.containsEmoji {
             passwordErrorLabel.isHidden = false
             userError = true
         } else {
             passwordErrorLabel.isHidden = true
         }
         
-        if allergies == "" {
+        if allergies == "" || allergies.containsEmoji {
             allergies = "none"
         }
         
