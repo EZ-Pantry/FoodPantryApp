@@ -58,6 +58,11 @@ class ViewController: UIViewController {
         signupButton.clipsToBounds = true;
     }
     
+    
+    private var authUser : User? {
+           return Auth.auth().currentUser
+    }
+    
     func showLoadingAlert() { //shows a loading indicator on the screen
         
         //https://stackoverflow.com/questions/6131205/how-to-find-topmost-view-controller-on-ios
@@ -79,11 +84,13 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         if let user = Auth.auth().currentUser{
             //checks if the user is already signed if
             //If so, then the user is directed directly to the home screen to prevent them from having to sign in multiple times
-            self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
+            if(authUser!.isEmailVerified){
+                self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
+            }
+            
         }
     }
     
