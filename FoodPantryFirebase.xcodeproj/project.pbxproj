@@ -13,6 +13,7 @@
 		1C748F322406188800936A05 /* checkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C748F312406188800936A05 /* checkoutViewController.swift */; };
 		1CBD01C52414095400AC53A9 /* chooseUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */; };
 		1CBD01C724140B7700AC53A9 /* chooseSchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */; };
+		1CBD0225241B118600AC53A9 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD0224241B118600AC53A9 /* RequestError.swift */; };
 		1CBDDC92240DFA7B00AC53A9 /* manualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC91240DFA7B00AC53A9 /* manualViewController.swift */; };
 		1CBDDC94240DFABD00AC53A9 /* addItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC93240DFABD00AC53A9 /* addItemViewController.swift */; };
 		1CBDDC96240DFAD300AC53A9 /* QRAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC95240DFAD300AC53A9 /* QRAddViewController.swift */; };
@@ -79,6 +80,7 @@
 		1C748F312406188800936A05 /* checkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutViewController.swift; sourceTree = "<group>"; };
 		1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseUserViewController.swift; sourceTree = "<group>"; };
 		1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseSchoolViewController.swift; sourceTree = "<group>"; };
+		1CBD0224241B118600AC53A9 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		1CBDDC91240DFA7B00AC53A9 /* manualViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = manualViewController.swift; sourceTree = "<group>"; };
 		1CBDDC93240DFABD00AC53A9 /* addItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addItemViewController.swift; sourceTree = "<group>"; };
 		1CBDDC95240DFAD300AC53A9 /* QRAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRAddViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				1CBDDC99240E072D00AC53A9 /* chooseManualViewController.swift */,
 				1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */,
 				1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */,
+				1CBD0224241B118600AC53A9 /* RequestError.swift */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				1CBDDC96240DFAD300AC53A9 /* QRAddViewController.swift in Sources */,
 				1CBDDC9A240E072D00AC53A9 /* chooseManualViewController.swift in Sources */,
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,
+				1CBD0225241B118600AC53A9 /* RequestError.swift in Sources */,
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
 				1CBDDC98240DFAEA00AC53A9 /* addMainViewController.swift in Sources */,
 				A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */,

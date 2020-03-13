@@ -253,7 +253,10 @@ class QRScrapeController: UIViewController {
             }
             
              callback(tempData, tempNames) //callback function
-        })
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
     }
 
     

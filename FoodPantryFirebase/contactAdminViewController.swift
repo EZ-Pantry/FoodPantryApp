@@ -21,8 +21,12 @@ class contactAdminViewController: UIViewController {
     var adminEmailAddresses = [String]()
     var ref: DatabaseReference!
     
+    var PantryName: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
         
         ref = Database.database().reference()
         sendButton.layer.cornerRadius = 15//15px
@@ -41,7 +45,7 @@ class contactAdminViewController: UIViewController {
     
     var tempData : [[String: Any]] = []
     func getEmailsFromFirebase(){
-        self.ref.child("Conant High School").child("Administration Contacts").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Administration Contacts").observeSingleEvent(of: .value, with: { (snapshot) in
             var c: Int = 0
             for child in snapshot.children {
                 let snap = child as! DataSnapshot
@@ -57,7 +61,10 @@ class contactAdminViewController: UIViewController {
             
             
             
-        })
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
     }
     
     @IBAction func dismissBack(_ sender: UIButton) {

@@ -184,7 +184,10 @@ class addMainViewController: UIViewController {
             }
             
              callback(tempData, tempNames) //callback function
-        })
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
     }
 
     
@@ -290,6 +293,7 @@ class addMainViewController: UIViewController {
                         myGroup.leave() //all done, can leave the group
                       // ...
                       }) { (error) in
+                        RequestError().showError()
                         print(error.localizedDescription)
                     }
                 } else { //need to add in a new food item
@@ -333,7 +337,7 @@ class addMainViewController: UIViewController {
                     
                     refChild.updateChildValues(dic as [NSObject : AnyObject]) { (error, ref) in
                         if(error != nil){
-                            print("Error",error)
+                            RequestError().showError()
                             myGroup.leave() //all done, can leave the group
                         } else{
                             print("\n\n\n\n\nAdded successfully...")
@@ -413,6 +417,7 @@ class addMainViewController: UIViewController {
                                myGroup.leave() //all done, can leave the group
                              // ...
                              }) { (error) in
+                                RequestError().showError()
                                print(error.localizedDescription)
                            }
                        } else {
@@ -456,7 +461,7 @@ class addMainViewController: UIViewController {
                            
                            refChild.updateChildValues(dic as [NSObject : AnyObject]) { (error, ref) in
                                if(error != nil){
-                                   print("Error",error)
+                                   RequestError().showError()
                                    myGroup.leave() //all done, can leave the group
                                } else{
                                    print("\n\n\n\n\nAdded successfully...")

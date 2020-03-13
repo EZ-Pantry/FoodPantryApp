@@ -73,8 +73,9 @@ class adminViewController: UIViewController {
             }
           // ...
           }) { (error) in
-            print(error.localizedDescription)
-        }
+              RequestError().showError()
+              print(error.localizedDescription)
+          }
     }
     
     func handleSaving(){

@@ -58,8 +58,9 @@ class chooseUserViewController: UIViewController {
              
            // ...
            }) { (error) in
-             print(error.localizedDescription)
-         }
+               RequestError().showError()
+               print(error.localizedDescription)
+           }
         
     }
      

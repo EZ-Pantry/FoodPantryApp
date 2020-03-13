@@ -25,7 +25,7 @@ class homeViewController: UIViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
-         
+        
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
         
         self.mapView.isZoomEnabled = false;
@@ -207,7 +207,7 @@ class homeViewController: UIViewController {
             let value = snapshot.value as? NSDictionary
             let firstName = value?["First Name"] as? String ?? ""
               let lastName = value?["Last Name"] as? String ?? ""
-              let fullName = firstName + lastName
+              let fullName = firstName + " " + lastName
             let lastCheckedOutDate = value?["Last Date Visited"] as? String ?? ""
             let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
             self.welcomeNameLbl.text = "Welcome, \(fullName)"

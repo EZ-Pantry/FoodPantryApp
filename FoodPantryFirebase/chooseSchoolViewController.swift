@@ -77,8 +77,9 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
                 self.correctPantryCode = value?["Pantry Code"] as? String ?? "" //loads in the code from firebase
                 self.chosenPantry = true
               }) { (error) in
-                print(error.localizedDescription)
-            }
+                  RequestError().showError()
+                  print(error.localizedDescription)
+              }
        }
     
     @IBAction func userContinue(_ sender: Any) {
