@@ -1615,10 +1615,10 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6xo-IW-zf3">
-                                <rect key="frame" x="151" y="206" width="113" height="32"/>
+                                <rect key="frame" x="123" y="206" width="173" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Graph"/>
+                                    <segment title="Line Graph"/>
                                     <segment title="Text"/>
                                 </segments>
                                 <connections>
@@ -1670,7 +1670,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJt-7r-QY0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="1738"/>
+            <point key="canvasLocation" x="579.71014492753625" y="1737.7232142857142"/>
         </scene>
         <!--SEARCH-->
         <scene sceneID="yKy-sA-1Md">
