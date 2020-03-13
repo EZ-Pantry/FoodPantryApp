@@ -157,10 +157,7 @@ class SignUpViewController: UIViewController {
                             UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
                         
                     }
-                    
                     self.sendVerificationMail();
-                    self.performSegue(withIdentifier: "toHome", sender: self)
-
                 }  else{
                     let firebaseError = error!.localizedDescription
                     let alert = UIAlertController(title: "Error Signing Up", message: firebaseError, preferredStyle: .alert)
@@ -175,7 +172,6 @@ class SignUpViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
               if segue.identifier == "toHome"{
                    let destinationVC = segue.destination as? homeViewController
                }
@@ -190,16 +186,16 @@ class SignUpViewController: UIViewController {
     
     private var authUser : User? {
            return Auth.auth().currentUser
-       }
+    }
 
     public func sendVerificationMail() {
            if self.authUser != nil && !self.authUser!.isEmailVerified {
+            print("reached inside")
                self.authUser!.sendEmailVerification(completion: { (error) in
                    // Notify the user that the mail has sent or couldn't because of an error.
-                   let alert = UIAlertController(title: "Sign up successful", message: "Please verify your email!", preferredStyle: UIAlertController.Style.alert)
-                   alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: { (action) in alert.dismiss(animated: true, completion: nil)
-                   }))
-//                   UserDefaults.standard.set(isAccountVerified, forKey: "isAccountVerified");//action for click
+                   let alert = UIAlertController(title: "Sign Up Successful!", message: "Please verify your email!", preferredStyle: .alert)
+                   alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                   self.present(alert, animated: true, completion: nil);
                })
                
            }
