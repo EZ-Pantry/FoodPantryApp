@@ -67,6 +67,11 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         nextButton.layer.cornerRadius = 10
         nextButton.clipsToBounds = true
+        
+        pickerField.isHidden = true;
+        chooseGraphOrTextSegment.isHidden = true;
+        
+        
     }
     
     var studentsVisitedNumberArray: [Double] = [Double]()//how many students visited indivisual array
@@ -212,9 +217,11 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             var lineChartEntry2 = [ChartDataEntry]()//this is the Array that will eventually be displayed on the graph.
             //here is the for loop
             for i in 0..<studentsVisitedNumberArray.count {
+                
                 var currentNum = Double(i)
                 let lastChar = String(currentNum).last!
                 if(lastChar == "0"){
+                    formato.stringForValue(Double(i), axis: xaxis)
                     print("i val let through: \(Double(i))")
                     let value = ChartDataEntry(x: Double(i), y: studentsVisitedNumberArray[i]) // here we set the X and Y status in a data chart entry
                     lineChartEntry.append(value) // here we add it to the data set
@@ -232,13 +239,15 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             self.chartView.rightAxis.enabled = true
             self.chartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
+            xaxis.valueFormatter = formato
+            chartView.xAxis.valueFormatter = xaxis.valueFormatter
 
             let data = LineChartData() //This is the object that will be added to the chart
             data.addDataSet(line1) //Adds the line to the dataSet
             data.addDataSet(line2)
+            
 
             chartView.data = data //finally - it adds the chart data to the chart and causes an update
-            chartView.chartDescription?.text = "Students visits per day " // Here we set the description for the graph
         }
         else{
             studentNameLbl.isHidden = false;
@@ -246,6 +255,38 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
         
     }
+    
+    let formato:BarChartFormatter = BarChartFormatter()
+    let xaxis:XAxis = XAxis()
+    
+    @objc(BarChartFormatter)
+    public class BarChartFormatter: NSObject, IAxisValueFormatter
+    {
+      var months: [String]! = ["1", "2", "3", "4", "5"]
+
+        public func stringForValue(_ value: Double, axis: AxisBase?) -> String
+      {
+        return months[Int(value)]
+      }
+    }
+    
+//    func setChart(dataEntryX forX:[String],dataEntryY forY: [Double]) {
+//        chartView.noDataText = "You need to provide data for the chart."
+//        var dataEntries:[BarChartDataEntry] = []
+//        for i in 0..<forX.count{
+//           // print(forX[i])
+//           // let dataEntry = BarChartDataEntry(x: (forX[i] as NSString).doubleValue, y: Double(unitsSold[i]))
+//            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(forY[i]) )
+//            print(dataEntry)
+//            dataEntries.append(dataEntry)
+//        }
+//        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Units Sold")
+//        let chartData = BarChartData(dataSet: chartDataSet)
+//        viewForChart.data = chartData
+//        let xAxisValue = viewForChart.xAxis
+//        xAxisValue.valueFormatter = axisFormatDelegate
+//
+//    }
     
     func sortWhetherUser(){
         print(self.data)

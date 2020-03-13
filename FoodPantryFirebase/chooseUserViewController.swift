@@ -36,7 +36,7 @@ class chooseUserViewController: UIViewController {
         super.viewDidLoad()
         ref = Database.database().reference()
 
-        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+//        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
         
         studentBtn.layer.cornerRadius = 15
         studentBtn.clipsToBounds = true
@@ -63,6 +63,11 @@ class chooseUserViewController: UIViewController {
            }
         
     }
+    
+    @IBAction func dismissBackTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
      
     @IBAction func choseStudent(_ sender: Any) { //user choose to be a student
         adminCode.isHidden = true
