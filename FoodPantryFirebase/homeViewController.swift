@@ -145,7 +145,7 @@ class homeViewController: UIViewController {
                 
                 
         // An UNNotificationRequest is generated which will trigger at the timeinterval of 180 seconds.
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: false)
         let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
                 
         // Notification is scheduled for delivery.
