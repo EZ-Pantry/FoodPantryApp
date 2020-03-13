@@ -99,20 +99,20 @@ class adminViewController: UIViewController {
         }
         
         if(firstName != currentFirstName){
-            self.ref.child(self.PantryName).child("Users").child(userID!).child("First Name").setValue(firstName)//set new name
+            self.ref.child(self.PantryName).child("Users").child(userID!).child("First Name").setValue(firstName.filterEmoji)//set new name
             currentFirstName = firstName
         }
         
         if(lastName != currentLastName){
-            self.ref.child(self.PantryName).child("Users").child(userID!).child("Last Name").setValue(lastName)//set new name
+            self.ref.child(self.PantryName).child("Users").child(userID!).child("Last Name").setValue(lastName.filterEmoji)//set new name
             currentLastName = lastName
         }
         
         if(schoolIDNumber != current_schoolID){
-            self.ref.child(self.PantryName).child("Users").child(userID!).child("ID Number ").setValue(schoolIDNumber)//set new id #
+            self.ref.child(self.PantryName).child("Users").child(userID!).child("ID Number ").setValue(schoolIDNumber.filterEmoji)//set new id #
         }
         if(allergies != currentAllergies){
-            self.ref.child(self.PantryName).child("Users").child(userID!).child("Allergies ").setValue(allergies)//set any new allergies in list format(i.e grass, roots, plants).
+            self.ref.child(self.PantryName).child("Users").child(userID!).child("Allergies ").setValue(allergies.filterEmoji)//set any new allergies in list format(i.e grass, roots, plants).
         }
         
         let alert = UIAlertController(title: "Changes Saved!", message: nil, preferredStyle: .alert)
