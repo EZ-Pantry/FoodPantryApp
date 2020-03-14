@@ -80,7 +80,7 @@ class contactAdminViewController: UIViewController {
         
         let composer = MFMailComposeViewController()//mailing object created
         composer.mailComposeDelegate = self as! MFMailComposeViewControllerDelegate
-        composer.setToRecipients(adminEmailAddresses.filterEmoji)//emails where message is sent
+        composer.setToRecipients(adminEmailAddresses)//emails where message is sent
         composer.setSubject(subjectEntered.filterEmoji)//the subject line
         composer.setMessageBody(messageEntered.filterEmoji, isHTML: false)//the message
         
