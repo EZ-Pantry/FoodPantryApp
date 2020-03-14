@@ -24,11 +24,8 @@ class homeViewController: UIViewController {
     var stringOfLowFoodItems: [String] = []
     override func viewDidLoad() {
 
-        var fullyFormatedDate = ""
         
         super.viewDidLoad()
-        
-
         
         //firebase persistance is great in that if you delete the app, the user will still stay logged in.
         //this isn't helpful when you sign in with your account, delete the app, and then get brought
