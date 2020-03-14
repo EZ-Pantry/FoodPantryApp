@@ -7,7 +7,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 
-class addMainViewController: UIViewController {
+class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     //all the a=labels
     @IBOutlet var nameLabel: UITextField!
@@ -43,6 +43,9 @@ class addMainViewController: UIViewController {
     var food_data: [String: Any] = [:] //data for the food item
     var found: Bool = false //if found the database, used for manual enter in previus view
     
+    //for healthy or not healthy
+    let yourPicker = UIPickerView()
+    var pickerData: [String] = [String]()//data which can be selected via pickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,7 +151,32 @@ class addMainViewController: UIViewController {
         
         quantityLabel.text = "1"
         quantityLabel.keyboardType = UIKeyboardType.numberPad
+        //healthy picker
         
+        yourPicker.delegate = self
+        yourPicker.dataSource = self
+        
+        healthyLabel.inputView = yourPicker
+        pickerData = ["Yes", "No"]
+                
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return fopr the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+     healthyLabel.text = pickerData[row]
     }
     
     func getFoodDataFromFirebase(callback: @escaping (_ data: [[String: Any]], _ names: [String])->Void) { //returns a dict of all the food items in the database and their data, and a list of the names of the food items

@@ -14,6 +14,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     var error = "" //error message
     
     var checkedOut = "" //format fooditem,quantity;fooditem,quantity
+    var barcodes = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +25,13 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         
         numberTextField.keyboardType = UIKeyboardType.alphabet
                 
+    }
+ 
+    override func viewWillAppear(_ animated: Bool) {
         if error != "" { //redirected from a different view and there is an error
             errorLabel.text = error + "\nplease try again";
+            print("set")
         }
-                
     }
     
     
@@ -49,9 +53,11 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
             
             destinationVC?.manualTitle = title
             destinationVC?.checkedOut = checkedOut
+            destinationVC?.barcodes = barcodes
         } else if(segue.identifier == "camera") { //person wants to scan barcode
             let destinationVC = segue.destination as? QRScannerController
             destinationVC?.checkedOut = checkedOut
+            destinationVC?.barcodes = barcodes
         }
     }
     

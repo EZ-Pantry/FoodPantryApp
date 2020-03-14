@@ -28,6 +28,13 @@ class QRAddViewController: UIViewController {
         addManualButton.layer.cornerRadius = 15
         addManualButton.clipsToBounds = true
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if error != "" {
+            errorLabel.text = error
+        }
+    }
+    
     @IBAction func addManually(_ sender: Any) {
         self.performSegue(withIdentifier: "GoToManual", sender: self) //go to qr scrape controller
     }
