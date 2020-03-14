@@ -122,7 +122,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             doLineGraph();
         }
         else if(getIndex == 1){
-            doTextData();
+            self.performSegue(withIdentifier: "toCalendar", sender: self)
+//            doTextData();
         }
     }
     
