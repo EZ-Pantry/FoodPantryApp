@@ -24,8 +24,8 @@ class MonthView: UIView {
         super.init(frame: frame)
         self.backgroundColor=UIColor.clear
         
-        currentMonthIndex = Calendar.current.component(.month, from: Date()) - 1
-        currentYear = Calendar.current.component(.year, from: Date())
+        currentMonthIndex = Calendar.current.component(.month, from: Date()) - 1//get current month index
+        currentYear = Calendar.current.component(.year, from: Date())//get current year like 2020
         
         setupViews()
         

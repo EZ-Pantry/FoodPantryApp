@@ -16,15 +16,17 @@ enum MyTheme {
 class calenderFirstViewController: UIViewController {
     
     var theme = MyTheme.dark
+
+    @IBOutlet weak var itemsCheckedOutlbl: UILabel!
+    @IBOutlet weak var studentsVisitedlbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "My Calender"
+        self.title = "Food Pantry Stats Calender"//set calendar name
         self.navigationController?.navigationBar.isTranslucent=false
         self.view.backgroundColor=Style.bgColor
-        
         view.addSubview(calenderView)
-        calenderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive=true
+        calenderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive=true//constraints
         calenderView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive=true
         calenderView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12).isActive=true
         calenderView.heightAnchor.constraint(equalToConstant: 365).isActive=true
@@ -36,6 +38,11 @@ class calenderFirstViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         calenderView.myCollectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    @IBAction func dismissBackTapped(_ sender: UIButton) {
+        //goback to select which statistic to choose
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func rightBarBtnAction(sender: UIBarButtonItem) {

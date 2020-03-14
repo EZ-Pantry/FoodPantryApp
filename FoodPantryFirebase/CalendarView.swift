@@ -57,19 +57,20 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var todaysDate = 0
     var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
     
-    var fullyFormatedDate = ""
+//    var fullyFormatedDate = ""
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let formatter : DateFormatter = DateFormatter()
-        formatter.dateFormat = "dd-MM-yyyy"
-        self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)//get in terms of calendar date
-        print("fully date: \(self.fullyFormatedDate)")
+//        let formatter : DateFormatter = DateFormatter()
+//        formatter.dateFormat = "MM-dd-yyyy"
+//        self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)//get in terms of calendar date
+//        print("fully date: \(self.fullyFormatedDate)")
         
         ref = Database.database().reference()
         
         loadInFirebaseTextDataAboutStatistics();
         initializeView()
+        monthView.btnLeft.isEnabled = true;
     }
     
     convenience init(theme: MyTheme) {
@@ -131,13 +132,8 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             let calcDate = indexPath.row-firstWeekDayOfMonth+2
             cell.isHidden=false
             cell.lbl.text="\(calcDate)"
-            if calcDate < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
-                cell.isUserInteractionEnabled=false
-                cell.lbl.textColor = UIColor.lightGray
-            } else {
-                cell.isUserInteractionEnabled=true
-                cell.lbl.textColor = Style.activeCellLblColor
-            }
+            cell.isUserInteractionEnabled=true//all of the dates can be clicked
+            cell.lbl.textColor = Style.activeCellLblColor
         }
         return cell
     }
@@ -159,39 +155,71 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         var currentMonthString = ""
         var currentDayString = ""
         if(currentMonthIndex<10){
+            //to make sure formate is correct add zero before dates which dont
             currentMonthString = "0" + String(currentMonthIndex)
         }
         else{
             currentMonthString = String(currentMonthIndex)
         }
+       
         
         if(Int(dateClicked)!<10){
-            var currentDayString = "0" + dateClicked
+            currentDayString = "0" + dateClicked
+            print("current day belowww")
+            print(currentDayString)
         }
         else{
             currentDayString = dateClicked;
         }
-        fullyCorrectedDate = currentDayString + "-" + currentMonthString + "-" + String(currentYear)//date which user has clicked on
+        fullyCorrectedDate = currentMonthString + "-" + currentDayString + "-" + String(currentYear)//date which user has clicked on fully formatted
         print("date fully done: \(fullyCorrectedDate)")
         determineWhetherDateContainsData();
         //dont disable any buttons
     }
     
+    var dataWasFound = false;
     func determineWhetherDateContainsData(){
+        dataWasFound = false;
+        let whiteBgButton = UIButton()
+        whiteBgButton.backgroundColor =  UIColor(red: 135/255.0, green: 206/255.0, blue: 235/255.0, alpha: 1.0)
+        whiteBgButton.frame = CGRect(x: 8, y: 392, width: 375, height: 400)//background behind labels
+        addSubview(whiteBgButton)
+        let itemsCheckedOutLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        let studentsVisitedLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
         for x in 0..<dataLoadedIn.count{
-            //neeed substring of that first day to compare
+            //comparing the date which clicked to ones available in firebase
             var dateLoadedFromFirebaseDataSet = dataLoadedIn[x]["date"] as! String?
             print("loaded from firebase \(dateLoadedFromFirebaseDataSet)")
             
             if(dateLoadedFromFirebaseDataSet == fullyCorrectedDate){
+                //match for date found
                 print("hello!")
+                itemsCheckedOutLbl.center = CGPoint(x: 190, y: 500)
+                itemsCheckedOutLbl.textAlignment = .center
+                itemsCheckedOutLbl.text = "Item's Checked Out: \(dataLoadedIn[x]["itemsCheckedOut"]!)"
+                addSubview(itemsCheckedOutLbl)
+//                //
+                studentsVisitedLbl.center = CGPoint(x: 190, y: 700)
+                studentsVisitedLbl.textAlignment = .center
+                studentsVisitedLbl.text = "Student's Visited: \(dataLoadedIn[x]["studentsVisited"]!)"
+                addSubview(studentsVisitedLbl)
+                
+                dataWasFound = true;
             }
+        }
+        print(dataWasFound)
+        if(!dataWasFound){
+            itemsCheckedOutLbl.center = CGPoint(x: 190, y: 500)
+            itemsCheckedOutLbl.textAlignment = .center
+            itemsCheckedOutLbl.text = "NO DATA FOR THIS DAY!"
+            addSubview(itemsCheckedOutLbl)
         }
     }
     
     //all firebaes handling below
     var dataLoadedIn : [[String: Any]] =  []
     func loadInFirebaseTextDataAboutStatistics(){
+        //get the dates and items/students visited with those dates
         self.ref.child("Conant High School").child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
 
             var tempData : [[String: Any]] = []
@@ -263,7 +291,8 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         
         myCollectionView.reloadData()
         
-        monthView.btnLeft.isEnabled = !(currentMonthIndex == presentMonthIndex && currentYear == presentYear)
+        monthView.btnLeft.isEnabled = true;
+//        !(currentMonthIndex == presentMonthIndex && currentYear == presentYear)
     }
     
     func setupViews() {
@@ -371,7 +400,6 @@ extension String {
         return String.dateFormatter.date(from: self)
     }
 }
-
 
 
 
