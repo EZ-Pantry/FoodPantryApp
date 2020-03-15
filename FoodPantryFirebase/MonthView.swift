@@ -72,6 +72,7 @@ class MonthView: UIView {
     }
     
     let lblName: UILabel = {
+        //lbl for month name and year
         let lbl=UILabel()
         lbl.text="Default Month Year text"
         lbl.textColor = Style.monthViewLblColor
@@ -82,6 +83,7 @@ class MonthView: UIView {
     }()
     
     let btnRight: UIButton = {
+        //button to go right a month
         let btn=UIButton()
         btn.setTitle(">", for: .normal)
         btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
@@ -91,6 +93,7 @@ class MonthView: UIView {
     }()
     
     let btnLeft: UIButton = {
+        //button to go left a month
         let btn=UIButton()
         btn.setTitle("<", for: .normal)
         btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)

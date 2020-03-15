@@ -133,6 +133,7 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
                 self.performSegue(withIdentifier: "GoBack", sender: self)
 
             }
+            //use dispatch groups to fire an asynchronous callback when all your requests finish.
             
             
         }) { (error) in

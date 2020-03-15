@@ -15,10 +15,7 @@ enum MyTheme {
 
 class calenderFirstViewController: UIViewController {
     
-    var theme = MyTheme.dark
-
-    @IBOutlet weak var itemsCheckedOutlbl: UILabel!
-    @IBOutlet weak var studentsVisitedlbl: UILabel!
+    var theme = MyTheme.dark//can make light or dark
     
     override func viewDidLoad() {
         super.viewDidLoad()
