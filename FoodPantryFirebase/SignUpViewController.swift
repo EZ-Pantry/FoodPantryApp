@@ -194,8 +194,11 @@ class SignUpViewController: UIViewController {
                self.authUser!.sendEmailVerification(completion: { (error) in
                    // Notify the user that the mail has sent or couldn't because of an error.
                    let alert = UIAlertController(title: "Sign Up Successful!", message: "Please verify your email!", preferredStyle: .alert)
-                   alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                        self.performSegue(withIdentifier: "toLoginScreen", sender: self)//perform when okay tapped
+                   }))
                    self.present(alert, animated: true, completion: nil);
+                
                })
                
            }

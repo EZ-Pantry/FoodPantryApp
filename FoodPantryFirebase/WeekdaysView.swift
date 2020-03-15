@@ -27,6 +27,7 @@ class WeekdaysView: UIView {
         
         var daysArr = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
         for i in 0..<7 {
+            //add those days above 
             let lbl=UILabel()
             lbl.text=daysArr[i]
             lbl.textAlignment = .center

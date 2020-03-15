@@ -130,6 +130,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             cell.isHidden=true
         } else {
             let calcDate = indexPath.row-firstWeekDayOfMonth+2
+            print(calcDate)
             cell.isHidden=false
             cell.lbl.text="\(calcDate)"
             cell.isUserInteractionEnabled=true//all of the dates can be clicked
@@ -186,6 +187,8 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         addSubview(whiteBgButton)
         let itemsCheckedOutLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
         let studentsVisitedLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        itemsCheckedOutLbl.font = UIFont.boldSystemFont(ofSize: 16)
+        studentsVisitedLbl.font = UIFont.boldSystemFont(ofSize: 16)
         for x in 0..<dataLoadedIn.count{
             //comparing the date which clicked to ones available in firebase
             var dateLoadedFromFirebaseDataSet = dataLoadedIn[x]["date"] as! String?
@@ -245,6 +248,8 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         }
         
     }
+
+    
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell=collectionView.cellForItem(at: indexPath)

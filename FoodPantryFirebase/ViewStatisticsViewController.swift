@@ -79,6 +79,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
     }
     
+    
     var studentsVisitedNumberArray: [Double] = [Double]()//how many students visited indivisual array
     var itemsCheckedOutNumberAray: [Double] = [Double]()//how many items checked out indivisual array
     var editedstudentsVisitedNumberArray: [Double] = [Double]()//the last 5 days of students visited
@@ -100,6 +101,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //changing what is able to be seen depending on which button is clicked
         pickerField.isHidden = false;
         chooseGraphOrTextSegment.isHidden = true;
+        nextButton.isHidden = true;
         chartView.isHidden = true;
         studentNameLbl.isHidden = false;
         studentNameLbl.text = ""
@@ -123,7 +125,9 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
         else if(getIndex == 1){
             self.performSegue(withIdentifier: "toCalendar", sender: self)
-//            doTextData();
+        }
+        else if(getIndex == 2){
+            doTextData()
         }
     }
     
@@ -251,7 +255,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             line2.colors = [NSUIColor.red] //Sets the color to blue
             
             
-            let Days = ["Day1", "Day2", "Day3", "Day4", "Day5"]
+            let Days = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"]
             chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values:Days)
             chartView.xAxis.granularity = 1
             
@@ -391,9 +395,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.canDisplayMap = false;
             }
             else if(self.studentsVisitedNumberArray.count > 5){
-                //since we need to display last 5 days of data, if length is larger than 5, display that last five
+                //since we need to display last 5 days of data, if length is larger than 5, display that last five days
                 self.canDisplayMap = true;
-                
                 
                 for i in 0..<6 {
                     self.editedstudentsVisitedNumberArray[i] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-(i+1)]
