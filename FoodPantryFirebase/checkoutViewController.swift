@@ -25,7 +25,8 @@ class checkoutViewController: UIViewController {
 
         //update with today's date
         let formatter : DateFormatter = DateFormatter()
-        formatter.dateFormat = "d-M-yyyy"
+        formatter.dateFormat = "MM-dd-yyyy"
+//        MM-dd-yyyy- no need
         self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
         
         //converts the string of food items into readeable text using the delimiters

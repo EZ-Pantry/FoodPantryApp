@@ -44,7 +44,7 @@ class inquireAboutFoodPantryViewController: UIViewController {
         
         let composer = MFMailComposeViewController()//mailing object created
         composer.mailComposeDelegate = self
-        composer.setToRecipients(["rayaan.siddiqi@gmail.com", "ashayp@gmail.com"])//emails where message is sent
+        composer.setToRecipients(["foodpantryappdevelopers@gmail.com"])//emails where message is sent
         composer.setSubject("Inquiry About Food Pantry")//the subject line
         composer.setMessageBody(messageEntered, isHTML: false)//the message
         

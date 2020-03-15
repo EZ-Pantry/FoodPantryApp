@@ -1587,10 +1587,10 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6xo-IW-zf3">
-                                <rect key="frame" x="151" y="206" width="113" height="32"/>
+                                <rect key="frame" x="123" y="206" width="173" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Graph"/>
+                                    <segment title="Line Graph"/>
                                     <segment title="Text"/>
                                 </segments>
                                 <connections>
@@ -1638,11 +1638,12 @@
                         <outlet property="studentNameLbl" destination="Wqs-I6-Wel" id="Dko-fj-sbQ"/>
                         <outlet property="totalItemsCheckedOutlbl" destination="13g-1t-q5b" id="foG-ey-tKg"/>
                         <outlet property="totalStatsButton" destination="ImV-NH-s9F" id="H7Z-hm-fgl"/>
+                        <segue destination="Tkq-00-VEX" kind="show" identifier="toCalendar" id="NIO-tF-MB1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJt-7r-QY0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="1738"/>
+            <point key="canvasLocation" x="579.71014492753625" y="1737.7232142857142"/>
         </scene>
         <!--SEARCH-->
         <scene sceneID="yKy-sA-1Md">
@@ -1831,6 +1832,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9lq-Z3-RRq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="254" y="2527"/>
+        </scene>
+        <!--Calender First View Controller-->
+        <scene sceneID="JvA-Z1-RMK">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="Tkq-00-VEX" customClass="calenderFirstViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zzy-lH-7bc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQB-jB-KvN">
+                                <rect key="frame" x="28" y="37" width="21" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xmark.octagon" catalog="system"/>
+                                <connections>
+                                    <action selector="dismissBackTapped:" destination="Tkq-00-VEX" eventType="touchUpInside" id="scw-ge-nN1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="H1x-Dp-dGu"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tz8-NK-L3M"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Otv-Kf-Zs3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1055.072463768116" y="2519.1964285714284"/>
         </scene>
         <!--Add Item View Controller-->
         <scene sceneID="td0-GD-Rn8">
@@ -2613,7 +2640,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5GS-m3-83s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="2399"/>
+            <point key="canvasLocation" x="1912" y="2405"/>
         </scene>
         <!--Edi Item Info View Controller-->
         <scene sceneID="qa9-Gn-H5G">
@@ -2764,7 +2791,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbb-TB-hfk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="BFO-57-K4a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1395.6521739130435" y="3142.6339285714284"/>
+            <point key="canvasLocation" x="1912" y="3132"/>
         </scene>
         <!--Send Feed Back Google Form View Controller-->
         <scene sceneID="JhT-II-f0h">
@@ -2828,6 +2855,6 @@
         <segue reference="Ya6-8G-W4l"/>
         <segue reference="tnj-7N-EuA"/>
         <segue reference="VrP-rx-HIg"/>
-        <segue reference="ETY-iU-Vqb"/>
+        <segue reference="ecB-Fx-w8c"/>
     </inferredMetricsTieBreakers>
 </document>
