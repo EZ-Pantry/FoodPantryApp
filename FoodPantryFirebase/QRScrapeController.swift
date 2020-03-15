@@ -434,6 +434,17 @@ extension String {
     func index(from: Int) -> Index {
         return self.index(startIndex, offsetBy: from)
     }
+    
+    func between(_ left: String, _ right: String) -> String? {
+        guard
+            let leftRange = range(of: left), let rightRange = range(of: right, options: .backwards)
+            , leftRange.upperBound <= rightRange.lowerBound
+            else { return nil }
+
+        let sub = self[leftRange.upperBound...]
+        let closestToLeftRange = sub.range(of: right)!
+        return String(sub[..<closestToLeftRange.lowerBound])
+    }
 
     func substring(from: Int) -> String {
         let fromIndex = index(from: from)

@@ -26,26 +26,28 @@ class logInViewController: UIViewController {
         guard let password = passwordTextField.text else { return }
         
         print(password)
-//        isAccountVerified = UserDefaults.standard.integer(forKey: "isAccountVerified")
         Auth.auth().signIn(withEmail: emailaddress, password: password){ user, error in
-            var isValidated = user?.user.isEmailVerified;
-            if error == nil && user != nil && isValidated!{
-//                isAccountVerified+=1;
-//                UserDefaults.standard.set(isAccountVerified, forKey: "isAccountVerified");
-                self.dismiss(animated: false, completion: nil)//sends user to home screen animation
-                //If email & password exist, then sign in
-            }
-            else if(isValidated! == false){
-                let alert = UIAlertController(title: "Email Not Verified", message: "Please check your inbox/spam folder and make sure you have verified your email!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil);
-            }
-            else{
+            
+            if(error != nil) {
                 //else show error message
                 let alert = UIAlertController(title: "Error Logging In", message: "Please try again!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil);
+            } else {
+            
+            
+                Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
+                    if(user!.isEmailVerified) {
+                        self.dismiss(animated: false, completion: nil)//sends user to home screen animation
+                    } else {
+                        let alert = UIAlertController(title: "Email Not Verified", message: "Please check your inbox/spam folder and make sure you have verified your email!", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil);
+                    }
+                }
+            
             }
+
         }
         
     }

@@ -32,6 +32,11 @@
 		A239DC212416F0D5003CFF0C /* ediItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC202416F0D5003CFF0C /* ediItemInfoViewController.swift */; };
 		A239DC232417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC222417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift */; };
 		A239DC2524196FE8003CFF0C /* contactAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC2424196FE8003CFF0C /* contactAdminViewController.swift */; };
+		A239DC27241C92C6003CFF0C /* calenderFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC26241C92C6003CFF0C /* calenderFirstViewController.swift */; };
+		A239DC29241C930C003CFF0C /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC28241C930C003CFF0C /* MonthView.swift */; };
+		A239DC2B241C9338003CFF0C /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC2A241C9338003CFF0C /* WeekdaysView.swift */; };
+		A239DC2D241C9351003CFF0C /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC2C241C9351003CFF0C /* CalendarView.swift */; };
+		A239DC2F241DA0A4003CFF0C /* helpAndSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC2E241DA0A3003CFF0C /* helpAndSupportViewController.swift */; };
 		A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381723EF66E000AACC97 /* AppDelegate.swift */; };
 		A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381923EF66E000AACC97 /* SceneDelegate.swift */; };
 		A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381B23EF66E000AACC97 /* ViewController.swift */; };
@@ -102,6 +107,11 @@
 		A239DC202416F0D5003CFF0C /* ediItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ediItemInfoViewController.swift; sourceTree = "<group>"; };
 		A239DC222417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendFeedBackGoogleFormViewController.swift; sourceTree = "<group>"; };
 		A239DC2424196FE8003CFF0C /* contactAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contactAdminViewController.swift; sourceTree = "<group>"; };
+		A239DC26241C92C6003CFF0C /* calenderFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calenderFirstViewController.swift; sourceTree = "<group>"; };
+		A239DC28241C930C003CFF0C /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		A239DC2A241C9338003CFF0C /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
+		A239DC2C241C9351003CFF0C /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		A239DC2E241DA0A3003CFF0C /* helpAndSupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helpAndSupportViewController.swift; sourceTree = "<group>"; };
 		A24F381423EF66E000AACC97 /* FoodPantryFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPantryFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24F381723EF66E000AACC97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A24F381923EF66E000AACC97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -221,6 +231,7 @@
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
+				A239DC2E241DA0A3003CFF0C /* helpAndSupportViewController.swift */,
 				A239DC2424196FE8003CFF0C /* contactAdminViewController.swift */,
 				A239DC222417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift */,
 				A239DC202416F0D5003CFF0C /* ediItemInfoViewController.swift */,
@@ -231,6 +242,10 @@
 				A239DC1024131589003CFF0C /* sendfeedbackcontrolsViewController.swift */,
 				A239DC122413159F003CFF0C /* emailFeedbackViewController.swift */,
 				A24F388C2407497400AACC97 /* ViewStatisticsViewController.swift */,
+				A239DC26241C92C6003CFF0C /* calenderFirstViewController.swift */,
+				A239DC28241C930C003CFF0C /* MonthView.swift */,
+				A239DC2A241C9338003CFF0C /* WeekdaysView.swift */,
+				A239DC2C241C9351003CFF0C /* CalendarView.swift */,
 				A24F388A2401CC8400AACC97 /* adminControlsViewController.swift */,
 				A24F388823FF52E700AACC97 /* adminViewController.swift */,
 				A24F388623FF500F00AACC97 /* popUpViewController.swift */,
@@ -566,9 +581,12 @@
 				A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */,
 				1CBD01C724140B7700AC53A9 /* chooseSchoolViewController.swift in Sources */,
 				1CBDDC96240DFAD300AC53A9 /* QRAddViewController.swift in Sources */,
+				A239DC27241C92C6003CFF0C /* calenderFirstViewController.swift in Sources */,
 				1CBDDC9A240E072D00AC53A9 /* chooseManualViewController.swift in Sources */,
+				A239DC2B241C9338003CFF0C /* WeekdaysView.swift in Sources */,
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,
 				1CBD0225241B118600AC53A9 /* RequestError.swift in Sources */,
+				A239DC29241C930C003CFF0C /* MonthView.swift in Sources */,
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
 				1CBDDC98240DFAEA00AC53A9 /* addMainViewController.swift in Sources */,
 				A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */,
@@ -576,6 +594,8 @@
 				A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */,
 				A24F388D2407497400AACC97 /* ViewStatisticsViewController.swift in Sources */,
 				A24F388B2401CC8400AACC97 /* adminControlsViewController.swift in Sources */,
+				A239DC2D241C9351003CFF0C /* CalendarView.swift in Sources */,
+				A239DC2F241DA0A4003CFF0C /* helpAndSupportViewController.swift in Sources */,
 				1C748F322406188800936A05 /* checkoutViewController.swift in Sources */,
 				1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */,
 				A239DC232417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift in Sources */,

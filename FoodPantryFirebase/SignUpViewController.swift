@@ -195,7 +195,6 @@ class SignUpViewController: UIViewController {
     
    
     public func sendVerificationMail() {
-        
         Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
             if(!user!.isEmailVerified) {
                 user!.sendEmailVerification(completion: { (error) in
@@ -204,7 +203,9 @@ class SignUpViewController: UIViewController {
                         // Notify the user that the mail has sent or couldn't because of an error.
                            let alert = UIAlertController(title: "Sign Up Successful!", message: "Please verify your email!", preferredStyle: .alert)
                                                     
-                           alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                           alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                                self.performSegue(withIdentifier: "toLoginScreen", sender: self)//perform when okay tapped
+                           }))
                            self.present(alert, animated: true, completion: nil);
                     } else {
                         // the user is not availabl
@@ -223,8 +224,7 @@ class SignUpViewController: UIViewController {
            }
         
        }
-    
-    
-
-
 }
+
+
+

@@ -8,6 +8,7 @@ import Charts
 class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var totalStatsButton: UIButton!//see total statistics
+    
     @IBOutlet weak var indivisualStudentButton: UIButton!//see indivisual student stats
     
     @IBOutlet weak var chooseGraphOrTextSegment: UISegmentedControl!//segment control to choose text or graph format
@@ -21,6 +22,9 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var allergiesLbl: UILabel!
     @IBOutlet weak var totalItemsCheckedOutlbl: UILabel!
     @IBOutlet weak var chartView: LineChartView!
+    
+    @IBOutlet weak var barChartView: BarChartView!
+    
     var ref: DatabaseReference!
     
     @IBOutlet weak var backButton: UIButton!
@@ -52,6 +56,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         pickerField.inputView = yourPicker
         
+        
         ref = Database.database().reference()
         loadStudentNames();//loading the names right when view is loaded
         
@@ -74,6 +79,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
     }
     
+    
     var studentsVisitedNumberArray: [Double] = [Double]()//how many students visited indivisual array
     var itemsCheckedOutNumberAray: [Double] = [Double]()//how many items checked out indivisual array
     var editedstudentsVisitedNumberArray: [Double] = [Double]()//the last 5 days of students visited
@@ -95,6 +101,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //changing what is able to be seen depending on which button is clicked
         pickerField.isHidden = false;
         chooseGraphOrTextSegment.isHidden = true;
+        nextButton.isHidden = true;
         chartView.isHidden = true;
         studentNameLbl.isHidden = false;
         studentNameLbl.text = ""
@@ -114,35 +121,45 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let getIndex = chooseGraphOrTextSegment.selectedSegmentIndex;
         if(getIndex == 0){
             //make changes depending on which segemnt control is selected
-            backButton.isHidden = true;
-            nextButton.isHidden = true;
-            updateGraph()
-            chartView.isHidden = false;
-            studentNameLbl.isHidden = true;
-            studentIDLbl.isHidden = true;
-            lastItemCheckedOutLbl.isHidden = true;
-            lastDateCheckedOutLbl.isHidden = true;
-            totalItemsCheckedOutlbl.isHidden = true;
-            allergiesLbl.isHidden = true;
+            doLineGraph();
         }
         else if(getIndex == 1){
-            
-            backButton.isHidden = false;
-            nextButton.isHidden = false;
-            chartView.isHidden = true;
-            studentNameLbl.isHidden = false;
-            studentNameLbl.text = ""
-            studentIDLbl.isHidden = false;
-            studentIDLbl.text = ""
-            lastItemCheckedOutLbl.isHidden = false;
-            lastItemCheckedOutLbl.text = ""
-            //display date at top and students visited nd number of items checked out at bottom
-            backButton.isHidden = true;
-            print(chartData.count)
-            showCorrespondingTextStatisticsData();
-            //use \n
+            self.performSegue(withIdentifier: "toCalendar", sender: self)
+        }
+        else if(getIndex == 2){
+            doTextData()
         }
     }
+    
+    func doLineGraph(){
+        backButton.isHidden = true;
+        nextButton.isHidden = true;
+        updateGraph()
+        chartView.isHidden = false;
+        studentNameLbl.isHidden = true;
+        studentIDLbl.isHidden = true;
+        lastItemCheckedOutLbl.isHidden = true;
+        lastDateCheckedOutLbl.isHidden = true;
+        totalItemsCheckedOutlbl.isHidden = true;
+        allergiesLbl.isHidden = true;
+    }
+    
+    func doTextData(){
+        backButton.isHidden = false;
+        nextButton.isHidden = false;
+        chartView.isHidden = true;
+        studentNameLbl.isHidden = false;
+        studentNameLbl.text = ""
+        studentIDLbl.isHidden = false;
+        studentIDLbl.text = ""
+        lastItemCheckedOutLbl.isHidden = false;
+        lastItemCheckedOutLbl.text = ""
+        //display date at top and students visited nd number of items checked out at bottom
+        backButton.isHidden = true;
+        print(chartData.count)
+        showCorrespondingTextStatisticsData();
+    }
+    
     
     @IBAction func backButtonClicked(_ sender: UIButton) {
         //moves one spot back in array to show previous day data
@@ -216,8 +233,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             var lineChartEntry  = [ChartDataEntry]()
             var lineChartEntry2 = [ChartDataEntry]()//this is the Array that will eventually be displayed on the graph.
             //here is the for loop
+            print("the count of students is: \(studentsVisitedNumberArray.count)")
             for i in 0..<studentsVisitedNumberArray.count {
-                
                 var currentNum = Double(i)
                 let lastChar = String(currentNum).last!
                 if(lastChar == "0"){
@@ -237,10 +254,15 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             let line2 = LineChartDataSet(entries: lineChartEntry2, label: "Items Checked Out") //Here we convert lineChartEntry to a LineChartDataSet
             line2.colors = [NSUIColor.red] //Sets the color to blue
             
+            
+            let Days = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"]
+            chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values:Days)
+            chartView.xAxis.granularity = 1
+            
             self.chartView.rightAxis.enabled = true
             self.chartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
-            xaxis.valueFormatter = formato
-            chartView.xAxis.valueFormatter = xaxis.valueFormatter
+//            xaxis.valueFormatter = formato
+//            chartView.xAxis.valueFormatter = xaxis.valueFormatter
 
             let data = LineChartData() //This is the object that will be added to the chart
             data.addDataSet(line1) //Adds the line to the dataSet
@@ -373,9 +395,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.canDisplayMap = false;
             }
             else if(self.studentsVisitedNumberArray.count > 5){
-                //since we need to display last 5 days of data, if length is larger than 5, display that last five
+                //since we need to display last 5 days of data, if length is larger than 5, display that last five days
                 self.canDisplayMap = true;
-                
                 
                 for i in 0..<6 {
                     self.editedstudentsVisitedNumberArray[i] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-(i+1)]
@@ -438,3 +459,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
 
 }
+
+
+

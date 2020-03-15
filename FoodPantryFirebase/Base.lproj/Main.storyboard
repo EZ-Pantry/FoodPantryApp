@@ -423,6 +423,7 @@
                         <outlet property="passwordTextField" destination="QJb-pk-1dL" id="HsS-9z-G5S"/>
                         <outlet property="schoolID" destination="hiy-l8-ab4" id="7vZ-Mn-wll"/>
                         <segue destination="hdj-aB-iKU" kind="presentation" identifier="toHome" id="EWc-7U-1jR"/>
+                        <segue destination="AYO-Xv-RKr" kind="show" identifier="toLoginScreen" id="AJ9-9r-s5L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mfd-pe-4bz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1587,11 +1588,12 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6xo-IW-zf3">
-                                <rect key="frame" x="151" y="206" width="113" height="32"/>
+                                <rect key="frame" x="47" y="206" width="326" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Graph"/>
-                                    <segment title="Text"/>
+                                    <segment title="Line Graph"/>
+                                    <segment title="Calendar View"/>
+                                    <segment title="Text "/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentControlChanged:" destination="KNv-eW-BHH" eventType="valueChanged" id="GLk-cw-WjG"/>
@@ -1638,11 +1640,12 @@
                         <outlet property="studentNameLbl" destination="Wqs-I6-Wel" id="Dko-fj-sbQ"/>
                         <outlet property="totalItemsCheckedOutlbl" destination="13g-1t-q5b" id="foG-ey-tKg"/>
                         <outlet property="totalStatsButton" destination="ImV-NH-s9F" id="H7Z-hm-fgl"/>
+                        <segue destination="Tkq-00-VEX" kind="show" identifier="toCalendar" id="NIO-tF-MB1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJt-7r-QY0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="1738"/>
+            <point key="canvasLocation" x="579.71014492753625" y="1737.7232142857142"/>
         </scene>
         <!--SEARCH-->
         <scene sceneID="yKy-sA-1Md">
@@ -1831,6 +1834,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9lq-Z3-RRq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="254" y="2527"/>
+        </scene>
+        <!--Calender First View Controller-->
+        <scene sceneID="JvA-Z1-RMK">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="Tkq-00-VEX" customClass="calenderFirstViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zzy-lH-7bc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQB-jB-KvN">
+                                <rect key="frame" x="28" y="37" width="21" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xmark.octagon" catalog="system"/>
+                                <connections>
+                                    <action selector="dismissBackTapped:" destination="Tkq-00-VEX" eventType="touchUpInside" id="scw-ge-nN1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="H1x-Dp-dGu"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tz8-NK-L3M"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Otv-Kf-Zs3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1055.072463768116" y="2519.1964285714284"/>
         </scene>
         <!--Add Item View Controller-->
         <scene sceneID="td0-GD-Rn8">
@@ -2102,19 +2131,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.55498530859999995" green="0.56673072030000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
-                                <state key="normal" title="APP FEEDBACK"/>
+                                <state key="normal" title="Help &amp; Support"/>
                                 <connections>
-                                    <segue destination="PdC-y2-ebH" kind="show" id="HiE-rh-EMP"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fge-iD-R7h">
-                                <rect key="frame" x="51" y="510" width="314" height="84"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.55498530859999995" green="0.56673072030000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
-                                <state key="normal" title="CONTACT ADMIN"/>
-                                <connections>
-                                    <segue destination="xhx-Ne-xkD" kind="show" id="xQr-TK-VxE"/>
+                                    <segue destination="GIb-h1-wKB" kind="show" id="CBm-Ic-pzL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2123,16 +2142,72 @@
                     </view>
                     <navigationItem key="navigationItem" id="HGj-xJ-JBx"/>
                     <connections>
-                        <outlet property="contactAdminButton" destination="fge-iD-R7h" id="t3c-YX-y4W"/>
                         <outlet property="logOutButton" destination="eXw-X0-zyG" id="h1o-ob-66h"/>
-                        <outlet property="sendFeedBackButton" destination="aJA-R2-w3X" id="0ZK-hs-qqU"/>
+                        <outlet property="sendFeedBackButton" destination="aJA-R2-w3X" id="hpm-lD-tm0"/>
                         <segue destination="WDi-yE-MtG" kind="unwind" identifier="logOut" unwindAction="unwindToFirst:" id="M97-e4-4XO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRs-pR-3hl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="WDi-yE-MtG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2172" y="-1177"/>
+            <point key="canvasLocation" x="2230" y="-1177"/>
+        </scene>
+        <!--Help And Support View Controller-->
+        <scene sceneID="okS-qh-sbo">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="GIb-h1-wKB" customClass="helpAndSupportViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sko-hQ-X0F">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOH-64-ND5">
+                                <rect key="frame" x="54" y="616" width="314" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.55498530859999995" green="0.56673072030000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
+                                <state key="normal" title="APP FEEDBACK"/>
+                                <connections>
+                                    <segue destination="PdC-y2-ebH" kind="show" id="8rh-mh-kmf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxX-2a-nwl">
+                                <rect key="frame" x="56" y="506" width="314" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.55498530859999995" green="0.56673072030000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
+                                <state key="normal" title="CONTACT ADMIN"/>
+                                <connections>
+                                    <segue destination="xhx-Ne-xkD" kind="show" id="dcd-CO-Tfk"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HELP &amp; SUPPORT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8W9-D4-dnY">
+                                <rect key="frame" x="68" y="129" width="281" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nID-AF-Hs8">
+                                <rect key="frame" x="20" y="44" width="38" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xmark.octagon" catalog="system"/>
+                                <connections>
+                                    <action selector="dismissBackTapped:" destination="GIb-h1-wKB" eventType="touchUpInside" id="tJ4-dz-ZJf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="l2u-gY-VGZ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9S6-Tt-8Y0"/>
+                    <connections>
+                        <outlet property="appFeedBackbutton" destination="ZOH-64-ND5" id="UYG-Uz-OoW"/>
+                        <outlet property="contactAdminButton" destination="nxX-2a-nwl" id="tBl-zu-0dJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vU1-mb-0De" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2271.0144927536235" y="-1890.4017857142856"/>
         </scene>
         <!--Contact Admin View Controller-->
         <scene sceneID="cuX-2m-Pbf">
@@ -2613,7 +2688,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5GS-m3-83s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="2399"/>
+            <point key="canvasLocation" x="1912" y="2405"/>
         </scene>
         <!--Edi Item Info View Controller-->
         <scene sceneID="qa9-Gn-H5G">
@@ -2764,7 +2839,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbb-TB-hfk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="BFO-57-K4a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1395.6521739130435" y="3142.6339285714284"/>
+            <point key="canvasLocation" x="1912" y="3132"/>
         </scene>
         <!--Send Feed Back Google Form View Controller-->
         <scene sceneID="JhT-II-f0h">
@@ -2827,7 +2902,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="Ya6-8G-W4l"/>
         <segue reference="tnj-7N-EuA"/>
-        <segue reference="VrP-rx-HIg"/>
-        <segue reference="ETY-iU-Vqb"/>
+        <segue reference="ZbA-Fj-Lae"/>
+        <segue reference="ecB-Fx-w8c"/>
+        <segue reference="AJ9-9r-s5L"/>
     </inferredMetricsTieBreakers>
 </document>
