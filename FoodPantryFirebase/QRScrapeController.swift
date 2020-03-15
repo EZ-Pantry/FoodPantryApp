@@ -39,6 +39,8 @@ class QRScrapeController: UIViewController {
     var manualEnter: Bool = false //true if the food item is manually loaded
     var manualTitle: String = "" //manual title that the user entered on the manualview (matches one of the titles in the database)
     var PantryName: String = ""
+    
+    var sessionQuantities = "" //how many food items remain in the food pantry
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +75,7 @@ class QRScrapeController: UIViewController {
                         
                         var ingredients = data[index]["information"] as! String //information/ingredients for the food item
                         var url = data[index]["image"] as! String //url for the image of the food item
+                        var foodAllergy = data[index]["allergies"] as! String
                         
                         self.ingredientsLabel.text = ingredients //puts on the screen
                         
@@ -86,6 +89,8 @@ class QRScrapeController: UIViewController {
                             if self.manualTitle.contains(allergy) { //title
                                 confirmed += allergy + ","
                             }  else if(ingredients.contains(allergy)) { //ingredients
+                                confirmed += allergy + ","
+                            } else if(foodAllergy.contains(allergy)) { //ingredients
                                 confirmed += allergy + ","
                             }
                         }
@@ -102,28 +107,28 @@ class QRScrapeController: UIViewController {
                             self.foodView.load(url: URL(string: url)!);
                         }
                     
-                    self.healthyLabel.text = data[index]["healthy"] as! String //puts healthy info on the screen
+                        self.healthyLabel.text = data[index]["healthy"] as! String //puts healthy info on the screen
                     
-                    //update checkout
+                        //update checkout
                         
-                    self.checkedOut = self.formatCheckout(currentCheckout: self.checkedOut, newItem: self.food_title)
+                        self.checkedOut = self.formatCheckout(currentCheckout: self.checkedOut, newItem: self.food_title)
                         
-                    //takes the checkout info and cleans and reformats it
+                        //takes the checkout info and cleans and reformats it
                     
-                    var text = ""
-                    var str: String = self.checkedOut
+                        var text = ""
+                        var str: String = self.checkedOut
                                         
-                    while str.count > 0 {
-                        //does substring based on the delimiters
-                        let food = str.substring(to: str.indexDistance(of: "$")!)
-                        str = str.substring(from: str.indexDistance(of: "$")! + 1)
-                        let quantity = str.substring(to: str.indexDistance(of: ";")!)
-                        text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
-                        str = str.substring(from: str.indexDistance(of: ";")! + 1)
-                    }
-                    //makes the format "Food: Item" next line "Quantity: number"
+                        while str.count > 0 {
+                            //does substring based on the delimiters
+                            let food = str.substring(to: str.indexDistance(of: "$")!)
+                            str = str.substring(from: str.indexDistance(of: "$")! + 1)
+                            let quantity = str.substring(to: str.indexDistance(of: ";")!)
+                            text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
+                            str = str.substring(from: str.indexDistance(of: ";")! + 1)
+                        }
+                        //makes the format "Food: Item" next line "Quantity: number"
                     
-                    self.currentLabel.text = text //puts on the screen
+                        self.currentLabel.text = text //puts on the screen
                     
                     }
                 } else { //no item found, go back to the qrcodeview screen
@@ -409,6 +414,7 @@ class QRScrapeController: UIViewController {
                 let destinationVC = segue.destination as? QRCodeViewController
                 destinationVC?.checkedOut = checkedOut
                 destinationVC?.barcodes = barcodes
+                destinationVC?.error = "";
             } else if(segue.identifier == "checkOut") {
                 let destinationVC = segue.destination as? checkoutViewController
                 destinationVC?.foodItems = checkedOut

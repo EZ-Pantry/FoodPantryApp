@@ -274,6 +274,7 @@ class checkoutViewController: UIViewController {
                 let destinationVC = segue.destination as? QRCodeViewController
                 destinationVC?.checkedOut = foodItems;
                 destinationVC?.barcodes = barcodes;
+                destinationVC?.error = "";
             }
 
         }
