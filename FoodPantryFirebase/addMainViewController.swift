@@ -7,7 +7,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 
-class addMainViewController: UIViewController {
+class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     //all the a=labels
     @IBOutlet var nameLabel: UITextField!
@@ -43,6 +43,9 @@ class addMainViewController: UIViewController {
     var food_data: [String: Any] = [:] //data for the food item
     var found: Bool = false //if found the database, used for manual enter in previus view
     
+    //for healthy or not healthy
+    let yourPicker = UIPickerView()
+    var pickerData: [String] = [String]()//data which can be selected via pickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,7 +151,32 @@ class addMainViewController: UIViewController {
         
         quantityLabel.text = "1"
         quantityLabel.keyboardType = UIKeyboardType.numberPad
+        //healthy picker
         
+        yourPicker.delegate = self
+        yourPicker.dataSource = self
+        
+        healthyLabel.inputView = yourPicker
+        pickerData = ["Yes", "No"]
+                
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return fopr the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+     healthyLabel.text = pickerData[row]
     }
     
     func getFoodDataFromFirebase(callback: @escaping (_ data: [[String: Any]], _ names: [String])->Void) { //returns a dict of all the food items in the database and their data, and a list of the names of the food items
@@ -280,15 +308,15 @@ class addMainViewController: UIViewController {
                         
                         //now update
 
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients.filterEmoji);
                         
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2.filterEmoji);
                         
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Type").setValue(newType);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Type").setValue(newType.filterEmoji);
                         
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies.filterEmoji);
                         
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy);
+                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy.filterEmoji);
                         
                         myGroup.leave() //all done, can leave the group
                       // ...
@@ -322,14 +350,14 @@ class addMainViewController: UIViewController {
                     }
                     
                     let dic = NSMutableDictionary()
-                    dic.setValue(newTitle, forKey: "Name")
-                    dic.setValue(newIngredients, forKey: "Information")
-                    dic.setValue(newAllergies, forKey: "Allergies")
-                    dic.setValue(newType, forKey: "Type")
-                    dic.setValue(newQuantity, forKey: "Quantity")
-                    dic.setValue(newURL, forKey: "URL")
-                    dic.setValue(checkedOut, forKey: "Checked Out")
-                    dic.setValue(newHealthy, forKey: "Healthy")
+                    dic.setValue(newTitle.filterEmoji, forKey: "Name")
+                    dic.setValue(newIngredients.filterEmoji, forKey: "Information")
+                    dic.setValue(newAllergies.filterEmoji, forKey: "Allergies")
+                    dic.setValue(newType.filterEmoji, forKey: "Type")
+                    dic.setValue(newQuantity.filterEmoji, forKey: "Quantity")
+                    dic.setValue(newURL.filterEmoji, forKey: "URL")
+                    dic.setValue(checkedOut.filterEmoji, forKey: "Checked Out")
+                    dic.setValue(newHealthy.filterEmoji, forKey: "Healthy")
                     
                     myGroup.enter()
                     

@@ -79,9 +79,9 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
         self.setupGridView()
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
-        //This view will appear function notifies the view controller that its view is about to be added to a view hierarchy.
-        //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
+        super.viewDidAppear(animated)
         refresh()
     }
     
@@ -100,7 +100,10 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
         loadingIndicator.startAnimating();
         
         alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
+        
+        let top: UIViewController = UIApplication.topViewController()!
+        
+        top.present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -221,9 +224,18 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     func refresh() {
         var imageRecieved: Int = 0
         showLoadingAlert()
+        foodItems = []
+        
+        //all the data for the food items
+        data =  []
+        
+        //sorted data
+        sortedData =  []
+        searching = false
+        
         getDataFromFirebase(callback: {(success)-> Void in //gets data from firebase
             if(success) { //same as the code in the viewDidLoad()
-                                
+                print("got data")
                 for i in 0..<self.data.count {
                     
                     let imageURL = self.data[i]["image"] as! String
@@ -245,9 +257,12 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
                                
                         if(imageRecieved == self.data.count) {
                             DispatchQueue.main.async {
-                                self.dismiss(animated: false)
+                                let top: UIViewController = UIApplication.topViewController()!
+                                top.dismiss(animated: false)
                                 self.collectionView.reloadData()
                                 self.pickerField.text = "All Items"
+                                print("refreshed")
+                                print(self.data)
                             }
                         }
                         
@@ -403,6 +418,14 @@ extension adminFirstEditItemsViewController: UISearchBarDelegate {
         collectionView.reloadData()
     }
     
+    @IBAction func unwindToAdminEdit(_ unwindSegue: UIStoryboardSegue) {
+        let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+        pickerField.text = "view did segue"
+        refresh()
+        pickerField.text = "view did refresh"
+
+    }
     
     
 }
