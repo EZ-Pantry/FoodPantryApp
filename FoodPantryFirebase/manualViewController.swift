@@ -26,6 +26,8 @@ class manualViewController: UIViewController {
     var error = "" //error message
     
     var PantryName: String = ""
+    
+    var barcodes = ""
 
     
     override func viewDidLoad() {
@@ -148,11 +150,13 @@ class manualViewController: UIViewController {
             let destinationVC = segue.destination as? QRCodeViewController
             destinationVC?.error = error
             destinationVC?.checkedOut = checkedOut
+            destinationVC?.barcodes = barcodes
         } else if(segue.identifier == "GoToScrape") {
             let destinationVC = segue.destination as? QRScrapeController
             destinationVC?.checkedOut = checkedOut
             destinationVC?.manualEnter = true
             destinationVC?.manualTitle = foodTitle
+            destinationVC?.barcodes = barcodes
         }
     }
     

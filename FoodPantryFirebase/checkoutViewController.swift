@@ -92,6 +92,11 @@ class checkoutViewController: UIViewController {
                 
                 var quantity = Int(value?["Quantity"] as? String ?? "") ?? 0
                 quantity -= quantityChanged;//number of items checked out would go here
+                
+                if (quantity < 0) { //make sure quantity isn't negative
+                    quantity = 0;
+                }
+                
                 self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key!).child("Quantity").setValue(String(quantity));
                 
                 var checkedOut = Int(value?["Checked Out"] as? String ?? "") ?? 0
@@ -101,15 +106,17 @@ class checkoutViewController: UIViewController {
                 
                 //OTHER FIREBASE UPDATES BELOW
             
-                
+                myGroup.leave()
                 print("changed " + String(quantityChanged) + " " + (key!))
               // ...
               }) { (error) in
                   RequestError().showError()
                   print(error.localizedDescription)
               }
+            
             let userID = Auth.auth().currentUser?.uid
             self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                myGroup.enter()
               // Get user value
                 let value = snapshot.value as? NSDictionary
                 //UPDATE Statistics Node
@@ -130,6 +137,7 @@ class checkoutViewController: UIViewController {
                 
                 
                 print("changed " + String(quantityChanged) + " " + (key!))
+                myGroup.leave()
               // ...
               }) { (error) in
                   RequestError().showError()
@@ -143,6 +151,8 @@ class checkoutViewController: UIViewController {
             
             
             self.ref.child(self.PantryName).child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                myGroup.enter()
                 
                 var dateNodesArray: [String] = [String]()
                 var c: Int = 0
@@ -204,7 +214,7 @@ class checkoutViewController: UIViewController {
             
         }
         
-        myGroup.notify(queue: .main) {
+        myGroup.notify(queue: .main) { //https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing/46852224
             print("Finished all requests.")
             callback()
         }

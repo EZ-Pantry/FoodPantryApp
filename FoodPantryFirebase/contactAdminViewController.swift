@@ -81,8 +81,8 @@ class contactAdminViewController: UIViewController {
         let composer = MFMailComposeViewController()//mailing object created
         composer.mailComposeDelegate = self as! MFMailComposeViewControllerDelegate
         composer.setToRecipients(adminEmailAddresses)//emails where message is sent
-        composer.setSubject(subjectEntered)//the subject line
-        composer.setMessageBody(messageEntered, isHTML: false)//the message
+        composer.setSubject(subjectEntered.filterEmoji)//the subject line
+        composer.setMessageBody(messageEntered.filterEmoji, isHTML: false)//the message
         
         present(composer, animated: true)//presents the apple mail message
     }

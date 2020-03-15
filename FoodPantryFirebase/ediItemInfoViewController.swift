@@ -8,7 +8,7 @@
 
 import UIKit
 import FirebaseUI
-class ediItemInfoViewController: UIViewController {
+class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var itemNameTextField: UITextField!
     @IBOutlet weak var itemInfoTextField: UITextField!
@@ -37,6 +37,10 @@ class ediItemInfoViewController: UIViewController {
     
     var itemBeingEditedID = "";//barcode number letters associated with item
     
+    //for healthy or not healthy
+    let yourPicker = UIPickerView()
+    var pickerData: [String] = [String]()//data which can be selected via pickerView
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
@@ -58,8 +62,33 @@ class ediItemInfoViewController: UIViewController {
         itemHealthyTextField.text = healthy;
         itemQuantityTextField.text = quantity;
         
+        //healthy picker
         
+        yourPicker.delegate = self
+        yourPicker.dataSource = self
+        
+        itemHealthyTextField.inputView = yourPicker
+        pickerData = ["Yes", "No"]
+                
 
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return fopr the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
+        return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+     itemHealthyTextField.text = pickerData[row]
     }
     
     
@@ -67,7 +96,12 @@ class ediItemInfoViewController: UIViewController {
     func setFirebaseData(){
         self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             var c: Int = 0
+            
+            let myGroup = DispatchGroup()
+
+            
             for child in snapshot.children {
+                myGroup.enter()
                 let snap = child as! DataSnapshot
                 let key = snap.key
                 let value: [String: Any] = snap.value as! [String : Any]
@@ -92,7 +126,14 @@ class ediItemInfoViewController: UIViewController {
                     self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Quantity").setValue(editedQuantity);
                 }
                 c += 1
+                myGroup.leave()
             }
+            
+            myGroup.notify(queue: .main) { //https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing/46852224
+                self.performSegue(withIdentifier: "GoBack", sender: self)
+
+            }
+            
             
         }) { (error) in
             RequestError().showError()
@@ -105,7 +146,6 @@ class ediItemInfoViewController: UIViewController {
     
     @IBAction func finishButtonTapped(_ sender: UIButton) {
         setFirebaseData();
-        dismiss(animated: true, completion: nil)
     }
     
 
