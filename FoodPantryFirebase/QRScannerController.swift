@@ -20,6 +20,8 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     var checkedOut = "" //previous checked out items, data is transferred between views: QRScanner, QRScrape, QRCodeView
     
+    var barcodes = ""
+    
     //all the supported types
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
     AVMetadataObject.ObjectType.code39,
@@ -133,6 +135,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             destinationVC?.barcode = code //send the code
             destinationVC?.quantity = "1" //send the quantity of items (default)
             destinationVC?.checkedOut = checkedOut //send the current items checkout out
+            destinationVC?.barcodes = barcodes //send the current barcodes checkout out
         }
     }
 

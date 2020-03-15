@@ -40,8 +40,8 @@ class emailFeedbackViewController: UIViewController {
         
         let composer = MFMailComposeViewController()//mailing object created
         composer.mailComposeDelegate = self
-        composer.setToRecipients(["rayaan.siddiqi@gmail.com", "ashayp@gmail.com"])//emails where message is sent
-        composer.setSubject(subjectEntered)//the subject line
+        composer.setToRecipients(["rayaan.siddiqi@gmail.com", "ashayp22@gmail.com"])//emails where message is sent
+        composer.setSubject(subjectEntered.filterEmoji)//the subject line
         composer.setMessageBody(messageEntered.filterEmoji, isHTML: false)//the message
         
         present(composer, animated: true)//presents the apple mail message

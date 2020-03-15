@@ -64,20 +64,16 @@ class SignUpViewController: UIViewController {
     
     
     @IBAction func handleContinue(_ sender: UIButton) {
-        guard let firstName = firstNameField.text else { return }//get users name
-        guard let lastName = lastNameField.text else { return }//get users name
+        guard var firstName = firstNameField.text else { return }//get users name
+        guard var lastName = lastNameField.text else { return }//get users name
         guard var schoolIDNumber = schoolID.text else { return }//get users ID
-        guard let emailaddress = emailTextField.text else { return }//get users email
-        guard let password = passwordTextField.text else { return }//get users password
+        guard var emailaddress = emailTextField.text else { return }//get users email
+        guard var password = passwordTextField.text else { return }//get users password
         guard var allergies = allergiesTextField.text else { return }//get users allergies
         
-        
-        if(schoolIDNumber.count >= 4) {
-            if((schoolIDNumber.substring(with: 0..<3)) == "000"){
-                //makes sure ID number is just the numbers without the zeroes
-                schoolIDNumber = schoolIDNumber.substring(from: 3);
-            }
-        }
+        firstName = firstName.trimmingCharacters(in: .whitespaces)
+         lastName = lastName.trimmingCharacters(in: .whitespaces)
+         emailaddress = emailaddress.trimmingCharacters(in: .whitespaces)
         
         var userError = false
         
@@ -95,11 +91,17 @@ class SignUpViewController: UIViewController {
             lastNameErrorLabel.isHidden = true
         }
         
-        if schoolIDNumber.count != 6 && userType == "student" {
+        
+        
+        if (schoolIDNumber.count != 6 && schoolIDNumber.count != 9) && userType == "student" {
             idErrorLabel.isHidden = false
             userError = true
         } else {
             idErrorLabel.isHidden = true
+        }
+        
+        if(schoolIDNumber.count == 9) {
+            schoolIDNumber = schoolIDNumber.substring(from: 3);
         }
         
         if !isValidEmail(emailaddress) || emailaddress.containsEmoji {
@@ -157,6 +159,9 @@ class SignUpViewController: UIViewController {
                             UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
                         
                     }
+                    
+                    print("sending")
+                    
                     self.sendVerificationMail();
                 }  else{
                     let firebaseError = error!.localizedDescription
@@ -187,24 +192,36 @@ class SignUpViewController: UIViewController {
     private var authUser : User? {
            return Auth.auth().currentUser
     }
-
+    
+   
     public func sendVerificationMail() {
-           if self.authUser != nil && !self.authUser!.isEmailVerified {
-            print("reached inside")
-               self.authUser!.sendEmailVerification(completion: { (error) in
-                   // Notify the user that the mail has sent or couldn't because of an error.
-                   let alert = UIAlertController(title: "Sign Up Successful!", message: "Please verify your email!", preferredStyle: .alert)
-                   alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                   self.present(alert, animated: true, completion: nil);
-               })
-               
+        
+        Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
+            if(!user!.isEmailVerified) {
+                user!.sendEmailVerification(completion: { (error) in
+                    print("sent verification")
+                    if(error == nil) {
+                        // Notify the user that the mail has sent or couldn't because of an error.
+                           let alert = UIAlertController(title: "Sign Up Successful!", message: "Please verify your email!", preferredStyle: .alert)
+                                                    
+                           alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                           self.present(alert, animated: true, completion: nil);
+                    } else {
+                        // the user is not availabl
+                        let alert = UIAlertController(title: "Error Signing Up", message: "Please try again!", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil);
+                    }
+                    
+                
+                })
+            } else {
+                let alert = UIAlertController(title: "Your Email is Already Verified, Continue to Login", message: "Please try again!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil);
+            }
            }
-           else {
-               // Either the user is not available, or the user is already verified.
-               let alert = UIAlertController(title: "Error Signing Up", message: "Please try again!", preferredStyle: .alert)
-               alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-               self.present(alert, animated: true, completion: nil);
-           }
+        
        }
     
     

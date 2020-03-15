@@ -11,7 +11,6 @@ class popUpViewController: UIViewController {
     @IBOutlet var foodName: UILabel!
     @IBOutlet var foodQuantity: UILabel!
     @IBOutlet var foodInformation: UILabel!
-    @IBOutlet var foodCheckedout: UILabel!
     @IBOutlet var foodHealthy: UILabel!
     @IBOutlet var foodAllergy: UILabel!
     @IBOutlet var foodType: UILabel!
@@ -33,9 +32,13 @@ class popUpViewController: UIViewController {
         
         //sets the labels on the screen
         foodName.text = name
-        foodQuantity.text = "Quantity: " + String(quantity)
+        
+        if(Int(quantity) ?? 0 == 0) {
+            foodQuantity.text = "Out of Stock"
+        } else {
+            foodQuantity.text = "Quantity: " + String(quantity)
+        }
         foodInformation.text = "Information: " + String(information)
-        foodCheckedout.text = "Checked out: " + String(checkedout)
         foodHealthy.text = "Healthy: " + String(healthy)
         
         if(image != "") {
