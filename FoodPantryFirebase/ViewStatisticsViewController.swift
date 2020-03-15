@@ -15,6 +15,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBOutlet weak var studentNameLbl: UILabel!//main header
     
+    @IBOutlet weak var studentEmailLbl: UILabel!
+    @IBOutlet weak var studentPasswordLbl: UILabel!
+    
+    
     @IBOutlet weak var studentIDLbl: UILabel!
     @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
     @IBOutlet weak var lastDateCheckedOutLbl: UILabel!
@@ -89,6 +93,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         chooseGraphOrTextSegment.isHidden = false;
         studentNameLbl.isHidden = true;
         studentIDLbl.isHidden = true;
+        studentEmailLbl.isHidden = true;
+        studentPasswordLbl.isHidden = true;
         lastItemCheckedOutLbl.isHidden = true;
         lastDateCheckedOutLbl.isHidden = true;
         totalItemsCheckedOutlbl.isHidden = true;
@@ -107,6 +113,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         studentNameLbl.text = ""
         studentIDLbl.isHidden = false;
         studentIDLbl.text = ""
+        studentEmailLbl.isHidden = false;
+        studentPasswordLbl.isHidden = false;
+        studentEmailLbl.text = "";
+        studentPasswordLbl.text = "";
         lastItemCheckedOutLbl.isHidden = false;
         lastItemCheckedOutLbl.text = ""
         lastDateCheckedOutLbl.isHidden = false;
@@ -138,6 +148,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         chartView.isHidden = false;
         studentNameLbl.isHidden = true;
         studentIDLbl.isHidden = true;
+        studentEmailLbl.isHidden = true;
+        studentPasswordLbl.isHidden = true;
         lastItemCheckedOutLbl.isHidden = true;
         lastDateCheckedOutLbl.isHidden = true;
         totalItemsCheckedOutlbl.isHidden = true;
@@ -152,6 +164,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         studentNameLbl.text = ""
         studentIDLbl.isHidden = false;
         studentIDLbl.text = ""
+        studentEmailLbl.isHidden = false;
+        studentPasswordLbl.isHidden = false;
+        studentEmailLbl.text = "";
+        studentPasswordLbl.text = "";
         lastItemCheckedOutLbl.isHidden = false;
         lastItemCheckedOutLbl.text = ""
         //display date at top and students visited nd number of items checked out at bottom
@@ -346,9 +362,11 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 let totalItemsCheckedOut = value["Total Items Checked Out"] as? String ?? ""
                 let allergies = value["Allergies"] as? String ?? ""
                 let adminValue = value["Admin"] as? String ?? ""
+                let userEmail = value["Email Address"] as? String ?? ""
+                let userPassword = value["Password"] as? String ?? ""
                 let id = String(c)
                 
-                tempData.append(["name": name, "idNumber": idNumber, "lastDateCheckedOut": lastDateCheckedOut, "lastItemCheckedOut": lastItemCheckedOut, "totalItemsCheckedOut": totalItemsCheckedOut, "allergies": allergies, "Admin": adminValue, "id": id])//adding each students atrributes to array
+                tempData.append(["name": name, "idNumber": idNumber, "lastDateCheckedOut": lastDateCheckedOut, "lastItemCheckedOut": lastItemCheckedOut, "totalItemsCheckedOut": totalItemsCheckedOut, "allergies": allergies, "Admin": adminValue, "Email": userEmail, "Password": userPassword, "id": id])//adding each students atrributes to array
                 tempNames.append(name)
                 c += 1
             }
@@ -440,6 +458,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 var lastItemCheckedOut = self.data[i]["lastItemCheckedOut"]
                 var totalItemsCheckedOut = self.data[i]["totalItemsCheckedOut"]
                 var allergies = self.data[i]["allergies"]
+                var studentEmail = self.data[i]["Email"]
+                var studentPassword = self.data[i]["Password"]
                 
                 studentNameLbl.text = studentName! as! String;
                 studentIDLbl.text = "ID: \(studentIDNumber!)"
@@ -447,6 +467,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 lastDateCheckedOutLbl.text = "Last Date Checked Out: \(lastDateCheckedOut!)"
                 totalItemsCheckedOutlbl.text = "Total Items Checked Out: \(totalItemsCheckedOut!)"
                 allergiesLbl.text = "Allergies: \(allergies!)"
+                studentEmailLbl.text = "Email Address: \(studentEmail!)";
+                studentPasswordLbl.text = "Password: \(studentPassword!)";
             }
         }
         
