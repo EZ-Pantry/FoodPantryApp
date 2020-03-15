@@ -10,6 +10,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var selectButton: UIButton! //button for selecting
     @IBOutlet var errorLabel: UILabel!
+    @IBOutlet var checkoutButton: UIButton!
     
     var error = "" //error message
     
@@ -23,7 +24,11 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         selectButton.layer.cornerRadius = 15
         selectButton.clipsToBounds = true
         
+        checkoutButton.layer.cornerRadius = 15
+        checkoutButton.clipsToBounds = true
+        
         numberTextField.keyboardType = UIKeyboardType.alphabet
+        
                 
     }
  
@@ -32,6 +37,14 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
             errorLabel.text = error + "\nplease try again";
             print("set")
         }
+        
+        if(checkedOut == "") {
+            checkoutButton.isHidden = true
+        } else {
+            checkoutButton.isHidden = false
+        }
+        
+        numberTextField.text = ""
     }
     
     
@@ -57,6 +70,10 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         } else if(segue.identifier == "camera") { //person wants to scan barcode
             let destinationVC = segue.destination as? QRScannerController
             destinationVC?.checkedOut = checkedOut
+            destinationVC?.barcodes = barcodes
+        } else if(segue.identifier == "GoToCheckout") { //person wants to scan barcode
+            let destinationVC = segue.destination as? checkoutViewController
+            destinationVC?.foodItems = checkedOut
             destinationVC?.barcodes = barcodes
         }
     }

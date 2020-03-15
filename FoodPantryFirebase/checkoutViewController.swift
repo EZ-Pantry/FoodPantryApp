@@ -9,8 +9,10 @@ class checkoutViewController: UIViewController {
 
     @IBOutlet var fooditemLabel: UILabel!
     @IBOutlet var finishButton: UIButton!
+    @IBOutlet var backButton: UIButton!
     
     var foodItems = ""
+    var barcodes = ""
     
     var items: [String] = []
     var quantities: [Int] = []
@@ -47,6 +49,9 @@ class checkoutViewController: UIViewController {
         self.fooditemLabel.text = text
         self.finishButton.layer.cornerRadius = 15
         self.finishButton.clipsToBounds = true
+        
+        self.backButton.layer.cornerRadius = 15
+        self.backButton.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
@@ -265,6 +270,10 @@ class checkoutViewController: UIViewController {
 
            if segue.identifier == "menu"{
                 let destinationVC = segue.destination as? homeViewController
+           } else if segue.identifier == "BackToCodeView" {
+                let destinationVC = segue.destination as? QRCodeViewController
+                destinationVC?.checkedOut = foodItems;
+                destinationVC?.barcodes = barcodes;
             }
 
         }

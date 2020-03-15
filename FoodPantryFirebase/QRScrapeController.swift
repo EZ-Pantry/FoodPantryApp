@@ -42,6 +42,15 @@ class QRScrapeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //makes the buttons round
+        
+        checkoutButton.layer.cornerRadius = 15
+        checkoutButton.clipsToBounds = true
+           
+        addMoreButton.layer.cornerRadius = 15
+        addMoreButton.clipsToBounds = true
+        
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
         //show loading indicator
@@ -95,11 +104,15 @@ class QRScrapeController: UIViewController {
                     
                     self.healthyLabel.text = data[index]["healthy"] as! String //puts healthy info on the screen
                     
+                    //update checkout
+                        
+                    self.checkedOut = self.formatCheckout(currentCheckout: self.checkedOut, newItem: self.food_title)
+                        
                     //takes the checkout info and cleans and reformats it
                     
                     var text = ""
                     var str: String = self.checkedOut
-                    
+                                        
                     while str.count > 0 {
                         //does substring based on the delimiters
                         let food = str.substring(to: str.indexDistance(of: "$")!)
@@ -126,7 +139,6 @@ class QRScrapeController: UIViewController {
             ref = Database.database().reference() //reference to database
             
             //first, check to see if this food item has already been scanned
-            
                    
             var str: String = barcodes
             
@@ -135,8 +147,6 @@ class QRScrapeController: UIViewController {
             //splits up the string into items and their quantities
             while str.count > 0 {
                 let upc = str.substring(to: str.indexDistance(of: ",")!)
-                print(upc)
-                print(barcode)
                 if(upc == barcode) { //already scanned
                     found = true
                     break
@@ -144,41 +154,35 @@ class QRScrapeController: UIViewController {
                 str = str.substring(from: str.indexDistance(of: ",")! + 1)
             }
             
+            
+            print(found)
+            
             if(found) {
-                print("already scanned")
                 self.errorMessage = "this food item has already been scanned";
                 DispatchQueue.main.async { //async thread - https://stackoverflow.com/questions/32292600/swift-performseguewithidentifier-not-working
                     self.performSegue(withIdentifier: "barcodeError", sender: self)
                 }
-                print("performing segue")
             } else {
             
             
         getData { (title, error) in //gets the title (string) and error (boolean)
             DispatchQueue.main.async { //async thread
-                print("got title")
                 if(error) { //there is an error
-                    print("error")
                     self.errorMessage = title;
                      self.performSegue(withIdentifier: "barcodeError", sender: self) //go back to the qrcodeview screen
                 } else {
-                    print("seeing if in db")
                     //check if it is in the database
                     
                     self.getFoodDataFromFirebase(callback: {(data, items)-> Void in //get data from the database
-                        print("returned from fb")
                         if(items.contains(title)) { //inside data
-                            print("cointained")
                             let index: Int = items.firstIndex(of: title)! //gets index of the food item
 
                             let quantity: Int = Int(data[index]["quantity"] as! String) ?? 0 //gets the max quantity
                             self.maxQuantity = quantity //sets to var
                             if(quantity <= 0) { //food item has run out
-                                print("ran out")
                                 self.errorMessage = "this food item has ran out";
                                 self.performSegue(withIdentifier: "barcodeError", sender: self)
                             } else {
-                                print("inside")
                                 //more setting
                                 self.food_title = title;
                                 self.nameLabel.text = title;
@@ -203,7 +207,11 @@ class QRScrapeController: UIViewController {
                                 }
                             
                                 self.healthyLabel.text = data[index]["healthy"] as! String
-
+                                
+                                //update checkout
+                                
+                                self.checkedOut = self.formatCheckout(currentCheckout: self.checkedOut, newItem: self.food_title)
+                                
                                 //takes the checkout info and cleans and reformats it
                             
                                 var text = ""
@@ -234,20 +242,12 @@ class QRScrapeController: UIViewController {
         }
         }
         
-        //makes the buttons round
-        
-        checkoutButton.layer.cornerRadius = 15
-        checkoutButton.clipsToBounds = true
-           
-        addMoreButton.layer.cornerRadius = 15
-        addMoreButton.clipsToBounds = true
-        
-        //sets the keypad type
-                
+
+                        
         }
         
     }
-    
+
     func getFoodDataFromFirebase(callback: @escaping (_ data: [[String: Any]], _ names: [String])->Void) { //returns a dict of all the food items in the database and their data, and a list of the names of the food items
         self.ref = Database.database().reference() //gets a reference
         
@@ -331,6 +331,64 @@ class QRScrapeController: UIViewController {
     
 
     
+    func formatCheckout(currentCheckout: String, newItem: String) -> String {
+        var checkout: String = currentCheckout
+        checkout += newItem + "$" + "1" + ";"
+        //check to see if there are any food titles that are duplictated
+               
+        var items: [String] = []
+        var quantities: [Int] = []
+               
+        var str: String = checkout
+               
+        //splits up the string into items and their quantities
+        while str.count > 0 {
+            let food = str.substring(to: str.indexDistance(of: "$")!)
+            items.append(food)
+            str = str.substring(from: str.indexDistance(of: "$")! + 1)
+            let quantity = str.substring(to: str.indexDistance(of: ";")!)
+            quantities.append(Int(quantity) ?? 0)
+            str = str.substring(from: str.indexDistance(of: ";")! + 1)
+
+        }
+               
+        var merged : [[String: Any]] = [] //all items, no duplicates
+               
+        //removes duplicates (could be more efficent code)
+        while items.count > 0 {
+            let food = items[0]
+            var quantity: Int = 0
+                   
+            var matched: [Int] = []
+                   
+            for i in 0..<items.count {
+                if items[i] == food {
+                    quantity += quantities[i]
+                    matched.append(i)
+                }
+            }
+                   
+            for i in 0..<matched.count{
+                items.remove(at: matched[i])
+                quantities.remove(at: matched[i])
+                matched = matched.map{ $0 - 1 } //subtracts 1 from every match since the array decreased in size
+            }
+                   
+            merged.append(["name": food, "quantity": quantity]) //adds tp the dict
+                   
+        }
+               
+        //convert dict back to string format
+               
+        checkout = ""
+               
+        for val in merged {
+            checkout += (val["name"] as! String) + "$" + String(val["quantity"] as! Int) + ";"
+        }
+        
+        return checkout
+        
+    }
 
     @IBAction func doAddMore(_ sender: Any) {
         self.performSegue(withIdentifier: "addMore", sender: self)
@@ -339,75 +397,14 @@ class QRScrapeController: UIViewController {
     
     //segue method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("seguing")
         //continue with segue
         if segue.identifier == "barcodeError"{
             let destinationVC = segue.destination as? QRCodeViewController
             destinationVC?.error = errorMessage
             destinationVC?.checkedOut = checkedOut
             destinationVC?.barcodes = barcodes
-            print("oing back")
         } else {
-        
-            checkedOut += food_title + "$" + quantity + ";" //adds onto the checkout
             barcodes += barcode + ","
-        
-            //check to see if there are any food titles that are duplictated
-        
-            var items: [String] = []
-            var quantities: [Int] = []
-        
-            var str: String = checkedOut
-        
-            //splits up the string into items and their quantities
-            while str.count > 0 {
-                let food = str.substring(to: str.indexDistance(of: "$")!)
-                items.append(food)
-                str = str.substring(from: str.indexDistance(of: "$")! + 1)
-                let quantity = str.substring(to: str.indexDistance(of: ";")!)
-                quantities.append(Int(quantity) ?? 0)
-                str = str.substring(from: str.indexDistance(of: ";")! + 1)
-
-            }
-        
-            var merged : [[String: Any]] = [] //all items, no duplicates
-        
-            //removes duplicates (could be more efficent code)
-            while items.count > 0 {
-                let food = items[0]
-                var quantity: Int = 0
-            
-                var matched: [Int] = []
-            
-                for i in 0..<items.count {
-                    if items[i] == food {
-                        quantity += quantities[i]
-                        matched.append(i)
-                    }
-                }
-            
-                for i in 0..<matched.count{
-                    items.remove(at: matched[i])
-                    quantities.remove(at: matched[i])
-                    matched = matched.map{ $0 - 1 } //subtracts 1 from every match since the array decreased in size
-                }
-            
-                merged.append(["name": food, "quantity": quantity]) //adds tp the dict
-            
-            }
-        
-            //convert dict back to string format
-        
-            checkedOut = ""
-        
-            for val in merged {
-                checkedOut += (val["name"] as! String) + "$" + String(val["quantity"] as! Int) + ";"
-                print(val["name"] as! String)
-                print(String(val["quantity"] as! Int))
-            }
-                
-        
-        
             if(segue.identifier == "addMore") {
                 let destinationVC = segue.destination as? QRCodeViewController
                 destinationVC?.checkedOut = checkedOut
@@ -415,6 +412,7 @@ class QRScrapeController: UIViewController {
             } else if(segue.identifier == "checkOut") {
                 let destinationVC = segue.destination as? checkoutViewController
                 destinationVC?.foodItems = checkedOut
+                destinationVC?.barcodes = barcodes
             }
         }
     }

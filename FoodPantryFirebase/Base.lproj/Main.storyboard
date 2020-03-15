@@ -853,7 +853,7 @@
                                 <state key="normal" backgroundImage="blackborder"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter Food Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMJ-Ry-D0U">
-                                <rect key="frame" x="138" y="523" width="135" height="20"/>
+                                <rect key="frame" x="138" y="513" width="135" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -871,14 +871,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XbF-RJ-evm">
-                                <rect key="frame" x="92" y="670" width="227" height="41"/>
+                                <rect key="frame" x="94" y="577" width="227" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="8"/>
                                 <color key="textColor" red="0.85561042750000005" green="0.14345569629999999" blue="0.099163593920000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Food Item Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OCu-MA-57e">
-                                <rect key="frame" x="128" y="572" width="159" height="34"/>
+                                <rect key="frame" x="128" y="541" width="159" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done"/>
@@ -895,12 +895,24 @@
                                     <segue destination="4Pg-Z3-YN5" kind="presentation" identifier="camera" modalPresentationStyle="fullScreen" id="5Wr-Np-bzz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxc-zN-9hr">
+                                <rect key="frame" x="129" y="670" width="157" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="CHECK OUT">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="rQB-fb-O7h" kind="presentation" identifier="GoToCheckout" id="qqH-PX-Nnl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="gmA-Sq-5D5"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="SCAN" image="barcode" catalog="system" id="fyG-JH-ozq"/>
                     <connections>
+                        <outlet property="checkoutButton" destination="Rxc-zN-9hr" id="0pM-LE-cxQ"/>
                         <outlet property="errorLabel" destination="XbF-RJ-evm" id="uqC-ch-vWV"/>
                         <outlet property="numberTextField" destination="OCu-MA-57e" id="BPt-4j-7ss"/>
                         <outlet property="selectButton" destination="srl-jt-TSa" id="xmt-Mg-uwK"/>
@@ -1193,7 +1205,7 @@
             <objects>
                 <viewController id="rQB-fb-O7h" customClass="checkoutViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IBW-Zk-R7P">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CHECK OUT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5D-Lu-RLS">
@@ -1217,7 +1229,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hm8-uw-qMk">
-                                <rect key="frame" x="133" y="631" width="157" height="36"/>
+                                <rect key="frame" x="133" y="609" width="157" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Finish">
@@ -1234,11 +1246,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fli-tZ-fYu">
+                                <rect key="frame" x="133" y="653" width="157" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qI9-CN-N3E" kind="unwind" identifier="BackToCodeView" unwindAction="unwindToQRCode:" id="q8K-3j-5xh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="C1r-E3-PBN"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="fli-tZ-fYu" id="STo-ig-Mwi"/>
                         <outlet property="finishButton" destination="hm8-uw-qMk" id="LhO-kO-kaC"/>
                         <outlet property="fooditemLabel" destination="ZZf-zP-3lC" id="jDO-0E-oJc"/>
                         <segue destination="qI9-CN-N3E" kind="unwind" identifier="GoToHome" unwindAction="unwindToHome:" id="iU8-4l-SJC"/>
@@ -2901,6 +2925,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ya6-8G-W4l"/>
+        <segue reference="qqH-PX-Nnl"/>
         <segue reference="tnj-7N-EuA"/>
         <segue reference="ZbA-Fj-Lae"/>
         <segue reference="ecB-Fx-w8c"/>
