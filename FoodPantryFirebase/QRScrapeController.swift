@@ -57,6 +57,7 @@ class QRScrapeController: UIViewController {
         
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
+        self.view.isUserInteractionEnabled = false
         
         //show loading indicator
         if(manualEnter) { //user manually entered title
@@ -140,6 +141,9 @@ class QRScrapeController: UIViewController {
                 }
                 
             })
+            
+            self.view.isUserInteractionEnabled = true
+
         } else { //user entered a barcode
         
             ref = Database.database().reference() //reference to database
@@ -242,7 +246,8 @@ class QRScrapeController: UIViewController {
                             self.performSegue(withIdentifier: "barcodeError", sender: self)
                         }
                         
-                        
+                        self.view.isUserInteractionEnabled = true
+
                     })
                 }
             }

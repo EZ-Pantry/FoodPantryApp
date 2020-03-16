@@ -55,6 +55,9 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 
         nameLabel.isUserInteractionEnabled = false //cannot edit the food item name
         
+        self.view.isUserInteractionEnabled = false
+
+        
         if (manualEnter) { //manually entered food item
             if(found) { //item exists in the db
                          
@@ -81,6 +84,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 nameLabel.isUserInteractionEnabled = true
                 self.adminDirections.text = "New Item\nAdd the Following"
             }
+            self.view.isUserInteractionEnabled = true
+
         } else { //used barcode
             getData { (title, error, image) in //gets the title (string) and error (boolean)
                 DispatchQueue.main.async { //async thread
@@ -136,6 +141,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 self.adminDirections.text = "New Item\nAdd the Following"
 
                             }
+                            self.view.isUserInteractionEnabled = true
                     })
                 }
             }
