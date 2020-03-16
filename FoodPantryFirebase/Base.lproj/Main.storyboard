@@ -1537,7 +1537,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEl-PQ-Fcv">
-                                <rect key="frame" x="20" y="273" width="374" height="577"/>
+                                <rect key="frame" x="20" y="273" width="374" height="589"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="bigblackborder"/>
@@ -1629,11 +1629,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YM3-uk-t7X" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="36" y="294" width="342" height="535"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adm-g3-Umg">
                                 <rect key="frame" x="36" y="73" width="23" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1642,6 +1637,25 @@
                                     <action selector="dismissBack:" destination="KNv-eW-BHH" eventType="touchUpInside" id="Ft0-bM-wgZ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHQ-hn-ctr">
+                                <rect key="frame" x="72" y="752" width="261" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nP-OO-AhQ">
+                                <rect key="frame" x="72" y="794" width="261" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YM3-uk-t7X" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="36" y="300" width="342" height="535"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Eno-kY-Nic"/>
@@ -1657,8 +1671,10 @@
                         <outlet property="lastItemCheckedOutLbl" destination="jQr-fx-5Fb" id="L9O-Av-VBi"/>
                         <outlet property="nextButton" destination="A6F-Xh-I6T" id="fK2-T9-tf9"/>
                         <outlet property="pickerField" destination="PYm-C9-ce1" id="bAe-MW-8m6"/>
+                        <outlet property="studentEmailLbl" destination="sHQ-hn-ctr" id="kS5-Bo-o0A"/>
                         <outlet property="studentIDLbl" destination="CD3-Fq-ffK" id="LQg-L5-eGw"/>
                         <outlet property="studentNameLbl" destination="Wqs-I6-Wel" id="Dko-fj-sbQ"/>
+                        <outlet property="studentPasswordLbl" destination="3nP-OO-AhQ" id="bdd-cx-4Pa"/>
                         <outlet property="totalItemsCheckedOutlbl" destination="13g-1t-q5b" id="foG-ey-tKg"/>
                         <outlet property="totalStatsButton" destination="ImV-NH-s9F" id="H7Z-hm-fgl"/>
                         <segue destination="Tkq-00-VEX" kind="show" identifier="toCalendar" id="NIO-tF-MB1"/>
