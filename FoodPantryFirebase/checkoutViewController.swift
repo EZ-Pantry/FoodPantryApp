@@ -5,18 +5,23 @@ import Foundation
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
-class checkoutViewController: UIViewController {
 
-    @IBOutlet var fooditemLabel: UILabel!
+
+class checkoutViewController: UITableViewController {
+    
     @IBOutlet var finishButton: UIButton!
+    @IBOutlet var backButton: UIButton!
     
     var foodItems = ""
+    var barcodes = ""
     
     var items: [String] = []
     var quantities: [Int] = []
     
     var ref: DatabaseReference!
     var PantryName: String = ""
+    
+    var data: [[String: Any]] = []
 
     
     override func viewDidLoad() {
@@ -29,48 +34,102 @@ class checkoutViewController: UIViewController {
 //        MM-dd-yyyy- no need
         self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
         
-        //converts the string of food items into readeable text using the delimiters
-        
-        var text = ""
-        var str: String = self.foodItems
-        
-        while str.count > 0 {
-            let food = str.substring(to: str.indexDistance(of: "$")!)
-            items.append(food)
-            str = str.substring(from: str.indexDistance(of: "$")! + 1)
-            let quantity = str.substring(to: str.indexDistance(of: ";")!)
-            quantities.append(Int(quantity) ?? 0)
-            text += "Item: " + food + "\nQuantity: " + quantity + "\n\n"
-            str = str.substring(from: str.indexDistance(of: ";")! + 1)
-        }
-        
-        self.fooditemLabel.text = text
         self.finishButton.layer.cornerRadius = 15
         self.finishButton.clipsToBounds = true
+
+        self.backButton.layer.cornerRadius = 15
+        self.backButton.clipsToBounds = true
+        
+        
+        setCheckoutItems(currentItems: foodItems)
 
         // Do any additional setup after loading the view.
     }
     
+    func setCheckoutItems(currentItems: String) {
+        
+        self.data = []
+        self.items = []
+        self.quantities = []
+        
+        self.getFoodDataFromFirebase(callback: {(data)-> Void in
+                   
+                   //gets the images of every food item
+                   var nameToImage: [String: Any] = [:]
+                   
+                   let myGroup = DispatchGroup()
 
-    @IBAction func finish(_ sender: Any) {
-        //update firebase database
-       self.getFoodDataFromFirebase(callback: {(data)-> Void in
-            print("recieved data")
-            print(data)
-        
-        var keyList: [[String: Any]] = []
-        
-            for i in 0..<self.items.count {
-                var key: String = self.getIdFromTitle(title: self.items[i], data: data)
-                keyList.append(["key": key, "quantity": self.quantities[i]])
+                   
+                   for i in 0..<data.count {
+                       let name = data[i]["name"] as! String
+                       let url = data[i]["image"] as! String
+                       myGroup.enter()
+                       
+                       self.loadImage(url: url, callback: {(loadedImage)-> Void in
+                           nameToImage[name] = loadedImage
+                           myGroup.leave()
+                       })
+                   }
+                   
+                   
+                   myGroup.notify(queue: .main) {
+                       
+                       //converts the string of food items into readeable text using the delimiters
+                       
+                       var text = ""
+                       var str: String = currentItems
+                       
+                       while str.count > 0 {
+                           let food = str.substring(to: str.indexDistance(of: "$")!)
+                           self.items.append(food)
+                           str = str.substring(from: str.indexDistance(of: "$")! + 1)
+                           let quantity = str.substring(to: str.indexDistance(of: ";")!)
+                           self.quantities.append(Int(quantity) ?? 0)
+                                               
+                           self.data.append(["food": food, "quantity": quantity, "image": nameToImage[food]])
+                           
+                           text += "Item: " + food + "\nQuantity: " + quantity + "\n\n"
+                           str = str.substring(from: str.indexDistance(of: ";")! + 1)
+                       }
+                       
+                       self.tableView.reloadData()
+                                       
+                   }
+                   
+                   
+               
+               })
+    }
+    
+    func loadImage(url: String, callback: @escaping (_ img: UIImage)->Void) { //loads an image based on the url, passed in an id and url
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: URL(string: url)!) {
+                let image = UIImage(data: data)
+                callback(image!) //returns a ui image
             }
+        }
+    }
+    
+    @IBAction func finish(_ sender: Any) {
+                //update firebase database
+               self.getFoodDataFromFirebase(callback: {(data)-> Void in
+                    print("recieved data")
+                    print(data)
         
-            self.updateFirebase(keyList: keyList, callback: {() -> Void in
-                print("done changing")
-                self.performSegue(withIdentifier: "GoToHome", sender: self)
-            })
-        })
-}
+                var keyList: [[String: Any]] = []
+        
+                    for i in 0..<self.items.count {
+                        var key: String = self.getIdFromTitle(title: self.items[i], data: data)
+                        keyList.append(["key": key, "quantity": self.quantities[i]])
+                    }
+        
+                    self.updateFirebase(keyList: keyList, callback: {() -> Void in
+                        print("done changing")
+                        self.performSegue(withIdentifier: "GoToHome", sender: self)
+                    })
+                })
+    }
+    
     
     var fullyFormatedDate : String = ""
     func updateFirebase(keyList : [[String: Any]], callback: @escaping () -> Void) {
@@ -247,8 +306,9 @@ class checkoutViewController: UIViewController {
                 let value: [String: Any] = snap.value as! [String : Any]
                 let name = value["Name"] as? String ?? ""
                 let quantity = value["Quantity"] as? String ?? ""
+                let image = value["URL"] as? String ?? ""
                 
-                tempData.append(["name": name, "quantity": quantity, "key": key])
+                tempData.append(["name": name, "quantity": quantity, "key": key, "image": image])
                 c += 1
             }
             
@@ -259,12 +319,67 @@ class checkoutViewController: UIViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = Bundle.main.loadNibNamed("CheckoutCell1TableViewCell", owner: self, options: nil)?.first as! CheckoutCell1TableViewCell
+        
+        //https://stackoverflow.com/questions/20655060/get-button-click-inside-uitableviewcell
+        cell.tapCallback = { //when the x button is clicked, remove the food item
+            //remove the food item
+            
+            var str: String = self.foodItems
+            print("------------------------")
+            print(str)
+            
+            let foodItem: String = self.data[indexPath.row]["food"] as! String
+            print(foodItem)
+            let food: Int = str.indexDistance(of: foodItem)! //get the index of the food item
+            str = str.substring(from: food) //chop off everything before the food item
+            let delimiter: Int = str.indexDistance(of: ";")! + food + 1//get the index of the delimiter, and you gotta add on the part u chopped off
+            
+            let quantity = str.substring(to: str.indexDistance(of: ";")!)
+            self.quantities.append(Int(quantity) ?? 0)
+            
+            print(food)
+            print(delimiter)
+            
+            self.foodItems = self.foodItems.substring(to: food) + self.foodItems.substring(from: delimiter)
+            
+            //update
+            print("*********************")
+            print(self.foodItems)
+            
+            self.setCheckoutItems(currentItems: self.foodItems)
+            
+            self.backButton.isHidden = true
+            
+        }
+        
+        cell.foodImage.image = self.data[indexPath.row]["image"] as! UIImage
+        cell.foodTitle.text = self.data[indexPath.row]["food"] as! String
+        cell.foodQuantity.text = "Quantity: " + (self.data[indexPath.row]["quantity"] as! String)
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 312
+    }
+    
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-           if segue.identifier == "menu"{
+           if segue.identifier == "GoToHome"{
                 let destinationVC = segue.destination as? homeViewController
+           } else if segue.identifier == "BackToCodeView" {
+                let destinationVC = segue.destination as? QRCodeViewController
+                destinationVC?.checkedOut = foodItems;
+                destinationVC?.barcodes = barcodes;
+                destinationVC?.error = "";
             }
 
         }

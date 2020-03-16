@@ -21,10 +21,6 @@ class QRAddViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        if error != "" {
-            errorLabel.text = error
-        }
-        
         addManualButton.layer.cornerRadius = 15
         addManualButton.clipsToBounds = true
     }
@@ -33,6 +29,8 @@ class QRAddViewController: UIViewController {
         if error != "" {
             errorLabel.text = error
         }
+        
+        foodTitle.text = ""
     }
     
     @IBAction func addManually(_ sender: Any) {
