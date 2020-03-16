@@ -103,6 +103,23 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadStudentNames();
+        pickerField.isHidden = true;
+        chooseGraphOrTextSegment.isHidden = true;
+        nextButton.isHidden = true;
+        backButton.isHidden = true;
+        studentNameLbl.isHidden = true;
+        studentIDLbl.isHidden = true;
+        studentEmailLbl.isHidden = true;
+        studentPasswordLbl.isHidden = true;
+        lastItemCheckedOutLbl.isHidden = true;
+        lastDateCheckedOutLbl.isHidden = true;
+        totalItemsCheckedOutlbl.isHidden = true;
+        chartView.isHidden = true;
+        
+    }
     @IBAction func indivisualStudentButtonTapped(_ sender: UIButton) {
         //changing what is able to be seen depending on which button is clicked
         pickerField.isHidden = false;
@@ -271,12 +288,14 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             line2.colors = [NSUIColor.red] //Sets the color to blue
             
             
-            let Days = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"]
+            let Days = ["5 Days", "4 Days", "3 Days", "2 Days", "1 Day"]
             chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values:Days)
             chartView.xAxis.granularity = 1
+            chartView.xAxis.labelWidth = 5
             
             self.chartView.rightAxis.enabled = true
             self.chartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
+            self.chartView.chartDescription?.text = "Past 5 Days Ago Data"
 //            xaxis.valueFormatter = formato
 //            chartView.xAxis.valueFormatter = xaxis.valueFormatter
 
