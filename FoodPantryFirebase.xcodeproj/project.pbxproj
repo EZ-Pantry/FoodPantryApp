@@ -19,6 +19,8 @@
 		1CBDDC96240DFAD300AC53A9 /* QRAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC95240DFAD300AC53A9 /* QRAddViewController.swift */; };
 		1CBDDC98240DFAEA00AC53A9 /* addMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC97240DFAEA00AC53A9 /* addMainViewController.swift */; };
 		1CBDDC9A240E072D00AC53A9 /* chooseManualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDDC99240E072D00AC53A9 /* chooseManualViewController.swift */; };
+		1CBF1C55242009EE0064F7D1 /* CheckoutCell1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBF1C53242009EE0064F7D1 /* CheckoutCell1TableViewCell.swift */; };
+		1CBF1C56242009EE0064F7D1 /* CheckoutCell1TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CBF1C54242009EE0064F7D1 /* CheckoutCell1TableViewCell.xib */; };
 		1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */; };
 		1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */; };
 		1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */; };
@@ -91,6 +93,8 @@
 		1CBDDC95240DFAD300AC53A9 /* QRAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRAddViewController.swift; sourceTree = "<group>"; };
 		1CBDDC97240DFAEA00AC53A9 /* addMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addMainViewController.swift; sourceTree = "<group>"; };
 		1CBDDC99240E072D00AC53A9 /* chooseManualViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseManualViewController.swift; sourceTree = "<group>"; };
+		1CBF1C53242009EE0064F7D1 /* CheckoutCell1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCell1TableViewCell.swift; sourceTree = "<group>"; };
+		1CBF1C54242009EE0064F7D1 /* CheckoutCell1TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutCell1TableViewCell.xib; sourceTree = "<group>"; };
 		1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScrapeController.swift; sourceTree = "<group>"; };
 		1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 				1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */,
 				1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */,
 				1CBD0224241B118600AC53A9 /* RequestError.swift */,
+				1CBF1C53242009EE0064F7D1 /* CheckoutCell1TableViewCell.swift */,
+				1CBF1C54242009EE0064F7D1 /* CheckoutCell1TableViewCell.xib */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -401,6 +407,7 @@
 				1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */,
 				A24F384D23EF759800AACC97 /* Main.storyboard in Resources */,
 				A24F382123EF66E100AACC97 /* Assets.xcassets in Resources */,
+				1CBF1C56242009EE0064F7D1 /* CheckoutCell1TableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +581,7 @@
 				A239DC1B2416CAA9003CFF0C /* inquireAboutFoodPantryViewController.swift in Sources */,
 				A24F385323EF817900AACC97 /* homeViewController.swift in Sources */,
 				A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */,
+				1CBF1C55242009EE0064F7D1 /* CheckoutCell1TableViewCell.swift in Sources */,
 				1CBD01C52414095400AC53A9 /* chooseUserViewController.swift in Sources */,
 				A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */,
 				A239DC0F2413156B003CFF0C /* settingsPageViewController.swift in Sources */,

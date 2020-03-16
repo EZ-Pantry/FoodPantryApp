@@ -33,7 +33,11 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     }
  
     override func viewWillAppear(_ animated: Bool) {
-                
+        
+        print(checkedOut)
+        print(barcodes)
+        print(error)
+        
         numberTextField.text = ""
         
         if error != "" { //redirected from a different view and there is an error
