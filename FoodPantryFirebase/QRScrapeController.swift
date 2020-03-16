@@ -42,6 +42,8 @@ class QRScrapeController: UIViewController {
     
     var sessionQuantities = "" //how many food items remain in the food pantry
 
+    var loadingBar = LoadingBar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,6 +57,7 @@ class QRScrapeController: UIViewController {
         
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
+        
         //show loading indicator
         if(manualEnter) { //user manually entered title
             ref = Database.database().reference() //sets the reference
@@ -137,9 +140,7 @@ class QRScrapeController: UIViewController {
                 }
                 
             })
-            
         } else { //user entered a barcode
-        
         
             ref = Database.database().reference() //reference to database
             
@@ -234,6 +235,7 @@ class QRScrapeController: UIViewController {
                             
                                 self.currentLabel.text = text //puts on the screen
                             }
+                                                        
                         } else { //return to the qr code view
                             print("item not found")
                             self.errorMessage = "food item not found in the inventory";

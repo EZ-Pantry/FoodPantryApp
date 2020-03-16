@@ -22,6 +22,9 @@ class homeViewController: UIViewController {
     var foodItemsOfLowQuantity : [[String: Any]] = []
     var foodItemsOfLowQuantityNumbers: [Int] = []
     var stringOfLowFoodItems: [String] = []
+    
+    var alert = LoadingBar()
+    
     override func viewDidLoad() {
 
         
@@ -32,11 +35,14 @@ class homeViewController: UIViewController {
         //to the home screen and an error pops up saying that pantry name doesn't exist
         
         self.ref = Database.database().reference()
-        
-        
-        let myGroup = DispatchGroup()
                 
+        let myGroup = DispatchGroup()
+            
+        alert.showLoadingAlert()
+        
         if(!UserDefaults.contains("Pantry Name")) {
+            
+        
             myGroup.enter()
             let uid = Auth.auth().currentUser!.uid
             
@@ -88,7 +94,6 @@ class homeViewController: UIViewController {
             })
             
                         
-            
             self.getUsersName()//helper function to display user data about last time they came
             self.displayMascotURL();
             
@@ -107,6 +112,9 @@ class homeViewController: UIViewController {
             }
             
             self.getPermissionForNotifications();
+            
+            self.alert.hideLoadingAlert()
+            
         }
         
     }
@@ -184,8 +192,6 @@ class homeViewController: UIViewController {
                         //checking if quantity of item was less than 10, indicates a notification must be send
                         if(!self.stringOfLowFoodItems.contains(self.foodItemsOfLowQuantity[x]["name"] as! String)){
                             self.stringOfLowFoodItems.append(self.foodItemsOfLowQuantity[x]["name"] as! String)
-                            print("the array below")
-                            print(quantityOfItem)
                         }
                     }
                 }
