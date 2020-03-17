@@ -113,27 +113,40 @@ class QRScrapeController: UIViewController {
                     
                         self.healthyLabel.text = data[index]["healthy"] as! String //puts healthy info on the screen
                     
-                        //update checkout
+                        //check to see how many times this item has been checked out in this current session
                         
-                        self.checkedOut = self.formatCheckout(currentCheckout: self.checkedOut, newItem: self.food_title)
+                        var count: Int = self.timesCheckedOut(item: self.food_title, current: self.checkedOut)
                         
-                        //takes the checkout info and cleans and reformats it
+                        print(count)
+                        
+                        if(count >= 3) {
+                            self.errorMessage = "This food item has been added too many times.";
+                            self.performSegue(withIdentifier: "barcodeError", sender: self)
+                        } else {
+                        
+                        
+                            //update checkout
+                        
+                            self.checkedOut = self.formatCheckout(currentCheckout: self.checkedOut, newItem: self.food_title)
+                        
+                            //takes the checkout info and cleans and reformats it
                     
-                        var text = ""
-                        var str: String = self.checkedOut
+                            var text = ""
+                            var str: String = self.checkedOut
                                         
-                        while str.count > 0 {
-                            //does substring based on the delimiters
-                            let food = str.substring(to: str.indexDistance(of: "$")!)
-                            str = str.substring(from: str.indexDistance(of: "$")! + 1)
-                            let quantity = str.substring(to: str.indexDistance(of: ";")!)
-                            text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
-                            str = str.substring(from: str.indexDistance(of: ";")! + 1)
+                            while str.count > 0 {
+                                //does substring based on the delimiters
+                                let food = str.substring(to: str.indexDistance(of: "$")!)
+                                str = str.substring(from: str.indexDistance(of: "$")! + 1)
+                                let quantity = str.substring(to: str.indexDistance(of: ";")!)
+                            
+                                text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
+                                str = str.substring(from: str.indexDistance(of: ";")! + 1)
+                            }
+                            //makes the format "Food: Item" next line "Quantity: number"
+                    
+                            self.currentLabel.text = text //puts on the screen
                         }
-                        //makes the format "Food: Item" next line "Quantity: number"
-                    
-                        self.currentLabel.text = text //puts on the screen
-                    
                     }
                 } else { //no item found, go back to the qrcodeview screen
                     self.errorMessage = "Food item not found in the inventory.";
@@ -252,26 +265,38 @@ class QRScrapeController: UIViewController {
                         
                             self.healthyLabel.text = isHealthy
                         
-                            //update checkout
-                        
-                            self.checkedOut = self.formatCheckout(currentCheckout: self.checkedOut, newItem: self.food_title)
-                        
-                            //takes the checkout info and cleans and reformats it
-                        
-                            var text = ""
-                            var str: String = self.checkedOut
-                        
-                            while str.count > 0 {
-                                //does substring based on the delimiters
-                                let food = str.substring(to: str.indexDistance(of: "$")!)
-                                str = str.substring(from: str.indexDistance(of: "$")! + 1)
-                                let quantity = str.substring(to: str.indexDistance(of: ";")!)
-                                text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
-                                str = str.substring(from: str.indexDistance(of: ";")! + 1)
-                            }
-                            //makes the format "Food: Item" next line "Quantity: number"
-                        
-                            self.currentLabel.text = text //puts on the screen
+                           //check to see how many times this item has been checked out in this current session
+                                
+                                var count: Int = self.timesCheckedOut(item: self.food_title, current: self.checkedOut)
+                                
+                                if(count >= 3) {
+                                    self.errorMessage = "This food item has been added too many times.";
+                                    self.performSegue(withIdentifier: "barcodeError", sender: self)
+                                } else {
+                                
+                                
+                                    //update checkout
+                                
+                                    self.checkedOut = self.formatCheckout(currentCheckout: self.checkedOut, newItem: self.food_title)
+                                
+                                    //takes the checkout info and cleans and reformats it
+                            
+                                    var text = ""
+                                    var str: String = self.checkedOut
+                                                
+                                    while str.count > 0 {
+                                        //does substring based on the delimiters
+                                        let food = str.substring(to: str.indexDistance(of: "$")!)
+                                        str = str.substring(from: str.indexDistance(of: "$")! + 1)
+                                        let quantity = str.substring(to: str.indexDistance(of: ";")!)
+                                    
+                                        text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
+                                        str = str.substring(from: str.indexDistance(of: ";")! + 1)
+                                    }
+                                    //makes the format "Food: Item" next line "Quantity: number"
+                            
+                                    self.currentLabel.text = text //puts on the screen
+                                }
                         }
                         }
 
@@ -370,6 +395,23 @@ class QRScrapeController: UIViewController {
                         
         }
         
+    }
+    
+    func timesCheckedOut(item: String, current: String) -> Int {
+        
+        if(!current.contains(item)) { //doesn't contain the item
+            return 0
+        }
+        
+        var str = current
+        
+        let food = str.indexDistance(of: item) ?? 0
+        str = str.substring(from: food)
+        str = str.substring(from: str.indexDistance(of: "$")! + 1)
+                
+        let quantity = str.substring(to: str.indexDistance(of: ";")!)
+        
+        return Int(quantity) ?? 0
     }
 
     func getFoodDataFromFirebase(callback: @escaping (_ data: [[String: Any]], _ names: [String])->Void) { //returns a dict of all the food items in the database and their data, and a list of the names of the food items
@@ -528,7 +570,11 @@ class QRScrapeController: UIViewController {
             destinationVC?.checkedOut = checkedOut
             destinationVC?.barcodes = barcodes
         } else {
-            barcodes += barcode + ","
+            
+            if(barcode != "") {
+                barcodes += barcode + ","
+            }
+            
             if(segue.identifier == "addMore") {
                 let destinationVC = segue.destination as? QRCodeViewController
                 destinationVC?.checkedOut = checkedOut
