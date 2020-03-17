@@ -267,15 +267,15 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             var lineChartEntry2 = [ChartDataEntry]()//this is the Array that will eventually be displayed on the graph.
             //here is the for loop
             print("the count of students is: \(studentsVisitedNumberArray.count)")
-            for i in 0..<studentsVisitedNumberArray.count {
+            for i in 0..<editeditemsCheckedOutNumberAray.count {
                 var currentNum = Double(i)
                 let lastChar = String(currentNum).last!
                 if(lastChar == "0"){
-                    formato.stringForValue(Double(i), axis: xaxis)
+//                    formato.stringForValue(Double(i), axis: xaxis)
                     print("i val let through: \(Double(i))")
-                    let value = ChartDataEntry(x: Double(i), y: studentsVisitedNumberArray[i]) // here we set the X and Y status in a data chart entry
+                    let value = ChartDataEntry(x: Double(i), y: editedstudentsVisitedNumberArray[i]) // here we set the X and Y status in a data chart entry
                     lineChartEntry.append(value) // here we add it to the data set
-                    let value2 = ChartDataEntry(x: Double(i), y: itemsCheckedOutNumberAray[i]) // here we set the X and Y status in a data chart entry
+                    let value2 = ChartDataEntry(x: Double(i), y: editeditemsCheckedOutNumberAray[i]) // here we set the X and Y status in a data chart entry
                     lineChartEntry2.append(value2) // here we add it to the data set
                 }
                 
@@ -313,19 +313,19 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
     }
     
-    let formato:BarChartFormatter = BarChartFormatter()
-    let xaxis:XAxis = XAxis()
-    
-    @objc(BarChartFormatter)
-    public class BarChartFormatter: NSObject, IAxisValueFormatter
-    {
-      var months: [String]! = ["1", "2", "3", "4", "5"]
-
-        public func stringForValue(_ value: Double, axis: AxisBase?) -> String
-      {
-        return months[Int(value)]
-      }
-    }
+//    let formato:BarChartFormatter = BarChartFormatter()
+//    let xaxis:XAxis = XAxis()
+//
+//    @objc(BarChartFormatter)
+//    public class BarChartFormatter: NSObject, IAxisValueFormatter
+//    {
+//      var months: [String]! = ["1", "2", "3", "4", "5"]
+//
+//        public func stringForValue(_ value: Double, axis: AxisBase?) -> String
+//      {
+//        return months[Int(value)]
+//      }
+//    }
     
 //    func setChart(dataEntryX forX:[String],dataEntryY forY: [Double]) {
 //        chartView.noDataText = "You need to provide data for the chart."
@@ -435,9 +435,11 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 //since we need to display last 5 days of data, if length is larger than 5, display that last five days
                 self.canDisplayMap = true;
                 
-                for i in 0..<6 {
-                    self.editedstudentsVisitedNumberArray[i] = self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-(i+1)]
-                        self.editeditemsCheckedOutNumberAray[i] = self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-(i+1)]
+                for i in 0..<5 {
+                    self.editedstudentsVisitedNumberArray.append( self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-(i+1)])
+                    self.editeditemsCheckedOutNumberAray.append( self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-(i+1)])
+                    self.editedstudentsVisitedNumberArray.reverse()
+                    self.editeditemsCheckedOutNumberAray.reverse()
                 }
                 
             }
