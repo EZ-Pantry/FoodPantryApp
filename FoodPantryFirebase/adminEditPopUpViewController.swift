@@ -6,6 +6,9 @@
 
 
 import UIKit
+import Foundation
+import FirebaseUI
+import FirebaseDatabase
 
 class adminEditPopUpViewController: UIViewController {
 
@@ -22,6 +25,7 @@ class adminEditPopUpViewController: UIViewController {
     
     @IBOutlet weak var editItemInfoButton: UIButton!
     @IBOutlet var foodImage: UIImageView!
+    @IBOutlet var deleteItemButton: UIButton!
     
     //data of the food item, set in another view controller
     var name = ""
@@ -33,9 +37,18 @@ class adminEditPopUpViewController: UIViewController {
     var allergies = ""
     var type = ""
     
+    var uid = ""
+    
+    var PantryName: String = ""
+    
+    var ref: DatabaseReference! //reference to the firebase database
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+        ref = Database.database().reference()
+
         //sets the labels on the screen
         foodName.text = name
         foodQuantity.text = "Quantity: " + String(quantity)
@@ -51,6 +64,8 @@ class adminEditPopUpViewController: UIViewController {
         editItemInfoButton.layer.cornerRadius = 15
         editItemInfoButton.clipsToBounds = true
         
+        deleteItemButton.layer.cornerRadius = 15
+        deleteItemButton.clipsToBounds = true
         
         // Do any additional setup after loading the view.
     }
@@ -76,6 +91,21 @@ class adminEditPopUpViewController: UIViewController {
     @IBAction func dismissToSearchView(_ sender: UIButton) {
         print("clicked")
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteItem(_ sender: Any) {
+        
+        let item = self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(uid)
+        
+        item.removeValue { error, _ in
+
+            if(error != nil) {
+                RequestError().showError()
+            } else {
+                self.performSegue(withIdentifier: "GoBack", sender: self)
+            }
+            
+        }
     }
     
     
