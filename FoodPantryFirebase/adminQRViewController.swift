@@ -41,8 +41,8 @@ class adminQRViewController: UIViewController {
              
              if(success) {
                 //do creation of QR
-                var imageName = self.generateBarcode(from: QRText)
-                self.QRCodeImageView.image = imageName//display the barcode
+                self.imageName = self.generateBarcode(from: QRText)!
+                self.QRCodeImageView.image = self.imageName//display the barcode
              }
             
          })
@@ -66,7 +66,9 @@ class adminQRViewController: UIViewController {
         }
     }
     
+    var imageName: UIImage = UIImage()
     func generateBarcode(from string: String) -> UIImage? {
+        //generates a random barcode which, when scanned, outputs the string from firebase
         //https://www.hackingwithswift.com/example-code/media/how-to-create-a-barcode
         let data = string.data(using: String.Encoding.ascii)
 
@@ -87,7 +89,7 @@ class adminQRViewController: UIViewController {
     @IBAction func saveQrButtonTapped(_ sender: UIButton) {
         //save the image of the barcode to camera roll
         takeScreenShot();
-        let alert = UIAlertController(title: "Barcode Image Saved", message: "Go to your Camera Roll to see the image!", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Barcode Image Saved", message: "Go to your Camera Roll & Crop the image to just show the barcode!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil);
     }
@@ -96,10 +98,10 @@ class adminQRViewController: UIViewController {
         let layer = UIApplication.shared.keyWindow!.layer
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale)
-        
+
         layer.render(in: UIGraphicsGetCurrentContext()!)
         let screenshot = UIGraphicsGetImageFromCurrentImageContext()
-        
+
         UIGraphicsEndImageContext()
         UIImageWriteToSavedPhotosAlbum(screenshot!, nil, nil, nil)
         
