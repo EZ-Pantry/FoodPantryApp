@@ -9,6 +9,7 @@ class adminControlsViewController: UIViewController {
     @IBOutlet weak var addItemsButton: UIButton!
     @IBOutlet weak var viewStatisticsButton: UIButton!
     @IBOutlet weak var editItemDataButton: UIButton!
+    @IBOutlet weak var foodPantryBarcodeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,9 @@ class adminControlsViewController: UIViewController {
         
         editItemDataButton.layer.cornerRadius = 15
         editItemDataButton.clipsToBounds = true
+        
+        foodPantryBarcodeButton.layer.cornerRadius = 15
+        foodPantryBarcodeButton.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }

@@ -42,7 +42,7 @@ class adminQRViewController: UIViewController {
              if(success) {
                 //do creation of QR
                 var imageName = self.generateBarcode(from: QRText)
-                self.QRCodeImageView.image = imageName
+                self.QRCodeImageView.image = imageName//display the barcode
              }
             
          })
@@ -85,6 +85,7 @@ class adminQRViewController: UIViewController {
     
     
     @IBAction func saveQrButtonTapped(_ sender: UIButton) {
+        //save the image of the barcode to camera roll
         takeScreenShot();
         let alert = UIAlertController(title: "Barcode Image Saved", message: "Go to your Camera Roll to see the image!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
