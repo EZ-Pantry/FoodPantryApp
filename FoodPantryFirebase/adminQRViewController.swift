@@ -15,8 +15,13 @@ class adminQRViewController: UIViewController {
     var alert = LoadingBar()
     var foodPantryQRText = ""
     
+    @IBOutlet var test: UIImageView!
     @IBOutlet weak var saveQRButton: UIButton!
     @IBOutlet weak var QRCodeImageView: UIImageView!
+    
+    var imageName: UIImage = UIImage()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,13 +46,28 @@ class adminQRViewController: UIViewController {
              
              if(success) {
                 //do creation of QR
-                self.imageName = self.generateBarcode(from: QRText)!
-                self.QRCodeImageView.image = self.imageName//display the barcode
+                self.generateCodeFromString(text: QRText)
              }
             
          })
         }
         self.alert.hideLoadingAlert()
+    }
+    
+    func generateCodeFromString(text: String) -> Void{
+
+        let id:String = text
+
+        let ciImageFromQRCode = BarcodeGenerator.generateQRCodeFromString(id)
+
+        // Scale according to imgViewQRCode. So, image is not blurred.
+        let scaleX = (QRCodeImageView.frame.size.width / ciImageFromQRCode.extent.size.width)
+        let scaleY = (QRCodeImageView.frame.size.height / ciImageFromQRCode.extent.size.height)
+
+        let imgTransformed = ciImageFromQRCode.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+        self.QRCodeImageView.image = BarcodeGenerator.convert(imgTransformed)
+        self.imageName = BarcodeGenerator.convert(imgTransformed)
+
     }
     
         
@@ -66,45 +86,32 @@ class adminQRViewController: UIViewController {
         }
     }
     
-    var imageName: UIImage = UIImage()
-    func generateBarcode(from string: String) -> UIImage? {
-        //generates a random barcode which, when scanned, outputs the string from firebase
-        //https://www.hackingwithswift.com/example-code/media/how-to-create-a-barcode
-        let data = string.data(using: String.Encoding.ascii)
-
-        if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
-            filter.setValue(data, forKey: "inputMessage")
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
-
-            if let output = filter.outputImage?.transformed(by: transform) {
-                return UIImage(ciImage: output)
-            }
-        }
-
-        return nil
-    }
-    
     
     
     @IBAction func saveQrButtonTapped(_ sender: UIButton) {
         //save the image of the barcode to camera roll
-        takeScreenShot();
-        let alert = UIAlertController(title: "Barcode Image Saved", message: "Go to your Camera Roll & Crop the image to just show the barcode!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil);
+        saveBarcode()
     }
     
-    func takeScreenShot(){
-        let layer = UIApplication.shared.keyWindow!.layer
-        let scale = UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale)
-
-        layer.render(in: UIGraphicsGetCurrentContext()!)
-        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
-
-        UIGraphicsEndImageContext()
-        UIImageWriteToSavedPhotosAlbum(screenshot!, nil, nil, nil)
-        
+    
+    func saveBarcode() {
+        UIImageWriteToSavedPhotosAlbum(imageName, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            print(error)
+        } else {
+            let alert = UIAlertController(title: "Barcode Image Saved", message: "Go to your Camera Roll", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil);
+        }
     }
     
 
@@ -113,4 +120,25 @@ class adminQRViewController: UIViewController {
     }
     
 
+}
+
+class BarcodeGenerator {
+    
+    class func generateQRCodeFromString(_ strQR:String) -> CIImage {
+        let dataString = strQR.data(using: String.Encoding.isoLatin1)
+
+        let qrFilter = CIFilter(name:"CICode128BarcodeGenerator")
+        qrFilter?.setValue(dataString, forKey: "inputMessage")
+        return (qrFilter?.outputImage)!
+    }
+
+
+    class func convert(_ cmage:CIImage) -> UIImage
+    {
+        let context:CIContext = CIContext.init(options: nil)
+        let cgImage:CGImage = context.createCGImage(cmage, from: cmage.extent)!
+        let image:UIImage = UIImage.init(cgImage: cgImage)
+        return image
+    }
+    
 }
