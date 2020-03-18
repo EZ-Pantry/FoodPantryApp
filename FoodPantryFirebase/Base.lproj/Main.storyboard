@@ -1858,11 +1858,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQa-wX-6sh">
-                                <rect key="frame" x="53" y="743" width="314" height="84"/>
+                                <rect key="frame" x="50" y="761" width="314" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="37"/>
-                                <state key="normal" title="SAVE BARCODE">
+                                <state key="normal" title="EXPORT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -1873,6 +1873,18 @@
                                 <rect key="frame" x="51" y="451" width="306" height="183"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1OF-mb-jSA">
+                                <rect key="frame" x="50" y="667" width="314" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="37"/>
+                                <state key="normal" title="GENERATE NEW">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="generateNew:" destination="UBP-Wa-IIo" eventType="touchUpInside" id="LnX-lB-DcN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="8I2-pZ-jtz"/>
@@ -1880,6 +1892,7 @@
                     <navigationItem key="navigationItem" id="wkk-dr-KrB"/>
                     <connections>
                         <outlet property="QRCodeImageView" destination="lqG-bo-0Gb" id="OY7-Ro-a7f"/>
+                        <outlet property="generateButton" destination="1OF-mb-jSA" id="nk6-EC-5V1"/>
                         <outlet property="saveQRButton" destination="vQa-wX-6sh" id="xyd-bO-ug2"/>
                     </connections>
                 </viewController>
