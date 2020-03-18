@@ -45,7 +45,7 @@ class adminQRViewController: UIViewController {
             self.retreiveQRTextFromFirebase(callback: {(success, QRText)-> Void in
              
              if(success) {
-                //do creation of QR
+                //do creation of Q
                 self.generateCodeFromString(text: QRText)
              }
             
