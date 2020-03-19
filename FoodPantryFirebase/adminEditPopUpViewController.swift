@@ -1,8 +1,4 @@
-//
-//  adminEditPopUpViewController.swift
-//  FoodPantryFirebase
-//  Copyright © 2020 Ashay Parikh,
-//  Rayaan Siddiqi. All rights reserved.
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
 
 
 import UIKit
