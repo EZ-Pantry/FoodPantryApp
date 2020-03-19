@@ -1,10 +1,4 @@
-//
-//  AppDelegate.swift
-//  FoodPantryFirebase
-//
-//  Created by Rayaan Siddiqi on 2/8/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
 
 import UIKit
 import Firebase
