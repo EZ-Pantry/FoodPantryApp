@@ -30,11 +30,11 @@ class checkoutViewController: UITableViewController {
 
         //update with today's date
         let formatter : DateFormatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
+        formatter.dateFormat = "MM-dd-yyyy"//in month/day/year format
 //        MM-dd-yyyy- no need
-        self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)
+        self.fullyFormatedDate = formatter.string(from:NSDate.init(timeIntervalSinceNow: 0) as Date)//the current date in literal format
         
-        self.finishButton.layer.cornerRadius = 15
+        self.finishButton.layer.cornerRadius = 15//round buttons
         self.finishButton.clipsToBounds = true
 
         self.backButton.layer.cornerRadius = 15

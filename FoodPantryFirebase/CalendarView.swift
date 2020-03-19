@@ -57,14 +57,9 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var todaysDate = 0
     var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
     
-//    var fullyFormatedDate = ""
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        let formatter : DateFormatter = DateFormatter()
-//        formatter.dateFormat = "MM-dd-yyyy"
-//        self.fullyFormatedDate = formatter.string(from:   NSDate.init(timeIntervalSinceNow: 0) as Date)//get in terms of calendar date
-//        print("fully date: \(self.fullyFormatedDate)")
         
         ref = Database.database().reference()
         
@@ -86,6 +81,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func changeTheme() {
+        //change from dark theme if desired
         myCollectionView.reloadData()
         
         monthView.lblName.textColor = Style.monthViewLblColor
@@ -164,8 +160,6 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         
         if(Int(dateClicked)!<10){
             currentDayString = "0" + dateClicked
-            print("current day belowww")
-            print(currentDayString)
         }
         else{
             currentDayString = dateClicked;

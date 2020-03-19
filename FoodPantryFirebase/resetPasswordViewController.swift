@@ -20,7 +20,7 @@ class resetPasswordViewController: UIViewController {
         guard let emailaddress = emailTextField.text else { return }//gets users email
         Auth.auth().sendPasswordReset(withEmail: emailaddress) { error in
             if error == nil {
-                //If no error, then email for recovery with instructions is sent
+                //If no error, then email for recovery with instructions is sent-manage email strucutre in firebase
                 print("email successfully sent!")
                 let alert = UIAlertController(title: "Password Reset Email Sent!", message: "Please check your email and follow the directions to reset your password!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))

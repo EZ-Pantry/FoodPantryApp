@@ -35,7 +35,6 @@ class logInViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil);
             } else {
             
-            
                 Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
                     if(user!.isEmailVerified) {
                         self.dismiss(animated: false, completion: nil)//sends user to home screen animation

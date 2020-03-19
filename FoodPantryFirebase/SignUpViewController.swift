@@ -156,7 +156,7 @@ class SignUpViewController: UIViewController {
                         
                             self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
                         
-                            UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
+                            UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")//set the pantry name so we can use this later
                         
                     }
                     
@@ -208,7 +208,7 @@ class SignUpViewController: UIViewController {
                            }))
                            self.present(alert, animated: true, completion: nil);
                     } else {
-                        // the user is not availabl
+                        // the user is not available-error display
                         let alert = UIAlertController(title: "Error Signing Up", message: "Please try again!", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                         self.present(alert, animated: true, completion: nil);
