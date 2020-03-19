@@ -26,6 +26,8 @@ class homeViewController: UIViewController {
     
     var alert = LoadingBar()
     
+    var message = ""
+    
     override func viewDidLoad() {
 
         
@@ -120,6 +122,15 @@ class homeViewController: UIViewController {
         }
         
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if message != "" {
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil);//presents the alert for completion
+            message = ""
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
