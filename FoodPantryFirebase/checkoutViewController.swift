@@ -334,8 +334,6 @@ class checkoutViewController: UITableViewController {
             let quantity = str.substring(to: str.indexDistance(of: ";")!)
             self.quantities.append(Int(quantity) ?? 0)
             
-            print(food)
-            print(delimiter)
             
             self.foodItems = self.foodItems.substring(to: food) + self.foodItems.substring(from: delimiter)
             

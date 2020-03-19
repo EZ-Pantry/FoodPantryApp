@@ -25,6 +25,7 @@
 		1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */; };
 		1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */; };
 		1CF92CE424203228001D7E0B /* LoadingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF92CE324203228001D7E0B /* LoadingBar.swift */; };
+		1CF92CE62423C177001D7E0B /* otherAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF92CE52423C177001D7E0B /* otherAdminViewController.swift */; };
 		790C13C585DC69A8A6659284 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */; };
 		A239DC0F2413156B003CFF0C /* settingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC0E2413156B003CFF0C /* settingsPageViewController.swift */; };
 		A239DC1124131589003CFF0C /* sendfeedbackcontrolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC1024131589003CFF0C /* sendfeedbackcontrolsViewController.swift */; };
@@ -102,6 +103,7 @@
 		1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScrapeController.swift; sourceTree = "<group>"; };
 		1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
 		1CF92CE324203228001D7E0B /* LoadingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBar.swift; sourceTree = "<group>"; };
+		1CF92CE52423C177001D7E0B /* otherAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherAdminViewController.swift; sourceTree = "<group>"; };
 		2C7ED3C37AF6642BA667F233 /* Pods_FoodPantryFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E1892DB996DB72CE1C59838 /* Pods-FoodPantryFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.debug.xcconfig"; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				1CBF1C53242009EE0064F7D1 /* CheckoutCell1TableViewCell.swift */,
 				1CBF1C54242009EE0064F7D1 /* CheckoutCell1TableViewCell.xib */,
 				1CF92CE324203228001D7E0B /* LoadingBar.swift */,
+				1CF92CE52423C177001D7E0B /* otherAdminViewController.swift */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				1CBDDC94240DFABD00AC53A9 /* addItemViewController.swift in Sources */,
 				A239DC1D2416CE77003CFF0C /* adminFirstEditItemsViewController.swift in Sources */,
 				A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */,
+				1CF92CE62423C177001D7E0B /* otherAdminViewController.swift in Sources */,
 				A239DC1124131589003CFF0C /* sendfeedbackcontrolsViewController.swift in Sources */,
 				1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */,
 				A239DC212416F0D5003CFF0C /* ediItemInfoViewController.swift in Sources */,

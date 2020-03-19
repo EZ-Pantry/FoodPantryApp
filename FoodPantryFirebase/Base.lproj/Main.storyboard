@@ -584,7 +584,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E9S-5b-LzT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="ND4-dw-KPJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1971" y="1330"/>
+            <point key="canvasLocation" x="-2578" y="1298"/>
         </scene>
         <!--HOME-->
         <scene sceneID="cyz-ll-z1e">
@@ -982,7 +982,7 @@
                                     <action selector="dismissBackTapped:" destination="ggt-BT-bn5" eventType="touchUpInside" id="ScI-Rr-cZh"/>
                                     <action selector="dismissBackToControls:" destination="ggt-BT-bn5" eventType="touchUpInside" id="5Sd-iz-hgx"/>
                                     <action selector="dismissToSearchView:" destination="eF5-yX-IfH" eventType="touchUpInside" id="0Xk-hM-UsR"/>
-                                    <segue destination="Cx6-OT-Bas" kind="unwind" unwindAction="unwindToHome:" id="62e-oS-NSg"/>
+                                    <segue destination="Cx6-OT-Bas" kind="unwind" identifier="BackToHome" unwindAction="unwindToHome:" id="62e-oS-NSg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -995,6 +995,7 @@
                         <outlet property="numberTextField" destination="bnm-Sw-lWr" id="bbm-eo-6ML"/>
                         <outlet property="selectButton" destination="c54-VI-0E2" id="oZQ-fn-nU7"/>
                         <segue destination="LbU-b6-iGh" kind="presentation" identifier="scanSession" modalPresentationStyle="fullScreen" id="Ybh-uf-f4w"/>
+                        <segue destination="Cx6-OT-Bas" kind="unwind" unwindAction="unwindToHome:" id="92q-mC-Kkd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iC-48-6u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1278,7 +1279,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpF-Ej-BoC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Bbg-FS-YR1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3309" y="1858"/>
+            <point key="canvasLocation" x="5712" y="1838"/>
         </scene>
         <!--Checkout View Controller-->
         <scene sceneID="ieI-5P-crh">
@@ -1348,7 +1349,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hop-ob-I8Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="A5a-uG-gnL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4735" y="1858"/>
+            <point key="canvasLocation" x="5201" y="2538"/>
         </scene>
         <!--PROFILE-->
         <scene sceneID="bWL-me-LUR">
@@ -1562,7 +1563,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWb-6p-e3b">
-                                <rect key="frame" x="50" y="696" width="314" height="74"/>
+                                <rect key="frame" x="50" y="592" width="314" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
@@ -1571,6 +1572,18 @@
                                 </state>
                                 <connections>
                                     <segue destination="UBP-Wa-IIo" kind="presentation" id="Scq-IL-ACv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCs-Qw-JSb">
+                                <rect key="frame" x="50" y="703" width="314" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                <state key="normal" title="OTHER">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="4qm-lL-7Is" kind="presentation" modalPresentationStyle="fullScreen" id="bMy-qq-rGg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1583,12 +1596,13 @@
                         <outlet property="addItemsButton" destination="2EF-G6-uUK" id="Ut9-07-amv"/>
                         <outlet property="editItemDataButton" destination="XIN-ie-Vhn" id="klZ-gc-003"/>
                         <outlet property="foodPantryBarcodeButton" destination="fWb-6p-e3b" id="bV6-eh-Ce7"/>
+                        <outlet property="otherButton" destination="wCs-Qw-JSb" id="QLb-zG-VLb"/>
                         <outlet property="viewStatisticsButton" destination="vD6-4u-XD9" id="zx7-EM-ThI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpj-eZ-7Sr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="907"/>
+            <point key="canvasLocation" x="532" y="1534"/>
         </scene>
         <!--View Statistics View Controller-->
         <scene sceneID="emm-VK-tzb">
@@ -1782,7 +1796,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJt-7r-QY0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="579.71014492753625" y="1737.7232142857142"/>
+            <point key="canvasLocation" x="699" y="2315"/>
         </scene>
         <!--SEARCH-->
         <scene sceneID="yKy-sA-1Md">
@@ -1905,7 +1919,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MbN-Sd-hzU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1010.144927536232" y="1737.7232142857142"/>
+            <point key="canvasLocation" x="-1509" y="2315"/>
         </scene>
         <!--Add View Controller-->
         <scene sceneID="4Vd-nV-3DC">
@@ -1999,7 +2013,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="USQ-1o-LgT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-107" y="1739"/>
+            <point key="canvasLocation" x="-375" y="2315"/>
         </scene>
         <!--Choose Manual View Controller-->
         <scene sceneID="YHm-3u-MKq">
@@ -2069,7 +2083,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9lq-Z3-RRq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="254" y="2527"/>
+            <point key="canvasLocation" x="125" y="3222"/>
         </scene>
         <!--Calender First View Controller-->
         <scene sceneID="JvA-Z1-RMK">
@@ -2095,7 +2109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Otv-Kf-Zs3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055.072463768116" y="2519.1964285714284"/>
+            <point key="canvasLocation" x="1104" y="3222"/>
         </scene>
         <!--Add Item View Controller-->
         <scene sceneID="td0-GD-Rn8">
@@ -2148,7 +2162,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lA4-2A-8su" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-925" y="2527"/>
+            <point key="canvasLocation" x="-1010" y="3187"/>
         </scene>
         <!--Add Main View Controller-->
         <scene sceneID="JVf-GS-V8s">
@@ -2316,7 +2330,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLC-Ia-fGA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="P9n-H2-N1p" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-262" y="3567"/>
+            <point key="canvasLocation" x="-435" y="4012"/>
         </scene>
         <!--Settings Page View Controller-->
         <scene sceneID="hHo-a6-1yi">
@@ -2860,7 +2874,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FpD-jY-8SH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="1700"/>
+            <point key="canvasLocation" x="1583" y="2315"/>
+        </scene>
+        <!--Other Admin View Controller-->
+        <scene sceneID="zMc-Pn-i5R">
+            <objects>
+                <viewController id="4qm-lL-7Is" customClass="otherAdminViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xLO-nT-130">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5HM-Jp-lQo">
+                                <rect key="frame" x="37" y="44" width="21" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xmark.octagon" catalog="system"/>
+                                <connections>
+                                    <action selector="dismissBack:" destination="4qm-lL-7Is" eventType="touchUpInside" id="UMf-7l-zHt"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OTHER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbH-M5-3vg">
+                                <rect key="frame" x="137" y="86" width="140" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Allow Checking Out" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cv-L1-4c6">
+                                <rect key="frame" x="87" y="262" width="241" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2a5-Mh-6mg">
+                                <rect key="frame" x="184" y="321" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="checkoutChanged:" destination="4qm-lL-7Is" eventType="valueChanged" id="W5o-SS-x2y"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ddz-8N-xkE"/>
+                    </view>
+                    <connections>
+                        <outlet property="checkoutSwitch" destination="2a5-Mh-6mg" id="AHN-ww-goD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cJp-fs-F58" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2489.8550724637685" y="2321.6517857142858"/>
         </scene>
         <!--Admin Edit Pop Up View Controller-->
         <scene sceneID="aj9-5a-cin">
@@ -2976,7 +3039,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5GS-m3-83s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="VEN-nF-Quo" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1911.594202898551" y="2404.6875"/>
+            <point key="canvasLocation" x="2071" y="3222"/>
         </scene>
         <!--Edi Item Info View Controller-->
         <scene sceneID="qa9-Gn-H5G">
@@ -3127,7 +3190,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbb-TB-hfk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="BFO-57-K4a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1912" y="3132"/>
+            <point key="canvasLocation" x="1983" y="4039"/>
         </scene>
         <!--Send Feed Back Google Form View Controller-->
         <scene sceneID="JhT-II-f0h">
@@ -3238,7 +3301,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4uu-1g-WfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="T5m-WH-0y7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2464" y="1609"/>
+            <point key="canvasLocation" x="3528" y="1920"/>
         </scene>
     </scenes>
     <resources>
