@@ -30,6 +30,9 @@ class popUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        popOverView.layer.cornerRadius = 15
+        popOverView.clipsToBounds = true
+        
         //sets the labels on the screen
         foodName.text = name
         
