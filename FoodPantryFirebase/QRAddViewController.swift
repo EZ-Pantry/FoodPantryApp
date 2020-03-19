@@ -49,6 +49,13 @@ class QRAddViewController: UIViewController {
             title = title.filterEmoji
             
             destinationVC?.manualTitle = title
+            
+            error = ""
+            
+        } else if segue.identifier == "GoToScan"{
+            let destinationVC = segue.destination as? addItemViewController
+            
+            error = ""
         }
     }
     
