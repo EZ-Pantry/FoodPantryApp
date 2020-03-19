@@ -1888,7 +1888,7 @@
                                 <color key="tintColor" red="0.0" green="0.47185860759999998" blue="0.97921389250000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="focus"/>
                                 <connections>
-                                    <segue destination="CnD-3e-evA" kind="presentation" modalPresentationStyle="fullScreen" id="Tlz-CM-1uG"/>
+                                    <segue destination="CnD-3e-evA" kind="presentation" identifier="GoToScan" modalPresentationStyle="fullScreen" id="Tlz-CM-1uG"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYj-QH-O4m">
@@ -3337,7 +3337,7 @@
         <image name="xmark.seal.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ya6-8G-W4l"/>
+        <segue reference="3Qs-b0-Rjn"/>
         <segue reference="Zke-bH-X19"/>
         <segue reference="H9f-l5-90A"/>
         <segue reference="EWc-7U-1jR"/>
