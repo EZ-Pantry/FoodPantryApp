@@ -1701,18 +1701,6 @@
                                     <action selector="nextButtonClicked:" destination="KNv-eW-BHH" eventType="touchUpInside" id="t4W-uN-OVf"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6xo-IW-zf3">
-                                <rect key="frame" x="47" y="206" width="326" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Line Graph"/>
-                                    <segment title="Calendar View"/>
-                                    <segment title="Text "/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentControlChanged:" destination="KNv-eW-BHH" eventType="valueChanged" id="GLk-cw-WjG"/>
-                                </connections>
-                            </segmentedControl>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose Student..." borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PYm-C9-ce1">
                                 <rect key="frame" x="87" y="206" width="251" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1744,11 +1732,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KwC-yt-Z3q" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="36" y="300" width="342" height="415"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YM3-uk-t7X" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="36" y="300" width="342" height="535"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6xo-IW-zf3">
+                                <rect key="frame" x="5" y="206" width="394" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Line Graph"/>
+                                    <segment title="Calendar View"/>
+                                    <segment title="Text "/>
+                                    <segment title="Bar Graph"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentControlChanged:" destination="KNv-eW-BHH" eventType="valueChanged" id="GLk-cw-WjG"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Eno-kY-Nic"/>
@@ -1760,6 +1766,7 @@
                         <outlet property="chartView" destination="YM3-uk-t7X" id="XIa-yi-M4g"/>
                         <outlet property="chooseGraphOrTextSegment" destination="6xo-IW-zf3" id="px2-lW-4S5"/>
                         <outlet property="indivisualStudentButton" destination="tHI-Tb-GKa" id="bIm-Zu-N8G"/>
+                        <outlet property="itemsBarChartView" destination="KwC-yt-Z3q" id="msP-7y-Pi3"/>
                         <outlet property="lastDateCheckedOutLbl" destination="OOi-V2-Fnr" id="PaL-Qk-eys"/>
                         <outlet property="lastItemCheckedOutLbl" destination="jQr-fx-5Fb" id="L9O-Av-VBi"/>
                         <outlet property="nextButton" destination="A6F-Xh-I6T" id="fK2-T9-tf9"/>
@@ -2876,32 +2883,25 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Food Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pH4-ZX-9le">
-                                        <rect key="frame" x="79" y="80" width="205" height="33"/>
+                                        <rect key="frame" x="79" y="34" width="205" height="33"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xe1-SP-IDT">
-                                        <rect key="frame" x="61" y="150" width="240" height="212"/>
+                                        <rect key="frame" x="61" y="104" width="240" height="212"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faD-Ha-YKa">
-                                        <rect key="frame" x="103" y="370" width="157" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Information" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XW3-sH-Dhj">
-                                        <rect key="frame" x="103" y="399" width="157" height="89"/>
+                                        <rect key="frame" x="103" y="353" width="157" height="89"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Checked Out" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vb3-gT-pOZ">
-                                        <rect key="frame" x="103" y="496" width="157" height="21"/>
+                                        <rect key="frame" x="103" y="450" width="157" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -2919,7 +2919,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Healthy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jha-I5-CcE">
-                                        <rect key="frame" x="103" y="531" width="157" height="21"/>
+                                        <rect key="frame" x="103" y="485" width="157" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -2936,6 +2936,20 @@
                                             <action selector="deleteItem:" destination="eF5-yX-IfH" eventType="touchUpInside" id="2bC-L4-eD1"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Avg Times Checked Out" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmW-O9-GHg">
+                                        <rect key="frame" x="61" y="524" width="269" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faD-Ha-YKa">
+                                        <rect key="frame" x="103" y="324" width="157" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -2945,6 +2959,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="u6S-SH-rKb"/>
                     <connections>
+                        <outlet property="avgTimesCheckedOutLbl" destination="WmW-O9-GHg" id="hLL-9t-4cp"/>
                         <outlet property="deleteItemButton" destination="bcD-uY-EtC" id="p5H-OB-E2b"/>
                         <outlet property="editItemInfoButton" destination="o8o-Io-Spi" id="klc-37-aZ6"/>
                         <outlet property="foodCheckedout" destination="Vb3-gT-pOZ" id="R9y-6z-Uiz"/>

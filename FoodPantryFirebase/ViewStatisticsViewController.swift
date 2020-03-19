@@ -5,7 +5,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 import Charts
-class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate {
 
     @IBOutlet weak var totalStatsButton: UIButton!//see total statistics
     
@@ -17,7 +17,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBOutlet weak var studentEmailLbl: UILabel!
     @IBOutlet weak var studentPasswordLbl: UILabel!
-    
+
     
     @IBOutlet weak var studentIDLbl: UILabel!
     @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
@@ -26,9 +26,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var allergiesLbl: UILabel!
     @IBOutlet weak var totalItemsCheckedOutlbl: UILabel!
     @IBOutlet weak var chartView: LineChartView!
-    
-    @IBOutlet weak var barChartView: BarChartView!
-    
+            
+
     var ref: DatabaseReference!
     
     @IBOutlet weak var backButton: UIButton!
@@ -46,10 +45,14 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     var studentNames: [String] = []//indivisual names array
     
     var data : [[String: Any]] =  []
+    var itemsCheckedOutData : [[String: Any]] =  []
     
+    var itemsCheckedOutDoubleArray : [Double] = []
+    var itemsCheckedOutStringNames : [String] = []
     var chartData : [[String: Any]] =  []
     var PantryName: String = ""
 
+    @IBOutlet weak var itemsBarChartView: BarChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,11 +68,13 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         loadStudentNames();//loading the names right when view is loaded
         
         loadInXandYAxis();
+        loadItemsData();
         totalStatsButton.layer.cornerRadius = 10
         totalStatsButton.clipsToBounds = true
         
         indivisualStudentButton.layer.cornerRadius = 10
         indivisualStudentButton.clipsToBounds = true
+        itemsBarChartView.delegate = self;
         
         backButton.layer.cornerRadius = 10
         backButton.clipsToBounds = true
@@ -79,7 +84,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         pickerField.isHidden = true;
         chooseGraphOrTextSegment.isHidden = true;
-        
         
     }
     
@@ -156,6 +160,44 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         else if(getIndex == 2){
             doTextData()
         }
+        else if(getIndex == 3){
+            print("in here")
+            setChartForItemsData();
+            print(itemsCheckedOutData)
+        }
+    }
+    var months: [String]!
+    
+    func setChartForItemsData(){
+        setChart(values: itemsCheckedOutDoubleArray)
+    }
+    
+    
+    func setChart(values: [Double]) {
+        var dataEntries: [BarChartDataEntry] = []
+
+        for i in 0..<values.count {
+          let dataEntry = BarChartDataEntry(x: Double(i), y: values[i])
+          dataEntries.append(dataEntry)
+        }
+
+        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Units Sold")
+        let chartData = BarChartData(dataSet: chartDataSet)
+        
+        
+        itemsBarChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: itemsCheckedOutStringNames)
+        itemsBarChartView.xAxis.granularity = 1
+        
+        self.itemsBarChartView.rightAxis.enabled = true
+        self.itemsBarChartView.xAxis.labelPosition = XAxis.LabelPosition.bottom
+        
+        itemsBarChartView.data = chartData
+        
+        itemsBarChartView.setVisibleXRangeMaximum(10)
+        
+            
+        itemsBarChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+            
     }
     
     func doLineGraph(){
@@ -360,6 +402,40 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         print(self.studentNames)
         pickerData = self.studentNames
     }
+    
+    func loadItemsData(){
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+
+            var tempData : [[String: Any]] = []
+            var tempNames: [String] = []
+            var c: Int = 0
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let key = snap.key
+                let value: [String: Any] = snap.value as! [String : Any]
+                
+                let itemName = value["Name"] as? String ?? ""
+                let checkedOutString = value["Checked Out"] as? String ?? ""
+                let checkedOutDouble = Double(value["Checked Out"] as? String ?? "") ?? 0
+                let id = String(c)
+                
+                tempData.append(["itemName": itemName, "numCheckedOut": checkedOutString])//adding each students atrributes to array
+                self.itemsCheckedOutDoubleArray.append(checkedOutDouble)
+                self.itemsCheckedOutStringNames.append(itemName)
+                c += 1
+            }
+            
+            self.itemsCheckedOutData = tempData
+            
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
+                
+        
+    }
+    
+    
     func loadStudentNames(){
         let userID = Auth.auth().currentUser?.uid
         self.ref.child(self.PantryName).child("Users").observeSingleEvent(of: .value, with: { (snapshot) in

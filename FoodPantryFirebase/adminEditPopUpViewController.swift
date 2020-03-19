@@ -23,6 +23,7 @@ class adminEditPopUpViewController: UIViewController {
     @IBOutlet var foodAllergy: UILabel!
     @IBOutlet var foodType: UILabel!
     
+    @IBOutlet weak var avgTimesCheckedOutLbl: UILabel!
     @IBOutlet weak var editItemInfoButton: UIButton!
     @IBOutlet var foodImage: UIImageView!
     @IBOutlet var deleteItemButton: UIButton!
@@ -36,6 +37,7 @@ class adminEditPopUpViewController: UIViewController {
     var image = ""
     var allergies = ""
     var type = ""
+    var timesCheckedOut = 0
     
     var uid = ""
     
@@ -53,9 +55,15 @@ class adminEditPopUpViewController: UIViewController {
         foodName.text = name
         foodQuantity.text = "Quantity: " + String(quantity)
         foodInformation.text = "Information: " + String(information)
-        foodCheckedout.text = "Checked out: " + String(checkedout)
+        foodCheckedout.text = "Total Checked out: " + String(checkedout)
         foodHealthy.text = "Healthy: " + String(healthy)
         
+        
+        //get weekly average:
+        timesCheckedOut = Int(checkedout)!;
+        timesCheckedOut = Int(timesCheckedOut/7)
+        print(timesCheckedOut)
+        avgTimesCheckedOutLbl.text = "Times Checked Out Per week: \(timesCheckedOut)"
         if(image != "") {
             foodImage.load(url: URL(string: String(image))!)
         } else {
