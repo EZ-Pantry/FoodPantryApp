@@ -35,6 +35,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     var pickerData: [String] = [String]()//where the choosable students names go
     var datesData: [String] = [String]()//where the dates of checking out go array
     var xAxisDataDates: [Int] = [Int]()//x axis on graph data
+    var emptyStringArray: [String] = [String]()
     var yAxisDataNumVisits: [Int] = [Int]()//y axis on graph data array
     var lineChartEntry = [ChartDataEntry]()//line Chart object array to plot points of entry
     
@@ -56,6 +57,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        itemsBarChartView.delegate = self
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
         yourPicker.delegate = self
@@ -72,9 +74,9 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         totalStatsButton.layer.cornerRadius = 10
         totalStatsButton.clipsToBounds = true
         
+        
         indivisualStudentButton.layer.cornerRadius = 10
         indivisualStudentButton.clipsToBounds = true
-        itemsBarChartView.delegate = self;
         
         backButton.layer.cornerRadius = 10
         backButton.clipsToBounds = true
@@ -109,6 +111,9 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        itemsBarChartView.delegate = self
+        print("delegate here")
+        print(itemsBarChartView.delegate)
         loadStudentNames();
         pickerField.isHidden = true;
         chooseGraphOrTextSegment.isHidden = true;
@@ -122,6 +127,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         lastDateCheckedOutLbl.isHidden = true;
         totalItemsCheckedOutlbl.isHidden = true;
         chartView.isHidden = true;
+        itemsBarChartView.isHidden = true;
         
     }
     @IBAction func indivisualStudentButtonTapped(_ sender: UIButton) {
@@ -130,6 +136,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         chooseGraphOrTextSegment.isHidden = true;
         nextButton.isHidden = true;
         chartView.isHidden = true;
+        itemsBarChartView.isHidden = true;
         studentNameLbl.isHidden = false;
         studentNameLbl.text = ""
         studentIDLbl.isHidden = false;
@@ -161,18 +168,32 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             doTextData()
         }
         else if(getIndex == 3){
-            print("in here")
-            setChartForItemsData();
-            print(itemsCheckedOutData)
+            doBarGraph();
         }
     }
-    var months: [String]!
     
+    func doBarGraph(){
+        backButton.isHidden = true;
+        nextButton.isHidden = true;
+        setChartForItemsData()
+        chartView.isHidden = true;
+        itemsBarChartView.isHidden = false;
+        studentNameLbl.isHidden = true;
+        studentIDLbl.isHidden = true;
+        studentEmailLbl.isHidden = true;
+        studentPasswordLbl.isHidden = true;
+        lastItemCheckedOutLbl.isHidden = true;
+        lastDateCheckedOutLbl.isHidden = true;
+        totalItemsCheckedOutlbl.isHidden = true;
+        allergiesLbl.isHidden = true;
+    }
+    var months: [String]!
     func setChartForItemsData(){
         setChart(values: itemsCheckedOutDoubleArray)
     }
     
     
+    var arrayOfAllItemsData: [BarChartDataSet]!
     func setChart(values: [Double]) {
         var dataEntries: [BarChartDataEntry] = []
 
@@ -181,11 +202,16 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
           dataEntries.append(dataEntry)
         }
 
-        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Units Sold")
+        //need to set each item with indivisual marker
+        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Items in Food Pantry")//each column represnents a food item checked out number of times
+        
         let chartData = BarChartData(dataSet: chartDataSet)
         
-        
-        itemsBarChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: itemsCheckedOutStringNames)
+        //sets x axis values
+        for x in 0..<itemsCheckedOutStringNames.count{
+            emptyStringArray.append(" ")//to make the x axis free of any random numbers
+        }
+        itemsBarChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: emptyStringArray)
         itemsBarChartView.xAxis.granularity = 1
         
         self.itemsBarChartView.rightAxis.enabled = true
@@ -195,16 +221,61 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         itemsBarChartView.setVisibleXRangeMaximum(10)
         
-            
         itemsBarChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
             
     }
+    
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        //display item name here when clicked
+        var entryYValSelected = entry.y
+        
+        for x in 0..<itemsCheckedOutData.count{
+            if(entryYValSelected == itemsCheckedOutDoubleArray[x]){
+                //when a bar is clicked, a pop over with little info about that item appears
+                print("item found")
+                print(itemsCheckedOutStringNames[x])
+                foodNameClicked = itemsCheckedOutStringNames[x]
+                foodImageClicked = itemsCheckedOutData[x]["itemImage"] as! String
+                foodCheckedOutClicked = itemsCheckedOutData[x]["numCheckedOut"] as! String
+                print(foodImageClicked)
+                print(foodCheckedOutClicked)
+                self.performSegue(withIdentifier: "toItemMiniPopOver", sender: self)
+            }
+        }
+        
+        
+    }
+    
+    var foodNameClicked = ""//the item name
+    var foodImageClicked = ""//image URL
+    var foodCheckedOutClicked = ""//number of that item checked out
+    
+    //segue handler
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //send data to other VC
+        if segue.identifier == "toItemMiniPopOver"{
+            let destinationVC = segue.destination as? popUpFromBarChartViewController
+            destinationVC?.name = foodNameClicked
+            destinationVC?.checkedout = foodCheckedOutClicked
+            destinationVC?.image = foodImageClicked
+
+
+        }
+    }
+
+
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        print("chartValueNothingSelected")
+    }
+    
+
     
     func doLineGraph(){
         backButton.isHidden = true;
         nextButton.isHidden = true;
         updateGraph()
         chartView.isHidden = false;
+        itemsBarChartView.isHidden = true;
         studentNameLbl.isHidden = true;
         studentIDLbl.isHidden = true;
         studentEmailLbl.isHidden = true;
@@ -219,6 +290,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         backButton.isHidden = false;
         nextButton.isHidden = false;
         chartView.isHidden = true;
+        itemsBarChartView.isHidden = true;
         studentNameLbl.isHidden = false;
         studentNameLbl.text = ""
         studentIDLbl.isHidden = false;
@@ -355,38 +427,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
     }
     
-//    let formato:BarChartFormatter = BarChartFormatter()
-//    let xaxis:XAxis = XAxis()
-//
-//    @objc(BarChartFormatter)
-//    public class BarChartFormatter: NSObject, IAxisValueFormatter
-//    {
-//      var months: [String]! = ["1", "2", "3", "4", "5"]
-//
-//        public func stringForValue(_ value: Double, axis: AxisBase?) -> String
-//      {
-//        return months[Int(value)]
-//      }
-//    }
-    
-//    func setChart(dataEntryX forX:[String],dataEntryY forY: [Double]) {
-//        chartView.noDataText = "You need to provide data for the chart."
-//        var dataEntries:[BarChartDataEntry] = []
-//        for i in 0..<forX.count{
-//           // print(forX[i])
-//           // let dataEntry = BarChartDataEntry(x: (forX[i] as NSString).doubleValue, y: Double(unitsSold[i]))
-//            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(forY[i]) )
-//            print(dataEntry)
-//            dataEntries.append(dataEntry)
-//        }
-//        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Units Sold")
-//        let chartData = BarChartData(dataSet: chartDataSet)
-//        viewForChart.data = chartData
-//        let xAxisValue = viewForChart.xAxis
-//        xAxisValue.valueFormatter = axisFormatDelegate
-//
-//    }
-    
     func sortWhetherUser(){
         print(self.data)
         print(data[0]["Admin"])
@@ -415,11 +455,12 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 let value: [String: Any] = snap.value as! [String : Any]
                 
                 let itemName = value["Name"] as? String ?? ""
+                let itemImage = value["URL"] as? String ?? ""
                 let checkedOutString = value["Checked Out"] as? String ?? ""
                 let checkedOutDouble = Double(value["Checked Out"] as? String ?? "") ?? 0
                 let id = String(c)
                 
-                tempData.append(["itemName": itemName, "numCheckedOut": checkedOutString])//adding each students atrributes to array
+                tempData.append(["itemName": itemName, "numCheckedOut": checkedOutString, "itemImage": itemImage])//adding each students atrributes to array
                 self.itemsCheckedOutDoubleArray.append(checkedOutDouble)
                 self.itemsCheckedOutStringNames.append(itemName)
                 c += 1
@@ -575,8 +616,12 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         dismiss(animated: true, completion: nil)
     }
     
+    
+    
 
 }
 
-
-
+//
+//extension ViewStatisticsViewController: ChartViewDelegate{
+//
+//}
