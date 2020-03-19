@@ -57,7 +57,9 @@ class adminQRViewController: UIViewController {
                 //do creation of QR
                 self.generateCodeFromString(text: QRText)
                 myGroup.leave()
-             }
+             } else {
+                RequestError().showError()
+            }
             
          })
         

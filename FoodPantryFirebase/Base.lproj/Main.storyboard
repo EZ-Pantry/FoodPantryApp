@@ -584,7 +584,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E9S-5b-LzT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="ND4-dw-KPJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1971" y="1298"/>
+            <point key="canvasLocation" x="-1971" y="1330"/>
         </scene>
         <!--HOME-->
         <scene sceneID="cyz-ll-z1e">
@@ -829,6 +829,7 @@
         <!--SCAN-->
         <scene sceneID="RB7-cW-IHs">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K7V-aQ-GIc" sceneMemberID="firstResponder"/>
                 <viewController modalPresentationStyle="fullScreen" id="lYj-js-UPa" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lAc-Ja-nzY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -843,7 +844,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="LbU-b6-iGh" kind="presentation" modalPresentationStyle="fullScreen" id="NT4-sd-hqn"/>
+                                    <segue destination="DA3-LT-lIA" kind="presentation" modalPresentationStyle="fullScreen" id="erW-P6-rDu"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="STEPS TO CHECKOUT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIU-bT-m6g">
@@ -881,9 +882,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="SCAN" image="barcode" catalog="system" id="fyG-JH-ozq"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="K7V-aQ-GIc" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1579.7101449275362" y="849.77678571428567"/>
+            <point key="canvasLocation" x="1583" y="868"/>
         </scene>
         <!--Code View Controller-->
         <scene sceneID="GoS-41-A0y">
@@ -993,12 +993,13 @@
                         <outlet property="errorLabel" destination="Mwl-q8-gcx" id="WaZ-LH-WwS"/>
                         <outlet property="numberTextField" destination="bnm-Sw-lWr" id="bbm-eo-6ML"/>
                         <outlet property="selectButton" destination="c54-VI-0E2" id="oZQ-fn-nU7"/>
+                        <segue destination="LbU-b6-iGh" kind="presentation" identifier="scanSession" modalPresentationStyle="fullScreen" id="Ybh-uf-f4w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iC-48-6u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Cx6-OT-Bas" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3677" y="1079"/>
+            <point key="canvasLocation" x="3478" y="1000"/>
         </scene>
         <!--Scanner Controller-->
         <scene sceneID="eYv-dY-9jL">
@@ -1346,7 +1347,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hop-ob-I8Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="A5a-uG-gnL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3308.6956521739135" y="2673.8839285714284"/>
+            <point key="canvasLocation" x="4735" y="1858"/>
         </scene>
         <!--PROFILE-->
         <scene sceneID="bWL-me-LUR">
@@ -3111,6 +3112,8 @@
         <!--Barcode Scan Entry View Controller-->
         <scene sceneID="brp-pf-2hG">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4uu-1g-WfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="T5m-WH-0y7" userLabel="Exit" sceneMemberID="exit"/>
                 <viewController id="LbU-b6-iGh" customClass="BarcodeScanEntryViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qDH-KB-udY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -3173,12 +3176,11 @@
                     <connections>
                         <outlet property="messageLabel" destination="6iN-R2-YSP" id="sgo-tG-7hY"/>
                         <outlet property="topbar" destination="VNo-xD-N10" id="pSe-1Z-vJD"/>
-                        <segue destination="DA3-LT-lIA" kind="presentation" identifier="toCheckoutOptions" modalPresentationStyle="fullScreen" id="29U-Za-JGZ"/>
+                        <segue destination="T5m-WH-0y7" kind="unwind" identifier="toCheckoutOptions" unwindAction="unwindToQRCode:" id="mhJ-zS-NwW"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4uu-1g-WfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2443" y="868"/>
+            <point key="canvasLocation" x="2464" y="1609"/>
         </scene>
     </scenes>
     <resources>

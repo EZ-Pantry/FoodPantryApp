@@ -59,28 +59,39 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
 
         // Get the back-facing camera for capturing videos
         
-        
     
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let myGroup = DispatchGroup()
-            
-        alert.showLoadingAlert()
         
-        myGroup.notify(queue: .main) {
-                                      
-            self.retreiveQRTextFromFirebase(callback: {(success, QRTextFromFirebase)-> Void in
+        myGroup.enter()
+        self.retreiveQRTextFromFirebase(callback: {(success, QRTextFromFirebase)-> Void in
              
-             if(success) {
-                self.barcodeTextFromFirebase = QRTextFromFirebase;//the code retrieved from barcode
-                print(self.barcodeTextFromFirebase)
-                self.startCameraSession();
-             }
+        if(success) {
+            self.barcodeTextFromFirebase = QRTextFromFirebase;//the code retrieved from barcode
+            self.startCameraSession();
+            myGroup.leave()
+        } else {
+            RequestError().showError()
+            }
             
          })
+        myGroup.notify(queue: .main) {
+            self.showMessage()
         }
-        self.alert.hideLoadingAlert()
+    }
+    
+    func showMessage() {
+        let alert = UIAlertController(title: "Please scan the Food Pantry's Code", message: "You need to verify that you are in the Food Pantry.", preferredStyle: .alert)
+                                 
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+        }))
+        
+        let top = UIApplication.topViewController()!
+
+        
+        top.present(alert, animated: true, completion: nil);
     }
     
     func retreiveQRTextFromFirebase(callback: @escaping (_ success: Bool,_ location: String)-> Void) {
@@ -172,11 +183,8 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
             if metadataObj.stringValue != nil && !sent {
                 messageLabel.text = metadataObj.stringValue
                 code = metadataObj.stringValue!
-                print("code found")
-                print(code)
-                compareBarcodeInformation();
-                //CODE FOUND
                 sent = true
+                compareBarcodeInformation();
             }
         }
     }
@@ -184,6 +192,10 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
     func compareBarcodeInformation(){
         //check if the entry code match hee
         if(code == barcodeTextFromFirebase){
+            
+            let time: String = TimeStamp().generateCurrentTimeStamp()
+            UserDefaults.standard.set(time, forKey: "UserSession")
+            
             let alert = UIAlertController(title: "Access to Food Pantry Checkout Granted", message: "Checkout items!", preferredStyle: .alert)
                                      
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
@@ -198,8 +210,10 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
             }))
             self.present(alert, animated: true, completion: nil);
+            sent = false
         }
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -225,3 +239,9 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
 
 }
 
+
+extension Date {
+    static var currentTimeStamp: Int64{
+        return Int64(Date().timeIntervalSince1970 * 1000)
+    }
+}

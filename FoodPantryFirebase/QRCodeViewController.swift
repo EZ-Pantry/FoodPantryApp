@@ -17,6 +17,8 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     var checkedOut = "" //format fooditem,quantity;fooditem,quantity
     var barcodes = ""
     
+    let timeDifference: Int = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +31,6 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         
         numberTextField.keyboardType = UIKeyboardType.alphabet
         
-        print("loaded")
     }
  
     override func viewWillAppear(_ animated: Bool) {
@@ -52,8 +53,59 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
             checkoutButton.isHidden = false
         }
         
+        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        //check current session
+        
+        let currentTime: String = UserDefaults.standard.object(forKey:"UserSession") as? String ?? ""
+        
+        print("checking")
+        if(currentTime == "" || tooLate(currentTime: currentTime)) {
+            //go to scanning barcode
+            self.performSegue(withIdentifier: "scanSession", sender: self)
+        }
+    }
+    
+    func generateCurrentTimeStamp () -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy_MM_dd_hh_mm_ss_"
+        return (formatter.string(from: Date()) as NSString) as String
+    }
+    
+    func tooLate(currentTime: String) -> Bool{
+        let rightNow: String = generateCurrentTimeStamp()
+        
+        let times1 = getTimes(t: currentTime) //last time the user scanned in
+        let times2 = getTimes(t: rightNow) //time right now
+        
+        for i in 0..<4 {
+            if(times2[i] > times1[i]) { //late by a year, month, day, or hour
+                return true
+            }
+        }
+        
+        let minuteDifference = times2[4] - times1[4]
+        
+        return minuteDifference >= timeDifference //5 minutes or under, you can checkout
+        
+    }
+    
+    func getTimes(t: String) -> [Int] { //given a time stamp, returns the times separately
+        var time = t
+        
+        var s: [Int] = []
+        
+        
+        while(time.count > 0) {
+            let separate = time.substring(to: time.indexDistance(of: "_")!)
+            s.append(Int(separate) ?? 0)
+            time = time.substring(from: time.indexDistance(of: "_")! + 1)
+        }
+        
+        return s
+    }
     
     
     
@@ -91,6 +143,9 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
             checkedOut = "" //reset
             barcodes = "" //reset
             error = ""
+        } else if(segue.identifier == "scanSession") { //person wants to scan barcode
+            let destinationVC = segue.destination as? BarcodeScanEntryViewController
+            //don't reset fooditems, barcodes, or errors
         }
     }
     
@@ -105,4 +160,12 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
 
+}
+
+public class TimeStamp {
+    public func generateCurrentTimeStamp () -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy_MM_dd_hh_mm_ss_"
+        return (formatter.string(from: Date()) as NSString) as String
+    }
 }
