@@ -434,11 +434,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             else if(self.studentsVisitedNumberArray.count > 5){
                 //since we need to display last 5 days of data, if length is larger than 5, display that last five days
                 self.canDisplayMap = true;
-                
                 for i in 0..<5 {
                     self.editedstudentsVisitedNumberArray.append( self.studentsVisitedNumberArray[self.studentsVisitedNumberArray.count-(i+1)])
                     self.editeditemsCheckedOutNumberAray.append( self.itemsCheckedOutNumberAray[self.itemsCheckedOutNumberAray.count-(i+1)])
-                    self.editedstudentsVisitedNumberArray.reverse()
+                    self.editedstudentsVisitedNumberArray.reverse()//make sure order is oldest data to newest
                     self.editeditemsCheckedOutNumberAray.reverse()
                 }
                 
