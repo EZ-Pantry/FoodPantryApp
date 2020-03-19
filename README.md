@@ -33,24 +33,90 @@ Made by two high school juniors: Rayaan Siddiqi and Ashay Parikh
 
 ## View Controllers' Descriptions
 
-- **Sign Up View Controller**
-    - It does x y and z
-- **Log In View Controller**
-    - It does x y and z    
-- **Home View Controller**
-    - It does x y and z
-- **Food Item Search View Controller**
-    - It does x y and z   
-- **Checkout(Student) View Controller**
-    - It does x y and z
-- **Profile View Controller**
-    - It does x y and z   
-- **Admin Controls View Controller**
-    - It does x y and z
-- **Add Items(Admin) View Controller**
-    - It does x y and z      
-- **View Statistics(Admin) View Controller**
-    - It does x y and z   
+- **addMainViewController**
+    - Admin can add a new food item and change existing settings
+- **QRAddViewController**
+    - Admin can choose to scan a barcode of an item or manually add an item    
+- **addItemViewController**
+    - Scanning a barcode when admin adds an item
+- **manualViewController**
+    - User manually adds an item
+- **ItemCell**
+    - Cell for the Inventory View
+- **QRScannerController**
+    - Scanning a barcode when user checks out an item   
+- **QRScrapeController**
+    - User gets checked out item info and can decide to add more or go to checkout
+- **QRCodeViewController**
+    - User can choose to scan a barcode of an item or manually add an item      
+- **View Controller**
+    - First View Controller - Login or Signup
+- **BarcodeScannerViewController**
+    - User is prompted with this when the session is up, and the user must validate that he/she is in the pantry  
+- **adminQRViewController**
+    - View for the Pantry Code - Admin can download the barcode or generate a new one  
+- **helpAndSupportViewController**
+    - Shows Help and Support  
+- **contactAdminViewController**
+    - Contacting the Admins
+- **sendFeedBackViewController**
+    - Sending Back Feedback  
+- **editItemInfoViewController**
+    - Admin is shown an item and can directly alter settings  
+- **adminEditPopUpViewController**
+    - Admin is shown popup of an item and can choose to edit or delete the item
+- **adminFirstEditItemsViewController**
+    - Admin is shown the inventory with the ability to edit 
+- **inquireAboutViewController**
+    - Inquiry Page  
+- **settingsPageViewController**
+    - Settings Page for User and Admin  
+- **sendfeedbackcontrolsViewController**
+    - Controls for sending feedback
+- **emailFeedbackViewController**
+    - Email Feedback  
+- **ViewStatisticsViewController**
+    - Admin can view user & food pantry statistics  
+- **calendarFirstViewController**
+    - Calendar, part of viewing statistics  
+- **MonthView**
+    - Part of Calendar  
+- **WeekdaysView**
+    - Part of Calendar
+- **CalendarView**
+    - Part of Calendar  
+- **adminControlsViewController**
+    - View for admin controls, admin can edit the pantry, add items, view statistics, or other options  
+- **adminViewController**
+    - Profile View 
+- **popUpViewController**
+    - Pop up when user views the inventory  
+- **FoodItemsSecondViewController**
+    - Inventory View   
+- **resetPasswordViewController**
+    - Reset password View 
+- **homeViewController**
+    - Home View  
+- **SignUpViewController**
+    - Signup View  
+- **loginViewController**
+    - Login View
+- **checkoutViewController**
+    - checkout view
+- **chooseManualViewController**
+    - Admin manually enters food item
+- **chooseUserViewController**
+    - User decides if he/she is an admin or user
+- **chooseSchoolViewController**
+    - User decides which pantry he/she belongs to 
+- **RequestError**
+    - Error shown
+- **CheckoutCell1TableViewCell**
+    - Cell for the checkout view
+- **LoadingBar**
+    - Loading bar shown
+- **otherAdminViewController**
+    -  Other options for admin 
 ---
 
 ## FAQ

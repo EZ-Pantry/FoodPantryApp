@@ -58,6 +58,24 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.view.isUserInteractionEnabled = false
 
         
+        addMoreBtn.layer.cornerRadius = 15
+        addMoreBtn.clipsToBounds = true
+           
+        finishBtn.layer.cornerRadius = 15
+        finishBtn.clipsToBounds = true
+        
+        //sets the keypad type
+        
+        quantityLabel.text = "1"
+        quantityLabel.keyboardType = UIKeyboardType.numberPad
+        //healthy picker
+        
+        yourPicker.delegate = self
+        yourPicker.dataSource = self
+        
+        healthyLabel.inputView = yourPicker
+        pickerData = ["Yes", "No"]
+        
         if (manualEnter) { //manually entered food item
             if(found) { //item exists in the db
                          
@@ -147,23 +165,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             }
         }
         }
-        addMoreBtn.layer.cornerRadius = 15
-        addMoreBtn.clipsToBounds = true
-           
-        finishBtn.layer.cornerRadius = 15
-        finishBtn.clipsToBounds = true
-        
-        //sets the keypad type
-        
-        quantityLabel.text = "1"
-        quantityLabel.keyboardType = UIKeyboardType.numberPad
-        //healthy picker
-        
-        yourPicker.delegate = self
-        yourPicker.dataSource = self
-        
-        healthyLabel.inputView = yourPicker
-        pickerData = ["Yes", "No"]
+
                 
     }
     

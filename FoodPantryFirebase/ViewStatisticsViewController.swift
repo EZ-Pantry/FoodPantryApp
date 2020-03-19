@@ -203,7 +203,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
 
         //need to set each item with indivisual marker
-        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Items in Food Pantry")//each column represnents a food item checked out number of times
+        let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Items in Food Pantry(Click bars to see more data)")//each column represnents a food item checked out number of times
         
         let chartData = BarChartData(dataSet: chartDataSet)
         

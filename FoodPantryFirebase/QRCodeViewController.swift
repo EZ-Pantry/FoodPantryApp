@@ -1,8 +1,10 @@
 //  Copyright © 2020 Ashay Parikh. All rights reserved.
 
 
-import UIKit
 import Foundation
+import UIKit
+import FirebaseUI
+import FirebaseDatabase
 
 class QRCodeViewController: UIViewController, UITextFieldDelegate {
 
@@ -19,9 +21,14 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     
     let timeDifference: Int = 8
     
+    var PantryName: String = ""
+    var ref: DatabaseReference! //reference to the firebase database
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
 
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
         // Do any additional setup after loading the view.
         selectButton.layer.cornerRadius = 15
         selectButton.clipsToBounds = true
@@ -57,15 +64,36 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //check current session
         
-        let currentTime: String = UserDefaults.standard.object(forKey:"UserSession") as? String ?? ""
-        
-        print("checking")
-        if(currentTime == "" || tooLate(currentTime: currentTime)) {
-            //go to scanning barcode
-            self.performSegue(withIdentifier: "scanSession", sender: self)
+        //check if checking out is allowed
+        self.view.isUserInteractionEnabled = false
+
+        ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
+          // Get user value
+          let value = snapshot.value as? NSDictionary
+          let checkout = value?["CanCheckout"] as? String ?? ""
+          
+            if(checkout == "yes") {
+                let currentTime: String = UserDefaults.standard.object(forKey:"UserSession") as? String ?? ""
+                
+                if(currentTime == "" || self.tooLate(currentTime: currentTime)) {
+                    //go to scanning barcode
+                    self.performSegue(withIdentifier: "scanSession", sender: self)
+                }
+                self.view.isUserInteractionEnabled = true
+
+            } else {
+                self.performSegue(withIdentifier: "BackToHome", sender: self)
+            }
+            
+
+          // ...
+          }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
         }
+        
+    
     }
     
     func generateCurrentTimeStamp () -> String {
@@ -146,6 +174,9 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         } else if(segue.identifier == "scanSession") { //person wants to scan barcode
             let destinationVC = segue.destination as? BarcodeScanEntryViewController
             //don't reset fooditems, barcodes, or errors
+        } else if(segue.identifier == "BackToHome") { //person wants to scan barcode
+            let destinationVC = segue.destination as? homeViewController
+            destinationVC?.message = "The admin has disabled checking out. Please try again later or contact them for more information."
         }
     }
     
