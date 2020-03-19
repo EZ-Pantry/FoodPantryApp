@@ -581,11 +581,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				A24F387B23F60B7D00AACC97 /* FoodItemsViewController.swift in Sources */,
 				A239DC412423F5DA003CFF0C /* popUpFromBarChartViewController.swift in Sources */,
-=======
->>>>>>> 320671a5ee85f2fc5d4d632268da19314a38eb7c
 				1CBDDC94240DFABD00AC53A9 /* addItemViewController.swift in Sources */,
 				A239DC1D2416CE77003CFF0C /* adminFirstEditItemsViewController.swift in Sources */,
 				A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */,
