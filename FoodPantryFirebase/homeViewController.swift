@@ -42,7 +42,6 @@ class homeViewController: UIViewController {
         
         if(!UserDefaults.contains("Pantry Name")) {
             
-        
             myGroup.enter()
             let uid = Auth.auth().currentUser!.uid
             
@@ -183,7 +182,7 @@ class homeViewController: UIViewController {
     }
     
     func sendOutNotification(){
-        
+        //notification will be sent every 24 hours=not redundant
         getDataFromFirebase(callback: {(success)-> Void in //gets data from firebase
             if(success) {
                 for x in 0..<self.foodItemsOfLowQuantityNumbers.count{

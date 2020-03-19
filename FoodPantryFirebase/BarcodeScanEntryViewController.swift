@@ -97,7 +97,6 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
     func retreiveQRTextFromFirebase(callback: @escaping (_ success: Bool,_ location: String)-> Void) {
         ref.child(foodPantryName).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            print("got")
             let value = snapshot.value as? NSDictionary
             let foodPantryQRText = value?["Food Pantry QR Text"] as? String ?? "" //load in the admin code
             callback(true, foodPantryQRText)
