@@ -586,7 +586,7 @@
             </objects>
             <point key="canvasLocation" x="-2578" y="1298"/>
         </scene>
-        <!--HOME-->
+        <!--Home View Controller-->
         <scene sceneID="cyz-ll-z1e">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="6zC-U3-2zj" customClass="homeViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
@@ -631,7 +631,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Zh-FK-kQi">
-                                <rect key="frame" x="335" y="72" width="60" height="60"/>
+                                <rect key="frame" x="334" y="99" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="settingsimage"/>
                                 <connections>
@@ -639,14 +639,13 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aIS-QC-CVR">
-                                <rect key="frame" x="87" y="111" width="240" height="128"/>
+                                <rect key="frame" x="86" y="138" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="48T-gx-oVc"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="HOME" image="house.fill" catalog="system" id="ms9-ze-WOx"/>
                     <navigationItem key="navigationItem" id="TVf-yc-1FD"/>
                     <connections>
                         <outlet property="lastCheckedOutLbl" destination="XyP-Wi-pDg" id="7N8-ht-9mI"/>
@@ -659,7 +658,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C14-5b-gi8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="-456"/>
+            <point key="canvasLocation" x="2305.7971014492755" y="-456.02678571428567"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bdP-cY-zvn">
@@ -673,7 +672,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="6zC-U3-2zj" kind="relationship" relationship="viewControllers" id="HLC-EI-gPB"/>
+                        <segue destination="mgh-xl-oAm" kind="relationship" relationship="viewControllers" id="HLC-EI-gPB"/>
                         <segue destination="Bcs-Lr-vOf" kind="relationship" relationship="viewControllers" id="jue-31-CKR"/>
                         <segue destination="DA3-LT-lIA" kind="relationship" relationship="viewControllers" id="Z4e-Dy-1o4"/>
                         <segue destination="oim-iw-eXS" kind="relationship" relationship="viewControllers" id="XIZ-eA-XYI"/>
@@ -2277,21 +2276,14 @@
             </objects>
             <point key="canvasLocation" x="-435" y="4012"/>
         </scene>
-        <!--Settings Page View Controller-->
+        <!--SETTINGS-->
         <scene sceneID="hHo-a6-1yi">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="KVH-nZ-1jA" customClass="settingsPageViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I5e-cH-viB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSc-vU-3jG">
-                                <rect key="frame" x="109" y="54" width="201" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="01F-yJ-850">
                                 <rect key="frame" x="315" y="206" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2303,16 +2295,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Dc-A3-c9D">
-                                <rect key="frame" x="36" y="78" width="21" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark.octagon" catalog="system"/>
-                                <connections>
-                                    <action selector="dismissBackToHome:" destination="KVH-nZ-1jA" eventType="touchUpInside" id="SLL-bQ-trY"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXw-X0-zyG">
-                                <rect key="frame" x="49" y="732" width="314" height="84"/>
+                                <rect key="frame" x="50" y="627" width="314" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="60"/>
@@ -2322,7 +2306,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJA-R2-w3X">
-                                <rect key="frame" x="49" y="620" width="314" height="84"/>
+                                <rect key="frame" x="50" y="515" width="314" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.55498530859999995" green="0.56673072030000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
@@ -2335,7 +2319,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="S8R-u8-pCP"/>
                     </view>
-                    <navigationItem key="navigationItem" id="HGj-xJ-JBx"/>
+                    <navigationItem key="navigationItem" title="SETTINGS" id="HGj-xJ-JBx"/>
                     <connections>
                         <outlet property="logOutButton" destination="eXw-X0-zyG" id="h1o-ob-66h"/>
                         <outlet property="sendFeedBackButton" destination="aJA-R2-w3X" id="hpm-lD-tm0"/>
@@ -2345,14 +2329,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRs-pR-3hl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="WDi-yE-MtG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2230" y="-1177"/>
+            <point key="canvasLocation" x="2228.985507246377" y="-1177.2321428571429"/>
         </scene>
-        <!--Help And Support View Controller-->
+        <!--HELP & SUPPORT-->
         <scene sceneID="okS-qh-sbo">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="GIb-h1-wKB" customClass="helpAndSupportViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sko-hQ-X0F">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOH-64-ND5">
@@ -2375,26 +2359,11 @@
                                     <segue destination="xhx-Ne-xkD" kind="show" id="dcd-CO-Tfk"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HELP &amp; SUPPORT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8W9-D4-dnY">
-                                <rect key="frame" x="68" y="129" width="281" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nID-AF-Hs8">
-                                <rect key="frame" x="20" y="44" width="38" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark.octagon" catalog="system"/>
-                                <connections>
-                                    <action selector="dismissBackTapped:" destination="GIb-h1-wKB" eventType="touchUpInside" id="tJ4-dz-ZJf"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="l2u-gY-VGZ"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9S6-Tt-8Y0"/>
+                    <navigationItem key="navigationItem" title="HELP &amp; SUPPORT" id="9S6-Tt-8Y0"/>
                     <connections>
                         <outlet property="appFeedBackbutton" destination="ZOH-64-ND5" id="UYG-Uz-OoW"/>
                         <outlet property="contactAdminButton" destination="nxX-2a-nwl" id="tBl-zu-0dJ"/>
@@ -2404,22 +2373,14 @@
             </objects>
             <point key="canvasLocation" x="2271.0144927536235" y="-1890.4017857142856"/>
         </scene>
-        <!--Contact Admin View Controller-->
+        <!--Contact Administration-->
         <scene sceneID="cuX-2m-Pbf">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="xhx-Ne-xkD" customClass="contactAdminViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yvb-zH-Bau">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uly-mg-8eh">
-                                <rect key="frame" x="46" y="47" width="21" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark.octagon" catalog="system"/>
-                                <connections>
-                                    <action selector="dismissBack:" destination="xhx-Ne-xkD" eventType="touchUpInside" id="rXV-yk-JUQ"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YQf-Cx-6UO">
                                 <rect key="frame" x="67" y="200" width="280" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2440,13 +2401,6 @@
                                     <action selector="sendEmailButton:" destination="Tqu-XP-Okv" eventType="touchUpInside" id="AOU-sx-9Dq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CONTACT ADMINISTRATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwK-af-Isk">
-                                <rect key="frame" x="11" y="106" width="396" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="29"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="interactive" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ES8-zE-0Y9">
                                 <rect key="frame" x="61" y="299" width="303" height="215"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2470,7 +2424,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="aJN-aH-qkn"/>
                     </view>
-                    <navigationItem key="navigationItem" id="09v-ID-5qx"/>
+                    <navigationItem key="navigationItem" title="Contact Administration" id="09v-ID-5qx"/>
                     <connections>
                         <outlet property="messageTextField" destination="ES8-zE-0Y9" id="eDb-PO-HY8"/>
                         <outlet property="sendButton" destination="Pss-Zy-LJt" id="wZB-K5-Exx"/>
@@ -2481,16 +2435,16 @@
             </objects>
             <point key="canvasLocation" x="3247.826086956522" y="-1903.125"/>
         </scene>
-        <!--Sendfeedbackcontrols View Controller-->
+        <!--App Feedback-->
         <scene sceneID="gzn-C2-Wg5">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="PdC-y2-ebH" customClass="sendfeedbackcontrolsViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="90t-IF-atU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zE1-ll-bc9">
-                                <rect key="frame" x="132" y="133" width="150" height="150"/>
+                                <rect key="frame" x="132" y="94" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="starimage"/>
                                 <connections>
@@ -2498,48 +2452,40 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RATE APP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckv-Pb-ini">
-                                <rect key="frame" x="115" y="312" width="185" height="48"/>
+                                <rect key="frame" x="115" y="273" width="185" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRf-qe-nhs">
-                                <rect key="frame" x="107" y="480" width="200" height="150"/>
+                                <rect key="frame" x="107" y="441" width="200" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="emailimage"/>
                                 <connections>
                                     <segue destination="Tqu-XP-Okv" kind="show" id="SMy-lm-qjB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQY-JD-RtW">
-                                <rect key="frame" x="52" y="69" width="21" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark.octagon" catalog="system"/>
-                                <connections>
-                                    <action selector="dismissBack:" destination="PdC-y2-ebH" eventType="touchUpInside" id="BcN-fY-A5D"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blackborder" translatesAutoresizingMaskIntoConstraints="NO" id="xJC-Je-tDl">
-                                <rect key="frame" x="61" y="110" width="292" height="284"/>
+                                <rect key="frame" x="61" y="94" width="292" height="261"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipY-jt-lLV">
-                                <rect key="frame" x="180" y="424" width="55" height="48"/>
+                                <rect key="frame" x="180" y="385" width="55" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="by8-K5-2pX">
-                                <rect key="frame" x="180" y="648" width="55" height="48"/>
+                                <rect key="frame" x="180" y="609" width="55" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYC-xj-l6Z">
-                                <rect key="frame" x="23" y="704" width="368" height="135"/>
+                                <rect key="frame" x="23" y="665" width="368" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="googleformlogo"/>
                                 <connections>
@@ -2550,7 +2496,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Iu3-u6-3CO"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dPd-9J-aAh"/>
+                    <navigationItem key="navigationItem" title="App Feedback" id="dPd-9J-aAh"/>
                     <connections>
                         <outlet property="emailButton" destination="oRf-qe-nhs" id="WVu-3b-i0q"/>
                     </connections>
@@ -2559,22 +2505,14 @@
             </objects>
             <point key="canvasLocation" x="3247.826086956522" y="-1177.2321428571429"/>
         </scene>
-        <!--Email Feedback View Controller-->
+        <!--Email Us!-->
         <scene sceneID="2w9-Wc-9s2">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="Tqu-XP-Okv" customClass="emailFeedbackViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r2a-63-VDi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8W-0d-mai">
-                                <rect key="frame" x="50" y="77" width="21" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark.octagon" catalog="system"/>
-                                <connections>
-                                    <action selector="dismissBackButton:" destination="Tqu-XP-Okv" eventType="touchUpInside" id="ct6-Uv-xRO"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5kz-PX-D9z">
                                 <rect key="frame" x="67" y="226" width="280" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2594,13 +2532,6 @@
                                     <action selector="sendEmailButton:" destination="Tqu-XP-Okv" eventType="touchUpInside" id="YWb-zi-byq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EMAIL US!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEB-4E-wlC">
-                                <rect key="frame" x="113" y="103" width="189" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="37"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="interactive" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="L07-9c-o7E">
                                 <rect key="frame" x="56" y="335" width="303" height="215"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2624,7 +2555,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="mly-6d-61p"/>
                     </view>
-                    <navigationItem key="navigationItem" id="L1G-KJ-qSf"/>
+                    <navigationItem key="navigationItem" title="Email Us!" id="L1G-KJ-qSf"/>
                     <connections>
                         <outlet property="emailButton" destination="cyz-fx-0Rx" id="yF1-SO-I0B"/>
                         <outlet property="messgeTextField" destination="L07-9c-o7E" id="180-h8-fti"/>
@@ -2633,7 +2564,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pnH-WH-6tF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4107" y="-1623"/>
+            <point key="canvasLocation" x="4105.7971014492759" y="-1623.2142857142856"/>
         </scene>
         <!--Inquire About Food Pantry View Controller-->
         <scene sceneID="UNh-ui-eJz">
@@ -3213,7 +3144,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="TwX-ay-QLz" customClass="sendFeedBackGoogleFormViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yaO-va-kbx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lz1-r6-YiZ">
@@ -3244,7 +3175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDZ-Ei-cRW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4106" y="-887"/>
+            <point key="canvasLocation" x="5015.9420289855079" y="-887.27678571428567"/>
         </scene>
         <!--Barcode Scan Entry View Controller-->
         <scene sceneID="brp-pf-2hG">
@@ -3375,6 +3306,25 @@
             </objects>
             <point key="canvasLocation" x="790" y="3248"/>
         </scene>
+        <!--HOME-->
+        <scene sceneID="w1s-tm-WZz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mgh-xl-oAm" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="HOME" image="house.fill" catalog="system" id="ms9-ze-WOx"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9zu-H1-6AU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6zC-U3-2zj" kind="relationship" relationship="rootViewController" id="o7B-fE-jPF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fyt-yK-UOi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1395.6521739130435" y="-456.02678571428567"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
@@ -3396,16 +3346,11 @@
         <image name="xmark.seal.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ya6-8G-W4l"/>
-        <segue reference="Dwa-lY-C5Y"/>
-        <segue reference="tnj-7N-EuA"/>
-        <segue reference="VrP-rx-HIg"/>
-        <segue reference="ETY-iU-Vqb"/>
         <segue reference="3Qs-b0-Rjn"/>
         <segue reference="Zke-bH-X19"/>
         <segue reference="H9f-l5-90A"/>
-        <segue reference="EWc-7U-1jR"/>
-        <segue reference="ecB-Fx-w8c"/>
+        <segue reference="ZbA-Fj-Lae"/>
+        <segue reference="ETY-iU-Vqb"/>
         <segue reference="AJ9-9r-s5L"/>
     </inferredMetricsTieBreakers>
 </document>
