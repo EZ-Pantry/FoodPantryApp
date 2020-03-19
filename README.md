@@ -33,24 +33,90 @@ Made by two high school juniors: Rayaan Siddiqi and Ashay Parikh
 
 ## View Controllers' Descriptions
 
-- **Sign Up View Controller**
+- **addMainViewController**
     - It does x y and z
-- **Log In View Controller**
+- **QRAddViewController**
     - It does x y and z    
-- **Home View Controller**
+- **addItemViewController**
     - It does x y and z
-- **Food Item Search View Controller**
+- **manualViewController**
     - It does x y and z   
-- **Checkout(Student) View Controller**
+- **ItemCell**
     - It does x y and z
-- **Profile View Controller**
+- **QRScannerController**
     - It does x y and z   
-- **Admin Controls View Controller**
+- **QRScrapeController**
     - It does x y and z
-- **Add Items(Admin) View Controller**
+- **QRCodeViewController**
     - It does x y and z      
-- **View Statistics(Admin) View Controller**
+- **View Controller**
+    - It does x y and z
+- **BarcodeScannerViewController**
     - It does x y and z   
+- **adminQRViewController**
+    - It does x y and z   
+- **helpAndSupportViewController**
+    - It does x y and z   
+- **contactAdminViewController**
+    - It does x y and z   
+- **sendFeedBackViewController**
+    - It does x y and z   
+- **editItemInfoViewController**
+    - It does x y and z   
+- **adminEditPopUpViewController**
+    - It does x y and z   
+- **adminFirstEditItemsViewController**
+    - It does x y and z   
+- **inquireAboutViewController**
+    - It does x y and z   
+- **settingsPageViewController**
+    - It does x y and z   
+- **sendfeedbakcontrolsViewController**
+    - It does x y and z
+- **emailFeedbackViewController**
+    - It does x y and z   
+- **ViewStatisticsViewController**
+    - It does x y and z   
+- **calendarFirstViewController**
+    - It does x y and z   
+- **MonthView**
+    - It does x y and z   
+- **WeekdaysView**
+    - It does x y and z   
+- **CalendarView**
+    - It does x y and z   
+- **adminControlsViewController**
+    - It does x y and z   
+- **adminViewController**
+    - It does x y and z   
+- **popUpViewController**
+    - It does x y and z   
+- **FoodItemsSecondViewController**
+    - It does x y and z   
+- **resetPasswordViewController**
+    - It does x y and z   
+- **homeViewController**
+    - It does x y and z   
+- **SignUpViewController**
+    - It does x y and z   
+- **loginViewController**
+    - It does x y and z   
+- **checkoutViewController**
+    - It does x y and z
+- **chooseManualViewController**
+    - It does x y and z  
+- **chooseUserViewController**
+    - It does x y and z
+- **chooseSchoolViewController**
+    - It does x y and z  
+- **RequestError**
+    - It does x y and z  
+- **CheckoutCell1TableViewCell**
+    - It does x y and z  
+- **LoadingBar**
+    - It does x y and z  
+- **otherAdminViewController**
+    - It does x y and z  
 ---
 
 ## FAQ
