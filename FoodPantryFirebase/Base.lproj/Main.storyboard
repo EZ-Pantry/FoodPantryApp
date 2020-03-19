@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I3t-8a-fsA">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login/Sign Up-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
@@ -24,7 +24,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="S3S-kd-YLK" kind="presentation" modalPresentationStyle="fullScreen" id="FeS-Zs-WB2"/>
+                                    <segue destination="S3S-kd-YLK" kind="show" id="FeS-Zs-WB2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Px-QU-phh">
@@ -48,17 +48,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Login/Sign Up" id="OQm-SB-R6L"/>
                     <connections>
                         <outlet property="loginButton" destination="0Px-QU-phh" id="eXb-vn-5Uu"/>
                         <outlet property="signupButton" destination="9XU-Pz-nJc" id="H8r-3E-5Ka"/>
-                        <segue destination="hdj-aB-iKU" kind="show" identifier="toHomeScreen" id="ZbA-Fj-Lae"/>
+                        <segue destination="hdj-aB-iKU" kind="presentation" identifier="toHomeScreen" id="ZbA-Fj-Lae"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1703" y="-313"/>
+            <point key="canvasLocation" x="-686" y="-313"/>
         </scene>
-        <!--Choose School View Controller-->
+        <!--Sign Up (1 of 3)-->
         <scene sceneID="A2r-RT-H9D">
             <objects>
                 <viewController id="S3S-kd-YLK" customClass="chooseSchoolViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
@@ -66,13 +67,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJf-dL-nBB">
-                                <rect key="frame" x="50" y="44" width="314" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
-                                <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7G3-H3-f8C">
                                 <rect key="frame" x="50" y="44" width="21" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -81,27 +75,24 @@
                                     <action selector="dismissBackTapped:" destination="S3S-kd-YLK" eventType="touchUpInside" id="aZY-O2-oB3"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose Pantry" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eBX-rp-azD">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose Pantry" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eBX-rp-azD">
                                 <rect key="frame" x="50" y="322" width="314" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Pantry Code" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H3C-Qy-Xon">
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Pantry Code" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H3C-Qy-Xon">
                                 <rect key="frame" x="50" y="432" width="314" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" keyboardType="alphabet"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESn-sR-2gV">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESn-sR-2gV">
                                 <rect key="frame" x="50" y="681" width="314" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="53"/>
                                 <state key="normal" title="CONTINUE">
@@ -111,16 +102,14 @@
                                     <action selector="userContinue:" destination="S3S-kd-YLK" eventType="touchUpInside" id="zxy-ux-F8f"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Incorrect Code, Please Try Again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFg-2c-ejh">
-                                <rect key="frame" x="67" y="504" width="281" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incorrect Code, Please Try Again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFg-2c-ejh">
+                                <rect key="frame" x="50" y="504" width="314" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.85561042750000005" green="0.14345569629999999" blue="0.099163593920000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aj-b7-tO6">
-                                <rect key="frame" x="49" y="467" width="314" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aj-b7-tO6">
+                                <rect key="frame" x="50" y="467" width="314" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Don't have a code?"/>
                                 <connections>
@@ -129,21 +118,39 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ESn-sR-2gV" firstAttribute="top" secondItem="XFg-2c-ejh" secondAttribute="bottom" constant="156" id="2Tk-tN-wwQ"/>
+                            <constraint firstItem="XFg-2c-ejh" firstAttribute="top" secondItem="7aj-b7-tO6" secondAttribute="bottom" constant="4" id="2uf-wT-Wt0"/>
+                            <constraint firstItem="eBX-rp-azD" firstAttribute="leading" secondItem="fia-hr-A4x" secondAttribute="leading" constant="50" id="32g-l9-XcE"/>
+                            <constraint firstItem="7aj-b7-tO6" firstAttribute="leading" secondItem="fia-hr-A4x" secondAttribute="leading" constant="50" id="3Vq-5j-bku"/>
+                            <constraint firstItem="ESn-sR-2gV" firstAttribute="leading" secondItem="fia-hr-A4x" secondAttribute="leading" constant="50" id="9t9-JU-jCB"/>
+                            <constraint firstItem="fia-hr-A4x" firstAttribute="trailing" secondItem="7aj-b7-tO6" secondAttribute="trailing" constant="50" id="Equ-H7-ZN7"/>
+                            <constraint firstItem="7aj-b7-tO6" firstAttribute="top" secondItem="H3C-Qy-Xon" secondAttribute="bottom" constant="2" id="PCV-9Q-vJU"/>
+                            <constraint firstItem="fia-hr-A4x" firstAttribute="bottom" secondItem="ESn-sR-2gV" secondAttribute="bottom" constant="105" id="VLY-sm-fQo"/>
+                            <constraint firstItem="H3C-Qy-Xon" firstAttribute="top" secondItem="eBX-rp-azD" secondAttribute="bottom" constant="76" id="X6b-HS-glb"/>
+                            <constraint firstItem="fia-hr-A4x" firstAttribute="trailing" secondItem="ESn-sR-2gV" secondAttribute="trailing" constant="50" id="kTx-5l-TXY"/>
+                            <constraint firstItem="fia-hr-A4x" firstAttribute="trailing" secondItem="H3C-Qy-Xon" secondAttribute="trailing" constant="50" id="mHT-S4-8ht"/>
+                            <constraint firstItem="XFg-2c-ejh" firstAttribute="leading" secondItem="fia-hr-A4x" secondAttribute="leading" constant="50" id="nAE-DJ-SYM"/>
+                            <constraint firstItem="fia-hr-A4x" firstAttribute="trailing" secondItem="eBX-rp-azD" secondAttribute="trailing" constant="50" id="tSz-KJ-NGT"/>
+                            <constraint firstItem="H3C-Qy-Xon" firstAttribute="leading" secondItem="fia-hr-A4x" secondAttribute="leading" constant="50" id="viF-Q5-cq2"/>
+                            <constraint firstItem="fia-hr-A4x" firstAttribute="trailing" secondItem="XFg-2c-ejh" secondAttribute="trailing" constant="50" id="xgn-dG-BeS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="fia-hr-A4x"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Sign Up (1 of 3)" id="ik5-4m-1HF"/>
                     <connections>
                         <outlet property="continueButton" destination="ESn-sR-2gV" id="ycD-mB-7OD"/>
                         <outlet property="errorLabel" destination="XFg-2c-ejh" id="MOa-f1-ClL"/>
                         <outlet property="pantryField" destination="H3C-Qy-Xon" id="l6m-UE-Czd"/>
                         <outlet property="pantryPicker" destination="eBX-rp-azD" id="rOp-E3-gzS"/>
-                        <segue destination="1Hz-8F-c4M" kind="presentation" identifier="GoToUser" modalPresentationStyle="fullScreen" id="tff-zc-uNF"/>
+                        <segue destination="1Hz-8F-c4M" kind="show" identifier="GoToUser" id="tff-zc-uNF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gv-xK-KRb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1130" y="-1256"/>
         </scene>
-        <!--Choose User View Controller-->
+        <!--Sign Up (2 of 3)-->
         <scene sceneID="6uG-m3-Lkv">
             <objects>
                 <viewController id="1Hz-8F-c4M" customClass="chooseUserViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
@@ -151,13 +158,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tog-hQ-wsX">
-                                <rect key="frame" x="50" y="44" width="314" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
-                                <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xd7-CS-riY">
                                 <rect key="frame" x="50" y="44" width="21" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -232,7 +232,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="fnb-lg-LCt"/>
                     </view>
-                    <navigationItem key="navigationItem" id="AHJ-Rn-xMM"/>
+                    <navigationItem key="navigationItem" title="Sign Up (2 of 3)" id="AHJ-Rn-xMM"/>
                     <connections>
                         <outlet property="adminBtn" destination="wi5-rX-gRi" id="yrc-Bx-Wxo"/>
                         <outlet property="adminCode" destination="bot-7P-G0m" id="84C-lz-wu8"/>
@@ -240,14 +240,14 @@
                         <outlet property="incorrectAdminLabel" destination="cet-ja-eVi" id="dGd-aX-zBT"/>
                         <outlet property="studentBtn" destination="R2v-qy-pLM" id="pRE-2e-4WE"/>
                         <outlet property="userField" destination="bOu-kx-FAS" id="a0H-Mk-DLr"/>
-                        <segue destination="Y4h-cv-WDg" kind="presentation" identifier="GoToSignup" modalPresentationStyle="fullScreen" id="Yrx-nD-5op"/>
+                        <segue destination="Y4h-cv-WDg" kind="show" identifier="GoToSignup" id="Yrx-nD-5op"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mCr-8P-Aee" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-149" y="-1256"/>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Sign Up (3 of 3)-->
         <scene sceneID="nrk-Cp-mvc">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="Y4h-cv-WDg" customClass="SignUpViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
@@ -303,13 +303,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgQ-fv-ICI">
-                                <rect key="frame" x="50" y="42" width="314" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
-                                <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hqh-1g-7PC">
                                 <rect key="frame" x="50" y="728" width="314" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -407,7 +400,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6NN-n6-tSN"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Crr-ih-y6X"/>
+                    <navigationItem key="navigationItem" title="Sign Up (3 of 3)" id="Crr-ih-y6X"/>
                     <connections>
                         <outlet property="allergiesTextField" destination="VRt-j3-aCp" id="bd6-Rk-xsf"/>
                         <outlet property="continueButton" destination="Hqh-1g-7PC" id="Xq2-rp-5AS"/>
@@ -430,7 +423,7 @@
             </objects>
             <point key="canvasLocation" x="791" y="-1256"/>
         </scene>
-        <!--Log In View Controller-->
+        <!--Login-->
         <scene sceneID="8zS-re-9cO">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="AYO-Xv-RKr" customClass="logInViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
@@ -438,6 +431,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fr9-TZ-zLT">
+                                <rect key="frame" x="50" y="44" width="21" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xmark.octagon" catalog="system"/>
+                                <connections>
+                                    <action selector="dismissToLoginScreen:" destination="AYO-Xv-RKr" eventType="touchUpInside" id="51M-pc-x4T"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email Address" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Cnu-EV-JiP">
                                 <rect key="frame" x="50" y="170" width="314" height="31"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -474,35 +475,17 @@
                                     <segue destination="bIk-dr-si6" kind="show" id="ETY-iU-Vqb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOG IN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyY-tl-G84">
-                                <rect key="frame" x="50" y="44" width="314" height="60"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
-                                <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fr9-TZ-zLT">
-                                <rect key="frame" x="50" y="44" width="21" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark.octagon" catalog="system"/>
-                                <connections>
-                                    <action selector="dismissToLoginScreen:" destination="AYO-Xv-RKr" eventType="touchUpInside" id="51M-pc-x4T"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="XyY-tl-G84" firstAttribute="leading" secondItem="n8r-Mb-6PJ" secondAttribute="leading" constant="50" id="1eN-uj-S6w"/>
                             <constraint firstItem="4bJ-rX-TBy" firstAttribute="top" secondItem="Cnu-EV-JiP" secondAttribute="bottom" constant="64" id="4JG-Vo-3aR"/>
                             <constraint firstItem="cBw-w0-StG" firstAttribute="leading" secondItem="n8r-Mb-6PJ" secondAttribute="leading" constant="50" id="54m-sL-ZIv"/>
                             <constraint firstItem="Cnu-EV-JiP" firstAttribute="leading" secondItem="n8r-Mb-6PJ" secondAttribute="leading" constant="50" id="5bL-7S-Rz5"/>
                             <constraint firstItem="n8r-Mb-6PJ" firstAttribute="bottom" secondItem="cBw-w0-StG" secondAttribute="bottom" constant="437" id="7OQ-Vm-1Ur"/>
                             <constraint firstItem="cBw-w0-StG" firstAttribute="top" secondItem="oVG-mU-Qrv" secondAttribute="bottom" constant="6" id="F7o-aL-Nc2"/>
                             <constraint firstItem="n8r-Mb-6PJ" firstAttribute="trailing" secondItem="oVG-mU-Qrv" secondAttribute="trailing" constant="50" id="FVk-MS-iOz"/>
-                            <constraint firstItem="n8r-Mb-6PJ" firstAttribute="trailing" secondItem="XyY-tl-G84" secondAttribute="trailing" constant="50" id="Fs6-oC-0f3"/>
-                            <constraint firstItem="XyY-tl-G84" firstAttribute="top" secondItem="n8r-Mb-6PJ" secondAttribute="top" id="LX0-dj-L7a"/>
                             <constraint firstItem="n8r-Mb-6PJ" firstAttribute="trailing" secondItem="4bJ-rX-TBy" secondAttribute="trailing" constant="50" id="ZZA-Zw-NaM"/>
                             <constraint firstItem="oVG-mU-Qrv" firstAttribute="top" secondItem="4bJ-rX-TBy" secondAttribute="bottom" constant="8" id="cBF-HK-bO7"/>
-                            <constraint firstItem="Cnu-EV-JiP" firstAttribute="top" secondItem="XyY-tl-G84" secondAttribute="bottom" constant="66" id="dYb-bf-tPv"/>
                             <constraint firstItem="n8r-Mb-6PJ" firstAttribute="trailing" secondItem="cBw-w0-StG" secondAttribute="trailing" constant="50" id="es2-Pj-6L2"/>
                             <constraint firstItem="4bJ-rX-TBy" firstAttribute="leading" secondItem="n8r-Mb-6PJ" secondAttribute="leading" constant="50" id="jpb-4n-YLG"/>
                             <constraint firstItem="n8r-Mb-6PJ" firstAttribute="trailing" secondItem="Cnu-EV-JiP" secondAttribute="trailing" constant="50" id="kff-EP-EwB"/>
@@ -510,7 +493,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n8r-Mb-6PJ"/>
                     </view>
-                    <navigationItem key="navigationItem" id="bbZ-WO-lRW"/>
+                    <navigationItem key="navigationItem" title="Login" id="bbZ-WO-lRW"/>
                     <connections>
                         <outlet property="continueButton" destination="cBw-w0-StG" id="XR1-tB-Ucp"/>
                         <outlet property="emailAddressTextField" destination="Cnu-EV-JiP" id="nFG-WU-cGi"/>
@@ -527,11 +510,11 @@
             <objects>
                 <viewController id="bIk-dr-si6" customClass="resetPasswordViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hcY-8Z-AXJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email Address" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ble-kp-MGt">
-                                <rect key="frame" x="50" y="164" width="314" height="31"/>
+                                <rect key="frame" x="50" y="218" width="314" height="31"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" keyboardType="alphabet"/>
                                 <userDefinedRuntimeAttributes>
@@ -539,7 +522,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uy9-Sc-Wvf">
-                                <rect key="frame" x="50" y="267" width="314" height="42"/>
+                                <rect key="frame" x="50" y="321" width="314" height="42"/>
                                 <color key="backgroundColor" red="0.50588235290000005" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
                                 <state key="normal" title="RESET MY PASSWORD">
@@ -550,7 +533,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-Ve-GNi">
-                                <rect key="frame" x="20" y="20" width="60" height="60"/>
+                                <rect key="frame" x="20" y="10" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="wUj-az-noB"/>
                                 </constraints>
@@ -591,7 +574,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="6zC-U3-2zj" customClass="homeViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7E3-AJ-Bwg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVd-jB-qVN">
@@ -658,7 +641,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C14-5b-gi8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2305.7971014492755" y="-456.02678571428567"/>
+            <point key="canvasLocation" x="3215.9420289855075" y="-456.02678571428567"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bdP-cY-zvn">
@@ -680,14 +663,14 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5R1-uc-UKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-375" y="-313"/>
+            <point key="canvasLocation" x="534.78260869565224" y="-313.39285714285711"/>
         </scene>
         <!--Food Items Second View Controller-->
         <scene sceneID="JRd-Al-eta">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="oHz-yb-dhY" customClass="FoodItemsSecondViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PnE-tj-xAn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VuH-bk-84n">
@@ -752,14 +735,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X1S-VS-FZd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3677" y="218"/>
+            <point key="canvasLocation" x="4586.9565217391309" y="217.63392857142856"/>
         </scene>
         <!--Pop Up View Controller-->
         <scene sceneID="bfG-nM-7uu">
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="JOR-ec-tQq" customClass="popUpViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X1b-5l-mxB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E0C-ot-ePS">
@@ -824,14 +807,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHQ-UU-dFL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4583" y="218"/>
+            <point key="canvasLocation" x="5492.753623188406" y="217.63392857142856"/>
         </scene>
         <!--CHECKOUT-->
         <scene sceneID="GoS-41-A0y">
             <objects>
                 <viewController id="DA3-LT-lIA" customClass="QRCodeViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xvv-nl-TTQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8p-PR-l9B">
@@ -1297,7 +1280,7 @@
             <objects>
                 <viewController id="oim-iw-eXS" customClass="adminViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GPE-wC-gnl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSb-t3-9yJ">
@@ -1449,7 +1432,7 @@
             <objects>
                 <viewController providesPresentationContextTransitionStyle="YES" modalPresentationStyle="currentContext" id="6dA-lI-9BW" customClass="adminControlsViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ouq-vO-5IH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EF-G6-uUK">
@@ -1748,12 +1731,10 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="nra-mc-n7O"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4uH-4v-OaM">
-                        <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CPt-Fo-8Or">
-                        <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -1762,7 +1743,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTs-Nj-RpF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2872" y="218"/>
+            <point key="canvasLocation" x="3781.1594202898555" y="217.63392857142856"/>
         </scene>
         <!--AdminQR View Controller-->
         <scene sceneID="0mC-xb-uT1">
@@ -2281,7 +2262,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="KVH-nZ-1jA" customClass="settingsPageViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I5e-cH-viB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="01F-yJ-850">
@@ -2336,7 +2317,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="GIb-h1-wKB" customClass="helpAndSupportViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sko-hQ-X0F">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOH-64-ND5">
@@ -2378,7 +2359,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="xhx-Ne-xkD" customClass="contactAdminViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yvb-zH-Bau">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YQf-Cx-6UO">
@@ -2440,7 +2421,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="PdC-y2-ebH" customClass="sendfeedbackcontrolsViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="90t-IF-atU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zE1-ll-bc9">
@@ -2510,7 +2491,7 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="Tqu-XP-Okv" customClass="emailFeedbackViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r2a-63-VDi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5kz-PX-D9z">
@@ -2566,7 +2547,7 @@
             </objects>
             <point key="canvasLocation" x="4105.7971014492759" y="-1623.2142857142856"/>
         </scene>
-        <!--Inquire About Food Pantry View Controller-->
+        <!--Inquiry Page-->
         <scene sceneID="UNh-ui-eJz">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="CC4-o4-xuk" customClass="inquireAboutFoodPantryViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
@@ -2594,13 +2575,6 @@
                                     <action selector="sendEmailButton:" destination="Tqu-XP-Okv" eventType="touchUpInside" id="vbj-8n-7RG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="INQUIRY PAGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1g-rG-aI3">
-                                <rect key="frame" x="64" y="80" width="287" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please be sure to include the following details:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSc-N1-as0">
                                 <rect key="frame" x="10" y="134" width="401" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2659,7 +2633,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="NvK-N6-x4g"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9Fg-cs-XDC"/>
+                    <navigationItem key="navigationItem" title="Inquiry Page" id="9Fg-cs-XDC"/>
                     <connections>
                         <outlet property="messageTextField" destination="rXe-d6-lFS" id="ec6-ca-u3W"/>
                         <outlet property="sendButton" destination="j2v-uv-Qna" id="XuI-AQ-5Cw"/>
@@ -3139,12 +3113,12 @@
             </objects>
             <point key="canvasLocation" x="1983" y="4039"/>
         </scene>
-        <!--Send Feed Back Google Form View Controller-->
+        <!--Google Form Feedback-->
         <scene sceneID="JhT-II-f0h">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="TwX-ay-QLz" customClass="sendFeedBackGoogleFormViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yaO-va-kbx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lz1-r6-YiZ">
@@ -3156,26 +3130,18 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hfr-Qx-OCl">
-                                <rect key="frame" x="34" y="41" width="21" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark.octagon" catalog="system"/>
-                                <connections>
-                                    <action selector="dismissBackTapped:" destination="TwX-ay-QLz" eventType="touchUpInside" id="4dv-jP-LUt"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="3uD-2G-2re"/>
                     </view>
-                    <navigationItem key="navigationItem" id="D6Y-3E-1Xl"/>
+                    <navigationItem key="navigationItem" title="Google Form Feedback" id="D6Y-3E-1Xl"/>
                     <connections>
                         <outlet property="webView" destination="lz1-r6-YiZ" id="oTJ-Rh-j3k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDZ-Ei-cRW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5015.9420289855079" y="-887.27678571428567"/>
+            <point key="canvasLocation" x="5926.0869565217399" y="-887.27678571428567"/>
         </scene>
         <!--Barcode Scan Entry View Controller-->
         <scene sceneID="brp-pf-2hG">
@@ -3313,7 +3279,7 @@
                     <tabBarItem key="tabBarItem" title="HOME" image="house.fill" catalog="system" id="ms9-ze-WOx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9zu-H1-6AU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3323,7 +3289,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fyt-yK-UOi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1395.6521739130435" y="-456.02678571428567"/>
+            <point key="canvasLocation" x="2304.3478260869565" y="-456.02678571428567"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bkv-nv-dm3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I3t-8a-fsA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dje-8k-yxX">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Kg4-ak-JV1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="why-5V-lbh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1704.3478260869567" y="-313.39285714285711"/>
         </scene>
     </scenes>
     <resources>
@@ -3349,8 +3333,8 @@
         <segue reference="3Qs-b0-Rjn"/>
         <segue reference="Zke-bH-X19"/>
         <segue reference="H9f-l5-90A"/>
-        <segue reference="ZbA-Fj-Lae"/>
+        <segue reference="VrP-rx-HIg"/>
         <segue reference="ETY-iU-Vqb"/>
-        <segue reference="AJ9-9r-s5L"/>
+        <segue reference="Ona-bs-GLF"/>
     </inferredMetricsTieBreakers>
 </document>

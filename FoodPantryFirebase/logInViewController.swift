@@ -37,6 +37,7 @@ class logInViewController: UIViewController {
             
                 Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
                     if(user!.isEmailVerified) {
+                        print("changing in")
                         self.dismiss(animated: false, completion: nil)//sends user to home screen animation
                     } else {
                         let alert = UIAlertController(title: "Email Not Verified", message: "Please check your inbox/spam folder and make sure you have verified your email!", preferredStyle: .alert)
