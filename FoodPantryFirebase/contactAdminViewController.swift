@@ -14,8 +14,8 @@ class contactAdminViewController: UIViewController {
         
     var emailAt = 0;
     @IBOutlet weak var subjectTextField: UITextField!
-    @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var messageTextField: UITextView!
     var subjectEntered = ""
     var messageEntered = ""
     var adminEmailAddresses = [String]()
@@ -26,6 +26,9 @@ class contactAdminViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        messageTextField.layer.borderColor = UIColor(red: 0/255, green: 191/255, blue: 255/255, alpha: 1.0).cgColor
+        messageTextField.layer.borderWidth = 1.0;
+        messageTextField.layer.cornerRadius = 5.0;
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
         
         ref = Database.database().reference()
@@ -40,7 +43,8 @@ class contactAdminViewController: UIViewController {
         subjectEntered = subjectTextField.text!
         messageEntered = messageTextField.text!
         
-        showMailComposer();
+        print(messageEntered)
+//        showMailComposer();
     }
     
     var tempData : [[String: Any]] = []

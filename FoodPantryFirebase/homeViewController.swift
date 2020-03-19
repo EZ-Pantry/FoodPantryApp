@@ -15,6 +15,7 @@ class homeViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var schoolImageView: UIImageView!
     
+    @IBOutlet weak var schoolNameLbl: UILabel!
     var PantryName: String = ""
     
     var ref: DatabaseReference!
@@ -76,6 +77,8 @@ class homeViewController: UIViewController {
                 if(success) {
                     print("location")
                     print(location)
+                    var pantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+                    self.schoolNameLbl.text = pantryName.uppercased();//upercase the school name
                     self.coordinates(forAddress: location) {
                                        (location) in
                                        guard let location = location else {
@@ -115,6 +118,7 @@ class homeViewController: UIViewController {
             self.alert.hideLoadingAlert()
             
         }
+        
         
     }
     
