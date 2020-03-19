@@ -150,8 +150,6 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         print("date day below")
         print(lbl.text)
         dateClicked = lbl.text!
-        currentMonthIndex = Calendar.current.component(.month, from: Date())
-        currentYear = Calendar.current.component(.year, from: Date())
         
         var currentMonthString = ""
         var currentDayString = ""
