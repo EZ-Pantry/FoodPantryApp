@@ -34,89 +34,89 @@ Made by two high school juniors: Rayaan Siddiqi and Ashay Parikh
 ## View Controllers' Descriptions
 
 - **addMainViewController**
-    - It does x y and z
+    - Admin can add a new food item and change existing settings
 - **QRAddViewController**
-    - It does x y and z    
+    - Admin can choose to scan a barcode of an item or manually add an item    
 - **addItemViewController**
-    - It does x y and z
+    - Scanning a barcode when admin adds an item
 - **manualViewController**
-    - It does x y and z   
+    - User manually adds an item
 - **ItemCell**
-    - It does x y and z
+    - Cell for the Inventory View
 - **QRScannerController**
-    - It does x y and z   
+    - Scanning a barcode when user checks out an item   
 - **QRScrapeController**
-    - It does x y and z
+    - User gets checked out item info and can decide to add more or go to checkout
 - **QRCodeViewController**
-    - It does x y and z      
+    - User can choose to scan a barcode of an item or manually add an item      
 - **View Controller**
-    - It does x y and z
+    - First View Controller - Login or Signup
 - **BarcodeScannerViewController**
-    - It does x y and z   
+    - User is prompted with this when the session is up, and the user must validate that he/she is in the pantry  
 - **adminQRViewController**
-    - It does x y and z   
+    - View for the Pantry Code - Admin can download the barcode or generate a new one  
 - **helpAndSupportViewController**
-    - It does x y and z   
+    - Shows Help and Support  
 - **contactAdminViewController**
-    - It does x y and z   
+    - Contacting the Admins
 - **sendFeedBackViewController**
-    - It does x y and z   
+    - Sending Back Feedback  
 - **editItemInfoViewController**
-    - It does x y and z   
+    - Admin is shown an item and can directly alter settings  
 - **adminEditPopUpViewController**
-    - It does x y and z   
+    - Admin is shown popup of an item and can choose to edit or delete the item
 - **adminFirstEditItemsViewController**
-    - It does x y and z   
+    - Admin is shown the inventory with the ability to edit 
 - **inquireAboutViewController**
-    - It does x y and z   
+    - Inquiry Page  
 - **settingsPageViewController**
-    - It does x y and z   
-- **sendfeedbakcontrolsViewController**
-    - It does x y and z
+    - Settings Page for User and Admin  
+- **sendfeedbackcontrolsViewController**
+    - Controls for sending feedback
 - **emailFeedbackViewController**
-    - It does x y and z   
+    - Email Feedback  
 - **ViewStatisticsViewController**
-    - It does x y and z   
+    - Admin can view user & food pantry statistics  
 - **calendarFirstViewController**
-    - It does x y and z   
+    - Calendar, part of viewing statistics  
 - **MonthView**
-    - It does x y and z   
+    - Part of Calendar  
 - **WeekdaysView**
-    - It does x y and z   
+    - Part of Calendar
 - **CalendarView**
-    - It does x y and z   
+    - Part of Calendar  
 - **adminControlsViewController**
-    - It does x y and z   
+    - View for admin controls, admin can edit the pantry, add items, view statistics, or other options  
 - **adminViewController**
-    - It does x y and z   
+    - Profile View 
 - **popUpViewController**
-    - It does x y and z   
+    - Pop up when user views the inventory  
 - **FoodItemsSecondViewController**
-    - It does x y and z   
+    - Inventory View   
 - **resetPasswordViewController**
-    - It does x y and z   
+    - Reset password View 
 - **homeViewController**
-    - It does x y and z   
+    - Home View  
 - **SignUpViewController**
-    - It does x y and z   
+    - Signup View  
 - **loginViewController**
-    - It does x y and z   
+    - Login View
 - **checkoutViewController**
-    - It does x y and z
+    - checkout view
 - **chooseManualViewController**
-    - It does x y and z  
+    - Admin manually enters food item
 - **chooseUserViewController**
-    - It does x y and z
+    - User decides if he/she is an admin or user
 - **chooseSchoolViewController**
-    - It does x y and z  
+    - User decides which pantry he/she belongs to 
 - **RequestError**
-    - It does x y and z  
+    - Error shown
 - **CheckoutCell1TableViewCell**
-    - It does x y and z  
+    - Cell for the checkout view
 - **LoadingBar**
-    - It does x y and z  
+    - Loading bar shown
 - **otherAdminViewController**
-    - It does x y and z  
+    -  Other options for admin 
 ---
 
 ## FAQ
