@@ -1,10 +1,5 @@
-//
-//  RequestError.swift
-//  FoodPantryFirebase
-//
-//  Created by Ashay Parikh on 3/12/20.
-//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
-//
+//  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
+
 
 import Foundation
 import Foundation
