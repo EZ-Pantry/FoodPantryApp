@@ -48,7 +48,7 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     var selectedFoodItem: [String: Any]?
         
     var PantryName: String = ""
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -183,7 +183,7 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
                 let id = String(c)
                 
                 //adds to array
-                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "type": type, "allergies": allergies, "id": id])
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "type": type, "allergies": allergies, "id": id, "uid": key])
                 tempNames.append(name)
                 c += 1 //increments id count
             }
@@ -323,7 +323,7 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
             destinationVC?.image = (selectedFoodItem?["image"] as? String)!
             destinationVC?.type = (selectedFoodItem?["type"] as? String)!
             destinationVC?.allergies = (selectedFoodItem?["allergies"] as? String)!
-
+            destinationVC?.uid = (selectedFoodItem?["uid"] as? String)!
         }
     }
     

@@ -266,80 +266,43 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
         @IBAction func addMoreSelected(_ sender: Any) {
     
-                //update firebase
-                
-                let myGroup = DispatchGroup() //dispatch group, needed because the for loop is async
+            addItem(next: "addmore")
 
+        }
+     
+    @IBAction func finishSelected(_ sender: Any) { //same code as above
+        
+        addItem(next: "finish")
+    }
+    
+    func addItem(next: String) {
+        //update firebase
             
-            if(existing) { //edit the current food item
-                    //update the current data in firebase
-                    
-                    myGroup.enter()
-                    
-                    let key = food_data["key"] as! String
-                    
-                    print("key")
-                    print(key)
-                    
-                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
-                        
-                        
-                        //updating ingredients, allergies, type and quantity
-                        
-                        var newIngredients: String = self.ingredientsLabel.text!
-                        var newAllergies: String = self.allergiesLabel.text!
-                        var newType: String = self.typeLabel.text!
-                        var additionalQuantity: String = self.quantityLabel.text!
-                        var currentQuantity = self.food_data["quantity"] as! String
-                        var newQuantity = Int(additionalQuantity)! + Int(currentQuantity)!
-                        var newQuantity2 = String(newQuantity)
-                        var newHealthy = self.healthyLabel.text!
-                        
-                        //check for blanks
-                        if(newIngredients == "") {
-                            newIngredients = "not listed"
-                        }
-                        
-                        if(newAllergies == "") {
-                            newAllergies = "not listed"
-                        }
-                        
-                        if(newType == "") {
-                            newType = "not listed"
-                        }
-                        
-                        if(newHealthy == "") {
-                            newHealthy = "not listed"
-                        }
-                        
-                        //now update
+            let myGroup = DispatchGroup() //dispatch group, needed because the for loop is async
 
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients.filterEmoji);
-                        
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2.filterEmoji);
-                        
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Type").setValue(newType.filterEmoji);
-                        
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies.filterEmoji);
-                        
-                        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy.filterEmoji);
-                        
-                        myGroup.leave() //all done, can leave the group
-                      // ...
-                      }) { (error) in
-                        RequestError().showError()
-                        print(error.localizedDescription)
-                    }
-                } else { //need to add in a new food item
-                    //create new data
+        
+        if(existing) { //edit the current food item
+                //update the current data in firebase
+                
+                myGroup.enter()
+                
+                let key = food_data["key"] as! String
+                
+                print("key")
+                print(key)
+                
+                self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
                     
-                    var newTitle = self.nameLabel.text!
+                    
+                    //updating ingredients, allergies, type and quantity
+                    
                     var newIngredients: String = self.ingredientsLabel.text!
                     var newAllergies: String = self.allergiesLabel.text!
                     var newType: String = self.typeLabel.text!
-                    var newQuantity: String = self.quantityLabel.text!
-                    var newURL = food_url
-                    var checkedOut = "0"
+                    var additionalQuantity: String = self.quantityLabel.text!
+                    var currentQuantity = self.food_data["quantity"] as! String
+                    var newQuantity = Int(additionalQuantity)! + Int(currentQuantity)!
+                    var newQuantity2 = String(newQuantity)
                     var newHealthy = self.healthyLabel.text!
                     
                     //check for blanks
@@ -355,161 +318,99 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                         newType = "not listed"
                     }
                     
-                    let dic = NSMutableDictionary()
-                    dic.setValue(newTitle.filterEmoji, forKey: "Name")
-                    dic.setValue(newIngredients.filterEmoji, forKey: "Information")
-                    dic.setValue(newAllergies.filterEmoji, forKey: "Allergies")
-                    dic.setValue(newType.filterEmoji, forKey: "Type")
-                    dic.setValue(newQuantity.filterEmoji, forKey: "Quantity")
-                    dic.setValue(newURL.filterEmoji, forKey: "URL")
-                    dic.setValue(checkedOut.filterEmoji, forKey: "Checked Out")
-                    dic.setValue(newHealthy.filterEmoji, forKey: "Healthy")
-                    
-                    myGroup.enter()
-                    
-                    let refChild = self.ref.child(self.PantryName).child("Inventory").child("Food Items").childByAutoId()
-                    
-                    refChild.updateChildValues(dic as [NSObject : AnyObject]) { (error, ref) in
-                        if(error != nil){
-                            RequestError().showError()
-                            myGroup.leave() //all done, can leave the group
-                        } else{
-                            print("\n\n\n\n\nAdded successfully...")
-                            myGroup.leave() //all done, can leave the group
-                        }
+                    if(newHealthy == "") {
+                        newHealthy = "not listed"
                     }
                     
+                    //now update
+
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients.filterEmoji);
+                    
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2.filterEmoji);
+                    
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Type").setValue(newType.filterEmoji);
+                    
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies.filterEmoji);
+                    
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy.filterEmoji);
+                    
+                    myGroup.leave() //all done, can leave the group
+                  // ...
+                  }) { (error) in
+                    RequestError().showError()
+                    print(error.localizedDescription)
+                }
+            } else { //need to add in a new food item
+                //create new data
+                
+                var newTitle = self.nameLabel.text!
+                var newIngredients: String = self.ingredientsLabel.text!
+                var newAllergies: String = self.allergiesLabel.text!
+                var newType: String = self.typeLabel.text!
+                var newQuantity: String = self.quantityLabel.text!
+                var newURL = food_url
+                var checkedOut = "0"
+                var newHealthy = self.healthyLabel.text!
+                
+                //check for blanks
+                if(newIngredients == "") {
+                    newIngredients = "not listed"
                 }
                 
-                myGroup.notify(queue: .main) { //all loops finished, can do the call back
-                    print("Finished all requests.")
-                    self.performSegue(withIdentifier: "addMore", sender: self)
+                if(newAllergies == "") {
+                    newAllergies = "not listed"
                 }
+                
+                if(newType == "") {
+                    newType = "not listed"
+                }
+            
+                if(newHealthy == "") {
+                    newHealthy = "not listed"
+                }
+            
+                
+                let dic = NSMutableDictionary()
+                dic.setValue(newTitle.filterEmoji, forKey: "Name")
+                dic.setValue(newIngredients.filterEmoji, forKey: "Information")
+                dic.setValue(newAllergies.filterEmoji, forKey: "Allergies")
+                dic.setValue(newType.filterEmoji, forKey: "Type")
+                dic.setValue(newQuantity.filterEmoji, forKey: "Quantity")
+                dic.setValue(newURL.filterEmoji, forKey: "URL")
+                dic.setValue(checkedOut.filterEmoji, forKey: "Checked Out")
+                dic.setValue(newHealthy.filterEmoji, forKey: "Healthy")
+                
+                myGroup.enter()
+                
+                let refChild = self.ref.child(self.PantryName).child("Inventory").child("Food Items").childByAutoId()
+                
+                if(!manualEnter) {
+                    let uid = refChild.key!
+                    self.ref.child(self.PantryName).child("Barcodes").setValue([barcode: uid])
+                }
+            
+                refChild.updateChildValues(dic as [NSObject : AnyObject]) { (error, ref) in
+                    if(error != nil){
+                        RequestError().showError()
+                        myGroup.leave() //all done, can leave the group
+                    } else{
+                        print("\n\n\n\n\nAdded successfully...")
+                        myGroup.leave() //all done, can leave the group
+                    }
+                }
+                
+            }
+            
+            myGroup.notify(queue: .main) { //all loops finished, can do the call back
+                
+                if(next == "finish") {
+                    self.performSegue(withIdentifier: "BackToHome", sender: self)
+                } else if(next == "addmore") {
+                    self.performSegue(withIdentifier: "addMore", sender: self)
 
-        }
-     
-    @IBAction func finishSelected(_ sender: Any) { //same code as above
-        
-        //update firebase
-                       
-                       let myGroup = DispatchGroup() //dispatch group, needed because the for loop is async
-
-                   
-                       if(existing) {
-                           //update the current data in firebase
-                           
-                           myGroup.enter()
-                           
-                           let key = food_data["key"] as! String
-                           
-                           print("key")
-                           print(key)
-                           
-                           self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
-                               
-                               
-                               //updating ingredients, allergies, type and quantity
-                               
-                               var newIngredients: String = self.ingredientsLabel.text!
-                               var newAllergies: String = self.allergiesLabel.text!
-                               var newType: String = self.typeLabel.text!
-                               var additionalQuantity: String = self.quantityLabel.text!
-                               var currentQuantity = self.food_data["quantity"] as! String
-                               var newQuantity = Int(additionalQuantity)! + Int(currentQuantity)!
-                               var newQuantity2 = String(newQuantity)
-                               var newHealthy = self.healthyLabel.text!
-                               
-                               //check for blanks
-                               if(newIngredients == "") {
-                                   newIngredients = "not listed"
-                               }
-                               
-                               if(newAllergies == "") {
-                                   newAllergies = "not listed"
-                               }
-                               
-                               if(newType == "") {
-                                   newType = "not listed"
-                               }
-                               
-                               if(newHealthy == "") {
-                                   newHealthy = "not listed"
-                               }
-                               
-                               //now update
-
-                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Information").setValue(newIngredients);
-                               
-                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Quantity").setValue(newQuantity2);
-                               
-                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Type").setValue(newType);
-                               
-                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Allergies").setValue(newAllergies);
-                               
-                               self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy);
-                               
-                               myGroup.leave() //all done, can leave the group
-                             // ...
-                             }) { (error) in
-                                RequestError().showError()
-                               print(error.localizedDescription)
-                           }
-                       } else {
-                           //create new data
-                           
-                           var newTitle = self.nameLabel.text!
-                           var newIngredients: String = self.ingredientsLabel.text!
-                           var newAllergies: String = self.allergiesLabel.text!
-                           var newType: String = self.typeLabel.text!
-                           var newQuantity: String = self.quantityLabel.text!
-                           var newURL = food_url
-                           var checkedOut = "0"
-                           var newHealthy = self.healthyLabel.text!
-                           
-                           //check for blanks
-                           if(newIngredients == "") {
-                               newIngredients = "not listed"
-                           }
-                           
-                           if(newAllergies == "") {
-                               newAllergies = "not listed"
-                           }
-                           
-                           if(newType == "") {
-                               newType = "not listed"
-                           }
-                           
-                           let dic = NSMutableDictionary()
-                           dic.setValue(newTitle, forKey: "Name")
-                           dic.setValue(newIngredients, forKey: "Information")
-                           dic.setValue(newAllergies, forKey: "Allergies")
-                           dic.setValue(newType, forKey: "Type")
-                           dic.setValue(newQuantity, forKey: "Quantity")
-                           dic.setValue(newURL, forKey: "URL")
-                           dic.setValue(checkedOut, forKey: "Checked Out")
-                           dic.setValue(newHealthy, forKey: "Healthy")
-                           
-                           myGroup.enter()
-                           
-                           let refChild = self.ref.child(self.PantryName).child("Inventory").child("Food Items").childByAutoId()
-                           
-                           refChild.updateChildValues(dic as [NSObject : AnyObject]) { (error, ref) in
-                               if(error != nil){
-                                   RequestError().showError()
-                                   myGroup.leave() //all done, can leave the group
-                               } else{
-                                   print("\n\n\n\n\nAdded successfully...")
-                                   myGroup.leave() //all done, can leave the group
-                               }
-                           }
-                           
-                       }
-                       
-                       myGroup.notify(queue: .main) { //all loops finished, can do the call back
-                           print("Finished all requests.")
-                            self.performSegue(withIdentifier: "BackToHome", sender: self)
-                        }
-        
+                }
+                
+            }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

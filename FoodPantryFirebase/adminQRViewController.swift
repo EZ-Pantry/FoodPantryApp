@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 class adminQRViewController: UIViewController {
 
-    var foodPantryName = ""
+    var PantryName = ""
     var ref: DatabaseReference!
     var alert = LoadingBar()
     var foodPantryQRText = ""
@@ -18,6 +18,10 @@ class adminQRViewController: UIViewController {
     @IBOutlet var test: UIImageView!
     @IBOutlet weak var saveQRButton: UIButton!
     @IBOutlet weak var QRCodeImageView: UIImageView!
+    @IBOutlet var generateButton: UIButton!
+    
+    
+    //barcodes will be 8 numbers long - random numbers, 1-9
     
     var imageName: UIImage = UIImage()
 
@@ -27,31 +31,41 @@ class adminQRViewController: UIViewController {
         
         ref = Database.database().reference()
         //we set pantry code
-        foodPantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+        PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
         
         saveQRButton.layer.cornerRadius = 15
         saveQRButton.clipsToBounds = true
+        
+        generateButton.layer.cornerRadius = 15
+        generateButton.clipsToBounds = true
     }
     
     
     
     override func viewWillAppear(_ animated: Bool) {
+        updateCode()
+    }
+    
+    func updateCode() {
         let myGroup = DispatchGroup()
             
         alert.showLoadingAlert()
-        
-        myGroup.notify(queue: .main) {
-                                      
+        myGroup.enter()
             self.retreiveQRTextFromFirebase(callback: {(success, QRText)-> Void in
              
              if(success) {
                 //do creation of QR
                 self.generateCodeFromString(text: QRText)
-             }
+                myGroup.leave()
+             } else {
+                RequestError().showError()
+            }
             
          })
+        
+        myGroup.notify(queue: .main) {
+            self.alert.hideLoadingAlert()
         }
-        self.alert.hideLoadingAlert()
     }
     
     func generateCodeFromString(text: String) -> Void{
@@ -72,7 +86,7 @@ class adminQRViewController: UIViewController {
     
         
     func retreiveQRTextFromFirebase(callback: @escaping (_ success: Bool,_ location: String)-> Void) {
-        ref.child(foodPantryName).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child(PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             print("got")
             let value = snapshot.value as? NSDictionary
@@ -90,17 +104,13 @@ class adminQRViewController: UIViewController {
     
     @IBAction func saveQrButtonTapped(_ sender: UIButton) {
         //save the image of the barcode to camera roll
-        saveBarcode()
+        //saveBarcode()
+        share(image: imageName)
     }
     
     
     func saveBarcode() {
         UIImageWriteToSavedPhotosAlbum(imageName, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
-    }
-    
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
@@ -114,7 +124,26 @@ class adminQRViewController: UIViewController {
         }
     }
     
-
+    @IBAction func generateNew(_ sender: Any) {
+        
+        var newCode = ""
+        
+        for _ in 0..<6 {
+            newCode += String(Int.random(in: 1 ..< 10))
+        }
+        
+        //update firebase
+        self.ref.child(self.PantryName).child("Food Pantry QR Text").setValue(newCode);
+        updateCode()
+        
+    }
+    
+    //https://www.hackingwithswift.com/example-code/uikit/how-to-print-using-uiactivityviewcontroller
+    func share(image: UIImage) {
+        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        present(vc, animated: true)
+    }
+    
     @IBAction func dismissTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
