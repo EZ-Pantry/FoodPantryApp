@@ -40,6 +40,8 @@
 		A239DC2B241C9338003CFF0C /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC2A241C9338003CFF0C /* WeekdaysView.swift */; };
 		A239DC2D241C9351003CFF0C /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC2C241C9351003CFF0C /* CalendarView.swift */; };
 		A239DC2F241DA0A4003CFF0C /* helpAndSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC2E241DA0A3003CFF0C /* helpAndSupportViewController.swift */; };
+		A239DC312420538E003CFF0C /* adminQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC302420538E003CFF0C /* adminQRViewController.swift */; };
+		A239DC3324206EDC003CFF0C /* BarcodeScanEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC3224206EDC003CFF0C /* BarcodeScanEntryViewController.swift */; };
 		A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381723EF66E000AACC97 /* AppDelegate.swift */; };
 		A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381923EF66E000AACC97 /* SceneDelegate.swift */; };
 		A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381B23EF66E000AACC97 /* ViewController.swift */; };
@@ -118,6 +120,8 @@
 		A239DC2A241C9338003CFF0C /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		A239DC2C241C9351003CFF0C /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		A239DC2E241DA0A3003CFF0C /* helpAndSupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helpAndSupportViewController.swift; sourceTree = "<group>"; };
+		A239DC302420538E003CFF0C /* adminQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminQRViewController.swift; sourceTree = "<group>"; };
+		A239DC3224206EDC003CFF0C /* BarcodeScanEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanEntryViewController.swift; sourceTree = "<group>"; };
 		A24F381423EF66E000AACC97 /* FoodPantryFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPantryFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24F381723EF66E000AACC97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A24F381923EF66E000AACC97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
+				A239DC3224206EDC003CFF0C /* BarcodeScanEntryViewController.swift */,
+				A239DC302420538E003CFF0C /* adminQRViewController.swift */,
 				A239DC2E241DA0A3003CFF0C /* helpAndSupportViewController.swift */,
 				A239DC2424196FE8003CFF0C /* contactAdminViewController.swift */,
 				A239DC222417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift */,
@@ -587,6 +593,7 @@
 				1CBF1C55242009EE0064F7D1 /* CheckoutCell1TableViewCell.swift in Sources */,
 				1CBD01C52414095400AC53A9 /* chooseUserViewController.swift in Sources */,
 				A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */,
+				A239DC312420538E003CFF0C /* adminQRViewController.swift in Sources */,
 				A239DC0F2413156B003CFF0C /* settingsPageViewController.swift in Sources */,
 				1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */,
 				A24F386723F2269C00AACC97 /* resetPasswordViewController.swift in Sources */,
@@ -608,6 +615,7 @@
 				A24F388B2401CC8400AACC97 /* adminControlsViewController.swift in Sources */,
 				A239DC2D241C9351003CFF0C /* CalendarView.swift in Sources */,
 				A239DC2F241DA0A4003CFF0C /* helpAndSupportViewController.swift in Sources */,
+				A239DC3324206EDC003CFF0C /* BarcodeScanEntryViewController.swift in Sources */,
 				1C748F322406188800936A05 /* checkoutViewController.swift in Sources */,
 				1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */,
 				A239DC232417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift in Sources */,
