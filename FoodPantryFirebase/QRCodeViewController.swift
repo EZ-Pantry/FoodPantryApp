@@ -17,7 +17,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     var checkedOut = "" //format fooditem,quantity;fooditem,quantity
     var barcodes = ""
     
-    let timeDifference: Int = 1
+    let timeDifference: Int = 8
     
     override func viewDidLoad() {
         super.viewDidLoad()
