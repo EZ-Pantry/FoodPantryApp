@@ -27,6 +27,9 @@ class popUpFromBarChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        popOverView.layer.cornerRadius = 15
+        popOverView.clipsToBounds = true
         //sets the labels on the screen
         foodName.text = name
         foodTotalCheckedOut.text = "Total Checked Out: \(checkedout)"
