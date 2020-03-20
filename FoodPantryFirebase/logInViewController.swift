@@ -38,7 +38,9 @@ class logInViewController: UIViewController {
                 Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
                     if(user!.isEmailVerified) {
                         print("changing in")
-                        self.dismiss(animated: false, completion: nil)//sends user to home screen animation
+                        if(user!.isEmailVerified){
+                            self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
+                        }
                     } else {
                         let alert = UIAlertController(title: "Email Not Verified", message: "Please check your inbox/spam folder and make sure you have verified your email!", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
@@ -51,6 +53,7 @@ class logInViewController: UIViewController {
         }
         
     }
+    
     
     @IBAction func unwindToLogin(_ unwindSegue: UIStoryboardSegue) {}
     
