@@ -169,11 +169,13 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     func determineWhetherDateContainsData(){
         dataWasFound = false;
         let whiteBgButton = UIButton()
-        whiteBgButton.backgroundColor =  UIColor(red: 135/255.0, green: 206/255.0, blue: 235/255.0, alpha: 1.0)
-        whiteBgButton.frame = CGRect(x: 8, y: 392, width: 375, height: 400)//background behind labels
+        whiteBgButton.backgroundColor =  UIColor(red: 252/255.0, green: 109/255.0, blue: 109/255.0, alpha: 1.0)
+        whiteBgButton.frame = CGRect(x: 8, y: 392, width: 375, height: 350)//background behind labels
         addSubview(whiteBgButton)
         let itemsCheckedOutLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
         let studentsVisitedLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        itemsCheckedOutLbl.textColor = UIColor.white;
+        studentsVisitedLbl.textColor = UIColor.white;
         itemsCheckedOutLbl.font = UIFont.boldSystemFont(ofSize: 16)
         studentsVisitedLbl.font = UIFont.boldSystemFont(ofSize: 16)
         for x in 0..<dataLoadedIn.count{
@@ -189,7 +191,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
                 itemsCheckedOutLbl.text = "Item's Checked Out: \(dataLoadedIn[x]["itemsCheckedOut"]!)"
                 addSubview(itemsCheckedOutLbl)
 //                //
-                studentsVisitedLbl.center = CGPoint(x: 190, y: 700)
+                studentsVisitedLbl.center = CGPoint(x: 190, y: 680)
                 studentsVisitedLbl.textAlignment = .center
                 studentsVisitedLbl.text = "Student's Visited: \(dataLoadedIn[x]["studentsVisited"]!)"
                 addSubview(studentsVisitedLbl)
