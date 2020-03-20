@@ -176,6 +176,8 @@ class checkoutViewController: UITableViewController {
             
         }
         
+        if(self.items.count > 0) {
+        
         myGroup.enter()
         let userID = Auth.auth().currentUser?.uid
         self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -263,7 +265,7 @@ class checkoutViewController: UITableViewController {
             RequestError().showError()
             print(error.localizedDescription)
         }
-        
+        }
         myGroup.notify(queue: .main) { //https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing/46852224
             print("Finished all requests.")
             callback()

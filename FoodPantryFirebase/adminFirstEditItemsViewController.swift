@@ -223,7 +223,7 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     
     func refresh() {
         var imageRecieved: Int = 0
-        showLoadingAlert()
+        //showLoadingAlert()
         foodItems = []
         
         //all the data for the food items
@@ -257,8 +257,8 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
                                
                         if(imageRecieved == self.data.count) {
                             DispatchQueue.main.async {
-                                let top: UIViewController = UIApplication.topViewController()!
-                                top.dismiss(animated: false)
+                                //let top: UIViewController = UIApplication.topViewController()!
+                                //top.dismiss(animated: false)
                                 self.collectionView.reloadData()
                                 self.pickerField.text = "All Items"
                                 print("refreshed")

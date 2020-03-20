@@ -36,9 +36,6 @@ class adminControlsViewController: UIViewController {
 
     
 
-    @IBAction func dismissButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
     
 
 }
