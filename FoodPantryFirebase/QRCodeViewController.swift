@@ -19,7 +19,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     var checkedOut = "" //format fooditem,quantity;fooditem,quantity
     var barcodes = ""
     
-    let timeDifference: Int = 8
+    let timeDifference: Int = 1
     
     var PantryName: String = ""
     var ref: DatabaseReference! //reference to the firebase database
@@ -49,7 +49,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         numberTextField.text = ""
         
         if error != "" { //redirected from a different view and there is an error
-            errorLabel.text = error + "\nplease try again";
+            errorLabel.text = error + "\nPlease try again.";
         } else {
              errorLabel.text = ""
         }

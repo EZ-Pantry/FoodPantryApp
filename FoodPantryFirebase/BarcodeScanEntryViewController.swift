@@ -44,6 +44,9 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
     
     var foodPantryName = ""
     var barcodeTextFromFirebase = ""
+    
+    var canCheck = false //if false, then that means an alert is on the screen & the user can't check the barcode
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +84,7 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
         let alert = UIAlertController(title: "Please scan the Food Pantry's Code", message: "You need to verify that you are in the Food Pantry.", preferredStyle: .alert)
                                  
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+            self.canCheck = true
         }))
         
         let top = UIApplication.topViewController()!
@@ -174,16 +178,16 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
             qrCodeFrameView?.frame = barCodeObject!.bounds
         
-            if metadataObj.stringValue != nil && !sent {
+            if metadataObj.stringValue != nil && !sent && canCheck {
                 messageLabel.text = metadataObj.stringValue
                 code = metadataObj.stringValue!
-                sent = true
-                compareBarcodeInformation();
+                sent = compareBarcodeInformation();
+                print(sent)
             }
         }
     }
     
-    func compareBarcodeInformation(){
+    func compareBarcodeInformation() -> Bool{
         //check if the entry code match hee
         if(code == barcodeTextFromFirebase){
             
@@ -196,15 +200,16 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
                  self.performSegue(withIdentifier: "toCheckoutOptions", sender: self)//perform when okay tapped
             }))
             self.present(alert, animated: true, completion: nil);
-            
+            return true
         }
         else{
            let alert = UIAlertController(title: "Access to Food Pantry Checkout Denied", message: "Please Try Again!", preferredStyle: .alert)
-                                     
+            canCheck = false
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                self.canCheck = true
             }))
             self.present(alert, animated: true, completion: nil);
-            sent = false
+            return false
         }
     }
     

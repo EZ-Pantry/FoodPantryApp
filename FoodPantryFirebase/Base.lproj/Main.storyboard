@@ -900,18 +900,6 @@
                                     <segue destination="sPP-jx-rYE" kind="presentation" identifier="GoToManual" modalPresentationStyle="fullScreen" id="7RU-M5-qPr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEs-TR-qtr">
-                                <rect key="frame" x="32" y="44" width="21" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark.octagon" catalog="system"/>
-                                <connections>
-                                    <action selector="dismissBack:" destination="ggt-BT-bn5" eventType="touchUpInside" id="7If-kY-q08"/>
-                                    <action selector="dismissBackTapped:" destination="ggt-BT-bn5" eventType="touchUpInside" id="ScI-Rr-cZh"/>
-                                    <action selector="dismissBackToControls:" destination="ggt-BT-bn5" eventType="touchUpInside" id="5Sd-iz-hgx"/>
-                                    <action selector="dismissToSearchView:" destination="eF5-yX-IfH" eventType="touchUpInside" id="0Xk-hM-UsR"/>
-                                    <segue destination="Cx6-OT-Bas" kind="unwind" identifier="BackToHome" unwindAction="unwindToHome:" id="62e-oS-NSg"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="GFF-JQ-MmF"/>
@@ -1425,14 +1413,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7QI-db-CAM">
-                                <rect key="frame" x="50" y="61" width="23" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xmark.seal.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="dismissButton:" destination="6dA-lI-9BW" eventType="touchUpInside" id="eg5-kq-I7h"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2EF-G6-uUK">
                                 <rect key="frame" x="50" y="242" width="314" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3117,7 +3097,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="cross"/>
                                         <connections>
-                                            <action selector="dismissViewToBack:" destination="LbU-b6-iGh" eventType="touchUpInside" id="c1f-fb-MPB"/>
+                                            <segue destination="T5m-WH-0y7" kind="unwind" unwindAction="unwindToHome:" id="pAt-9K-WQ1"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3292,12 +3272,11 @@
         <image name="questionmark.circle" catalog="system" width="64" height="60"/>
         <image name="starimage" width="512" height="512"/>
         <image name="xmark.octagon" catalog="system" width="64" height="56"/>
-        <image name="xmark.seal.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ya6-8G-W4l"/>
-        <segue reference="Dwa-lY-C5Y"/>
-        <segue reference="tnj-7N-EuA"/>
+        <segue reference="Zke-bH-X19"/>
+        <segue reference="H9f-l5-90A"/>
         <segue reference="VrP-rx-HIg"/>
         <segue reference="ecB-Fx-w8c"/>
         <segue reference="AJ9-9r-s5L"/>
