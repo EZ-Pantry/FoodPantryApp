@@ -205,6 +205,8 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //need to set each item with indivisual marker
         let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Items in Food Pantry(Click bars to see more data)")//each column represnents a food item checked out number of times
         
+        chartDataSet.colors = [UIColor.red]
+        
         let chartData = BarChartData(dataSet: chartDataSet)
         
         //sets x axis values
@@ -219,7 +221,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         itemsBarChartView.data = chartData
         
-        itemsBarChartView.setVisibleXRangeMaximum(10)
+        itemsBarChartView.setVisibleXRangeMaximum(5)//show 5 at a time-makes the bar chart scrollable
         
         itemsBarChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
             
