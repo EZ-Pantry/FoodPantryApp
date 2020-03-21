@@ -607,12 +607,19 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UPDATES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZ5-xe-zmE">
+                                <rect key="frame" x="148" y="593" width="117" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="48T-gx-oVc"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="TVf-yc-1FD">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="questionmark.circle" catalog="system" id="aiD-IE-HNW">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="aiD-IE-HNW">
                             <connections>
                                 <segue destination="KVH-nZ-1jA" kind="show" id="vwB-Ts-wWf"/>
                             </connections>
@@ -3258,12 +3265,12 @@
         <image name="cross" width="40" height="40"/>
         <image name="emailimage" width="900" height="600"/>
         <image name="focus" width="150" height="150"/>
+        <image name="gear" catalog="system" width="64" height="58"/>
         <image name="googleformlogo" width="1081" height="290"/>
         <image name="house.fill" catalog="system" width="64" height="52"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="otherblackborder" width="2197" height="1677"/>
         <image name="person.crop.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="questionmark.circle" catalog="system" width="64" height="60"/>
         <image name="starimage" width="512" height="512"/>
         <image name="xmark.octagon" catalog="system" width="64" height="56"/>
     </resources>
