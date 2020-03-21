@@ -19,7 +19,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     var checkedOut = "" //format fooditem,quantity;fooditem,quantity
     var barcodes = ""
     
-    let timeDifference: Int = 1
+    let timeDifference: Int = 10
     
     var PantryName: String = ""
     var ref: DatabaseReference! //reference to the firebase database
