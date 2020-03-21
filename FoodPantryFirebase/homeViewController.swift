@@ -9,12 +9,11 @@ import UserNotifications
 
 class homeViewController: UIViewController {
 
-    @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
-    @IBOutlet weak var lastCheckedOutLbl: UILabel!
     @IBOutlet weak var welcomeNameLbl: UILabel!
     @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var schoolImageView: UIImageView!
     
+    @IBOutlet var adminUpdateLabel: UILabel!
     @IBOutlet weak var schoolNameLbl: UILabel!
     var PantryName: String = ""
     
@@ -138,9 +137,12 @@ class homeViewController: UIViewController {
         //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
         
         ref = Database.database().reference()
+        
+        
         if Auth.auth().currentUser != nil {
             
-            if(!UserDefaults.contains("Pantry Name")) {
+            if(!UserDefaults.contains("Pantry Name")) { //doesn't contain pantry name
+                
                 let uid = Auth.auth().currentUser!.uid
                 
                 ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -160,6 +162,14 @@ class homeViewController: UIViewController {
                 
             } else {
                 self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+                ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    let value = snapshot.value as? NSDictionary
+                    self.adminUpdateLabel.text = (value?["Admin Message"] as? String ?? "") //loads ithe
+                }) { (error) in
+                    RequestError().showError()
+                    print(error.localizedDescription)
+                }
                 self.getUsersName()//helper function to display user data about last time they came
                 self.sendOutNotification()
             }
@@ -322,8 +332,8 @@ class homeViewController: UIViewController {
             let lastCheckedOutDate = value?["Last Date Visited"] as? String ?? ""
             let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
             self.welcomeNameLbl.text = "Welcome, \(fullName)"
-              self.lastCheckedOutLbl.text = "Last visited: \(lastCheckedOutDate)"//Display last item user checked out
-              self.lastItemCheckedOutLbl.text = "Last Checked Out Item: \(lastItemCheckedOut)"//And the last date they visited
+//              self.lastCheckedOutLbl.text = "Last visited: \(lastCheckedOutDate)"//Display last item user checked out
+//              self.lastItemCheckedOutLbl.text = "Last Checked Out Item: \(lastItemCheckedOut)"//And the last date they visited
               
               //all code with snapshot must be in here
             // ...
