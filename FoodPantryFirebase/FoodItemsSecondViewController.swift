@@ -18,6 +18,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()
     
+    @IBOutlet weak var refreshButton: UIButton!
     
     var foodItemsNameDataArray = [String]() //names of all the food items
     var storage: Storage! //storage
@@ -201,6 +202,11 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     
     //page is refreshed
     @IBAction func refreshPage(_ sender: Any) {
+        UIView.animate(withDuration: 0.75) {
+            //animate the refresh button in a 360 degree circle
+          self.refreshButton.transform = self.refreshButton.transform.rotated(by: CGFloat.pi)
+          self.refreshButton.transform = self.refreshButton.transform.rotated(by: CGFloat.pi)
+        }
         refresh()
         
     }
