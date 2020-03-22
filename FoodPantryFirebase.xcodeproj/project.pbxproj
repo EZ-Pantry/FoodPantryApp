@@ -127,7 +127,7 @@
 		A239DC302420538E003CFF0C /* adminQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminQRViewController.swift; sourceTree = "<group>"; };
 		A239DC3224206EDC003CFF0C /* BarcodeScanEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanEntryViewController.swift; sourceTree = "<group>"; };
 		A239DC402423F5DA003CFF0C /* popUpFromBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popUpFromBarChartViewController.swift; sourceTree = "<group>"; };
-		A24F381423EF66E000AACC97 /* FoodPantryFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPantryFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A24F381423EF66E000AACC97 /* EZ Pantry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EZ Pantry.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24F381723EF66E000AACC97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A24F381923EF66E000AACC97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A24F381B23EF66E000AACC97 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 		A24F381523EF66E000AACC97 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A24F381423EF66E000AACC97 /* FoodPantryFirebase.app */,
+				A24F381423EF66E000AACC97 /* EZ Pantry.app */,
 				A24F382A23EF66E100AACC97 /* FoodPantryFirebaseTests.xctest */,
 				A24F383523EF66E100AACC97 /* FoodPantryFirebaseUITests.xctest */,
 			);
@@ -326,7 +326,7 @@
 			);
 			name = FoodPantryFirebase;
 			productName = FoodPantryFirebase;
-			productReference = A24F381423EF66E000AACC97 /* FoodPantryFirebase.app */;
+			productReference = A24F381423EF66E000AACC97 /* EZ Pantry.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A24F382923EF66E100AACC97 /* FoodPantryFirebaseTests */ = {
@@ -811,7 +811,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.RayaanSiddiqi.FoodPantryFirebase;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "EZ Pantry";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -830,7 +830,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.RayaanSiddiqi.FoodPantryFirebase;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "EZ Pantry";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
