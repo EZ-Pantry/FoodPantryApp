@@ -14,11 +14,13 @@ class notificationsViewController: UIViewController {
     @IBOutlet var messageField: UITextField!
     @IBOutlet var lastNotification: UILabel!
     
+    @IBOutlet weak var validLbl: UILabel!
     var fullName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        validLbl.isHidden = true;
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
         
@@ -54,11 +56,18 @@ class notificationsViewController: UIViewController {
         dateFormatter.dateFormat = "MM-dd-yyyy"
         let current_date = dateFormatter.string(from: date)
         
-        let message = fullName + " (" + current_date + "): " + messageField.text!.filterEmoji
+        if(messageField.text! == ""){
+            validLbl.isHidden = false;
+        }
+        else{
+            validLbl.isHidden = true;
+            let message = fullName + " (" + current_date + "): " + messageField.text!.filterEmoji
+            
+            self.ref.child(self.PantryName).child("Admin Message").setValue(message);
+            
+            lastNotification.text = message
+        }
         
-        self.ref.child(self.PantryName).child("Admin Message").setValue(message);
-        
-        lastNotification.text = message
     }
     
 
