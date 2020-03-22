@@ -118,6 +118,8 @@ Made by two high school juniors: Rayaan Siddiqi and Ashay Parikh
 - **otherAdminViewController**
     -  Other options for admin 
        - Change Pantry Code
+       - Change Pantry Location
+       - Allow/Disallow Checkout
 ---
 
 ## FAQ
