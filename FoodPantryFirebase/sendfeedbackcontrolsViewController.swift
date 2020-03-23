@@ -8,10 +8,14 @@ class sendfeedbackcontrolsViewController: UIViewController, MFMailComposeViewCon
 
     @IBOutlet weak var emailButton: UIButton!
     
+    @IBOutlet weak var rateAppButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         emailButton.layer.cornerRadius = 15
         emailButton.clipsToBounds = true
+        
+        rateAppButton.layer.cornerRadius = 15
+        rateAppButton.clipsToBounds = true
     }
     
     
