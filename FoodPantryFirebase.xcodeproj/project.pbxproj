@@ -62,6 +62,8 @@
 		A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F388823FF52E700AACC97 /* adminViewController.swift */; };
 		A24F388B2401CC8400AACC97 /* adminControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F388A2401CC8400AACC97 /* adminControlsViewController.swift */; };
 		A24F388D2407497400AACC97 /* ViewStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F388C2407497400AACC97 /* ViewStatisticsViewController.swift */; };
+		A2563DD724283D5800C36EAD /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2563DD624283D5800C36EAD /* FAQView.swift */; };
+		A2563DD92428414700C36EAD /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2563DD82428414700C36EAD /* FAQViewController.swift */; };
 		D50F4E844ACDBE31BD04E0F9 /* Pods_FoodPantryFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */; };
 		F84117738F0E079EE27ACA36 /* Pods_FoodPantryFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7ED3C37AF6642BA667F233 /* Pods_FoodPantryFirebase.framework */; };
 /* End PBXBuildFile section */
@@ -150,6 +152,8 @@
 		A24F388823FF52E700AACC97 /* adminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminViewController.swift; sourceTree = "<group>"; };
 		A24F388A2401CC8400AACC97 /* adminControlsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminControlsViewController.swift; sourceTree = "<group>"; };
 		A24F388C2407497400AACC97 /* ViewStatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStatisticsViewController.swift; sourceTree = "<group>"; };
+		A2563DD624283D5800C36EAD /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		A2563DD82428414700C36EAD /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
 		C5FFF02738E9C4DCF3A1B49B /* Pods-FoodPantryFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		CAB18081389E8C52423833BA /* Pods-FoodPantryFirebaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED60645AD577D91FDDFED4AB /* Pods-FoodPantryFirebaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
+				A2563DD82428414700C36EAD /* FAQViewController.swift */,
 				A239DC402423F5DA003CFF0C /* popUpFromBarChartViewController.swift */,
 				A239DC3224206EDC003CFF0C /* BarcodeScanEntryViewController.swift */,
 				A239DC302420538E003CFF0C /* adminQRViewController.swift */,
@@ -262,6 +267,7 @@
 				A239DC26241C92C6003CFF0C /* calenderFirstViewController.swift */,
 				A239DC28241C930C003CFF0C /* MonthView.swift */,
 				A239DC2A241C9338003CFF0C /* WeekdaysView.swift */,
+				A2563DD624283D5800C36EAD /* FAQView.swift */,
 				A239DC2C241C9351003CFF0C /* CalendarView.swift */,
 				A24F388A2401CC8400AACC97 /* adminControlsViewController.swift */,
 				A24F388823FF52E700AACC97 /* adminViewController.swift */,
@@ -593,6 +599,7 @@
 				1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */,
 				A239DC212416F0D5003CFF0C /* ediItemInfoViewController.swift in Sources */,
 				1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */,
+				A2563DD92428414700C36EAD /* FAQViewController.swift in Sources */,
 				A239DC132413159F003CFF0C /* emailFeedbackViewController.swift in Sources */,
 				A239DC1B2416CAA9003CFF0C /* inquireAboutFoodPantryViewController.swift in Sources */,
 				A24F385323EF817900AACC97 /* homeViewController.swift in Sources */,
@@ -626,6 +633,7 @@
 				A239DC3324206EDC003CFF0C /* BarcodeScanEntryViewController.swift in Sources */,
 				1C748F322406188800936A05 /* checkoutViewController.swift in Sources */,
 				1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */,
+				A2563DD724283D5800C36EAD /* FAQView.swift in Sources */,
 				A239DC232417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift in Sources */,
 				A239DC1F2416EE2B003CFF0C /* adminEditPopUpViewController.swift in Sources */,
 				1CBDDC92240DFA7B00AC53A9 /* manualViewController.swift in Sources */,

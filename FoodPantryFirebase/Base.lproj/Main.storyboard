@@ -2932,6 +2932,22 @@
             </objects>
             <point key="canvasLocation" x="2228.985507246377" y="-1177.2321428571429"/>
         </scene>
+        <!--FAQ-->
+        <scene sceneID="TVb-xl-gFU">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="4tq-pL-GLs" customClass="FAQViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LVV-WY-7bf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="a1Z-Oe-2qp"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="FAQ" id="WbY-aP-DOM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VbA-0M-e4i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1444" y="-1891"/>
+        </scene>
         <!--Help & Support-->
         <scene sceneID="okS-qh-sbo">
             <objects>
@@ -2941,11 +2957,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOH-64-ND5">
-                                <rect key="frame" x="50" y="456" width="314" height="75"/>
+                                <rect key="frame" x="50" y="476" width="314" height="55"/>
                                 <color key="backgroundColor" red="0.50980392156862742" green="0.51764705882352935" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="PPn-8B-nkW"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
                                 <state key="normal" title="APP FEEDBACK"/>
                                 <connections>
@@ -2953,26 +2966,35 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxX-2a-nwl">
-                                <rect key="frame" x="50" y="346" width="314" height="75"/>
+                                <rect key="frame" x="50" y="366" width="314" height="55"/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="PFS-BU-rBy"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="36"/>
                                 <state key="normal" title="CONTACT ADMIN"/>
                                 <connections>
                                     <segue destination="xhx-Ne-xkD" kind="show" id="dcd-CO-Tfk"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aoi-mz-dwR">
+                                <rect key="frame" x="50" y="576" width="314" height="59"/>
+                                <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="39"/>
+                                <state key="normal" title="FAQ"/>
+                                <connections>
+                                    <segue destination="4tq-pL-GLs" kind="show" id="MHa-ae-PDv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="l2u-gY-VGZ" firstAttribute="trailing" secondItem="nxX-2a-nwl" secondAttribute="trailing" constant="50" id="0tz-HK-P2b"/>
-                            <constraint firstItem="ZOH-64-ND5" firstAttribute="leading" secondItem="l2u-gY-VGZ" secondAttribute="leading" constant="50" id="BhX-LS-QK9"/>
-                            <constraint firstItem="nxX-2a-nwl" firstAttribute="leading" secondItem="l2u-gY-VGZ" secondAttribute="leading" constant="50" id="U80-gA-ceG"/>
-                            <constraint firstItem="l2u-gY-VGZ" firstAttribute="bottom" secondItem="ZOH-64-ND5" secondAttribute="bottom" constant="331" id="Vtm-q0-Fg5"/>
-                            <constraint firstItem="ZOH-64-ND5" firstAttribute="top" secondItem="nxX-2a-nwl" secondAttribute="bottom" constant="35" id="spk-ba-V2H"/>
-                            <constraint firstItem="l2u-gY-VGZ" firstAttribute="trailing" secondItem="ZOH-64-ND5" secondAttribute="trailing" constant="50" id="xtA-7e-5h2"/>
+                            <constraint firstItem="Aoi-mz-dwR" firstAttribute="leading" secondItem="l2u-gY-VGZ" secondAttribute="leading" constant="50" id="77k-me-wpU"/>
+                            <constraint firstItem="ZOH-64-ND5" firstAttribute="leading" secondItem="l2u-gY-VGZ" secondAttribute="leading" constant="50" id="BxP-Um-uGe"/>
+                            <constraint firstItem="Aoi-mz-dwR" firstAttribute="top" secondItem="ZOH-64-ND5" secondAttribute="bottom" constant="45" id="KMQ-yS-p3S"/>
+                            <constraint firstItem="l2u-gY-VGZ" firstAttribute="trailing" secondItem="Aoi-mz-dwR" secondAttribute="trailing" constant="50" id="Lu6-Ou-EhP"/>
+                            <constraint firstItem="l2u-gY-VGZ" firstAttribute="trailing" secondItem="ZOH-64-ND5" secondAttribute="trailing" constant="50" id="Nm5-ys-Kat"/>
+                            <constraint firstItem="l2u-gY-VGZ" firstAttribute="trailing" secondItem="nxX-2a-nwl" secondAttribute="trailing" constant="50" id="Sn3-ch-NEg"/>
+                            <constraint firstItem="nxX-2a-nwl" firstAttribute="leading" secondItem="l2u-gY-VGZ" secondAttribute="leading" constant="50" id="aiH-nl-NjO"/>
+                            <constraint firstItem="l2u-gY-VGZ" firstAttribute="bottom" secondItem="Aoi-mz-dwR" secondAttribute="bottom" constant="227" id="kSQ-5Z-Tc0"/>
+                            <constraint firstItem="ZOH-64-ND5" firstAttribute="top" secondItem="nxX-2a-nwl" secondAttribute="bottom" constant="55" id="rD7-gW-TPl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l2u-gY-VGZ"/>
                     </view>
@@ -2980,6 +3002,7 @@
                     <connections>
                         <outlet property="appFeedBackbutton" destination="ZOH-64-ND5" id="UYG-Uz-OoW"/>
                         <outlet property="contactAdminButton" destination="nxX-2a-nwl" id="tBl-zu-0dJ"/>
+                        <outlet property="faqButton" destination="Aoi-mz-dwR" id="9n1-sO-t3b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vU1-mb-0De" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
