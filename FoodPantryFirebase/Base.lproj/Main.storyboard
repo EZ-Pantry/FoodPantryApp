@@ -2932,7 +2932,7 @@
             </objects>
             <point key="canvasLocation" x="2228.985507246377" y="-1177.2321428571429"/>
         </scene>
-        <!--FAQ-->
+        <!--Frequently Asked Questions-->
         <scene sceneID="TVb-xl-gFU">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="4tq-pL-GLs" customClass="FAQViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
@@ -2942,7 +2942,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="a1Z-Oe-2qp"/>
                     </view>
-                    <navigationItem key="navigationItem" title="FAQ" id="WbY-aP-DOM"/>
+                    <navigationItem key="navigationItem" title="Frequently Asked Questions" id="WbY-aP-DOM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VbA-0M-e4i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
