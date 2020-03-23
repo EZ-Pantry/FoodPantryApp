@@ -24,6 +24,7 @@ class FAQViewController: UIViewController {
         FAQItem(question: "Unanswered question?", answer: "Feel free to contact the app developers!")]//questions & answers
 
         let faqView = FAQView(frame: view.frame, title: "Top Questions", items: items)//set the title
+        
         view.addSubview(faqView)
     }
     
