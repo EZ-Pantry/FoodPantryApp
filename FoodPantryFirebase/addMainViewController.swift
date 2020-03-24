@@ -17,6 +17,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet var quantityLabel: UITextField!
     @IBOutlet var healthyLabel: UITextField!
     @IBOutlet var finishBtn: UIButton!
+    @IBOutlet var cancelBtn: UIButton!
     
     //options for the admin: adding more button
     @IBOutlet var addMoreBtn: UIButton!
@@ -72,6 +73,13 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         finishBtn.titleLabel?.numberOfLines = 1;
         finishBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         
+        cancelBtn.layer.cornerRadius = 15
+        cancelBtn.clipsToBounds = true
+        
+        cancelBtn.titleLabel?.minimumScaleFactor = 0.5
+        cancelBtn.titleLabel?.numberOfLines = 1;
+        cancelBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         //sets the keypad type
         
         quantityLabel.text = "1"
@@ -87,7 +95,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if (manualEnter) { //manually entered food item
             if(found) { //item exists in the db
                          
-                //update screem
+                //update screen
                 self.existing = true
                 self.nameLabel.text = food_data["name"] as! String
                 self.ingredientsLabel.text = food_data["information"] as! String
@@ -430,9 +438,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                let destinationVC = segue.destination as? QRAddViewController
                destinationVC?.error = errorMessage
            } else if segue.identifier == "addMore"{
-            let destinationVC = segue.destination as? QRAddViewController
-            
-        }
+                let destinationVC = segue.destination as? QRAddViewController
+            }
        }
     
     
