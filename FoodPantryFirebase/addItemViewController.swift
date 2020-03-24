@@ -9,7 +9,6 @@ import AVFoundation
 
 class addItemViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
-    @IBOutlet var topbar: UIView!
     @IBOutlet var messageLabel: UILabel!
     
     //code for capturing a live stream using the camera
@@ -81,7 +80,6 @@ class addItemViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         // Move the message label and top bar to the front
         view.bringSubviewToFront(messageLabel)
-        view.bringSubviewToFront(topbar)
 
         messageLabel.text = "Move the camera close to the barcode"
 
@@ -133,9 +131,6 @@ class addItemViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
     }
     
-    @IBAction func dismissView(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
     
     
     

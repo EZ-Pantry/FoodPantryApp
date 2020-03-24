@@ -8,9 +8,6 @@ import FirebaseUI
 class QRScrapeController: UIViewController {
     
     @IBOutlet var nameLabel: UILabel! //label for the name of the food item
-    @IBOutlet var ingredientsLabel: UILabel! //label for the ingredient
-    @IBOutlet var healthyLabel: UILabel! //food item is healthy label
-    @IBOutlet var typeLabel: UILabel! //type of food label
     
     @IBOutlet var checkoutButton: UIButton! //checkout button
     @IBOutlet var addMoreButton: UIButton! //adding more items button
@@ -75,7 +72,7 @@ class QRScrapeController: UIViewController {
                         var url = data[index]["image"] as! String //url for the image of the food item
                         var foodAllergy = data[index]["allergies"] as! String
                         
-                        self.ingredientsLabel.text = ingredients //puts on the screen
+                        //self.ingredientsLabel.text = ingredients //puts on the screen
                         
                         //determines allergies based on the information in ingredients
                         var allergies = ["corn", "egg", "fish", "milk", "nut", "soy", "wheat"]
@@ -98,14 +95,14 @@ class QRScrapeController: UIViewController {
                             confirmed = "none,"
                         }
                     
-                        self.typeLabel.text = confirmed.substring(to: confirmed.count-1); //removes the comma at the end, puts on the screen
+                        //self.typeLabel.text = confirmed.substring(to: confirmed.count-1); //removes the comma at the end, puts on the screen
                     
                     
                         if url != "" { //only loads the url if there is one
                             self.foodView.load(url: URL(string: url)!);
                         }
                     
-                        self.healthyLabel.text = data[index]["healthy"] as! String //puts healthy info on the screen
+                        //self.healthyLabel.text = data[index]["healthy"] as! String //puts healthy info on the screen
                     
                         //check to see how many times this item has been checked out in this current session
                         
@@ -245,19 +242,19 @@ class QRScrapeController: UIViewController {
                             self.nameLabel.text = name;
                         
                             //even more setting
-                            self.ingredientsLabel.text = information
+                            //self.ingredientsLabel.text = information
                                                 
                             if allergies == "" {
                                 allergies = "none"
                             }
                         
-                            self.typeLabel.text = allergies
+                            //self.typeLabel.text = allergies
                         
                             if url != "" {
                                 self.foodView.load(url: URL(string: url)!);
                             }
                         
-                            self.healthyLabel.text = isHealthy
+                            //self.healthyLabel.text = isHealthy
                         
                            //check to see how many times this item has been checked out in this current session
                                 
