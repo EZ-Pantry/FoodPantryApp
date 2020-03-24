@@ -39,10 +39,14 @@ class popUpViewController: UIViewController {
         if(Int(quantity) ?? 0 == 0) {
             foodQuantity.text = "Out of Stock"
         } else {
-            foodQuantity.text = "Quantity: " + String(quantity)
+            foodQuantity.text = "Quantity:\n" + String(quantity)
         }
-        foodInformation.text = "Information: " + String(information)
-        foodHealthy.text = "Healthy: " + String(healthy)
+        foodInformation.text = "Information:\n" + String(information)
+        foodHealthy.text = "Healthy:\n" + String(healthy)
+        
+        foodAllergy.text = "Allergies:\n" + String(allergies)
+        foodType.text = "Type:\n" + String(type)
+
         
         if(image != "") {
             foodImage.load(url: URL(string: String(image))!)
