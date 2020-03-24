@@ -17,8 +17,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     @IBOutlet var pickerField: UITextField!
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()
-    
-    
+        
     var foodItemsNameDataArray = [String]() //names of all the food items
     var storage: Storage! //storage
     var foodItemsImageArray = [UIImage]() //array of images of all the food items, loaded in the beginning
@@ -200,9 +199,9 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     }
     
     //page is refreshed
+        
     @IBAction func refreshPage(_ sender: Any) {
         refresh()
-        
     }
     
     func refresh() {

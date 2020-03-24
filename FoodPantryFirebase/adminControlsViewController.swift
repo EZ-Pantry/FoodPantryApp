@@ -11,6 +11,7 @@ class adminControlsViewController: UIViewController {
     @IBOutlet weak var editItemDataButton: UIButton!
     @IBOutlet weak var foodPantryBarcodeButton: UIButton!
     @IBOutlet var otherButton: UIButton!
+    @IBOutlet var notificationsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +31,16 @@ class adminControlsViewController: UIViewController {
         
         otherButton.layer.cornerRadius = 15
         otherButton.clipsToBounds = true
+        
+        notificationsButton.layer.cornerRadius = 15
+        notificationsButton.clipsToBounds = true
+
 
         // Do any additional setup after loading the view.
     }
 
     
 
-    @IBAction func dismissButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
     
 
 }

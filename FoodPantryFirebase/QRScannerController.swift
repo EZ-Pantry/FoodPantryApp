@@ -7,7 +7,6 @@ import AVFoundation
 class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     @IBOutlet var messageLabel:UILabel! //message at the bottom of the screen
-    @IBOutlet var topbar: UIView! //message at the top of the screen
     
     //code for capturing a live stream using the camera
     var captureSession:AVCaptureSession = AVCaptureSession()
@@ -82,7 +81,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
 
         // Move the message label and top bar to the front
         view.bringSubviewToFront(messageLabel)
-        view.bringSubviewToFront(topbar)
 
         messageLabel.text = "Move the camera close to the barcode"
 
@@ -148,10 +146,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         // Pass the selected object to the new view controller.
     }
     */
-    
-    @IBAction func dismissViewToBack(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
+
     
     
 

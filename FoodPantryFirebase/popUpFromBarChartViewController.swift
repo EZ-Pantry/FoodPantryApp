@@ -28,6 +28,7 @@ class popUpFromBarChartViewController: UIViewController {
         super.viewDidLoad()
         
         
+        
         popOverView.layer.cornerRadius = 15
         popOverView.clipsToBounds = true
         //sets the labels on the screen
