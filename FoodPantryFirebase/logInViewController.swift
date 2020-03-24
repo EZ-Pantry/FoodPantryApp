@@ -16,6 +16,10 @@ class logInViewController: UIViewController {
         //Create rounded buttons
         continueButton.layer.cornerRadius = 15
         continueButton.clipsToBounds = true
+        
+        continueButton.titleLabel?.minimumScaleFactor = 0.5
+        continueButton.titleLabel?.numberOfLines = 1;
+        continueButton.titleLabel?.adjustsFontSizeToFitWidth = true
  
         // Do any additional setup after loading the view.
     }

@@ -31,8 +31,16 @@ class adminQRViewController: UIViewController {
         saveQRButton.layer.cornerRadius = 15
         saveQRButton.clipsToBounds = true
         
+        saveQRButton.titleLabel?.minimumScaleFactor = 0.5
+        saveQRButton.titleLabel?.numberOfLines = 1;
+        saveQRButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         generateButton.layer.cornerRadius = 15
         generateButton.clipsToBounds = true
+        
+        generateButton.titleLabel?.minimumScaleFactor = 0.5
+        generateButton.titleLabel?.numberOfLines = 1;
+        generateButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     

@@ -42,9 +42,17 @@ class QRScrapeController: UIViewController {
         
         checkoutButton.layer.cornerRadius = 15
         checkoutButton.clipsToBounds = true
+        
+        checkoutButton.titleLabel?.minimumScaleFactor = 0.5
+        checkoutButton.titleLabel?.numberOfLines = 1;
+        checkoutButton.titleLabel?.adjustsFontSizeToFitWidth = true
            
         addMoreButton.layer.cornerRadius = 15
         addMoreButton.clipsToBounds = true
+        
+        addMoreButton.titleLabel?.minimumScaleFactor = 0.5
+        addMoreButton.titleLabel?.numberOfLines = 1;
+        addMoreButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 

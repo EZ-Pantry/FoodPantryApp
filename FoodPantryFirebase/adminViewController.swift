@@ -32,8 +32,17 @@ class adminViewController: UIViewController {
         //Create rounded buttons
         saveButton.layer.cornerRadius = 15
         saveButton.clipsToBounds = true
+        
+        saveButton.titleLabel?.minimumScaleFactor = 0.5
+        saveButton.titleLabel?.numberOfLines = 1;
+        saveButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         adminControlsButton.layer.cornerRadius = 15
         adminControlsButton.clipsToBounds = true
+        
+        adminControlsButton.titleLabel?.minimumScaleFactor = 0.5
+        adminControlsButton.titleLabel?.numberOfLines = 1;
+        adminControlsButton.titleLabel?.adjustsFontSizeToFitWidth = true
         ref = Database.database().reference()
         prepareButton();
         // Do any additional setup after loading the view.

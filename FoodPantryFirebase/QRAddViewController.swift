@@ -23,6 +23,10 @@ class QRAddViewController: UIViewController {
         
         addManualButton.layer.cornerRadius = 15
         addManualButton.clipsToBounds = true
+        
+        addManualButton.titleLabel?.minimumScaleFactor = 0.5
+        addManualButton.titleLabel?.numberOfLines = 1;
+        addManualButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

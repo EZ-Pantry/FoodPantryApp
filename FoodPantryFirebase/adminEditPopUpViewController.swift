@@ -63,8 +63,16 @@ class adminEditPopUpViewController: UIViewController {
         editItemInfoButton.layer.cornerRadius = 15
         editItemInfoButton.clipsToBounds = true
         
+        editItemInfoButton.titleLabel?.minimumScaleFactor = 0.5
+        editItemInfoButton.titleLabel?.numberOfLines = 1;
+        editItemInfoButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         deleteItemButton.layer.cornerRadius = 15
         deleteItemButton.clipsToBounds = true
+        
+        deleteItemButton.titleLabel?.minimumScaleFactor = 0.5
+        deleteItemButton.titleLabel?.numberOfLines = 1;
+        deleteItemButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         // Do any additional setup after loading the view.
     }

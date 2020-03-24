@@ -36,11 +36,23 @@ class chooseUserViewController: UIViewController {
         studentBtn.layer.cornerRadius = 15
         studentBtn.clipsToBounds = true
         
+        studentBtn.titleLabel?.minimumScaleFactor = 0.5
+        studentBtn.titleLabel?.numberOfLines = 1;
+        studentBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         adminBtn.layer.cornerRadius = 15
         adminBtn.clipsToBounds = true
         
+        adminBtn.titleLabel?.minimumScaleFactor = 0.5
+        adminBtn.titleLabel?.numberOfLines = 1;
+        adminBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         continueButton.layer.cornerRadius = 15
         continueButton.clipsToBounds = true
+        
+        continueButton.titleLabel?.minimumScaleFactor = 0.5
+        continueButton.titleLabel?.numberOfLines = 1;
+        continueButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         
         adminCode.isHidden = true

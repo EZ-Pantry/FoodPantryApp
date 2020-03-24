@@ -34,6 +34,10 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
         continueButton.layer.cornerRadius = 15
         continueButton.clipsToBounds = true
         
+        continueButton.titleLabel?.minimumScaleFactor = 0.5
+        continueButton.titleLabel?.numberOfLines = 1;
+        continueButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         yourPicker.delegate = self
         yourPicker.dataSource = self
         

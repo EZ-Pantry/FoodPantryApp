@@ -40,8 +40,16 @@ class manualViewController: UIViewController {
         self.yesButton.layer.cornerRadius = 15
         self.yesButton.clipsToBounds = true
         
+        yesButton.titleLabel?.minimumScaleFactor = 0.5
+        yesButton.titleLabel?.numberOfLines = 1;
+        yesButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         self.noButton.layer.cornerRadius = 15
         self.noButton.clipsToBounds = true
+        
+        noButton.titleLabel?.minimumScaleFactor = 0.5
+        noButton.titleLabel?.numberOfLines = 1;
+        noButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         //check to see match
         

@@ -30,6 +30,9 @@ class contactAdminViewController: UIViewController {
         sendButton.layer.cornerRadius = 15//15px
         sendButton.clipsToBounds = true
         
+        sendButton.titleLabel?.minimumScaleFactor = 0.5
+        sendButton.titleLabel?.numberOfLines = 1;
+        sendButton.titleLabel?.adjustsFontSizeToFitWidth = true
         getEmailsFromFirebase();
         // Do any additional setup after loading the view.
     }

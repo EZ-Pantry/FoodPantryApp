@@ -17,9 +17,16 @@ class notificationsViewController: UIViewController {
     @IBOutlet weak var validLbl: UILabel!
     var fullName = ""
     
+    @IBOutlet weak var sendButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        sendButton.layer.cornerRadius = 15
+        sendButton.clipsToBounds = true
+        
+        sendButton.titleLabel?.minimumScaleFactor = 0.5
+        sendButton.titleLabel?.numberOfLines = 1;
+        sendButton.titleLabel?.adjustsFontSizeToFitWidth = true
         validLbl.isHidden = true;
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String

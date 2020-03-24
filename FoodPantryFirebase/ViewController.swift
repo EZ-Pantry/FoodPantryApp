@@ -56,6 +56,14 @@ class ViewController: UIViewController {
         loginButton.clipsToBounds = true
         signupButton.layer.cornerRadius = 15;
         signupButton.clipsToBounds = true;
+        
+        loginButton.titleLabel?.minimumScaleFactor = 0.5
+        loginButton.titleLabel?.numberOfLines = 1;
+        loginButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        signupButton.titleLabel?.minimumScaleFactor = 0.5
+        signupButton.titleLabel?.numberOfLines = 1;
+        signupButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     

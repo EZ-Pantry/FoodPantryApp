@@ -39,8 +39,16 @@ class chooseManualViewController: UIViewController {
         self.yesButton.layer.cornerRadius = 15
         self.yesButton.clipsToBounds = true
         
+        yesButton.titleLabel?.minimumScaleFactor = 0.5
+        yesButton.titleLabel?.numberOfLines = 1;
+        yesButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         self.noButton.layer.cornerRadius = 15
         self.noButton.clipsToBounds = true
+        
+        noButton.titleLabel?.minimumScaleFactor = 0.5
+        noButton.titleLabel?.numberOfLines = 1;
+        noButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         self.getFoodDataFromFirebase(callback: {(data, items)-> Void in
             //compare the title the user entered to the items in the database

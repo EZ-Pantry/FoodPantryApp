@@ -33,8 +33,16 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         selectButton.layer.cornerRadius = 15
         selectButton.clipsToBounds = true
         
+        selectButton.titleLabel?.minimumScaleFactor = 0.5
+        selectButton.titleLabel?.numberOfLines = 1;
+        selectButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         checkoutButton.layer.cornerRadius = 15
         checkoutButton.clipsToBounds = true
+        
+        checkoutButton.titleLabel?.minimumScaleFactor = 0.5
+        checkoutButton.titleLabel?.numberOfLines = 1;
+        checkoutButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         numberTextField.keyboardType = UIKeyboardType.alphabet
         

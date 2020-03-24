@@ -14,8 +14,16 @@ class sendfeedbackcontrolsViewController: UIViewController, MFMailComposeViewCon
         emailButton.layer.cornerRadius = 15
         emailButton.clipsToBounds = true
         
+        emailButton.titleLabel?.minimumScaleFactor = 0.5
+        emailButton.titleLabel?.numberOfLines = 1;
+        emailButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         rateAppButton.layer.cornerRadius = 15
         rateAppButton.clipsToBounds = true
+        
+        rateAppButton.titleLabel?.minimumScaleFactor = 0.5
+        rateAppButton.titleLabel?.numberOfLines = 1;
+        rateAppButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     

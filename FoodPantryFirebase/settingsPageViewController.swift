@@ -12,11 +12,20 @@ class settingsPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        logOutButton.layer.cornerRadius = 15
+        logOutButton.layer.cornerRadius = 10
         logOutButton.clipsToBounds = true
         
         sendFeedBackButton.layer.cornerRadius = 15
         sendFeedBackButton.clipsToBounds = true
+        
+        //Below makes the button text fit the width of all constraints on any device        //https://stackoverflow.com/questions/32561435/adjust-font-size-of-text-to-fit-in-uibutton
+        logOutButton.titleLabel?.minimumScaleFactor = 0.5
+        logOutButton.titleLabel?.numberOfLines = 1;
+        logOutButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+      sendFeedBackButton.titleLabel?.minimumScaleFactor = 0.5
+        sendFeedBackButton.titleLabel?.numberOfLines = 1;
+        sendFeedBackButton.titleLabel?.adjustsFontSizeToFitWidth = true
         // Do any additional setup after loading the view.
     }
     

@@ -74,15 +74,31 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         totalStatsButton.layer.cornerRadius = 10
         totalStatsButton.clipsToBounds = true
         
+        totalStatsButton.titleLabel?.minimumScaleFactor = 0.5
+        totalStatsButton.titleLabel?.numberOfLines = 1;
+        totalStatsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         
         indivisualStudentButton.layer.cornerRadius = 10
         indivisualStudentButton.clipsToBounds = true
         
+        indivisualStudentButton.titleLabel?.minimumScaleFactor = 0.5
+        indivisualStudentButton.titleLabel?.numberOfLines = 1;
+        indivisualStudentButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         backButton.layer.cornerRadius = 10
         backButton.clipsToBounds = true
         
+        backButton.titleLabel?.minimumScaleFactor = 0.5
+        backButton.titleLabel?.numberOfLines = 1;
+        backButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         nextButton.layer.cornerRadius = 10
         nextButton.clipsToBounds = true
+        
+        nextButton.titleLabel?.minimumScaleFactor = 0.5
+        nextButton.titleLabel?.numberOfLines = 1;
+        nextButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         pickerField.isHidden = true;
         chooseGraphOrTextSegment.isHidden = true;

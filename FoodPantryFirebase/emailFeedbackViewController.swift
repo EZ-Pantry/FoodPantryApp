@@ -17,6 +17,10 @@ class emailFeedbackViewController: UIViewController {
         emailButton.layer.cornerRadius = 15//15px
         emailButton.clipsToBounds = true
         
+        emailButton.titleLabel?.minimumScaleFactor = 0.5
+        emailButton.titleLabel?.numberOfLines = 1;
+        emailButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         messgeTextField.layer.borderColor = UIColor(red: 0/255, green: 191/255, blue: 255/255, alpha: 1.0).cgColor
         messgeTextField.layer.borderWidth = 1.0;
         messgeTextField.layer.cornerRadius = 5.0;

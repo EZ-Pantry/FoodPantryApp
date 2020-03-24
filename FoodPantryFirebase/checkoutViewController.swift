@@ -36,9 +36,17 @@ class checkoutViewController: UITableViewController {
         
         self.finishButton.layer.cornerRadius = 15//round buttons
         self.finishButton.clipsToBounds = true
+        
+        finishButton.titleLabel?.minimumScaleFactor = 0.5
+        finishButton.titleLabel?.numberOfLines = 1;
+        finishButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         self.backButton.layer.cornerRadius = 15
         self.backButton.clipsToBounds = true
+        
+        backButton.titleLabel?.minimumScaleFactor = 0.5
+        backButton.titleLabel?.numberOfLines = 1;
+        backButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         
         setCheckoutItems(currentItems: foodItems)

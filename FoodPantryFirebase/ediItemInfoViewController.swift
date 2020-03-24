@@ -44,6 +44,10 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         finishButton.layer.cornerRadius = 15
         finishButton.clipsToBounds = true
+        
+        finishButton.titleLabel?.minimumScaleFactor = 0.5
+        finishButton.titleLabel?.numberOfLines = 1;
+        finishButton.titleLabel?.adjustsFontSizeToFitWidth = true
         if(image != "") {
             itemImageView.load(url: URL(string: String(image))!)
         } else {

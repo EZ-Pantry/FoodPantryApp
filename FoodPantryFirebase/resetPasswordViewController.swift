@@ -12,6 +12,10 @@ class resetPasswordViewController: UIViewController {
         //creating rounded buttons below
         resetButton.layer.cornerRadius = 15
         resetButton.clipsToBounds = true
+        
+        resetButton.titleLabel?.minimumScaleFactor = 0.5
+        resetButton.titleLabel?.numberOfLines = 1;
+        resetButton.titleLabel?.adjustsFontSizeToFitWidth = true
         // Do any additional setup after loading the view.
     }
     

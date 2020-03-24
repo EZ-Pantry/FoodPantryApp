@@ -60,9 +60,17 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         addMoreBtn.layer.cornerRadius = 15
         addMoreBtn.clipsToBounds = true
+        
+        addMoreBtn.titleLabel?.minimumScaleFactor = 0.5
+        addMoreBtn.titleLabel?.numberOfLines = 1;
+        addMoreBtn.titleLabel?.adjustsFontSizeToFitWidth = true
            
         finishBtn.layer.cornerRadius = 15
         finishBtn.clipsToBounds = true
+        
+        finishBtn.titleLabel?.minimumScaleFactor = 0.5
+        finishBtn.titleLabel?.numberOfLines = 1;
+        finishBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         
         //sets the keypad type
         

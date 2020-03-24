@@ -26,6 +26,10 @@ class otherAdminViewController: UIViewController {
 
        saveButton.layer.cornerRadius = 15
        saveButton.clipsToBounds = true
+        
+        saveButton.titleLabel?.minimumScaleFactor = 0.5
+        saveButton.titleLabel?.numberOfLines = 1;
+        saveButton.titleLabel?.adjustsFontSizeToFitWidth = true
           
     }
     
