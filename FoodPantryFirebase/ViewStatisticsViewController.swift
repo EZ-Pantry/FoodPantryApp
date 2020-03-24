@@ -241,6 +241,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 foodCheckedOutClicked = itemsCheckedOutData[x]["numCheckedOut"] as! String
                 print(foodImageClicked)
                 print(foodCheckedOutClicked)
+                print("occurirnghere")
                 self.performSegue(withIdentifier: "toItemMiniPopOver", sender: self)
             }
         }
