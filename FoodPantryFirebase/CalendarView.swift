@@ -169,8 +169,10 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     func determineWhetherDateContainsData(){
         dataWasFound = false;
         let whiteBgButton = UIButton()
+        var midY = frame.height / 2
+        var midX = frame.width / 2
         whiteBgButton.backgroundColor =  UIColor(red: 252/255.0, green: 109/255.0, blue: 109/255.0, alpha: 1.0)
-        whiteBgButton.frame = CGRect(x: 8, y: 392, width: 375, height: 350)//background behind labels
+        whiteBgButton.frame = CGRect(x: midX-175, y: midY + 200, width: 350, height: 350)//background behind labels
         addSubview(whiteBgButton)
         let itemsCheckedOutLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
         let studentsVisitedLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
@@ -186,12 +188,12 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             if(dateLoadedFromFirebaseDataSet == fullyCorrectedDate){
                 //match for date found
                 print("hello!")
-                itemsCheckedOutLbl.center = CGPoint(x: 190, y: 500)
+                itemsCheckedOutLbl.center = CGPoint(x: midX, y: midY + 300)
                 itemsCheckedOutLbl.textAlignment = .center
                 itemsCheckedOutLbl.text = "Item's Checked Out: \(dataLoadedIn[x]["itemsCheckedOut"]!)"
                 addSubview(itemsCheckedOutLbl)
 //                //
-                studentsVisitedLbl.center = CGPoint(x: 190, y: 680)
+                studentsVisitedLbl.center = CGPoint(x: midX, y: midY + 500)
                 studentsVisitedLbl.textAlignment = .center
                 studentsVisitedLbl.text = "Student's Visited: \(dataLoadedIn[x]["studentsVisited"]!)"
                 addSubview(studentsVisitedLbl)
@@ -201,7 +203,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         }
         print(dataWasFound)
         if(!dataWasFound){
-            itemsCheckedOutLbl.center = CGPoint(x: 190, y: 500)
+            itemsCheckedOutLbl.center = CGPoint(x: midX, y: midY + 300)
             itemsCheckedOutLbl.textAlignment = .center
             itemsCheckedOutLbl.text = "NO DATA FOR THIS DAY!"
             addSubview(itemsCheckedOutLbl)

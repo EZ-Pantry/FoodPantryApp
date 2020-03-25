@@ -25,6 +25,7 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     var ref: DatabaseReference!
 
+    @IBOutlet weak var dontHaveCodeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,10 @@ class chooseSchoolViewController: UIViewController, UIPickerViewDelegate, UIPick
         continueButton.titleLabel?.numberOfLines = 1;
         continueButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
+        
+        dontHaveCodeButton.titleLabel?.minimumScaleFactor = 0.5
+        dontHaveCodeButton.titleLabel?.numberOfLines = 1;
+        dontHaveCodeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         yourPicker.delegate = self
         yourPicker.dataSource = self
         

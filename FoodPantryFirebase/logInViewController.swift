@@ -10,6 +10,7 @@ class logInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!//where user inputs the password
     @IBOutlet weak var continueButton: UIButton!//where user clicks to continue to home screen
     
+    @IBOutlet weak var forgotPasswordButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,10 @@ class logInViewController: UIViewController {
         continueButton.titleLabel?.minimumScaleFactor = 0.5
         continueButton.titleLabel?.numberOfLines = 1;
         continueButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        forgotPasswordButton.titleLabel?.minimumScaleFactor = 0.5
+        forgotPasswordButton.titleLabel?.numberOfLines = 1;
+        forgotPasswordButton.titleLabel?.adjustsFontSizeToFitWidth = true
  
         // Do any additional setup after loading the view.
     }
