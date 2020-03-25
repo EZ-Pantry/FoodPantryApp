@@ -1859,7 +1859,7 @@
                     <connections>
                         <outlet property="messageLabel" destination="U3e-VN-1Et" id="8gm-VT-3lR"/>
                         <outlet property="topBar" destination="xYG-cH-nUS" id="vm2-bo-xVu"/>
-                        <segue destination="efu-PH-rx6" kind="show" identifier="GoToScrape" id="H9f-l5-90A"/>
+                        <segue destination="efu-PH-rx6" kind="presentation" identifier="GoToScrape" modalPresentationStyle="fullScreen" id="H9f-l5-90A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSs-GD-aRI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2095,11 +2095,11 @@
             <objects>
                 <viewController storyboardIdentifier="Scrape View" hidesBottomBarWhenPushed="YES" id="efu-PH-rx6" customClass="QRScrapeController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w7X-xo-SKe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ycr-q6-vtA">
-                                <rect key="frame" x="31" y="15" width="352" height="89.666666666666671"/>
+                                <rect key="frame" x="20" y="58.999999999999993" width="374" height="95.333333333333314"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ycr-q6-vtA" secondAttribute="height" multiplier="364:43" id="0pX-Lq-aSc"/>
                                     <constraint firstAttribute="width" secondItem="ycr-q6-vtA" secondAttribute="height" multiplier="373:95" id="f8T-d6-U5d"/>
@@ -2125,7 +2125,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0s6-Pv-geo">
-                                <rect key="frame" x="88.666666666666686" y="354.33333333333331" width="236.66666666666663" height="54.333333333333314"/>
+                                <rect key="frame" x="81" y="419" width="252" height="58"/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0s6-Pv-geo" secondAttribute="height" multiplier="126:29" id="anI-Lv-1qh"/>
@@ -2155,7 +2155,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-ko-YwO">
-                                <rect key="frame" x="90" y="112.66666666666667" width="234" height="233.66666666666663"/>
+                                <rect key="frame" x="82.666666666666671" y="162.33333333333337" width="248.66666666666663" height="248.66666666666663"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Teo-ko-YwO" secondAttribute="height" multiplier="1:1" id="s9m-U6-T4s"/>
                                     <constraint firstAttribute="width" secondItem="Teo-ko-YwO" secondAttribute="height" multiplier="1:1" id="vQf-v9-bTH"/>
@@ -2178,7 +2178,7 @@
                                 </variation>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uA-rD-Z16">
-                                <rect key="frame" x="88.666666666666686" y="417.66666666666669" width="236.66666666666663" height="51"/>
+                                <rect key="frame" x="81" y="486" width="252" height="54"/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4uA-rD-Z16" secondAttribute="height" multiplier="14:3" id="62m-RE-roQ"/>
@@ -2208,7 +2208,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Items" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="h4D-7P-sgz">
-                                <rect key="frame" x="31.333333333333343" y="611.66666666666663" width="351.33333333333326" height="196.33333333333337"/>
+                                <rect key="frame" x="20" y="653" width="374" height="209"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="h4D-7P-sgz" secondAttribute="height" multiplier="34:19" id="1id-fO-Dti"/>
                                     <constraint firstAttribute="width" secondItem="h4D-7P-sgz" secondAttribute="height" multiplier="768:325" id="wGv-Mz-Vny"/>
@@ -2234,7 +2234,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have selected:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mGF-z8-90U">
-                                <rect key="frame" x="88.666666666666686" y="584.66666666666663" width="236.66666666666663" height="19"/>
+                                <rect key="frame" x="81" y="625" width="252" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mGF-z8-90U" secondAttribute="height" multiplier="271:21" id="UQ1-tq-8Ze"/>
                                     <constraint firstAttribute="width" secondItem="mGF-z8-90U" secondAttribute="height" multiplier="63:5" id="uXp-NJ-hyI"/>
@@ -2415,7 +2415,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngj-8w-6Ju">
-                                    <rect key="frame" x="97.666666666666686" y="20" width="218.66666666666663" height="71"/>
+                                    <rect key="frame" x="97.666666666666671" y="20" width="218.66666666666663" height="71"/>
                                     <color key="backgroundColor" red="0.50980392159999999" green="0.51764705879999995" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ngj-8w-6Ju" secondAttribute="height" multiplier="77:25" id="IXv-MW-Fuk"/>
@@ -2445,7 +2445,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USd-ft-9Pk">
-                                    <rect key="frame" x="97.666666666666686" y="116" width="218.66666666666663" height="70.666666666666686"/>
+                                    <rect key="frame" x="97.666666666666671" y="116" width="218.66666666666663" height="70.666666666666686"/>
                                     <color key="backgroundColor" red="0.50980392159999999" green="0.51764705879999995" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="USd-ft-9Pk" secondAttribute="height" multiplier="77:25" id="RzL-be-Nea"/>
@@ -4558,6 +4558,10 @@
                                 <connections>
                                     <segue destination="P9n-H2-N1p" kind="unwind" unwindAction="unwindToQRAdd:" id="szK-3c-iCb"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lo-tV-jOb">
+                                <rect key="frame" x="192" y="77" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.90980392160000001" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -7203,8 +7207,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3Qs-b0-Rjn"/>
-        <segue reference="Zke-bH-X19"/>
-        <segue reference="H9f-l5-90A"/>
+        <segue reference="Dwa-lY-C5Y"/>
+        <segue reference="tnj-7N-EuA"/>
         <segue reference="EWc-7U-1jR"/>
         <segue reference="ecB-Fx-w8c"/>
         <segue reference="AJ9-9r-s5L"/>
