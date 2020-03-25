@@ -10,7 +10,8 @@ import AVFoundation
 class addItemViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     @IBOutlet var messageLabel: UILabel!
-    
+    @IBOutlet var topBar: UIView!
+
     //code for capturing a live stream using the camera
     var captureSession:AVCaptureSession = AVCaptureSession()
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
@@ -80,6 +81,7 @@ class addItemViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         // Move the message label and top bar to the front
         view.bringSubviewToFront(messageLabel)
+        view.bringSubviewToFront(topBar)
 
         messageLabel.text = "Move the camera close to the barcode"
 

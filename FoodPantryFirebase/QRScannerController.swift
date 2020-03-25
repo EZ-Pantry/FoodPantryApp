@@ -7,6 +7,8 @@ import AVFoundation
 class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 
     @IBOutlet var messageLabel:UILabel! //message at the bottom of the screen
+    @IBOutlet var topBar:UIView! //message at the bottom of the screen
+
     
     //code for capturing a live stream using the camera
     var captureSession:AVCaptureSession = AVCaptureSession()
@@ -81,7 +83,8 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
 
         // Move the message label and top bar to the front
         view.bringSubviewToFront(messageLabel)
-
+        view.bringSubviewToFront(topBar)
+        
         messageLabel.text = "Move the camera close to the barcode"
 
         // Initialize QR Code Frame to highlight the QR code
