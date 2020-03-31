@@ -47,7 +47,7 @@ class adminEditPopUpViewController: UIViewController {
         ref = Database.database().reference()
 
         //sets the labels on the screen
-        foodName.text = name
+        foodName.text = name.trimTitle()
         foodQuantity.text = "Quantity: " + String(quantity)
         foodInformation.text = "Information: " + String(information)
         foodCheckedout.text = "Total Checked out: " + String(checkedout)

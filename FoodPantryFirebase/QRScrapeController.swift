@@ -74,7 +74,7 @@ class QRScrapeController: UIViewController {
                         self.performSegue(withIdentifier: "barcodeError", sender: self) //redirect to QRCodeView
                     } else {
                         self.food_title = self.manualTitle; //sets to a variable
-                        self.nameLabel.text = self.manualTitle; //puts on the screen
+                        self.nameLabel.text = self.manualTitle.trimTitle(); //puts on the screen
                         
                         var ingredients = data[index]["information"] as! String //information/ingredients for the food item
                         var url = data[index]["image"] as! String //url for the image of the food item
@@ -247,7 +247,7 @@ class QRScrapeController: UIViewController {
                         } else {
                             //more setting
                             self.food_title = name;
-                            self.nameLabel.text = name;
+                            self.nameLabel.text = name.trimTitle();
                         
                             //even more setting
                             //self.ingredientsLabel.text = information

@@ -70,7 +70,7 @@ class manualViewController: UIViewController {
             
                 self.foodTitle = items[index] //sets its title
             
-                self.foodName.text = self.foodTitle //also sets to a variable
+                self.foodName.text = self.foodTitle.trimTitle() //also sets to a variable
             
                 for d in data {
                     if d["name"] as! String == self.foodTitle { //if the name is equal to the title

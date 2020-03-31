@@ -97,7 +97,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                          
                 //update screen
                 self.existing = true
-                self.nameLabel.text = food_data["name"] as! String
+                self.nameLabel.text = (food_data["name"] as! String).trimTitle()
                 self.ingredientsLabel.text = food_data["information"] as! String
                 self.allergiesLabel.text = food_data["allergies"] as! String
                 self.typeLabel.text = food_data["type"] as! String
@@ -144,7 +144,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 let type = data[index]["type"] as! String
                                 let healthy = data[index]["healthy"] as! String
                                 //put on screen
-                                self.nameLabel.text = title
+                                self.nameLabel.text = title.trimTitle()
                                 self.ingredientsLabel.text = ingredients
                                 self.allergiesLabel.text = allergies
                                 self.typeLabel.text = type
@@ -166,7 +166,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 self.food_title = title
                                 
                                 //admin sets the rest
-                                self.nameLabel.text = title
+                                self.nameLabel.text = title.trimTitle()
 
                                 if image != "" {
                                     self.foodView.load(url: URL(string: image)!);

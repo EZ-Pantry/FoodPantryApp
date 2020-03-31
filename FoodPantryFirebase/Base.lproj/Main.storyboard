@@ -1324,13 +1324,13 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9Kd-SZ-AMf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Item Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9Kd-SZ-AMf">
                                         <rect key="frame" x="79.666666666666686" y="8" width="205" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="9Kd-SZ-AMf" secondAttribute="height" multiplier="614:33" id="dXH-uD-vDG"/>
                                             <constraint firstAttribute="width" secondItem="9Kd-SZ-AMf" secondAttribute="height" multiplier="205:33" id="pwc-Oz-XWI"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
@@ -6387,13 +6387,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBl-KS-bpx">
                                 <rect key="frame" x="25" y="98" width="364" height="689"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pH4-ZX-9le">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Item Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pH4-ZX-9le">
                                         <rect key="frame" x="79.666666666666686" y="8" width="205" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="pH4-ZX-9le" secondAttribute="height" multiplier="614:33" id="FU1-WU-CSR"/>
                                             <constraint firstAttribute="width" secondItem="pH4-ZX-9le" secondAttribute="height" multiplier="205:33" id="iVG-Gq-xSy"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
@@ -7780,11 +7780,11 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CZv-4k-nyU">
-                                        <rect key="frame" x="50" y="55" width="264" height="33"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Item Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CZv-4k-nyU">
+                                        <rect key="frame" x="50" y="55" width="264" height="62"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="CZv-4k-nyU" secondAttribute="height" multiplier="618:67" id="0gP-Jm-t3X"/>
-                                            <constraint firstAttribute="width" secondItem="CZv-4k-nyU" secondAttribute="height" multiplier="8:1" id="MH9-ql-1cO"/>
+                                            <constraint firstAttribute="width" secondItem="CZv-4k-nyU" secondAttribute="height" multiplier="8:1" constant="-232" id="MH9-ql-1cO"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -7872,7 +7872,7 @@
                                     <constraint firstItem="ECq-So-g17" firstAttribute="leading" secondItem="Q5m-xt-3qI" secondAttribute="leadingMargin" id="Vc2-mp-gek"/>
                                     <constraint firstItem="CZv-4k-nyU" firstAttribute="leading" secondItem="Q5m-xt-3qI" secondAttribute="leading" constant="50" id="W6D-wT-BK0"/>
                                     <constraint firstItem="CZv-4k-nyU" firstAttribute="centerX" secondItem="Q5m-xt-3qI" secondAttribute="centerX" id="aJd-Ni-k1K"/>
-                                    <constraint firstItem="tff-Ae-nFt" firstAttribute="top" secondItem="CZv-4k-nyU" secondAttribute="bottom" constant="37" id="anr-XQ-NfE"/>
+                                    <constraint firstItem="tff-Ae-nFt" firstAttribute="top" secondItem="CZv-4k-nyU" secondAttribute="bottom" constant="8" id="anr-XQ-NfE"/>
                                     <constraint firstItem="tff-Ae-nFt" firstAttribute="leading" secondItem="Q5m-xt-3qI" secondAttribute="leading" constant="60" id="b8K-au-BVB"/>
                                     <constraint firstItem="qew-cb-Rvv" firstAttribute="top" secondItem="tff-Ae-nFt" secondAttribute="bottom" constant="22" id="bME-pI-0Kb"/>
                                     <constraint firstItem="qew-cb-Rvv" firstAttribute="leading" secondItem="Q5m-xt-3qI" secondAttribute="leading" constant="60" id="dJ3-1F-cMq"/>
@@ -7966,7 +7966,7 @@
                             <constraint firstItem="tff-Ae-nFt" firstAttribute="height" secondItem="5e1-Dl-goG" secondAttribute="height" multiplier="0.236607" id="eir-rV-OQC"/>
                             <constraint firstItem="tff-Ae-nFt" firstAttribute="height" secondItem="5e1-Dl-goG" secondAttribute="height" multiplier="0.325195" id="i5N-yi-eIj"/>
                             <constraint firstItem="W9x-SQ-K4Z" firstAttribute="bottom" secondItem="Q5m-xt-3qI" secondAttribute="bottom" constant="255" id="mHa-Xc-zgS"/>
-                            <constraint firstItem="CZv-4k-nyU" firstAttribute="height" secondItem="5e1-Dl-goG" secondAttribute="height" multiplier="0.0368304" id="qhF-VT-0Kb"/>
+                            <constraint firstItem="CZv-4k-nyU" firstAttribute="height" secondItem="5e1-Dl-goG" secondAttribute="height" multiplier="0.0368304" constant="28.999961599999999" id="qhF-VT-0Kb"/>
                             <constraint firstItem="W9x-SQ-K4Z" firstAttribute="bottom" secondItem="Q5m-xt-3qI" secondAttribute="bottom" constant="255" id="sgn-ue-s2a">
                                 <variation key="heightClass=regular-widthClass=compact" constant="100"/>
                             </constraint>
@@ -8027,7 +8027,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXe-Md-FpU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789.84375" y="3247.8515625"/>
+            <point key="canvasLocation" x="788.40579710144937" y="3247.7678571428569"/>
         </scene>
         <!--HOME-->
         <scene sceneID="w1s-tm-WZz">
@@ -8120,7 +8120,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="Ya6-8G-W4l"/>
         <segue reference="Dwa-lY-C5Y"/>
-        <segue reference="H9f-l5-90A"/>
+        <segue reference="tnj-7N-EuA"/>
         <segue reference="VrP-rx-HIg"/>
         <segue reference="ecB-Fx-w8c"/>
         <segue reference="Ona-bs-GLF"/>

@@ -78,6 +78,7 @@ class homeViewController: UIViewController {
                 if(success) {
                     print("location")
                     print(location)
+                    var address: String = location
                     var pantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
                     self.schoolNameLbl.text = pantryName.uppercased();//upercase the school name
                     self.coordinates(forAddress: location) {
@@ -87,11 +88,18 @@ class homeViewController: UIViewController {
                                            return
                                        }
                                        self.openMapForPlace(lat: location.latitude, long: location.longitude)//helper function to show the zooming in of map into address inputed which corresponds with school
+                                        let annotation = MKPointAnnotation()
+                                            annotation.title = address
+                                            //You can also add a subtitle that displays under the annotation such as
+//                                            annotation.subtitle = address
+                                            annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+                                            self.mapView.addAnnotation(annotation)
                                    }
                     
-                    self.mapView.isZoomEnabled = false;
-                    self.mapView.isScrollEnabled = false;
-                    self.mapView.isUserInteractionEnabled = false;
+                    
+                    self.mapView.isZoomEnabled = true;
+                    self.mapView.isScrollEnabled = true;
+                    self.mapView.isUserInteractionEnabled = true;
                 }
                
             })

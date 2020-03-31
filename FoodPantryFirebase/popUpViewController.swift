@@ -34,7 +34,7 @@ class popUpViewController: UIViewController {
         popOverView.clipsToBounds = true
         
         //sets the labels on the screen
-        foodName.text = name
+        foodName.text = name.trimTitle()
         
         if(Int(quantity) ?? 0 == 0) {
             foodQuantity.text = "Out of Stock"

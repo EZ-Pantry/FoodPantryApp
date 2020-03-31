@@ -358,7 +358,7 @@ class checkoutViewController: UITableViewController {
         }
         
         cell.foodImage.image = self.data[indexPath.row]["image"] as! UIImage
-        cell.foodTitle.text = self.data[indexPath.row]["food"] as! String
+        cell.foodTitle.text = (self.data[indexPath.row]["food"] as! String).trimTitle()
         cell.foodQuantity.text = "Quantity: " + (self.data[indexPath.row]["quantity"] as! String)
         
         return cell

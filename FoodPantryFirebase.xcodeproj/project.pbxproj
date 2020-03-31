@@ -17,6 +17,7 @@
 		1C38A3802432B4FB00BB7E23 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A3762432B4FA00BB7E23 /* OpenSans-ExtraBoldItalic.ttf */; };
 		1C38A3812432B4FB00BB7E23 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A3772432B4FA00BB7E23 /* OpenSans-Regular.ttf */; };
 		1C38A3822432B4FB00BB7E23 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A3782432B4FA00BB7E23 /* OpenSans-BoldItalic.ttf */; };
+		1C63897F2432E008005BB1BC /* EditName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63897E2432E008005BB1BC /* EditName.swift */; };
 		1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C68022A2401E5C1002D0C38 /* ItemCell.swift */; };
 		1C68022D2401E5C1002D0C38 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022B2401E5C1002D0C38 /* ItemCell.xib */; };
 		1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022F2401E825002D0C38 /* GoogleService-Info.plist */; };
@@ -108,6 +109,7 @@
 		1C38A3762432B4FA00BB7E23 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		1C38A3772432B4FA00BB7E23 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		1C38A3782432B4FA00BB7E23 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		1C63897E2432E008005BB1BC /* EditName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditName.swift; sourceTree = "<group>"; };
 		1C68022A2401E5C1002D0C38 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		1C68022B2401E5C1002D0C38 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 		1C68022F2401E825002D0C38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				1CF92CE324203228001D7E0B /* LoadingBar.swift */,
 				1CF92CE52423C177001D7E0B /* otherAdminViewController.swift */,
 				1CF92CE724269013001D7E0B /* notificationsViewController.swift */,
+				1C63897E2432E008005BB1BC /* EditName.swift */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				A239DC212416F0D5003CFF0C /* ediItemInfoViewController.swift in Sources */,
 				1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */,
 				A2563DD92428414700C36EAD /* FAQViewController.swift in Sources */,
+				1C63897F2432E008005BB1BC /* EditName.swift in Sources */,
 				A239DC132413159F003CFF0C /* emailFeedbackViewController.swift in Sources */,
 				A239DC1B2416CAA9003CFF0C /* inquireAboutFoodPantryViewController.swift in Sources */,
 				A24F385323EF817900AACC97 /* homeViewController.swift in Sources */,
