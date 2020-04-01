@@ -75,6 +75,8 @@
 		A24F388D2407497400AACC97 /* ViewStatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F388C2407497400AACC97 /* ViewStatisticsViewController.swift */; };
 		A2563DD724283D5800C36EAD /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2563DD624283D5800C36EAD /* FAQView.swift */; };
 		A2563DD92428414700C36EAD /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2563DD82428414700C36EAD /* FAQViewController.swift */; };
+		A2794DD82434301500E58C13 /* otherTwoAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2794DD72434301500E58C13 /* otherTwoAdminViewController.swift */; };
+		A2794DDA243431C600E58C13 /* adminAddFAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2794DD9243431C600E58C13 /* adminAddFAQViewController.swift */; };
 		D50F4E844ACDBE31BD04E0F9 /* Pods_FoodPantryFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */; };
 		F84117738F0E079EE27ACA36 /* Pods_FoodPantryFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7ED3C37AF6642BA667F233 /* Pods_FoodPantryFirebase.framework */; };
 /* End PBXBuildFile section */
@@ -176,6 +178,8 @@
 		A24F388C2407497400AACC97 /* ViewStatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStatisticsViewController.swift; sourceTree = "<group>"; };
 		A2563DD624283D5800C36EAD /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		A2563DD82428414700C36EAD /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
+		A2794DD72434301500E58C13 /* otherTwoAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherTwoAdminViewController.swift; sourceTree = "<group>"; };
+		A2794DD9243431C600E58C13 /* adminAddFAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminAddFAQViewController.swift; sourceTree = "<group>"; };
 		C5FFF02738E9C4DCF3A1B49B /* Pods-FoodPantryFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		CAB18081389E8C52423833BA /* Pods-FoodPantryFirebaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED60645AD577D91FDDFED4AB /* Pods-FoodPantryFirebaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -289,6 +293,8 @@
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
+				A2794DD9243431C600E58C13 /* adminAddFAQViewController.swift */,
+				A2794DD72434301500E58C13 /* otherTwoAdminViewController.swift */,
 				A2563DD82428414700C36EAD /* FAQViewController.swift */,
 				A239DC402423F5DA003CFF0C /* popUpFromBarChartViewController.swift */,
 				A239DC3224206EDC003CFF0C /* BarcodeScanEntryViewController.swift */,
@@ -641,6 +647,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2794DD82434301500E58C13 /* otherTwoAdminViewController.swift in Sources */,
 				A239DC412423F5DA003CFF0C /* popUpFromBarChartViewController.swift in Sources */,
 				1CBDDC94240DFABD00AC53A9 /* addItemViewController.swift in Sources */,
 				A239DC1D2416CE77003CFF0C /* adminFirstEditItemsViewController.swift in Sources */,
@@ -670,6 +677,7 @@
 				1CBDDC9A240E072D00AC53A9 /* chooseManualViewController.swift in Sources */,
 				A239DC2B241C9338003CFF0C /* WeekdaysView.swift in Sources */,
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,
+				A2794DDA243431C600E58C13 /* adminAddFAQViewController.swift in Sources */,
 				1CBD0225241B118600AC53A9 /* RequestError.swift in Sources */,
 				A239DC29241C930C003CFF0C /* MonthView.swift in Sources */,
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,

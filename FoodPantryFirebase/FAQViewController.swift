@@ -7,21 +7,79 @@
 //
 
 import UIKit
-
+import FirebaseUI
 class FAQViewController: UIViewController {
 
+    var ref: DatabaseReference!
+    
+    var stringOfFAQData : [[String: Any]] =  []
+    var alert = LoadingBar()
+    var PantryName = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ref = Database.database().reference()
 
-        loadQuestionsAndAnswers();
+        PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+        
+        let myGroup = DispatchGroup()
+            
+        alert.showLoadingAlert()
+        myGroup.enter()
+            self.retreiveQRTextFromFirebase(callback: {(success, QRText)-> Void in
+             if(success) {
+                //do creation of QR
+                print(self.stringOfFAQData)
+                self.loadQuestionsAndAnswers();
+                myGroup.leave()
+             } else {
+                RequestError().showError()
+            }
+            
+         })
+        
+        myGroup.notify(queue: .main) {
+            self.alert.hideLoadingAlert()
+        }
+        
         
     }
     
+    func retreiveQRTextFromFirebase(callback: @escaping (_ success: Bool,_ location: String)-> Void) {
+        ref.child(PantryName).child("FAQ Page").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            var tempData : [[String: Any]] = []
+            var c: Int = 0
+            for child in snapshot.children {
+                let snap = child as! DataSnapshot
+                let key = snap.key
+                let value: [String: Any] = snap.value as! [String : Any]
+                
+                let faqQuestion = value["Question"] as? String ?? ""
+                let faqAnswer = value["Answer"] as? String ?? ""
+                let id = String(c)
+                
+                tempData.append(["question": faqQuestion, "answer": faqAnswer])//adding each students atrributes to array
+                c += 1
+            }
+            
+            self.stringOfFAQData = tempData;
+            
+            callback(true, "Done")
+        // ...
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+            callback(false, "")
+        }
+    }
+    
+    var items: [FAQItem] = []
     func loadQuestionsAndAnswers(){
-        let items = [FAQItem(question: "I am not able to checkout. Why?", answer: "The administrators at your food pantry have disabled checkout. If you think this may be an error, feel free to contact your administrator."),
-        FAQItem(question: "I reset my password, but don’t see the reset password email?", answer: "Be sure to check your spam and trash folder."),
-        FAQItem(question: "Who determined whether an item was healthy or not?", answer: "The administrators at your food pantry have decided whether an item is healthy or not."),
-        FAQItem(question: "Unanswered question?", answer: "Feel free to contact the app developers!")]//questions & answers
+        for x in 0..<stringOfFAQData.count{
+            let item = FAQItem(question: stringOfFAQData[x]["question"] as! String, answer: stringOfFAQData[x]["answer"] as! String)
+            items.append(item)
+        }
 
         let faqView = FAQView(frame: view.frame, title: "Top Questions", items: items)//set the title
         

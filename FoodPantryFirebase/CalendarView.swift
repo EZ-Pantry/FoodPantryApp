@@ -52,6 +52,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var todaysDate = 0
     var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
     
+    var fullyFormatedDate: String = ""
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -61,6 +62,11 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         loadInFirebaseTextDataAboutStatistics();
         initializeView()
         monthView.btnLeft.isEnabled = true;
+        
+        let formatter : DateFormatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy"//in month/day/year format
+        //        MM-dd-yyyy- no need
+        self.fullyFormatedDate = formatter.string(from:NSDate.init(timeIntervalSinceNow: 0) as Date)//the current date in literal format
     }
     
     convenience init(theme: MyTheme) {
@@ -115,6 +121,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("called")
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! dateCVCell
         cell.backgroundColor=UIColor.clear
         if indexPath.item <= firstWeekDayOfMonth - 2 {
@@ -126,6 +133,28 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             cell.lbl.text="\(calcDate)"
             cell.isUserInteractionEnabled=true//all of the dates can be clicked
             cell.lbl.textColor = Style.activeCellLblColor
+            var currentMonthString = ""
+             var currentDayString = ""
+             if(currentMonthIndex<10){
+                 //to make sure formate is correct add zero before dates which dont
+                 currentMonthString = "0" + String(currentMonthIndex)
+             }
+             else{
+                 currentMonthString = String(currentMonthIndex)
+             }
+                         
+             if(Int(cell.lbl.text!)!<10){
+                 currentDayString = "0" + cell.lbl.text!
+             }
+             else{
+                 currentDayString = cell.lbl.text!;
+             }
+             fullyCorrectedDate = currentMonthString + "-" + currentDayString + "-" + String(currentYear)//date which user has clicked on fully formatted
+            print(fullyCorrectedDate)
+            if(fullyFormatedDate == fullyCorrectedDate){
+                cell.backgroundColor=Colors.darkRed
+            }
+//            cell?.backgroundColor=Colors.darkRed
         }
         return cell
     }
@@ -135,6 +164,14 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //WHERE ALL HANDLING SHALL OCCUR
         let cell=collectionView.cellForItem(at: indexPath)
+        var otherClicked = cell?.subviews[1] as! UILabel;
+        for x in 0..<numOfDaysInMonth[currentMonthIndex-1]{
+            let cell=collectionView.cellForItem(at: [0, x])
+            let lbl = cell?.subviews[1] as! UILabel
+            if(lbl.text! != otherClicked.text){
+                cell!.backgroundColor=Colors.darkGray
+            }
+        }
         cell?.backgroundColor=Colors.darkRed
         let lbl = cell?.subviews[1] as! UILabel
         lbl.textColor=UIColor.white
