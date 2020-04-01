@@ -3,7 +3,7 @@
 
 import UIKit
 import FirebaseUI
-class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var itemNameTextField: UITextField!
     @IBOutlet weak var itemInfoTextField: UITextField!
@@ -19,6 +19,7 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var PantryName: String = ""
     
+    var activeField: UITextField!
     var name = ""
     var quantity = ""
     var information = ""
@@ -40,6 +41,15 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
         super.viewDidLoad()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
+        NotificationCenter.default.addObserver(self, selector: #selector(ediItemInfoViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ediItemInfoViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        itemNameTextField.delegate = self;
+        itemInfoTextField.delegate = self;
+        itemAllergiesTextField.delegate = self;
+        itemTypeTextField.delegate = self;
+        itemHealthyTextField.delegate = self
+        itemQuantityTextField.delegate = self;
         ref = Database.database().reference()
         
         finishButton.layer.cornerRadius = 15
@@ -71,6 +81,38 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
                 
 
     }
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(true)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+        
+        func textFieldDidBeginEditing(_ textField: UITextField){
+            print("switched")
+            self.activeField = textField
+        }
+
+        func textFieldDidEndEditing(_ textField: UITextField){
+            activeField = nil
+        }
+
+        @objc func keyboardWillShow(notification: NSNotification) {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+    //            print("textfeld val below")
+    //            print(self.activeField?.frame.origin.y)
+    //            print("keyborad height")
+    //            print(keyboardSize.height)
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
+            }
+        }
+
+        @objc func keyboardWillHide(notification: NSNotification) {
+            self.view.frame.origin.y = 0
+        }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

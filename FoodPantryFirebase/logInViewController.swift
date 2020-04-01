@@ -4,7 +4,7 @@
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
-class logInViewController: UIViewController {
+class logInViewController: UIViewController, UITextFieldDelegate {
  
     @IBOutlet weak var emailAddressTextField: UITextField!//where user inputs their school email address
     @IBOutlet weak var passwordTextField: UITextField!//where user inputs the password
@@ -12,12 +12,18 @@ class logInViewController: UIViewController {
     
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
+    var activeField : UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         //Create rounded buttons
         continueButton.layer.cornerRadius = 15
         continueButton.clipsToBounds = true
         
+        NotificationCenter.default.addObserver(self, selector: #selector(logInViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logInViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        emailAddressTextField.delegate = self;
+        passwordTextField.delegate = self;
         continueButton.titleLabel?.minimumScaleFactor = 0.5
         continueButton.titleLabel?.numberOfLines = 1;
         continueButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -61,6 +67,39 @@ class logInViewController: UIViewController {
 
         }
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        print("switched")
+        self.activeField = textField
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField){
+        activeField = nil
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//            print("textfeld val below")
+//            print(self.activeField?.frame.origin.y)
+//            print("keyborad height")
+//            print(keyboardSize.height)
+            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+            } else {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     
     

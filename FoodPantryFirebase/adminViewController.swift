@@ -4,7 +4,7 @@
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
-class adminViewController: UIViewController {
+class adminViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
@@ -25,10 +25,17 @@ class adminViewController: UIViewController {
     var ref: DatabaseReference!//referncing the database
     var isActuallyAdmin = false;//boolean to check if the admin controls button is visible
     
+    var activeField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
+        NotificationCenter.default.addObserver(self, selector: #selector(adminViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adminViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        firstNameField.delegate = self;
+        lastNameField.delegate = self;
+        schoolIDTextField.delegate = self;
+        allergiesTextField.delegate = self;
         //Create rounded buttons
         saveButton.layer.cornerRadius = 15
         saveButton.clipsToBounds = true
@@ -44,9 +51,43 @@ class adminViewController: UIViewController {
         adminControlsButton.titleLabel?.numberOfLines = 1;
         adminControlsButton.titleLabel?.adjustsFontSizeToFitWidth = true
         ref = Database.database().reference()
+        
         prepareButton();
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(true)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+        
+        func textFieldDidBeginEditing(_ textField: UITextField){
+            print("switched")
+            self.activeField = textField
+        }
+
+        func textFieldDidEndEditing(_ textField: UITextField){
+            activeField = nil
+        }
+
+        @objc func keyboardWillShow(notification: NSNotification) {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+    //            print("textfeld val below")
+    //            print(self.activeField?.frame.origin.y)
+    //            print("keyborad height")
+    //            print(keyboardSize.height)
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
+            }
+        }
+
+        @objc func keyboardWillHide(notification: NSNotification) {
+            self.view.frame.origin.y = 0
+        }
     
     
     @IBAction func adminControlsButtonTapped(_ sender: UIButton) {

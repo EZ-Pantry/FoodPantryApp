@@ -6,7 +6,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 
-class QRAddViewController: UIViewController {
+class QRAddViewController: UIViewController, UITextFieldDelegate {
     
     //first screen admin sees when adding items 
     
@@ -16,6 +16,7 @@ class QRAddViewController: UIViewController {
     
     var error = ""
     
+    var activeField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,10 +25,47 @@ class QRAddViewController: UIViewController {
         addManualButton.layer.cornerRadius = 15
         addManualButton.clipsToBounds = true
         
+        NotificationCenter.default.addObserver(self, selector: #selector(QRAddViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(QRAddViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        foodTitle.delegate = self;
+        
         addManualButton.titleLabel?.minimumScaleFactor = 0.5
         addManualButton.titleLabel?.numberOfLines = 1;
         addManualButton.titleLabel?.adjustsFontSizeToFitWidth = true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(true)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+        
+        func textFieldDidBeginEditing(_ textField: UITextField){
+            print("switched")
+            self.activeField = textField
+        }
+
+        func textFieldDidEndEditing(_ textField: UITextField){
+            activeField = nil
+        }
+
+        @objc func keyboardWillShow(notification: NSNotification) {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+    //            print("textfeld val below")
+    //            print(self.activeField?.frame.origin.y)
+    //            print("keyborad height")
+    //            print(keyboardSize.height)
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
+            }
+        }
+
+        @objc func keyboardWillHide(notification: NSNotification) {
+            self.view.frame.origin.y = 0
+        }
     
     override func viewWillAppear(_ animated: Bool) {
         if error != "" {
