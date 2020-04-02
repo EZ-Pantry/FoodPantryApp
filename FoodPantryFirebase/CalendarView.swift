@@ -153,6 +153,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             print(fullyCorrectedDate)
             if(fullyFormatedDate == fullyCorrectedDate){
                 cell.backgroundColor=Colors.darkRed
+                determineWhetherDateContainsData();
             }
 //            cell?.backgroundColor=Colors.darkRed
         }
