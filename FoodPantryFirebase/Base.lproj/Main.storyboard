@@ -4496,10 +4496,10 @@
             </objects>
             <point key="canvasLocation" x="-1011.9140624999999" y="3186.6764275256219"/>
         </scene>
-        <!--View Controller-->
+        <!--Admin Add Image Manual View Controller-->
         <scene sceneID="AhX-mx-por">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="vIN-fi-J4O" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="vIN-fi-J4O" customClass="adminAddImageManualViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g5w-Nf-k3I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4512,11 +4512,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7BT-1K-EU2">
-                                <rect key="frame" x="0.0" y="181" width="414" height="498"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jb5-6K-vqM">
                                 <rect key="frame" x="34" y="738" width="346" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -4540,13 +4535,28 @@
                                 </state>
                                 <connections>
                                     <action selector="addMoreSelected:" destination="liV-Dg-c9g" eventType="touchUpInside" id="MaE-Yx-5xq"/>
+                                    <action selector="doneButtonTapped:" destination="vIN-fi-J4O" eventType="touchUpInside" id="dNK-Em-j05"/>
                                 </connections>
                             </button>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f1e-ag-ySn">
+                                <rect key="frame" x="20" y="211" width="360" height="468"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="fVX-sC-FFx"/>
                     </view>
                     <navigationItem key="navigationItem" id="5ov-wX-Y5o"/>
+                    <connections>
+                        <outlet property="doneButton" destination="vsQ-Wu-aa8" id="5vN-Ld-h4Z"/>
+                        <outlet property="imageURLTextField" destination="jb5-6K-vqM" id="tkT-oE-Nob"/>
+                        <outlet property="webView" destination="f1e-ag-ySn" id="uh2-ja-uz5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpC-0l-0JG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -8303,7 +8313,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ya6-8G-W4l"/>
+        <segue reference="3Qs-b0-Rjn"/>
         <segue reference="Dwa-lY-C5Y"/>
         <segue reference="tnj-7N-EuA"/>
         <segue reference="VrP-rx-HIg"/>

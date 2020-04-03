@@ -120,7 +120,13 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 if url != "" {
                     self.foodView.load(url: URL(string: url)!);
                 } else {
-                    self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
+                    if(newImageURL != ""){
+                        self.foodView.load(url: URL(string: newImageURL)!);
+                    }
+                    else{
+                        self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
+                    }
+                   
                 }
                 
                 self.adminDirections.text = "Existing Item\nEdit the Following"
@@ -166,7 +172,12 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 if url != "" {
                                     self.foodView.load(url: URL(string: url)!);
                                 } else {
-                                    self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
+                                    if(newImageURL != ""){
+                                        self.foodView.load(url: URL(string: newImageURL)!);
+                                    }
+                                    else{
+                                        self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
+                                    }
                                 }
                                 
                                 self.adminDirections.text = "Existing Item\nEdit the Following"
