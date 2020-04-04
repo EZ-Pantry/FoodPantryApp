@@ -36,6 +36,7 @@ class homeViewController: UIViewController {
         //this isn't helpful when you sign in with your account, delete the app, and then get brought
         //to the home screen and an error pops up saying that pantry name doesn't exist
         
+        
         self.ref = Database.database().reference()
                 
         let myGroup = DispatchGroup()
@@ -100,6 +101,7 @@ class homeViewController: UIViewController {
                     self.mapView.isZoomEnabled = true;
                     self.mapView.isScrollEnabled = true;
                     self.mapView.isUserInteractionEnabled = true;
+
                 }
                
             })
@@ -130,6 +132,16 @@ class homeViewController: UIViewController {
         
         
     }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView)
+    {
+        if let annotationTitle = view.annotation?.title
+        {
+            print("User tapped on annotation with title: \(annotationTitle!)")
+        }
+    }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         if message != "" {
@@ -186,6 +198,9 @@ class homeViewController: UIViewController {
         }
         
     }
+    
+    
+    
     
     func getPantryLocation(callback: @escaping (_ success: Bool,_ location: String)-> Void) {
         ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
