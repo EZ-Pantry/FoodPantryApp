@@ -14,22 +14,7 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blurredless2" translatesAutoresizingMaskIntoConstraints="NO" id="dZU-D7-Fuq">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="dZU-D7-Fuq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="D60-cL-QL9"/>
-                            <constraint firstItem="dZU-D7-Fuq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LUm-TB-V01"/>
-                            <constraint firstItem="dZU-D7-Fuq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-44" id="NgY-lO-Rk5"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="dZU-D7-Fuq" secondAttribute="bottom" constant="-34" id="mAG-hz-8al"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dZU-D7-Fuq" secondAttribute="trailing" id="r1W-qT-iY9"/>
-                            <constraint firstItem="dZU-D7-Fuq" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" constant="-44" id="tSa-r1-E5v"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dZU-D7-Fuq" secondAttribute="bottom" constant="-34" id="wmJ-AB-RLP"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dZU-D7-Fuq" secondAttribute="trailing" id="ys3-Tu-JYx"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.90980392160000001" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -38,7 +23,4 @@
             <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="blurredless2" width="164" height="243"/>
-    </resources>
 </document>

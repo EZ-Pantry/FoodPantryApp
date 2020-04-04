@@ -7,7 +7,7 @@ import FirebaseDatabase
 import MapKit
 import UserNotifications
 
-class homeViewController: UIViewController {
+class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var welcomeNameLbl: UILabel!
     @IBOutlet var mapView: MKMapView!
@@ -26,6 +26,11 @@ class homeViewController: UIViewController {
     var alert = LoadingBar()
     
     var message = ""
+    
+    //for the map alert
+    var installedNavigationApps : [String] = ["Apple Maps", "Google Maps"] // Apple Maps is always installed
+    var latitude: Double = 45.5088
+    var longitude: Double = -73.554
     
     override func viewDidLoad() {
 
@@ -69,7 +74,8 @@ class homeViewController: UIViewController {
         
         myGroup.notify(queue: .main) {
            
-            print("we in")
+            self.mapView.delegate = self
+            
             
             self.setUpNotications();
             //input any address and within 200 meters are shown
@@ -88,6 +94,9 @@ class homeViewController: UIViewController {
                                            // Handle error here.
                                            return
                                        }
+                        self.longitude = location.longitude
+                        self.latitude = location.latitude
+                        
                                        self.openMapForPlace(lat: location.latitude, long: location.longitude)//helper function to show the zooming in of map into address inputed which corresponds with school
                                         let annotation = MKPointAnnotation()
                                             annotation.title = address
@@ -101,7 +110,6 @@ class homeViewController: UIViewController {
                     self.mapView.isZoomEnabled = true;
                     self.mapView.isScrollEnabled = true;
                     self.mapView.isUserInteractionEnabled = true;
-
                 }
                
             })
@@ -133,14 +141,41 @@ class homeViewController: UIViewController {
         
     }
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView)
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
     {
         if let annotationTitle = view.annotation?.title
         {
             print("User tapped on annotation with title: \(annotationTitle!)")
+            openMapButtonAction()
+            
         }
     }
     
+    func openMapButtonAction() {
+
+        let appleURL = "http://maps.apple.com/?daddr=\(self.latitude),\(self.longitude)"
+        let googleURL = "comgooglemaps://?daddr=\(self.latitude),\(self.longitude)&directionsmode=driving"
+
+        let googleItem = ("Google Map", URL(string:googleURL)!)
+        var installedNavigationApps = [("Apple Maps", URL(string:appleURL)!)]
+
+        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+            installedNavigationApps.append(googleItem)
+        }
+        
+
+        let alert = UIAlertController(title: "Selection", message: "Select Navigation App", preferredStyle: .actionSheet)
+        for app in installedNavigationApps {
+            let button = UIAlertAction(title: app.0, style: .default, handler: { _ in
+                UIApplication.shared.open(app.1, options: [:], completionHandler: nil)
+            })
+            alert.addAction(button)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+
     
     
     override func viewDidAppear(_ animated: Bool) {
