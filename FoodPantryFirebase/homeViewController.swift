@@ -7,7 +7,7 @@ import FirebaseDatabase
 import MapKit
 import UserNotifications
 
-class homeViewController: UIViewController {
+class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var welcomeNameLbl: UILabel!
     @IBOutlet var mapView: MKMapView!
@@ -27,6 +27,11 @@ class homeViewController: UIViewController {
     
     var message = ""
     
+    //for the map alert
+    var installedNavigationApps : [String] = ["Apple Maps", "Google Maps"] // Apple Maps is always installed
+    var latitude: Double = 45.5088
+    var longitude: Double = -73.554
+    
     override func viewDidLoad() {
 
         
@@ -35,6 +40,7 @@ class homeViewController: UIViewController {
         //firebase persistance is great in that if you delete the app, the user will still stay logged in.
         //this isn't helpful when you sign in with your account, delete the app, and then get brought
         //to the home screen and an error pops up saying that pantry name doesn't exist
+        
         
         self.ref = Database.database().reference()
                 
@@ -68,7 +74,8 @@ class homeViewController: UIViewController {
         
         myGroup.notify(queue: .main) {
            
-            print("we in")
+            self.mapView.delegate = self
+            
             
             self.setUpNotications();
             //input any address and within 200 meters are shown
@@ -87,6 +94,9 @@ class homeViewController: UIViewController {
                                            // Handle error here.
                                            return
                                        }
+                        self.longitude = location.longitude
+                        self.latitude = location.latitude
+                        
                                        self.openMapForPlace(lat: location.latitude, long: location.longitude)//helper function to show the zooming in of map into address inputed which corresponds with school
                                         let annotation = MKPointAnnotation()
                                             annotation.title = address
@@ -130,6 +140,45 @@ class homeViewController: UIViewController {
         
         
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
+    {
+        if let annotationTitle = view.annotation?.title
+        {
+            print("User tapped on annotation with title: \(annotationTitle!)")
+            openMapButtonAction()
+            
+        }
+    }
+    
+    //https://stackoverflow.com/questions/38250397/open-an-alert-asking-to-choose-app-to-open-map-with/60930491#60930491
+    
+    func openMapButtonAction() {
+
+        let appleURL = "http://maps.apple.com/?daddr=\(self.latitude),\(self.longitude)"
+        let googleURL = "comgooglemaps://?daddr=\(self.latitude),\(self.longitude)&directionsmode=driving"
+
+        let googleItem = ("Google Map", URL(string:googleURL)!)
+        var installedNavigationApps = [("Apple Maps", URL(string:appleURL)!)]
+
+        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+            installedNavigationApps.append(googleItem)
+        }
+        
+
+        let alert = UIAlertController(title: "Selection", message: "Select Navigation App", preferredStyle: .actionSheet)
+        for app in installedNavigationApps {
+            let button = UIAlertAction(title: app.0, style: .default, handler: { _ in
+                UIApplication.shared.open(app.1, options: [:], completionHandler: nil)
+            })
+            alert.addAction(button)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+
+    
     
     override func viewDidAppear(_ animated: Bool) {
         if message != "" {
@@ -186,6 +235,9 @@ class homeViewController: UIViewController {
         }
         
     }
+    
+    
+    
     
     func getPantryLocation(callback: @escaping (_ success: Bool,_ location: String)-> Void) {
         ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
