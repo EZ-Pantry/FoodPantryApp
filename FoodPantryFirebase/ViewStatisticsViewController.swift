@@ -14,9 +14,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var chooseGraphOrTextSegment: UISegmentedControl!//segment control to choose text or graph format
     
     @IBOutlet weak var studentNameLbl: UILabel!//main header
-    
-    @IBOutlet weak var studentEmailLbl: UILabel!
-    @IBOutlet weak var studentPasswordLbl: UILabel!
 
     
     @IBOutlet weak var studentIDLbl: UILabel!
@@ -115,8 +112,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         chooseGraphOrTextSegment.isHidden = false;
         studentNameLbl.isHidden = true;
         studentIDLbl.isHidden = true;
-        studentEmailLbl.isHidden = true;
-        studentPasswordLbl.isHidden = true;
         lastItemCheckedOutLbl.isHidden = true;
         lastDateCheckedOutLbl.isHidden = true;
         totalItemsCheckedOutlbl.isHidden = true;
@@ -137,8 +132,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         backButton.isHidden = true;
         studentNameLbl.isHidden = true;
         studentIDLbl.isHidden = true;
-        studentEmailLbl.isHidden = true;
-        studentPasswordLbl.isHidden = true;
         lastItemCheckedOutLbl.isHidden = true;
         lastDateCheckedOutLbl.isHidden = true;
         totalItemsCheckedOutlbl.isHidden = true;
@@ -157,10 +150,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         studentNameLbl.text = ""
         studentIDLbl.isHidden = false;
         studentIDLbl.text = ""
-        studentEmailLbl.isHidden = false;
-        studentPasswordLbl.isHidden = false;
-        studentEmailLbl.text = "";
-        studentPasswordLbl.text = "";
         lastItemCheckedOutLbl.isHidden = false;
         lastItemCheckedOutLbl.text = ""
         lastDateCheckedOutLbl.isHidden = false;
@@ -196,8 +185,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         itemsBarChartView.isHidden = false;
         studentNameLbl.isHidden = true;
         studentIDLbl.isHidden = true;
-        studentEmailLbl.isHidden = true;
-        studentPasswordLbl.isHidden = true;
         lastItemCheckedOutLbl.isHidden = true;
         lastDateCheckedOutLbl.isHidden = true;
         totalItemsCheckedOutlbl.isHidden = true;
@@ -297,8 +284,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         itemsBarChartView.isHidden = true;
         studentNameLbl.isHidden = true;
         studentIDLbl.isHidden = true;
-        studentEmailLbl.isHidden = true;
-        studentPasswordLbl.isHidden = true;
         lastItemCheckedOutLbl.isHidden = true;
         lastDateCheckedOutLbl.isHidden = true;
         totalItemsCheckedOutlbl.isHidden = true;
@@ -314,10 +299,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         studentNameLbl.text = ""
         studentIDLbl.isHidden = false;
         studentIDLbl.text = ""
-        studentEmailLbl.isHidden = false;
-        studentPasswordLbl.isHidden = false;
-        studentEmailLbl.text = "";
-        studentPasswordLbl.text = "";
         lastItemCheckedOutLbl.isHidden = false;
         lastItemCheckedOutLbl.text = ""
         //display date at top and students visited nd number of items checked out at bottom
@@ -623,8 +604,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 lastDateCheckedOutLbl.text = "Last Date Checked Out: \(lastDateCheckedOut!)"
                 totalItemsCheckedOutlbl.text = "Total Items Checked Out: \(totalItemsCheckedOut!)"
                 allergiesLbl.text = "Allergies: \(allergies!)"
-                studentEmailLbl.text = "Email Address: \(studentEmail!)";
-                studentPasswordLbl.text = "Password: \(studentPassword!)";
             }
         }
         
