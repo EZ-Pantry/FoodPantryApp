@@ -619,7 +619,3 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
 
 }
 
-//
-//extension ViewStatisticsViewController: ChartViewDelegate{
-//
-//}
