@@ -54,9 +54,10 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        chooseImgButton.isHidden = true;
-        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        chooseImgButton.isHidden = true;
+//        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         nameLabel.delegate = self;
         ingredientsLabel.delegate = self;
         allergiesLabel.delegate = self;
@@ -72,12 +73,20 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.view.isUserInteractionEnabled = false
 
         
+        
         addMoreBtn.layer.cornerRadius = 15
         addMoreBtn.clipsToBounds = true
         
         addMoreBtn.titleLabel?.minimumScaleFactor = 0.5
         addMoreBtn.titleLabel?.numberOfLines = 1;
         addMoreBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        chooseImgButton.layer.cornerRadius = 15
+        chooseImgButton.clipsToBounds = true
+        
+        chooseImgButton.titleLabel?.minimumScaleFactor = 0.5
+        chooseImgButton.titleLabel?.numberOfLines = 1;
+        chooseImgButton.titleLabel?.adjustsFontSizeToFitWidth = true
            
         finishBtn.layer.cornerRadius = 15
         finishBtn.clipsToBounds = true
@@ -122,6 +131,9 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 if url != "" {
                     self.foodView.load(url: URL(string: url)!);
                 } else {
+                    self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
+                    print("reached here")
+                    print(newImageURL)
                     chooseImgButton.isHidden = false;
                     if(newImageURL != ""){
                         self.foodView.load(url: URL(string: newImageURL)!);
@@ -176,6 +188,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                     self.foodView.load(url: URL(string: url)!);
                                 } else {
                                     self.chooseImgButton.isHidden = false;
+                                    self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
                                     if(newImageURL != ""){
                                         self.foodView.load(url: URL(string: newImageURL)!);
                                     }
@@ -217,38 +230,44 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(true)
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
+        if(newImageURL != ""){
+            self.foodView.load(url: URL(string: newImageURL)!);
         }
-        
-        func textFieldDidBeginEditing(_ textField: UITextField){
-            print("switched")
-            self.activeField = textField
+        else{
+            self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
         }
-
-        func textFieldDidEndEditing(_ textField: UITextField){
-            activeField = nil
-        }
-
-        @objc func keyboardWillShow(notification: NSNotification) {
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-    //            print("textfeld val below")
-    //            print(self.activeField?.frame.origin.y)
-    //            print("keyborad height")
-    //            print(keyboardSize.height)
-                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-                } else {
-                    self.view.frame.origin.y = 0
-                }
-            }
-        }
-
-        @objc func keyboardWillHide(notification: NSNotification) {
-            self.view.frame.origin.y = 0
-        }
+    }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//            super.viewWillDisappear(true)
+//            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+//            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+//        }
+//
+//        func textFieldDidBeginEditing(_ textField: UITextField){
+//            print("switched")
+//            self.activeField = textField
+//        }
+//
+//        func textFieldDidEndEditing(_ textField: UITextField){
+//            activeField = nil
+//        }
+//
+//        @objc func keyboardWillShow(notification: NSNotification) {
+//            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+//                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+//                } else {
+//                    self.view.frame.origin.y = 0
+//                }
+//            }
+//        }
+//
+//        @objc func keyboardWillHide(notification: NSNotification) {
+//            self.view.frame.origin.y = 0
+//        }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
