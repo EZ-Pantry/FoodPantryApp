@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I3t-8a-fsA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I3t-8a-fsA">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +22,7 @@
         <!--EZ Pantry-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,7 +86,7 @@
         <!--Sign Up (1 of 3)-->
         <scene sceneID="A2r-RT-H9D">
             <objects>
-                <viewController id="S3S-kd-YLK" customClass="chooseSchoolViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="S3S-kd-YLK" customClass="chooseSchoolViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h4G-1b-zKA">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,7 +183,7 @@
         <!--Sign Up (2 of 3)-->
         <scene sceneID="6uG-m3-Lkv">
             <objects>
-                <viewController id="1Hz-8F-c4M" customClass="chooseUserViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1Hz-8F-c4M" customClass="chooseUserViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uLa-16-Ay1">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -304,7 +304,7 @@
         <!--Sign Up (3 of 3)-->
         <scene sceneID="nrk-Cp-mvc">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Y4h-cv-WDg" customClass="SignUpViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Y4h-cv-WDg" customClass="SignUpViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6I0-7L-6D9">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -718,7 +718,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hqh-1g-7PC">
-                                <rect key="frame" x="210.5" y="686" width="347" height="85"/>
+                                <rect key="frame" x="233" y="686" width="302" height="74"/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Hqh-1g-7PC" secondAttribute="height" multiplier="359:88" id="Ba2-6h-7dh"/>
@@ -1173,7 +1173,7 @@
         <!--Login-->
         <scene sceneID="8zS-re-9cO">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="AYO-Xv-RKr" customClass="logInViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="AYO-Xv-RKr" customClass="logInViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zvj-b6-0rX">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1260,7 +1260,7 @@
         <!--Reset Password-->
         <scene sceneID="b9B-Rp-eDK">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="bIk-dr-si6" customClass="resetPasswordViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="bIk-dr-si6" customClass="resetPasswordViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hcY-8Z-AXJ">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1315,7 +1315,7 @@
         <!--Home-->
         <scene sceneID="cyz-ll-z1e">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="6zC-U3-2zj" customClass="homeViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="6zC-U3-2zj" customClass="homeViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7E3-AJ-Bwg">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1347,7 +1347,7 @@
                                 </variation>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="otherblackborder" translatesAutoresizingMaskIntoConstraints="NO" id="oYu-ng-4oj">
-                                <rect key="frame" x="141" y="306" width="486" height="412.00000000000045"/>
+                                <rect key="frame" x="141" y="306" width="486" height="412"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oYu-ng-4oj" secondAttribute="height" multiplier="22:15" id="ES6-td-Q0b"/>
                                     <constraint firstAttribute="width" secondItem="oYu-ng-4oj" secondAttribute="height" multiplier="485:411" id="O0f-fb-fUb"/>
@@ -1689,7 +1689,7 @@
         <!--Inventory-->
         <scene sceneID="JRd-Al-eta">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="oHz-yb-dhY" customClass="FoodItemsSecondViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="oHz-yb-dhY" customClass="FoodItemsSecondViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PnE-tj-xAn">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1767,11 +1767,6 @@
                                 <exclude reference="kNC-uC-sqv"/>
                                 <exclude reference="oOk-On-zbt"/>
                                 <exclude reference="sqm-Oi-MYC"/>
-                                <exclude reference="CRz-S4-mpf"/>
-                                <exclude reference="D5E-Vp-k6G"/>
-                                <exclude reference="WVv-lf-9FA"/>
-                                <exclude reference="gXn-YL-5MX"/>
-                                <exclude reference="kGM-OA-wBn"/>
                                 <exclude reference="7gG-1x-Q5K"/>
                                 <exclude reference="8pt-DB-Y5X"/>
                                 <exclude reference="COT-r7-0t9"/>
@@ -1780,6 +1775,11 @@
                                 <exclude reference="j2m-Tf-keD"/>
                                 <exclude reference="tqa-Qc-av9"/>
                                 <exclude reference="yHW-Mm-sBU"/>
+                                <exclude reference="CRz-S4-mpf"/>
+                                <exclude reference="D5E-Vp-k6G"/>
+                                <exclude reference="WVv-lf-9FA"/>
+                                <exclude reference="gXn-YL-5MX"/>
+                                <exclude reference="kGM-OA-wBn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1788,13 +1788,13 @@
                                 <include reference="Bds-Ui-cgW"/>
                                 <include reference="Tzv-8T-9wE"/>
                                 <include reference="sqm-Oi-MYC"/>
-                                <include reference="D5E-Vp-k6G"/>
-                                <include reference="gXn-YL-5MX"/>
-                                <exclude reference="kGM-OA-wBn"/>
                                 <include reference="COT-r7-0t9"/>
                                 <include reference="Kcg-Jk-aL2"/>
                                 <include reference="h59-ah-rg3"/>
                                 <include reference="tqa-Qc-av9"/>
+                                <include reference="D5E-Vp-k6G"/>
+                                <include reference="gXn-YL-5MX"/>
+                                <exclude reference="kGM-OA-wBn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -1803,12 +1803,12 @@
                                 <include reference="jch-EJ-UZO"/>
                                 <include reference="kNC-uC-sqv"/>
                                 <include reference="oOk-On-zbt"/>
-                                <include reference="CRz-S4-mpf"/>
-                                <include reference="WVv-lf-9FA"/>
                                 <include reference="7gG-1x-Q5K"/>
                                 <include reference="8pt-DB-Y5X"/>
                                 <include reference="j2m-Tf-keD"/>
                                 <include reference="yHW-Mm-sBU"/>
+                                <include reference="CRz-S4-mpf"/>
+                                <include reference="WVv-lf-9FA"/>
                             </mask>
                         </variation>
                     </view>
@@ -1833,7 +1833,7 @@
         <!--Pop Up View Controller-->
         <scene sceneID="bfG-nM-7uu">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" hidesBottomBarWhenPushed="YES" id="JOR-ec-tQq" customClass="popUpViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" hidesBottomBarWhenPushed="YES" id="JOR-ec-tQq" customClass="popUpViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X1b-5l-mxB">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2088,10 +2088,6 @@
                                         <exclude reference="dnZ-Tn-O9K"/>
                                         <exclude reference="hu8-Dz-Wa4"/>
                                         <exclude reference="jf7-RN-DBo"/>
-                                        <exclude reference="Eb2-Ix-NrZ"/>
-                                        <exclude reference="FIL-4D-FwC"/>
-                                        <exclude reference="a5V-bS-KCc"/>
-                                        <exclude reference="niS-GN-0nQ"/>
                                         <exclude reference="3EN-4L-mWr"/>
                                         <exclude reference="HXE-al-Fr8"/>
                                         <exclude reference="J5Z-4I-jhs"/>
@@ -2101,6 +2097,10 @@
                                         <exclude reference="m3W-rP-NmN"/>
                                         <exclude reference="yBc-IS-GuP"/>
                                         <exclude reference="zuP-k3-Z30"/>
+                                        <exclude reference="Eb2-Ix-NrZ"/>
+                                        <exclude reference="FIL-4D-FwC"/>
+                                        <exclude reference="a5V-bS-KCc"/>
+                                        <exclude reference="niS-GN-0nQ"/>
                                         <exclude reference="UQv-4G-4hl"/>
                                         <exclude reference="Xbh-GZ-eZ5"/>
                                         <exclude reference="ycF-uM-TEy"/>
@@ -2122,8 +2122,6 @@
                                     <mask key="constraints">
                                         <include reference="I5U-yG-uPV"/>
                                         <include reference="hu8-Dz-Wa4"/>
-                                        <include reference="Eb2-Ix-NrZ"/>
-                                        <include reference="FIL-4D-FwC"/>
                                         <include reference="HXE-al-Fr8"/>
                                         <include reference="J5Z-4I-jhs"/>
                                         <include reference="NdX-bI-0zQ"/>
@@ -2131,6 +2129,8 @@
                                         <include reference="Zfw-ZC-eCg"/>
                                         <include reference="m3W-rP-NmN"/>
                                         <include reference="zuP-k3-Z30"/>
+                                        <include reference="Eb2-Ix-NrZ"/>
+                                        <include reference="FIL-4D-FwC"/>
                                         <include reference="Xbh-GZ-eZ5"/>
                                         <include reference="YhP-qu-gaW"/>
                                         <include reference="F6A-ft-yvK"/>
@@ -2144,10 +2144,10 @@
                                         <include reference="LUn-TK-xmR"/>
                                         <include reference="dnZ-Tn-O9K"/>
                                         <include reference="jf7-RN-DBo"/>
-                                        <include reference="a5V-bS-KCc"/>
-                                        <include reference="niS-GN-0nQ"/>
                                         <include reference="3EN-4L-mWr"/>
                                         <include reference="yBc-IS-GuP"/>
+                                        <include reference="a5V-bS-KCc"/>
+                                        <include reference="niS-GN-0nQ"/>
                                         <include reference="UQv-4G-4hl"/>
                                         <include reference="ycF-uM-TEy"/>
                                         <include reference="0wi-4B-dVq"/>
@@ -2204,10 +2204,10 @@
                                 <exclude reference="vss-3N-abq"/>
                                 <exclude reference="5ns-be-qZp"/>
                                 <exclude reference="M7W-c8-L2K"/>
-                                <exclude reference="9by-Hr-VOm"/>
-                                <exclude reference="aZ0-FW-td3"/>
                                 <exclude reference="6bl-TZ-c4O"/>
                                 <exclude reference="mtg-f0-BgY"/>
+                                <exclude reference="9by-Hr-VOm"/>
+                                <exclude reference="aZ0-FW-td3"/>
                                 <exclude reference="enU-pv-lKe"/>
                                 <exclude reference="sDX-3E-B3d"/>
                                 <exclude reference="Iqb-bb-Agq"/>
@@ -2228,8 +2228,8 @@
                                 <include reference="vss-3N-abq"/>
                                 <exclude reference="5ns-be-qZp"/>
                                 <include reference="M7W-c8-L2K"/>
-                                <include reference="aZ0-FW-td3"/>
                                 <include reference="mtg-f0-BgY"/>
+                                <include reference="aZ0-FW-td3"/>
                                 <include reference="sDX-3E-B3d"/>
                                 <include reference="Iqb-bb-Agq"/>
                                 <include reference="fF0-Zn-qd2"/>
@@ -2244,8 +2244,8 @@
                                 <include reference="CCl-HB-Uax"/>
                                 <exclude reference="Xdc-N6-r7e"/>
                                 <include reference="sGg-my-JEh"/>
-                                <include reference="9by-Hr-VOm"/>
                                 <include reference="6bl-TZ-c4O"/>
+                                <include reference="9by-Hr-VOm"/>
                                 <include reference="enU-pv-lKe"/>
                                 <include reference="dT4-18-z0y"/>
                                 <include reference="Tw1-bD-iI6"/>
@@ -2272,7 +2272,7 @@
         <!--Checkout-->
         <scene sceneID="GoS-41-A0y">
             <objects>
-                <viewController id="DA3-LT-lIA" customClass="QRCodeViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DA3-LT-lIA" customClass="QRCodeViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xvv-nl-TTQ">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2306,7 +2306,7 @@
                                 </variation>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iNL-cZ-Ztp">
-                                <rect key="frame" x="351" y="481.5" width="66" height="61"/>
+                                <rect key="frame" x="351" y="486" width="66" height="52.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -2597,15 +2597,15 @@
                                 <exclude reference="fjh-UJ-uZZ"/>
                                 <exclude reference="iUf-de-JdZ"/>
                                 <exclude reference="wio-9L-I0l"/>
-                                <exclude reference="60U-oq-vEQ"/>
-                                <exclude reference="k8c-bg-Qli"/>
-                                <exclude reference="meZ-hJ-FRb"/>
-                                <exclude reference="oHv-8M-j8v"/>
                                 <exclude reference="0nJ-vZ-rEd"/>
                                 <exclude reference="7H6-He-TFu"/>
                                 <exclude reference="9qH-KR-tUQ"/>
                                 <exclude reference="b3M-7G-YXC"/>
                                 <exclude reference="dHm-yu-LQR"/>
+                                <exclude reference="60U-oq-vEQ"/>
+                                <exclude reference="k8c-bg-Qli"/>
+                                <exclude reference="meZ-hJ-FRb"/>
+                                <exclude reference="oHv-8M-j8v"/>
                                 <exclude reference="Kte-wN-h6H"/>
                                 <exclude reference="MTO-Yx-ghX"/>
                                 <exclude reference="RZD-gV-Rnw"/>
@@ -2650,10 +2650,10 @@
                                 <include reference="Vf9-Hq-ckH"/>
                                 <include reference="fjh-UJ-uZZ"/>
                                 <include reference="wio-9L-I0l"/>
-                                <include reference="60U-oq-vEQ"/>
-                                <include reference="oHv-8M-j8v"/>
                                 <include reference="7H6-He-TFu"/>
                                 <include reference="dHm-yu-LQR"/>
+                                <include reference="60U-oq-vEQ"/>
+                                <include reference="oHv-8M-j8v"/>
                                 <include reference="Kte-wN-h6H"/>
                                 <include reference="RZD-gV-Rnw"/>
                                 <include reference="1gc-Fj-gQo"/>
@@ -2676,11 +2676,11 @@
                                 <include reference="5qb-IL-nsq"/>
                                 <include reference="Wch-Og-iyI"/>
                                 <include reference="iUf-de-JdZ"/>
-                                <include reference="k8c-bg-Qli"/>
-                                <include reference="meZ-hJ-FRb"/>
                                 <include reference="0nJ-vZ-rEd"/>
                                 <include reference="9qH-KR-tUQ"/>
                                 <include reference="b3M-7G-YXC"/>
+                                <include reference="k8c-bg-Qli"/>
+                                <include reference="meZ-hJ-FRb"/>
                                 <include reference="MTO-Yx-ghX"/>
                                 <include reference="VlE-dc-vac"/>
                                 <exclude reference="xaw-wK-tkX"/>
@@ -2719,7 +2719,7 @@
         <!--Scan-->
         <scene sceneID="eYv-dY-9jL">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="4Pg-Z3-YN5" customClass="QRScannerController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="4Pg-Z3-YN5" customClass="QRScannerController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9CC-yY-Hwt">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2741,7 +2741,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jio-A3-AxC">
-                                        <rect key="frame" x="365.5" y="38.5" width="37" height="23.5"/>
+                                        <rect key="frame" x="364.5" y="42" width="39" height="20"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2797,7 +2797,7 @@
         <!--Is this it?-->
         <scene sceneID="qId-50-BL1">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="sPP-jx-rYE" customClass="manualViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="sPP-jx-rYE" customClass="manualViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z6D-z6-8sh">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3021,7 +3021,7 @@
         <!--Add or Checkout-->
         <scene sceneID="Nmc-jI-BFb">
             <objects>
-                <viewController storyboardIdentifier="Scrape View" hidesBottomBarWhenPushed="YES" id="efu-PH-rx6" customClass="QRScrapeController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Scrape View" hidesBottomBarWhenPushed="YES" id="efu-PH-rx6" customClass="QRScrapeController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w7X-xo-SKe">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3260,15 +3260,15 @@
                                 <exclude reference="Mcs-AB-bgj"/>
                                 <exclude reference="lIx-ih-xab"/>
                                 <exclude reference="pEX-zl-Qyp"/>
-                                <exclude reference="FR6-j8-uIT"/>
-                                <exclude reference="TXb-av-SWr"/>
-                                <exclude reference="e4O-Dv-agr"/>
                                 <exclude reference="Jes-YR-x6C"/>
                                 <exclude reference="SnR-iG-uyc"/>
                                 <exclude reference="f6L-pL-NNL"/>
                                 <exclude reference="oFr-Zb-4t8"/>
                                 <exclude reference="pVC-tb-oUH"/>
                                 <exclude reference="wBm-pH-MWf"/>
+                                <exclude reference="FR6-j8-uIT"/>
+                                <exclude reference="TXb-av-SWr"/>
+                                <exclude reference="e4O-Dv-agr"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3287,10 +3287,10 @@
                                 <include reference="LeV-I0-W73"/>
                                 <include reference="lIx-ih-xab"/>
                                 <include reference="pEX-zl-Qyp"/>
-                                <include reference="e4O-Dv-agr"/>
                                 <include reference="SnR-iG-uyc"/>
                                 <include reference="oFr-Zb-4t8"/>
                                 <include reference="pVC-tb-oUH"/>
+                                <include reference="e4O-Dv-agr"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -3308,11 +3308,11 @@
                                 <include reference="pyB-cS-eTL"/>
                                 <include reference="8mu-KN-PYO"/>
                                 <include reference="Mcs-AB-bgj"/>
-                                <include reference="FR6-j8-uIT"/>
-                                <include reference="TXb-av-SWr"/>
                                 <include reference="Jes-YR-x6C"/>
                                 <include reference="f6L-pL-NNL"/>
                                 <include reference="wBm-pH-MWf"/>
+                                <include reference="FR6-j8-uIT"/>
+                                <include reference="TXb-av-SWr"/>
                             </mask>
                         </variation>
                     </view>
@@ -3335,7 +3335,7 @@
         <!--Checkout View Controller-->
         <scene sceneID="ieI-5P-crh">
             <objects>
-                <tableViewController id="DrA-bz-sng" customClass="checkoutViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="DrA-bz-sng" customClass="checkoutViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pBM-x5-CJ8">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3488,7 +3488,7 @@
         <!--Profile-->
         <scene sceneID="bWL-me-LUR">
             <objects>
-                <viewController id="oim-iw-eXS" customClass="adminViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oim-iw-eXS" customClass="adminViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GPE-wC-gnl">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3695,7 +3695,7 @@
         <!--Admin Controls-->
         <scene sceneID="YZp-gl-PVX">
             <objects>
-                <viewController providesPresentationContextTransitionStyle="YES" modalPresentationStyle="currentContext" hidesBottomBarWhenPushed="YES" id="6dA-lI-9BW" customClass="adminControlsViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController providesPresentationContextTransitionStyle="YES" modalPresentationStyle="currentContext" hidesBottomBarWhenPushed="YES" id="6dA-lI-9BW" customClass="adminControlsViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ouq-vO-5IH">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4079,7 +4079,7 @@
         <!--Statistics-->
         <scene sceneID="emm-VK-tzb">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="KNv-eW-BHH" customClass="ViewStatisticsViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="KNv-eW-BHH" customClass="ViewStatisticsViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j0P-Iq-Eh0">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4478,7 +4478,7 @@
         <!--Notify Users-->
         <scene sceneID="8xN-fq-9ZM">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="PQn-kt-bpO" customClass="notificationsViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="PQn-kt-bpO" customClass="notificationsViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5CI-4k-C7K">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4586,7 +4586,7 @@
         <!--Pantry Barcode-->
         <scene sceneID="0mC-xb-uT1">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="UBP-Wa-IIo" customClass="adminQRViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="UBP-Wa-IIo" customClass="adminQRViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cSt-Az-NAH">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4710,7 +4710,7 @@
         <!--Add Items-->
         <scene sceneID="4Vd-nV-3DC">
             <objects>
-                <viewController storyboardIdentifier="QR Add View" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="GmH-fc-sq3" customClass="QRAddViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QR Add View" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="GmH-fc-sq3" customClass="QRAddViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oei-Te-M0L">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4798,7 +4798,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYj-QH-O4m">
-                                <rect key="frame" x="352.5" y="481.5" width="63" height="61"/>
+                                <rect key="frame" x="351.5" y="486" width="65.5" height="52.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -4959,16 +4959,16 @@
                                 <exclude reference="d9J-EW-gPU"/>
                                 <exclude reference="eB9-Ea-a7E"/>
                                 <exclude reference="rFY-YA-Ngw"/>
-                                <exclude reference="Kv3-s3-JSB"/>
-                                <exclude reference="Uht-0B-Dp8"/>
-                                <exclude reference="b5U-6o-bgb"/>
-                                <exclude reference="cJp-iz-hYl"/>
                                 <exclude reference="0Fy-7k-5fQ"/>
                                 <exclude reference="B25-LA-HgD"/>
                                 <exclude reference="VnY-Ew-n4q"/>
                                 <exclude reference="XS1-sO-Bx3"/>
                                 <exclude reference="kjo-yw-fab"/>
                                 <exclude reference="mld-Mc-Y1A"/>
+                                <exclude reference="Kv3-s3-JSB"/>
+                                <exclude reference="Uht-0B-Dp8"/>
+                                <exclude reference="b5U-6o-bgb"/>
+                                <exclude reference="cJp-iz-hYl"/>
                                 <exclude reference="63Y-Tt-oW0"/>
                                 <exclude reference="L7c-qV-vS5"/>
                                 <exclude reference="eeE-96-FUJ"/>
@@ -4998,11 +4998,11 @@
                                 <exclude reference="BuX-Or-zl3"/>
                                 <include reference="Mdl-t9-ePV"/>
                                 <include reference="d9J-EW-gPU"/>
-                                <include reference="Kv3-s3-JSB"/>
-                                <include reference="b5U-6o-bgb"/>
                                 <include reference="0Fy-7k-5fQ"/>
                                 <include reference="VnY-Ew-n4q"/>
                                 <include reference="kjo-yw-fab"/>
+                                <include reference="Kv3-s3-JSB"/>
+                                <include reference="b5U-6o-bgb"/>
                                 <include reference="L7c-qV-vS5"/>
                                 <include reference="xBO-L2-7RK"/>
                                 <include reference="EaG-HV-9UA"/>
@@ -5022,11 +5022,11 @@
                                 <include reference="HW4-XE-Qdc"/>
                                 <include reference="eB9-Ea-a7E"/>
                                 <include reference="rFY-YA-Ngw"/>
-                                <include reference="Uht-0B-Dp8"/>
-                                <include reference="cJp-iz-hYl"/>
                                 <include reference="B25-LA-HgD"/>
                                 <include reference="XS1-sO-Bx3"/>
                                 <include reference="mld-Mc-Y1A"/>
+                                <include reference="Uht-0B-Dp8"/>
+                                <include reference="cJp-iz-hYl"/>
                                 <include reference="63Y-Tt-oW0"/>
                                 <include reference="eeE-96-FUJ"/>
                                 <include reference="JAJ-B1-oGQ"/>
@@ -5053,7 +5053,7 @@
         <!--Is this it?-->
         <scene sceneID="YHm-3u-MKq">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="hvu-KR-PKH" customClass="chooseManualViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="hvu-KR-PKH" customClass="chooseManualViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xFV-FT-OkB">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5275,7 +5275,7 @@
         <!--Calender First View Controller-->
         <scene sceneID="JvA-Z1-RMK">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="Tkq-00-VEX" customClass="calenderFirstViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="Tkq-00-VEX" customClass="calenderFirstViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Zzy-lH-7bc">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5301,7 +5301,7 @@
         <!--Scan-->
         <scene sceneID="td0-GD-Rn8">
             <objects>
-                <viewController storyboardIdentifier="Add Barcode" hidesBottomBarWhenPushed="YES" id="CnD-3e-evA" customClass="addItemViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Add Barcode" hidesBottomBarWhenPushed="YES" id="CnD-3e-evA" customClass="addItemViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pgW-MB-VeI">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5337,7 +5337,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwL-oj-XZR">
-                                        <rect key="frame" x="365.5" y="38.5" width="37" height="23.5"/>
+                                        <rect key="frame" x="364.5" y="42" width="39" height="20"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -5422,7 +5422,7 @@
         <!--Admin Add Image Manual View Controller-->
         <scene sceneID="AhX-mx-por">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="vIN-fi-J4O" customClass="adminAddImageManualViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="vIN-fi-J4O" customClass="adminAddImageManualViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g5w-Nf-k3I">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5488,7 +5488,7 @@
         <!--Add Main View Controller-->
         <scene sceneID="JVf-GS-V8s">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="liV-Dg-c9g" customClass="addMainViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="liV-Dg-c9g" customClass="addMainViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OKk-C1-kCi">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5841,7 +5841,7 @@
                                 </variation>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBW-6d-mp5">
-                                <rect key="frame" x="129.66666666666669" y="771.66666666666663" width="154.66666666666669" height="40.333333333333371"/>
+                                <rect key="frame" x="295.5" y="738.5" width="177" height="46"/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="UBW-6d-mp5" secondAttribute="height" multiplier="23:6" id="hkM-YW-USy"/>
@@ -5881,8 +5881,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgZ-JH-Oq1">
-
-                                <rect key="frame" x="129.66666666666669" y="856.33333333333337" width="154.66666666666669" height="40.333333333333371"/>
+                                <rect key="frame" x="295.5" y="834.5" width="177" height="46"/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mgZ-JH-Oq1" secondAttribute="height" multiplier="23:6" id="s74-3X-VMJ"/>
@@ -5896,8 +5895,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCP-i0-mtC">
-
-                                <rect key="frame" x="128.33333333333331" y="814" width="157.33333333333331" height="39.666666666666629"/>
+                                <rect key="frame" x="294" y="786.5" width="180" height="45.5"/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="OCP-i0-mtC" secondAttribute="height" multiplier="115:29" id="aqZ-za-P2z"/>
@@ -5911,7 +5909,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxS-MS-3at">
-                                <rect key="frame" x="129.66666666666669" y="726.66666666666663" width="154.66666666666669" height="40"/>
+                                <rect key="frame" x="295.5" y="687.5" width="177" height="46"/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NxS-MS-3at" secondAttribute="height" multiplier="23:6" id="Sfh-oT-SKw"/>
@@ -6237,7 +6235,7 @@
         <!--Help & Support-->
         <scene sceneID="hHo-a6-1yi">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="KVH-nZ-1jA" customClass="settingsPageViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="KVH-nZ-1jA" customClass="settingsPageViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I5e-cH-viB">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6293,7 +6291,7 @@
         <!--Frequently Asked Questions-->
         <scene sceneID="TVb-xl-gFU">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="4tq-pL-GLs" customClass="FAQViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="4tq-pL-GLs" customClass="FAQViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LVV-WY-7bf">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6309,7 +6307,7 @@
         <!--Help & Support-->
         <scene sceneID="okS-qh-sbo">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="GIb-h1-wKB" customClass="helpAndSupportViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="GIb-h1-wKB" customClass="helpAndSupportViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sko-hQ-X0F">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6523,7 +6521,7 @@
         <!--Contact Administration-->
         <scene sceneID="cuX-2m-Pbf">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="xhx-Ne-xkD" customClass="contactAdminViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="xhx-Ne-xkD" customClass="contactAdminViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yvb-zH-Bau">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6607,7 +6605,7 @@
         <!--App Feedback-->
         <scene sceneID="gzn-C2-Wg5">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="PdC-y2-ebH" customClass="sendfeedbackcontrolsViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="PdC-y2-ebH" customClass="sendfeedbackcontrolsViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="90t-IF-atU">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6785,7 +6783,7 @@
         <!--Email Us!-->
         <scene sceneID="2w9-Wc-9s2">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="Tqu-XP-Okv" customClass="emailFeedbackViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="Tqu-XP-Okv" customClass="emailFeedbackViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r2a-63-VDi">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6868,7 +6866,7 @@
         <!--Inquiry Page-->
         <scene sceneID="UNh-ui-eJz">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="CC4-o4-xuk" customClass="inquireAboutFoodPantryViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="CC4-o4-xuk" customClass="inquireAboutFoodPantryViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Afo-gg-h3j">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6998,7 +6996,7 @@
         <!--View Inventory-->
         <scene sceneID="uqf-eG-edw">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="ggt-BT-bn5" customClass="adminFirstEditItemsViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="ggt-BT-bn5" customClass="adminFirstEditItemsViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GAv-Lh-YVH">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7075,10 +7073,6 @@
                                 <exclude reference="YTE-EB-htP"/>
                                 <exclude reference="tJU-1G-ThS"/>
                                 <exclude reference="xLJ-VW-Hqv"/>
-                                <exclude reference="HYM-Wk-165"/>
-                                <exclude reference="JjP-7h-7iK"/>
-                                <exclude reference="a6s-4D-3Sz"/>
-                                <exclude reference="rfb-c8-cOl"/>
                                 <exclude reference="98g-gC-qOb"/>
                                 <exclude reference="9LP-Nl-2AQ"/>
                                 <exclude reference="Ne6-Dm-VEM"/>
@@ -7087,6 +7081,10 @@
                                 <exclude reference="ZfL-u9-Qbx"/>
                                 <exclude reference="kJn-EG-Yv1"/>
                                 <exclude reference="vAJ-Qb-VG2"/>
+                                <exclude reference="HYM-Wk-165"/>
+                                <exclude reference="JjP-7h-7iK"/>
+                                <exclude reference="a6s-4D-3Sz"/>
+                                <exclude reference="rfb-c8-cOl"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -7095,12 +7093,12 @@
                                 <include reference="26n-hT-XdS"/>
                                 <include reference="YTE-EB-htP"/>
                                 <include reference="xLJ-VW-Hqv"/>
-                                <include reference="HYM-Wk-165"/>
-                                <include reference="a6s-4D-3Sz"/>
                                 <include reference="98g-gC-qOb"/>
                                 <include reference="Ne6-Dm-VEM"/>
                                 <include reference="kJn-EG-Yv1"/>
                                 <include reference="vAJ-Qb-VG2"/>
+                                <include reference="HYM-Wk-165"/>
+                                <include reference="a6s-4D-3Sz"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -7109,12 +7107,12 @@
                                 <include reference="5L2-Dy-xdi"/>
                                 <include reference="IHX-2d-gGL"/>
                                 <include reference="tJU-1G-ThS"/>
-                                <include reference="JjP-7h-7iK"/>
-                                <include reference="rfb-c8-cOl"/>
                                 <include reference="9LP-Nl-2AQ"/>
                                 <include reference="OC5-zL-uM9"/>
                                 <include reference="WT3-jv-buO"/>
                                 <include reference="ZfL-u9-Qbx"/>
+                                <include reference="JjP-7h-7iK"/>
+                                <include reference="rfb-c8-cOl"/>
                             </mask>
                         </variation>
                     </view>
@@ -7139,7 +7137,7 @@
         <!--Other-->
         <scene sceneID="zMc-Pn-i5R">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="4qm-lL-7Is" customClass="otherAdminViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="4qm-lL-7Is" customClass="otherAdminViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xLO-nT-130">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7292,7 +7290,7 @@
         <!--Admin Edit Pop Up View Controller-->
         <scene sceneID="aj9-5a-cin">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" hidesBottomBarWhenPushed="YES" id="eF5-yX-IfH" customClass="adminEditPopUpViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" hidesBottomBarWhenPushed="YES" id="eF5-yX-IfH" customClass="adminEditPopUpViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OEw-tI-xjG">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7658,16 +7656,16 @@
                                         <exclude reference="98x-VJ-S68"/>
                                         <exclude reference="CMM-uY-3IC"/>
                                         <exclude reference="VUy-7J-4fQ"/>
+                                        <exclude reference="4EH-g4-vwy"/>
+                                        <exclude reference="A5t-pn-0Px"/>
+                                        <exclude reference="FAh-PX-TK1"/>
+                                        <exclude reference="g4l-xM-hSR"/>
                                         <exclude reference="36G-j3-zOv"/>
                                         <exclude reference="JFx-lT-PM8"/>
                                         <exclude reference="Oc1-LF-XuY"/>
                                         <exclude reference="ZCi-0U-eI5"/>
                                         <exclude reference="aXL-lm-wSa"/>
                                         <exclude reference="qfT-1O-Gzc"/>
-                                        <exclude reference="4EH-g4-vwy"/>
-                                        <exclude reference="A5t-pn-0Px"/>
-                                        <exclude reference="FAh-PX-TK1"/>
-                                        <exclude reference="g4l-xM-hSR"/>
                                         <exclude reference="J7T-Na-8fu"/>
                                         <exclude reference="Nnp-Qm-40P"/>
                                         <exclude reference="WZA-qf-Gkn"/>
@@ -7712,10 +7710,10 @@
                                         <exclude reference="F2Q-xa-7V9"/>
                                         <exclude reference="SHL-a8-xo9"/>
                                         <include reference="VUy-7J-4fQ"/>
-                                        <include reference="Oc1-LF-XuY"/>
-                                        <include reference="ZCi-0U-eI5"/>
                                         <include reference="FAh-PX-TK1"/>
                                         <include reference="g4l-xM-hSR"/>
+                                        <include reference="Oc1-LF-XuY"/>
+                                        <include reference="ZCi-0U-eI5"/>
                                         <include reference="Nnp-Qm-40P"/>
                                         <include reference="WZA-qf-Gkn"/>
                                         <include reference="2LA-G9-u9p"/>
@@ -7740,12 +7738,12 @@
                                         <include reference="CMM-uY-3IC"/>
                                         <exclude reference="F2Q-xa-7V9"/>
                                         <exclude reference="SHL-a8-xo9"/>
+                                        <include reference="4EH-g4-vwy"/>
+                                        <include reference="A5t-pn-0Px"/>
                                         <include reference="36G-j3-zOv"/>
                                         <include reference="JFx-lT-PM8"/>
                                         <include reference="aXL-lm-wSa"/>
                                         <include reference="qfT-1O-Gzc"/>
-                                        <include reference="4EH-g4-vwy"/>
-                                        <include reference="A5t-pn-0Px"/>
                                         <include reference="J7T-Na-8fu"/>
                                         <include reference="vJC-ks-Rm9"/>
                                         <include reference="Szm-cF-e7I"/>
@@ -7819,10 +7817,10 @@
                                 <exclude reference="ukz-Lk-ZdU"/>
                                 <exclude reference="K7z-eO-5VD"/>
                                 <exclude reference="awf-fr-YFK"/>
-                                <exclude reference="7Ua-KH-6Am"/>
-                                <exclude reference="p5N-eB-ToF"/>
                                 <exclude reference="iQA-Jj-1QD"/>
                                 <exclude reference="vjR-RI-3cx"/>
+                                <exclude reference="7Ua-KH-6Am"/>
+                                <exclude reference="p5N-eB-ToF"/>
                                 <exclude reference="0ti-qb-R1b"/>
                                 <exclude reference="y0y-rj-Rxg"/>
                                 <exclude reference="Ynq-Dd-hFc"/>
@@ -7851,8 +7849,8 @@
                                 <exclude reference="cKG-kA-o1i"/>
                                 <include reference="ukz-Lk-ZdU"/>
                                 <include reference="K7z-eO-5VD"/>
-                                <include reference="7Ua-KH-6Am"/>
                                 <include reference="iQA-Jj-1QD"/>
+                                <include reference="7Ua-KH-6Am"/>
                                 <include reference="0ti-qb-R1b"/>
                                 <include reference="cZc-sr-4is"/>
                                 <include reference="v2x-2e-rmb"/>
@@ -7873,8 +7871,8 @@
                                 <exclude reference="cKG-kA-o1i"/>
                                 <include reference="dm1-hq-45W"/>
                                 <include reference="awf-fr-YFK"/>
-                                <include reference="p5N-eB-ToF"/>
                                 <include reference="vjR-RI-3cx"/>
+                                <include reference="p5N-eB-ToF"/>
                                 <include reference="y0y-rj-Rxg"/>
                                 <include reference="Ynq-Dd-hFc"/>
                                 <include reference="YOw-u5-Bmb"/>
@@ -7911,7 +7909,7 @@
         <!--Edi Item Info View Controller-->
         <scene sceneID="qa9-Gn-H5G">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="vWj-sL-IZl" customClass="ediItemInfoViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="vWj-sL-IZl" customClass="ediItemInfoViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AbT-gP-qdN">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -8582,7 +8580,7 @@
         <!--Barcode Scan Entry View Controller-->
         <scene sceneID="brp-pf-2hG">
             <objects>
-                <viewController id="LbU-b6-iGh" customClass="BarcodeScanEntryViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LbU-b6-iGh" customClass="BarcodeScanEntryViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qDH-KB-udY">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -8591,7 +8589,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abw-Dz-t5g">
-                                        <rect key="frame" x="365.5" y="38.5" width="37" height="23.5"/>
+                                        <rect key="frame" x="364.5" y="42" width="39" height="20"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -8659,7 +8657,7 @@
         <!--Pop Up From Bar Chart View Controller-->
         <scene sceneID="jpF-3M-nF8">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" hidesBottomBarWhenPushed="YES" id="MGn-ik-409" customClass="popUpFromBarChartViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" hidesBottomBarWhenPushed="YES" id="MGn-ik-409" customClass="popUpFromBarChartViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5e1-Dl-goG">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -9020,7 +9018,7 @@
         <!--Other-->
         <scene sceneID="ORo-ab-13G">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="LEY-cc-bqW" customClass="otherTwoAdminViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="LEY-cc-bqW" customClass="otherTwoAdminViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MGC-p3-JpH">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -9078,13 +9076,13 @@
         <!--Add FAQ Items-->
         <scene sceneID="LYc-Hl-9oF">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="7Vw-kk-bpk" customClass="adminAddFAQViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="7Vw-kk-bpk" customClass="adminAddFAQViewController" customModule="FoodPantryFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mYw-9h-p3e">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqp-nr-xvL">
-                                <rect key="frame" x="51" y="584" width="316.33333333333331" height="84.666666666666629"/>
+                                <rect key="frame" x="205.5" y="669.5" width="362" height="97"/>
                                 <color key="backgroundColor" red="0.1019607843" green="0.1529411765" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zqp-nr-xvL" secondAttribute="height" multiplier="157:42" id="Vob-zB-kIy"/>
@@ -9098,7 +9096,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4yG-op-CSW">
-                                <rect key="frame" x="52.333333333333343" y="469" width="314" height="20"/>
+                                <rect key="frame" x="207" y="547" width="359" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4yG-op-CSW" secondAttribute="height" multiplier="157:10" id="ity-Qh-wb2"/>
                                 </constraints>
@@ -9107,7 +9105,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GEc-eZ-zxf">
-                                <rect key="frame" x="48" y="514" width="322.33333333333331" height="33.666666666666629"/>
+                                <rect key="frame" x="202.5" y="595" width="368" height="38.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GEc-eZ-zxf" secondAttribute="height" multiplier="316:33" id="7VN-22-ChT"/>
                                 </constraints>
@@ -9118,7 +9116,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YHr-0Q-vVe">
-                                <rect key="frame" x="49.666666666666657" y="360.66666666666669" width="319" height="20.333333333333314"/>
+                                <rect key="frame" x="204" y="431" width="365" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YHr-0Q-vVe" secondAttribute="height" multiplier="157:10" id="UP9-i1-coE"/>
                                 </constraints>
@@ -9127,7 +9125,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a Question along with an Answer you would like added to the FAQ Page." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6N8-kY-ozi">
-                                <rect key="frame" x="48" y="205.66666666666666" width="318" height="84.999999999999972"/>
+                                <rect key="frame" x="202.5" y="263.5" width="363" height="97"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6N8-kY-ozi" secondAttribute="height" multiplier="318:85" id="UGy-oK-u0q"/>
                                 </constraints>
@@ -9136,7 +9134,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SJk-8C-HVe">
-                                <rect key="frame" x="48" y="404" width="322.33333333333331" height="33.666666666666686"/>
+                                <rect key="frame" x="202.5" y="477" width="368" height="38.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SJk-8C-HVe" secondAttribute="height" multiplier="316:33" id="ivQ-sR-u90"/>
                                 </constraints>
@@ -9182,27 +9180,25 @@
             <point key="canvasLocation" x="3487" y="3084"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="barcode.viewfinder" catalog="system" width="64" height="56"/>
-        <image name="bigblackborder" width="1500" height="1500"/>
-        <image name="blurredless2" width="164" height="243"/>
-        <image name="cart" catalog="system" width="64" height="50"/>
-        <image name="cross" width="40" height="40"/>
-        <image name="gear" catalog="system" width="64" height="58"/>
-        <image name="house.fill" catalog="system" width="64" height="52"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="otherblackborder" width="2197" height="1677"/>
-        <image name="person.crop.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="xmark.octagon" catalog="system" width="64" height="56"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3Qs-b0-Rjn"/>
         <segue reference="Dwa-lY-C5Y"/>
         <segue reference="tnj-7N-EuA"/>
-        <segue reference="EWc-7U-1jR"/>
-        <segue reference="ETY-iU-Vqb"/>
         <segue reference="VrP-rx-HIg"/>
         <segue reference="ecB-Fx-w8c"/>
         <segue reference="AJ9-9r-s5L"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="barcode.viewfinder" catalog="system" width="128" height="114"/>
+        <image name="bigblackborder" width="1500" height="1500"/>
+        <image name="blurredless2" width="164" height="243"/>
+        <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="cross" width="40" height="40"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="otherblackborder" width="2197" height="1677"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="xmark.octagon" catalog="system" width="128" height="112"/>
+    </resources>
 </document>

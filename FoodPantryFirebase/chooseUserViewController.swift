@@ -32,9 +32,7 @@ class chooseUserViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         ref = Database.database().reference()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(chooseUserViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(chooseUserViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        adminCode.delegate = self;
+        
         
 
 //        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
@@ -77,38 +75,38 @@ class chooseUserViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         NotificationCenter.default.addObserver(self, selector: #selector(chooseUserViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+               NotificationCenter.default.addObserver(self, selector: #selector(chooseUserViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        adminCode.delegate = self;
+    }
     override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(true)
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        }
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
         
-        func textFieldDidBeginEditing(_ textField: UITextField){
-            print("switched")
-            self.activeField = textField
-        }
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        self.activeField = textField
+    }
 
-        func textFieldDidEndEditing(_ textField: UITextField){
-            activeField = nil
-        }
+    func textFieldDidEndEditing(_ textField: UITextField){
+        activeField = nil
+    }
 
-        @objc func keyboardWillShow(notification: NSNotification) {
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-    //            print("textfeld val below")
-    //            print(self.activeField?.frame.origin.y)
-    //            print("keyborad height")
-    //            print(keyboardSize.height)
-                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-                } else {
-                    self.view.frame.origin.y = 0
-                }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+            } else {
+                self.view.frame.origin.y = 0
             }
         }
+    }
 
-        @objc func keyboardWillHide(notification: NSNotification) {
-            self.view.frame.origin.y = 0
-        }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
     
     @IBAction func dismissBackTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)

@@ -31,11 +31,7 @@ class adminAddFAQViewController: UIViewController, UITextFieldDelegate {
         addButton.titleLabel?.numberOfLines = 1;
         addButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        NotificationCenter.default.addObserver(self, selector: #selector(adminAddFAQViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(adminAddFAQViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        questionTextField.delegate = self;
-        answerTextField.delegate = self;
         
         
 
@@ -69,34 +65,42 @@ class adminAddFAQViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         NotificationCenter.default.addObserver(self, selector: #selector(adminAddFAQViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(adminAddFAQViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+         
+         questionTextField.delegate = self;
+         answerTextField.delegate = self;
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(true)
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        }
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
         
-        func textFieldDidBeginEditing(_ textField: UITextField){
-            print("switched")
-            self.activeField = textField
-        }
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        self.activeField = textField
+    }
 
-        func textFieldDidEndEditing(_ textField: UITextField){
-            activeField = nil
-        }
+    func textFieldDidEndEditing(_ textField: UITextField){
+        activeField = nil
+    }
 
-        @objc func keyboardWillShow(notification: NSNotification) {
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-                } else {
-                    self.view.frame.origin.y = 0
-                }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+            } else {
+                self.view.frame.origin.y = 0
             }
         }
+    }
 
-        @objc func keyboardWillHide(notification: NSNotification) {
-            self.view.frame.origin.y = 0
-        }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
