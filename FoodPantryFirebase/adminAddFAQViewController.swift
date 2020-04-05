@@ -119,6 +119,10 @@ class adminAddFAQViewController: UIViewController, UITextFieldDelegate {
                 
         self.ref.child(self.PantryName).child("FAQ Page").child(String(nextNum)).child("Question").setValue(questionEntered)
         self.ref.child(self.PantryName).child("FAQ Page").child(String(nextNum)).child("Answer").setValue(answerEntered)
+        
+        let alert = UIAlertController(title: "FAQ Item Added!", message: "The Question & Answer which you entered has been added to the FAQ Page!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil);
     }
     
 
