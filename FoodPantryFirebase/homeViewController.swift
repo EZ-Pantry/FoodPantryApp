@@ -151,6 +151,8 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         }
     }
     
+    //https://stackoverflow.com/questions/38250397/open-an-alert-asking-to-choose-app-to-open-map-with/60930491#60930491
+    
     func openMapButtonAction() {
 
         let appleURL = "http://maps.apple.com/?daddr=\(self.latitude),\(self.longitude)"

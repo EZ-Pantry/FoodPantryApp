@@ -17,6 +17,7 @@
 		1C38A3802432B4FB00BB7E23 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A3762432B4FA00BB7E23 /* OpenSans-ExtraBoldItalic.ttf */; };
 		1C38A3812432B4FB00BB7E23 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A3772432B4FA00BB7E23 /* OpenSans-Regular.ttf */; };
 		1C38A3822432B4FB00BB7E23 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A3782432B4FA00BB7E23 /* OpenSans-BoldItalic.ttf */; };
+		1C61044E2439819900ED1A9A /* manageUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C61044D2439819900ED1A9A /* manageUsersViewController.swift */; };
 		1C63897F2432E008005BB1BC /* EditName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63897E2432E008005BB1BC /* EditName.swift */; };
 		1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C68022A2401E5C1002D0C38 /* ItemCell.swift */; };
 		1C68022D2401E5C1002D0C38 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022B2401E5C1002D0C38 /* ItemCell.xib */; };
@@ -111,6 +112,7 @@
 		1C38A3762432B4FA00BB7E23 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		1C38A3772432B4FA00BB7E23 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		1C38A3782432B4FA00BB7E23 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		1C61044D2439819900ED1A9A /* manageUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manageUsersViewController.swift; sourceTree = "<group>"; };
 		1C63897E2432E008005BB1BC /* EditName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditName.swift; sourceTree = "<group>"; };
 		1C68022A2401E5C1002D0C38 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		1C68022B2401E5C1002D0C38 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				1CF92CE52423C177001D7E0B /* otherAdminViewController.swift */,
 				1CF92CE724269013001D7E0B /* notificationsViewController.swift */,
 				1C63897E2432E008005BB1BC /* EditName.swift */,
+				1C61044D2439819900ED1A9A /* manageUsersViewController.swift */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				A239DC1B2416CAA9003CFF0C /* inquireAboutFoodPantryViewController.swift in Sources */,
 				A24F385323EF817900AACC97 /* homeViewController.swift in Sources */,
 				A24F387D23F6109B00AACC97 /* FoodItemsSecondViewController.swift in Sources */,
+				1C61044E2439819900ED1A9A /* manageUsersViewController.swift in Sources */,
 				1CBF1C55242009EE0064F7D1 /* CheckoutCell1TableViewCell.swift in Sources */,
 				1CBD01C52414095400AC53A9 /* chooseUserViewController.swift in Sources */,
 				A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */,
