@@ -18,6 +18,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet var healthyLabel: UITextField!
     @IBOutlet var finishBtn: UIButton!
     @IBOutlet var cancelBtn: UIButton!
+    @IBOutlet weak var chooseImgButton: UIButton!
     
     //options for the admin: adding more button
     @IBOutlet var addMoreBtn: UIButton!
@@ -53,6 +54,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        chooseImgButton.isHidden = true;
         NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         nameLabel.delegate = self;
@@ -120,6 +122,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 if url != "" {
                     self.foodView.load(url: URL(string: url)!);
                 } else {
+                    chooseImgButton.isHidden = false;
                     if(newImageURL != ""){
                         self.foodView.load(url: URL(string: newImageURL)!);
                     }
@@ -172,6 +175,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 if url != "" {
                                     self.foodView.load(url: URL(string: url)!);
                                 } else {
+                                    self.chooseImgButton.isHidden = false;
                                     if(newImageURL != ""){
                                         self.foodView.load(url: URL(string: newImageURL)!);
                                     }
@@ -184,7 +188,13 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 
                             } else { //new item
                                 self.existing = false
-                                self.food_url = image
+                                if(newImageURL == ""){
+                                    self.food_url = image
+                                }
+                                else{
+                                    self.food_url = newImageURL;
+                                }
+                                
                                 self.food_title = title
                                 
                                 //admin sets the rest
