@@ -7,6 +7,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 
+var foodItemEnteringName = ""
 class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     //all the a=labels
@@ -71,9 +72,10 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         nameLabel.isUserInteractionEnabled = false //cannot edit the food item name
         
         self.view.isUserInteractionEnabled = false
-
         
         
+        print("below what found")
+        print(foodItemEnteringName)
         addMoreBtn.layer.cornerRadius = 15
         addMoreBtn.clipsToBounds = true
         

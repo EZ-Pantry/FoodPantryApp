@@ -97,9 +97,9 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.activeField = textField
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField){
-        activeField = nil
-    }
+//    func textFieldDidEndEditing(_ textField: UITextField){
+//        activeField = nil
+//    }
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {

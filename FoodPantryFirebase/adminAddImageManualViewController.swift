@@ -12,64 +12,96 @@ var newImageURL = ""
 
 class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var doneButton: UIButton!
-
-    @IBOutlet weak var webView: WKWebView!
-    @IBOutlet weak var imageURLTextField: UITextField!
+    @IBOutlet weak var yesButton: UIButton!
+    
+    @IBOutlet weak var foodImageView: UIImageView!
+    @IBOutlet weak var noButton: UIButton!
     var activeField: UITextField!
+    
+    var imageSRCData: [String] = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        doneButton.layer.cornerRadius = 15//15px
-        doneButton.clipsToBounds = true
+        yesButton.layer.cornerRadius = 15//15px
+        yesButton.clipsToBounds = true
         
-        doneButton.titleLabel?.minimumScaleFactor = 0.5
-        doneButton.titleLabel?.numberOfLines = 1;
-        doneButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        yesButton.titleLabel?.minimumScaleFactor = 0.5
+        yesButton.titleLabel?.numberOfLines = 1;
+        yesButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(adminAddImageManualViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(adminAddImageManualViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        imageURLTextField.delegate = self;
+        noButton.layer.cornerRadius = 15//15px
+        noButton.clipsToBounds = true
         
-        let url = URL(string: "https://www.google.com/imghp?sxsrf=ALeKk03e4lZxlLt96JTR0omP0WzA3y6esg:1585862815779&source=lnms&tbm=isch&sa=X&ved=2ahUKEwj1yq-u18roAhWAAp0JHW3UCGAQ_AUoAnoECBUQBA&biw=1440&bih=757")!
-        webView.load(URLRequest(url: url))
+        noButton.titleLabel?.minimumScaleFactor = 0.5
+        noButton.titleLabel?.numberOfLines = 1;
+        noButton.titleLabel?.adjustsFontSizeToFitWidth = true
+    
+        print("food beloww")
+        print(foodItemEnteringName)
+//        https://www.google.com/search?tbm=isch&as_q=vienna&tbs=isch
+//        https://www.google.com/search?tbm=isch&as_q=vienna&tbs=isz:lt,islt:4mp,sur:fmc
+        let url = URL(string: "https://www.google.com/search?tbm=isch&as_q=" + foodItemEnteringName + "&tbs=isch")
+        
+        let task = URLSession.shared.dataTask(with: url!) { (data, response , error) in
+            
+            if error != nil{
+                print(error)
+            }
+            else{
+                let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)//the HTML
+                print(htmlContent)
+                //next 99 characters
+                
+            }
+        
+        }
+        task.resume()
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func doneButtonTapped(_ sender: UIButton) {
-        guard let imageURLPasted = imageURLTextField.text else { return }
-        newImageURL = imageURLPasted;
-        dismiss(animated: true, completion: nil)
+
+
+    @IBAction func yesButtonTapped(_ sender: UIButton) {
+        
     }
     
+    @IBAction func noButtonTapped(_ sender: UIButton) {
+        
+    }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(true)
-//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-//    }
-//
-//    func textFieldDidBeginEditing(_ textField: UITextField){
-//        print("switched")
-//        self.activeField = textField
-//    }
-//
-//    func textFieldDidEndEditing(_ textField: UITextField){
-//        activeField = nil
-//    }
-//
-//    @objc func keyboardWillShow(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-//                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-//            } else {
-//                self.view.frame.origin.y = 0
-//            }
-//        }
-//    }
 
-//    @objc func keyboardWillHide(notification: NSNotification) {
-//        self.view.frame.origin.y = 0
-//    }
     
+}
+
+extension StringProtocol {
+    func index<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> Index? {
+        range(of: string, options: options)?.lowerBound
+    }
+    func endIndex<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> Index? {
+        range(of: string, options: options)?.upperBound
+    }
+    func indices<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [Index] {
+        var indices: [Index] = []
+        var startIndex = self.startIndex
+        while startIndex < endIndex,
+            let range = self[startIndex...]
+                .range(of: string, options: options) {
+                indices.append(range.lowerBound)
+                startIndex = range.lowerBound < range.upperBound ? range.upperBound :
+                    index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
+        }
+        return indices
+    }
+    func ranges<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [Range<Index>] {
+        var result: [Range<Index>] = []
+        var startIndex = self.startIndex
+        while startIndex < endIndex,
+            let range = self[startIndex...]
+                .range(of: string, options: options) {
+                result.append(range)
+                startIndex = range.lowerBound < range.upperBound ? range.upperBound :
+                    index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
+        }
+        return result
+    }
 }

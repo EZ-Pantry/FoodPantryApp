@@ -76,6 +76,9 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addManually(_ sender: Any) {
+        foodItemEnteringName = foodTitle.text!;
+        print("entered")
+        print(foodItemEnteringName)
         self.performSegue(withIdentifier: "GoToManual", sender: self) //go to qr scrape controller
     }
     
