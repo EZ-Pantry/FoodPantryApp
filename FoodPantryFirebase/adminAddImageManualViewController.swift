@@ -20,6 +20,8 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
     
     var imageSRCData: [String] = [String]()
     var indiciesOfSRC: [Int] = [Int]()
+    var modifiedSRCData: [String] = [String]()
+    var indexAtArray = 0;
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -71,6 +73,7 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
                     let currentRange = stringOfHTMLContent.substring(with: self.indiciesOfSRC[x]..<self.indiciesOfSRC[x] + 103)//do everything with this!
                     print(currentRange)
                     print(currentRange.substring(from: 5))
+                    self.imageSRCData.append(currentRange.substring(from: 5))//all the src gathered, now get https ones
                     
 //                    let range = text.substring(0..<3)
 //                    print("")
@@ -79,23 +82,48 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
 //                    print("")
 //                    print(stringOfHTMLContent.between(firstIndex, lastIndexTo))
                 }
+                
+                for y in 0..<self.imageSRCData.count{
+                    if(self.imageSRCData[y].contains("http")){
+                        print("contains http")
+                        self.modifiedSRCData.append(self.imageSRCData[y])//getting the actual images only with good link
+                    }
+                }
+                self.loadFirstImage();
                 //next 99 characters
                 
             }
         
         }
         task.resume()
+        
+
+        
+        
         // Do any additional setup after loading the view.
     }
+
     
+    func loadFirstImage(){
+        self.foodImageView.load(url: URL(string: self.modifiedSRCData[self.indexAtArray])!);
+    }
 
 
     @IBAction func yesButtonTapped(_ sender: UIButton) {
-        
+        var imageURLSelected = self.modifiedSRCData[self.indexAtArray];
+        newImageURL = imageURLSelected;
+        print(newImageURL)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func noButtonTapped(_ sender: UIButton) {
-        
+        if(indexAtArray+1 != modifiedSRCData.count){
+            indexAtArray += 1;
+            self.foodImageView.load(url: URL(string: self.modifiedSRCData[self.indexAtArray])!);
+        }
+        else{
+            print("choose other pic")
+        }
     }
     
 
