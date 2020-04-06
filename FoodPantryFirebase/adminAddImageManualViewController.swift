@@ -19,6 +19,7 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
     var activeField: UITextField!
     
     var imageSRCData: [String] = [String]()
+    var indiciesOfSRC: [Int] = [Int]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,6 +51,34 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
             else{
                 let htmlContent = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)//the HTML
                 print(htmlContent)
+                let stringOfHTMLContent: String = htmlContent as! String
+                print("other one below")
+                print(stringOfHTMLContent)
+                print(stringOfHTMLContent.indices(of: "src="))
+                self.indiciesOfSRC.append(contentsOf: stringOfHTMLContent.indices(of: "src="))
+                print(self.indiciesOfSRC)//provides begining indicies
+                
+//                http://t1.gstatic.com/images?q=tbn:ANd9GcReGv2aOtZhU2V1Wf8GjWSkKdp7s3bGmHpl_iPVkeVXYXr2tHVJcVu98Tk
+                
+                print("printing other below")
+                for x in 0..<self.indiciesOfSRC.count{
+//                    print(stringOfHTMLContent.between(self.indiciesOfSRC[x], self.indiciesOfSRC[x] + 99))
+//get first ss to last one
+//                    var firstIndex = stringOfHTMLContent.substring(from: self.indiciesOfSRC[x]);
+//                    print(firstIndex)
+                    
+                    print("other newest one")
+                    let currentRange = stringOfHTMLContent.substring(with: self.indiciesOfSRC[x]..<self.indiciesOfSRC[x] + 103)//do everything with this!
+                    print(currentRange)
+                    print(currentRange.substring(from: 5))
+                    
+//                    let range = text.substring(0..<3)
+//                    print("")
+//                    var lastIndexTo = stringOfHTMLContent.substring(from: self.indiciesOfSRC[x] + 99)
+//                    print(lastIndexTo)
+//                    print("")
+//                    print(stringOfHTMLContent.between(firstIndex, lastIndexTo))
+                }
                 //next 99 characters
                 
             }
@@ -105,3 +134,16 @@ extension StringProtocol {
         return result
     }
 }
+extension String {
+
+    func indices(of searchTerm:String) -> [Int] {
+        var indices = [Int]()
+        var pos = self.startIndex
+        while let range = range(of: searchTerm, range: pos ..< self.endIndex) {
+            indices.append(distance(from: startIndex, to: range.lowerBound))
+            pos = index(after: range.lowerBound)
+        }
+        return indices
+    }
+}
+
