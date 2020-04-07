@@ -4219,7 +4219,7 @@
                                     <constraint firstAttribute="height" constant="38" id="yyH-p9-cVi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="18"/>
-                                <state key="normal" title="Total Statistics">
+                                <state key="normal" title="Total">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -4232,8 +4232,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="PHh-NW-V4O"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="15"/>
-                                <state key="normal" title="Individual Student">
+                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="18"/>
+                                <state key="normal" title="Individual">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -4303,7 +4303,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose Student..." borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PYm-C9-ce1">
-                                <rect key="frame" x="84.666666666666686" y="161" width="244.66666666666663" height="33.666666666666657"/>
+                                <rect key="frame" x="84.666666666666671" y="161" width="244.66666666666663" height="33.666666666666657"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PYm-C9-ce1" secondAttribute="height" multiplier="182:25" id="qb5-MO-q9j"/>
                                 </constraints>
