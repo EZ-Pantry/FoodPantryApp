@@ -18,6 +18,9 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var noButton: UIButton!
     var activeField: UITextField!
     
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var outOfHowMany: UILabel!
+    var fullWordWithPlus = ""
     var imageSRCData: [String] = [String]()
     var indiciesOfSRC: [Int] = [Int]()
     var modifiedSRCData: [String] = [String]()
@@ -38,12 +41,46 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
         noButton.titleLabel?.minimumScaleFactor = 0.5
         noButton.titleLabel?.numberOfLines = 1;
         noButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        backButton.layer.cornerRadius = 15//15px
+        backButton.clipsToBounds = true
+        
+        backButton.titleLabel?.minimumScaleFactor = 0.5
+        backButton.titleLabel?.numberOfLines = 1;
+        backButton.titleLabel?.adjustsFontSizeToFitWidth = true
     
         print("food beloww")
         print(foodItemEnteringName)
 //        https://www.google.com/search?tbm=isch&as_q=vienna&tbs=isch
 //        https://www.google.com/search?tbm=isch&as_q=vienna&tbs=isz:lt,islt:4mp,sur:fmc
-        let url = URL(string: "https://www.google.com/search?tbm=isch&as_q=" + foodItemEnteringName + "&tbs=isch")
+        let fullFoodNameArr = foodItemEnteringName.components(separatedBy: " ")
+        
+        fullWordWithPlus = foodItemEnteringName
+        print(fullFoodNameArr)
+        if(fullFoodNameArr.count>0){
+            for x in 0..<fullFoodNameArr.count{
+                var currentWord = fullFoodNameArr[x]
+                print(currentWord)
+                if(x == 0){
+                    fullWordWithPlus = currentWord + "+"
+                }
+                else if(x<fullFoodNameArr.count-1){
+                    fullWordWithPlus += currentWord + "+"
+                }
+                else{
+                    fullWordWithPlus += currentWord
+                }
+                
+            }
+        }
+        
+        print("full word below")
+        print(fullWordWithPlus)
+//        https://www.google.com/search?tbm=isch&as_q=vienna+beach&tbs=isch&safari_group=9
+        var fullURL = "https://www.google.com/search?tbm=isch&as_q=" + fullWordWithPlus + "&tbs=isch"
+        let url = URL(string: fullURL)
+        
+//        let url = URL(string: "https://www.google.com/search?tbm=isch&as_q=" + fullWordWithPlus + "&tbs=isch")
         
         let task = URLSession.shared.dataTask(with: url!) { (data, response , error) in
             
@@ -119,14 +156,29 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
     @IBAction func noButtonTapped(_ sender: UIButton) {
         if(indexAtArray+1 != modifiedSRCData.count){
             indexAtArray += 1;
+            print(self.modifiedSRCData[self.indexAtArray])
             self.foodImageView.load(url: URL(string: self.modifiedSRCData[self.indexAtArray])!);
+            outOfHowMany.text = "\(indexAtArray+1)/\(self.modifiedSRCData.count)"
+            backButton.isHidden = true;
         }
         else{
             print("choose other pic")
+            backButton.isHidden = false;
         }
     }
     
-
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        if(indexAtArray-1 != -1){
+            indexAtArray -= 1;
+            print(self.modifiedSRCData[self.indexAtArray])
+            outOfHowMany.text = "\(indexAtArray+1)/\(self.modifiedSRCData.count)"
+            self.foodImageView.load(url: URL(string: self.modifiedSRCData[self.indexAtArray])!);
+        }
+        else{
+            backButton.isHidden = true;
+        }
+    }
+    
     
 }
 
