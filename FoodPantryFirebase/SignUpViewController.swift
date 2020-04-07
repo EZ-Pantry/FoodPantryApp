@@ -236,7 +236,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Item Checked Out").setValue(" ")
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Date Visited").setValue(" ")
                         
-                        self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Account Status").setValue(" ")
+                        self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Account Status").setValue("0")
                         //0 = Not Confirmed
                         //1 = Confirmed
                         //2 = Suspended
