@@ -57,7 +57,7 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
         
         fullWordWithPlus = foodItemEnteringName
         print(fullFoodNameArr)
-        if(fullFoodNameArr.count>0){
+        if(fullFoodNameArr.count>1){
             for x in 0..<fullFoodNameArr.count{
                 var currentWord = fullFoodNameArr[x]
                 print(currentWord)
@@ -184,7 +184,8 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
             indexAtArray -= 1;
             print(self.modifiedSRCData[self.indexAtArray])
             var currentlyAt = self.modifiedSRCData[self.indexAtArray] as! String
-            var theURLOfFoodItem = currentlyAt.replacingOccurrences(of: "\"", with: "")
+            var temp1 = currentlyAt.replacingOccurrences(of: "\"", with: "")
+            var theURLOfFoodItem = temp1.replacingOccurrences(of: ">", with: "")
             outOfHowMany.text = "\(indexAtArray+1)/\(self.modifiedSRCData.count)"
             self.foodImageView.load(url: URL(string: theURLOfFoodItem)!);
         }
