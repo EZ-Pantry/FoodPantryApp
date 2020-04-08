@@ -77,7 +77,13 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
         print("full word below")
         print(fullWordWithPlus)
 //        https://www.google.com/search?tbm=isch&as_q=vienna+beach&tbs=isch&safari_group=9
+//        var fullURL = "https://www.google.com/search?tbm=isch&as_q=" + fullWordWithPlus + "&tbs=isch"
+        
         var fullURL = "https://www.google.com/search?tbm=isch&as_q=" + fullWordWithPlus + "&tbs=isch"
+        
+        
+        print("full url below")
+        print(fullURL)
         let url = URL(string: fullURL)
         
 //        let url = URL(string: "https://www.google.com/search?tbm=isch&as_q=" + fullWordWithPlus + "&tbs=isch")
@@ -107,7 +113,7 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
 //                    print(firstIndex)
                     
                     print("other newest one")
-                    let currentRange = stringOfHTMLContent.substring(with: self.indiciesOfSRC[x]..<self.indiciesOfSRC[x] + 103)//do everything with this!
+                    let currentRange = stringOfHTMLContent.substring(with: self.indiciesOfSRC[x]..<self.indiciesOfSRC[x] + 104)//do everything with this!
                     print(currentRange)
                     print(currentRange.substring(from: 5))
                     self.imageSRCData.append(currentRange.substring(from: 5))//all the src gathered, now get https ones
@@ -142,7 +148,10 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
 
     
     func loadFirstImage(){
-        self.foodImageView.load(url: URL(string: self.modifiedSRCData[self.indexAtArray])!);
+        var currentlyAt = self.modifiedSRCData[self.indexAtArray] as! String
+        var theURLOfFoodItem = currentlyAt.replacingOccurrences(of: "\"", with: "")
+        outOfHowMany.text = "\(indexAtArray+1)/\(self.modifiedSRCData.count)"
+        self.foodImageView.load(url: URL(string: theURLOfFoodItem)!);
     }
 
 
@@ -157,7 +166,10 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
         if(indexAtArray+1 != modifiedSRCData.count){
             indexAtArray += 1;
             print(self.modifiedSRCData[self.indexAtArray])
-            self.foodImageView.load(url: URL(string: self.modifiedSRCData[self.indexAtArray])!);
+            var currentlyAt = self.modifiedSRCData[self.indexAtArray] as! String
+            var temp1 = currentlyAt.replacingOccurrences(of: "\"", with: "")
+            var theURLOfFoodItem = temp1.replacingOccurrences(of: ">", with: "")
+            self.foodImageView.load(url: URL(string: theURLOfFoodItem)!);
             outOfHowMany.text = "\(indexAtArray+1)/\(self.modifiedSRCData.count)"
             backButton.isHidden = true;
         }
@@ -171,8 +183,10 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
         if(indexAtArray-1 != -1){
             indexAtArray -= 1;
             print(self.modifiedSRCData[self.indexAtArray])
+            var currentlyAt = self.modifiedSRCData[self.indexAtArray] as! String
+            var theURLOfFoodItem = currentlyAt.replacingOccurrences(of: "\"", with: "")
             outOfHowMany.text = "\(indexAtArray+1)/\(self.modifiedSRCData.count)"
-            self.foodImageView.load(url: URL(string: self.modifiedSRCData[self.indexAtArray])!);
+            self.foodImageView.load(url: URL(string: theURLOfFoodItem)!);
         }
         else{
             backButton.isHidden = true;
