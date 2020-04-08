@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref = Database.database().reference()
+
         //check for connection
         let monitor = NWPathMonitor()
         
@@ -92,19 +94,54 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let user = Auth.auth().currentUser{
+        print("here")
+        if let user = Auth.auth().currentUser {
             //checks if the user is already signed if
             //If so, then the user is directed directly to the home screen to prevent them from having to sign in multiple times
             if(authUser!.isEmailVerified){
-                self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
+                
+                //check if admin allowed
+                let user = Auth.auth().currentUser
+                ref.child("All Users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                 let status = value?["Account Status"] as? String ?? "" //load in the admin code
+                    print("checking")
+                    print(status)
+                    if(status == "1" || status == "2") { //user is either approved or suspended
+                        self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
+                    } else if(status == "3") { //user is deleted
+                        try! Auth.auth().signOut()
+                        let alert = UIAlertController(title: "Your Account has Been Deleted", message: "The admin has deleted this account.", preferredStyle: .alert)
+                                                 
+                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+            
+                        }))
+                        self.present(alert, animated: true, completion: nil);
+                    }
+                    
+                // ...
+                }) { (error) in
+                    RequestError().showError()
+                    print(error.localizedDescription)
+                }
+                
+            } else {
+                print("not verified")
             }
             
+        } else {
+            print("f")
         }
+        
+        
     }
     
     @IBAction func unwindToFirst(_ unwindSegue: UIStoryboardSegue) {
         let sourceViewController = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
+        let identifier: String = unwindSegue.identifier ?? ""
+        print(identifier)
     }
     
     

@@ -203,6 +203,7 @@
                         <outlet property="loginButton" destination="0Px-QU-phh" id="eXb-vn-5Uu"/>
                         <outlet property="signupButton" destination="9XU-Pz-nJc" id="H8r-3E-5Ka"/>
                         <segue destination="hdj-aB-iKU" kind="presentation" identifier="toHomeScreen" id="ZbA-Fj-Lae"/>
+                        <segue destination="AYO-Xv-RKr" kind="show" identifier="login" id="Qlt-Px-tG7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1289,10 +1290,11 @@
                         <outlet property="passwordTextField" destination="QJb-pk-1dL" id="HsS-9z-G5S"/>
                         <outlet property="schoolID" destination="hiy-l8-ab4" id="7vZ-Mn-wll"/>
                         <segue destination="hdj-aB-iKU" kind="presentation" identifier="toHome" id="EWc-7U-1jR"/>
-                        <segue destination="AYO-Xv-RKr" kind="show" identifier="toLoginScreen" id="AJ9-9r-s5L"/>
+                        <segue destination="v38-xQ-Gp5" kind="unwind" identifier="signedUp" unwindAction="unwindToFirst:" id="Nsr-bY-O21"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mfd-pe-4bz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="v38-xQ-Gp5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="789.84375" y="-1256.25"/>
         </scene>
@@ -3211,7 +3213,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-ko-YwO">
-                                <rect key="frame" x="82.666666666666686" y="162.33333333333337" width="248.66666666666663" height="248.66666666666663"/>
+                                <rect key="frame" x="82.666666666666671" y="162.33333333333337" width="248.66666666666663" height="248.66666666666663"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Teo-ko-YwO" secondAttribute="height" multiplier="1:1" id="s9m-U6-T4s"/>
                                     <constraint firstAttribute="width" secondItem="Teo-ko-YwO" secondAttribute="height" multiplier="1:1" id="vQf-v9-bTH"/>
@@ -3472,7 +3474,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngj-8w-6Ju">
-                                    <rect key="frame" x="97.666666666666686" y="20" width="218.66666666666663" height="71"/>
+                                    <rect key="frame" x="97.666666666666671" y="20" width="218.66666666666663" height="71"/>
                                     <color key="backgroundColor" red="0.50980392159999999" green="0.51764705879999995" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ngj-8w-6Ju" secondAttribute="height" multiplier="77:25" id="IXv-MW-Fuk"/>
@@ -3503,7 +3505,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USd-ft-9Pk">
-                                    <rect key="frame" x="97.666666666666686" y="116" width="218.66666666666663" height="70.666666666666686"/>
+                                    <rect key="frame" x="97.666666666666671" y="116" width="218.66666666666663" height="70.666666666666686"/>
                                     <color key="backgroundColor" red="0.50980392159999999" green="0.51764705879999995" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="USd-ft-9Pk" secondAttribute="height" multiplier="77:25" id="RzL-be-Nea"/>
@@ -9328,8 +9330,8 @@
         <segue reference="Ya6-8G-W4l"/>
         <segue reference="Zke-bH-X19"/>
         <segue reference="tnj-7N-EuA"/>
-        <segue reference="ZbA-Fj-Lae"/>
-        <segue reference="ecB-Fx-w8c"/>
+        <segue reference="VrP-rx-HIg"/>
+        <segue reference="ETY-iU-Vqb"/>
         <segue reference="Ona-bs-GLF"/>
     </inferredMetricsTieBreakers>
 </document>
