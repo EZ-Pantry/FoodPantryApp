@@ -12,6 +12,7 @@ class adminControlsViewController: UIViewController {
     @IBOutlet weak var foodPantryBarcodeButton: UIButton!
     @IBOutlet var otherButton: UIButton!
     @IBOutlet var notificationsButton: UIButton!
+    @IBOutlet var manageUsersButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,13 @@ class adminControlsViewController: UIViewController {
         notificationsButton.titleLabel?.numberOfLines = 1;
         notificationsButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
+        
+        manageUsersButton.layer.cornerRadius = 15
+        manageUsersButton.clipsToBounds = true
+        
+        manageUsersButton.titleLabel?.minimumScaleFactor = 0.5
+        manageUsersButton.titleLabel?.numberOfLines = 1;
+        manageUsersButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         // Do any additional setup after loading the view.
     }

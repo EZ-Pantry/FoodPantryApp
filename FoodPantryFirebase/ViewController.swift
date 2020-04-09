@@ -109,7 +109,7 @@ class ViewController: UIViewController {
                     print("checking")
                     print(status)
                     if(status == "1") { //user is either approved or suspended
-                        
+                        self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
                     } else if (status == "2") {
                         let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
                                                              
