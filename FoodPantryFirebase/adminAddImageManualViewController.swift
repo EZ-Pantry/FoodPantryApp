@@ -163,7 +163,7 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func noButtonTapped(_ sender: UIButton) {
-        if(indexAtArray+1 != modifiedSRCData.count){
+        if(indexAtArray != modifiedSRCData.count-1){
             indexAtArray += 1;
             print(self.modifiedSRCData[self.indexAtArray])
             var currentlyAt = self.modifiedSRCData[self.indexAtArray] as! String
@@ -172,6 +172,9 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
             self.foodImageView.load(url: URL(string: theURLOfFoodItem)!);
             outOfHowMany.text = "\(indexAtArray+1)/\(self.modifiedSRCData.count)"
             backButton.isHidden = true;
+            if(indexAtArray+1 == self.modifiedSRCData.count){
+                backButton.isHidden = false;
+            }
         }
         else{
             print("choose other pic")
