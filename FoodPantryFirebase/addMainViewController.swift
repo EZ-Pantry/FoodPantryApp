@@ -59,12 +59,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 //        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        nameLabel.delegate = self;
-        ingredientsLabel.delegate = self;
-        allergiesLabel.delegate = self;
-        typeLabel.delegate = self;
-        quantityLabel.delegate = self;
-        healthyLabel.delegate = self;
+        
         
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
@@ -242,6 +237,44 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         else{
             self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+               NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        nameLabel.delegate = self;
+        ingredientsLabel.delegate = self;
+        allergiesLabel.delegate = self;
+        typeLabel.delegate = self;
+        quantityLabel.delegate = self;
+        healthyLabel.delegate = self;
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+        
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        self.activeField = textField
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField){
+        activeField = nil
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+            } else {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     
 //    override func viewWillDisappear(_ animated: Bool) {
