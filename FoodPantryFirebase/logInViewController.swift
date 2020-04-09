@@ -56,7 +56,6 @@ class logInViewController: UIViewController, UITextFieldDelegate {
             
                 Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
                     if(user!.isEmailVerified) {
-                        if(user!.isEmailVerified){
                             //check if admin allowed
                             let user = Auth.auth().currentUser
                             self.ref.child("All Users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -65,7 +64,23 @@ class logInViewController: UIViewController, UITextFieldDelegate {
                              let status = value?["Account Status"] as? String ?? "" //load in the admin code
                               
                                 if(status != "0") {
-                                    self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
+                                    
+                                    if(status == "2") {
+                                        
+                                        let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
+                                                                             
+                                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                                            
+                                            self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
+                                        }))
+                                        self.present(alert, animated: true, completion: nil);
+                                        
+                                        
+                                    } else {
+                                        self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
+                                    }
+                                    
+                                    
                                 } else {
                                     let alert = UIAlertController(title: "Account Not Approved", message: "This account has not been approved by the admin", preferredStyle: .alert)
                                     alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
@@ -77,7 +92,6 @@ class logInViewController: UIViewController, UITextFieldDelegate {
                                 RequestError().showError()
                                 print(error.localizedDescription)
                             }
-                        }
                     } else {
                         let alert = UIAlertController(title: "Email Not Verified", message: "Please check your inbox/spam folder and make sure you have verified your email!", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))

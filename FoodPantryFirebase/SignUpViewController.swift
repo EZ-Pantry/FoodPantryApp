@@ -215,11 +215,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
                 
+                        self.ref.child(self.pantryName).child("Administration Contacts").child(firstName + " " + lastName).child("Email").setValue(emailaddress)
+                        
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Admin").setValue("Yes")
                         
                         
                             self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
                         
+                            self.ref.child("All Users").child(user!.user.uid).child("Account Status").setValue("1")
+
                             UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
 
                     }

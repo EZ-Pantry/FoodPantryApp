@@ -120,7 +120,7 @@ class chooseUserViewController: UIViewController, UITextFieldDelegate {
         incorrectAdminLabel.isHidden = true
         user = "student"
         
-        userField.text = "You are a student"
+        userField.text = "You are a user"
     }
     
     @IBAction func choseAdmin(_ sender: Any) {

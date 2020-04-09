@@ -108,8 +108,17 @@ class ViewController: UIViewController {
                  let status = value?["Account Status"] as? String ?? "" //load in the admin code
                     print("checking")
                     print(status)
-                    if(status == "1" || status == "2") { //user is either approved or suspended
-                        self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
+                    if(status == "1") { //user is either approved or suspended
+                        
+                    } else if (status == "2") {
+                        let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
+                                                             
+                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                            
+                            self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
+                        }))
+                        self.present(alert, animated: true, completion: nil);
+
                     } else if(status == "3") { //user is deleted
                         try! Auth.auth().signOut()
                         let alert = UIAlertController(title: "Your Account has Been Deleted", message: "The admin has deleted this account.", preferredStyle: .alert)
