@@ -79,9 +79,9 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
 //        https://www.google.com/search?tbm=isch&as_q=vienna+beach&tbs=isch&safari_group=9
 //        var fullURL = "https://www.google.com/search?tbm=isch&as_q=" + fullWordWithPlus + "&tbs=isch"
         
-        var fullURL = "https://www.google.com/search?tbm=isch&as_q=" + fullWordWithPlus + "&tbs=isch"
-        
-        
+//        var fullURL = "https://www.google.com/search?tbm=isch&as_q=" + fullWordWithPlus + "&tbs=isch"
+        var fullURL = "https://www.bing.com/images/search?q=" + fullWordWithPlus + "&go=Search&qs=n&form=QBILPG&sp=-1&pq=apple+sauc&sc=8-10&sk=&cvid=3A1B11EC0FF740BABF32F0EBD132E7A2"
+        //BING IMAGE SEARCH WORKS
         print("full url below")
         print(fullURL)
         let url = URL(string: fullURL)
