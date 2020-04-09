@@ -139,6 +139,7 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
         
         }
         task.resume()
+        outOfHowMany.text = "\(indexAtArray+1)/28"//loadds 28 @ a time
         
 
         
@@ -150,7 +151,6 @@ class adminAddImageManualViewController: UIViewController, UITextFieldDelegate {
     func loadFirstImage(){
         var currentlyAt = self.modifiedSRCData[self.indexAtArray] as! String
         var theURLOfFoodItem = currentlyAt.replacingOccurrences(of: "\"", with: "")
-        outOfHowMany.text = "\(indexAtArray+1)/\(self.modifiedSRCData.count)"
         self.foodImageView.load(url: URL(string: theURLOfFoodItem)!);
     }
 

@@ -193,6 +193,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                     self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
                                     if(newImageURL != ""){
                                         self.foodView.load(url: URL(string: newImageURL)!);
+                                        self.food_url = newImageURL
                                     }
                                     else{
                                         self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
@@ -205,6 +206,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 self.existing = false
                                 if(newImageURL == ""){
                                     self.food_url = image
+                                    print("this was reached")
                                 }
                                 else{
                                     self.food_url = newImageURL;
@@ -377,6 +379,10 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBAction func finishSelected(_ sender: Any) { //same code as above
         
         addItem(next: "finish")
+        print("food url below")
+        print(food_url)
+        print("one received")
+        print(newImageURL)
     }
     
     func addItem(next: String) {
@@ -452,7 +458,14 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 var newAllergies: String = self.allergiesLabel.text!
                 var newType: String = self.typeLabel.text!
                 var newQuantity: String = self.quantityLabel.text!
-                var newURL = food_url
+                var newURL = ""
+                if(newImageURL != ""){
+                    newURL = newImageURL
+                }
+                else{
+                    newURL = food_url
+                }
+                
                 var checkedOut = "0"
                 var newHealthy = self.healthyLabel.text!
                 
