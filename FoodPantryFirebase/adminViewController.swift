@@ -30,12 +30,8 @@ class adminViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
-        NotificationCenter.default.addObserver(self, selector: #selector(adminViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(adminViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        firstNameField.delegate = self;
-        lastNameField.delegate = self;
-        schoolIDTextField.delegate = self;
-        allergiesTextField.delegate = self;
+
+        
         //Create rounded buttons
         saveButton.layer.cornerRadius = 15
         saveButton.clipsToBounds = true
@@ -57,14 +53,23 @@ class adminViewController: UIViewController, UITextFieldDelegate {
     }
 
     
+    override func viewWillAppear(_ animated: Bool) {
+         NotificationCenter.default.addObserver(self, selector: #selector(adminViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+               NotificationCenter.default.addObserver(self, selector: #selector(adminViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        firstNameField.delegate = self;
+        lastNameField.delegate = self;
+        schoolIDTextField.delegate = self;
+        allergiesTextField.delegate = self;
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
         
     func textFieldDidBeginEditing(_ textField: UITextField){
-        print("switched")
         self.activeField = textField
     }
 

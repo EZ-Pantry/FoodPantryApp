@@ -22,14 +22,7 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(otherAdminViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(otherAdminViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        adminCode.delegate = self;
-        pantryCode.delegate = self;
-        location.delegate = self;
-        
-        
+
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
@@ -44,50 +37,41 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
         
           
     }
-    
-//    @objc func keyboardWillShow(notification: NSNotification) {
-//
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//            self.view.frame.origin.y = self.view.frame.height - (self.view.frame.height + keyboardSize.height)
-//        }
-//
-//    }
-//
-//    @objc func keyboardWillHide(notification: NSNotification) {
-//            self.view.frame.origin.y = 0
-//    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(otherAdminViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(otherAdminViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        adminCode.delegate = self;
+        pantryCode.delegate = self;
+        location.delegate = self;
+    }
     override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(true)
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        }
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
         
-        func textFieldDidBeginEditing(_ textField: UITextField){
-            print("switched")
-            self.activeField = textField
-        }
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        self.activeField = textField
+    }
 
-        func textFieldDidEndEditing(_ textField: UITextField){
-            activeField = nil
-        }
+    func textFieldDidEndEditing(_ textField: UITextField){
+        activeField = nil
+    }
 
-        @objc func keyboardWillShow(notification: NSNotification) {
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-    //            print("textfeld val below")
-    //            print(self.activeField?.frame.origin.y)
-    //            print("keyborad height")
-    //            print(keyboardSize.height)
-                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-                } else {
-                    self.view.frame.origin.y = 0
-                }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+            } else {
+                self.view.frame.origin.y = 0
             }
         }
+    }
 
-        @objc func keyboardWillHide(notification: NSNotification) {
-            self.view.frame.origin.y = 0
-        }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         //check if checking out is allowed

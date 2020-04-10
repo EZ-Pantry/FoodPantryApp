@@ -45,9 +45,9 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
             self.activeField = textField
         }
 
-        func textFieldDidEndEditing(_ textField: UITextField){
-            activeField = nil
-        }
+//        func textFieldDidEndEditing(_ textField: UITextField){
+//            activeField = nil
+//        }
 
         @objc func keyboardWillShow(notification: NSNotification) {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -76,6 +76,9 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func addManually(_ sender: Any) {
+        foodItemEnteringName = foodTitle.text!;
+        print("entered")
+        print(foodItemEnteringName)
         self.performSegue(withIdentifier: "GoToManual", sender: self) //go to qr scrape controller
     }
     

@@ -1,0 +1,208 @@
+//
+//  indivisualStudentStatsViewController.swift
+//  FoodPantryFirebase
+//
+//  Created by Rayaan Siddiqi on 4/10/20.
+//  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
+//
+
+import UIKit
+import FirebaseUI
+import FirebaseDatabase
+
+class indivisualStudentStatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet weak var searchBar: UISearchBar!
+    var PantryName: String = ""
+    var ref: DatabaseReference! //reference to the firebase database
+    
+    var users: [[String: Any]] = []
+    
+    var usersApproved: [[String: Any]] = []
+    
+    var searchedUser = [String]()
+    var searching = false
+    
+    var selectedName = ""
+    var selectedSchoolID = ""
+    var selectedEmail = ""
+    var lastDateVisited = ""
+    var lastItemCheckedOut = ""
+    var totalItemsCheckedOut = ""
+    
+    @IBOutlet weak var studentsTableView: UITableView!
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+
+        studentsTableView.delegate = self;
+        studentsTableView.dataSource = self;        
+        ref = Database.database().reference()
+        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+            
+        
+    }
+    
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        refresh()
+        print("done")
+    }
+    
+    func refresh() {
+        
+        users = []
+        
+        getPeople(callback: {(success)-> Void in //gets data from firebase
+            if(success) { //same as the code in the viewDidLoad()
+                
+                
+                let myGroup = DispatchGroup()
+                print("getting status")
+                
+                
+                for i in 0..<self.users.count {
+                    myGroup.enter()
+                    self.ref.child("All Users").child(self.users[i]["UID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
+                                   // Get user value
+                        let value = snapshot.value as? NSDictionary
+                        let status = value?["Account Status"] as? String ?? "" //loads in the code from firebase
+                        self.users[i]["Status"] = status
+                        print("status below")
+                        print(status)
+                        if(status == "1"){
+                            self.usersApproved.append(self.users[i])
+                        }
+                        myGroup.leave()
+                    }) { (error) in
+                        RequestError().showError()
+                        print(error.localizedDescription)
+                    }
+                }
+                
+                myGroup.notify(queue: .main) {
+                    self.studentsTableView.reloadData()
+                    print(self.users)
+                    print(self.usersApproved)
+                }
+            }
+        })
+    }
+    
+    func getStatus(callback: @escaping (_ success: Bool)->Void) {
+        ref.child(self.PantryName).child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
+                       // Get user value
+            for child in snapshot.children { //iterates through all the food items
+                let snap = child as! DataSnapshot
+                let uid = snap.key
+                let value: [String: Any] = snap.value as! [String : Any]
+                let admin = value["Admin"] as? String ?? ""
+                let firstName = value["First Name"] as? String ?? ""
+                let lastName = value["Last Name"] as? String ?? ""
+                let lastDateVisit = value["Last Date Visited"] as? String ?? ""
+                let lastItemChecked = value["Last Item Checked Out"] as? String ?? ""
+                let totalItemsChecked = value["Total Item's Checked Out"] as? String ?? ""
+                
+                if(admin != "Yes") {
+                    self.users.append(["Name": firstName + " " + lastName, "Last Date Visited": lastDateVisit, "Last Item Checked Out": lastItemChecked, "Total Item's Checked Out": totalItemsChecked,  "UID": uid])
+                }
+                
+            }
+            
+            callback(true)
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getPeople(callback: @escaping (_ success: Bool)->Void) {
+        ref.child(self.PantryName).child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
+                       // Get user value
+            for child in snapshot.children { //iterates through all the food items
+                let snap = child as! DataSnapshot
+                let uid = snap.key
+                let value: [String: Any] = snap.value as! [String : Any]
+                let admin = value["Admin"] as? String ?? ""
+                let firstName = value["First Name"] as? String ?? ""
+                let lastName = value["Last Name"] as? String ?? ""
+                let schoolID = value["ID Number"] as? String ?? ""
+                let email = value["Email Address"] as? String ?? ""
+                let lastDateVisit = value["Last Date Visited"] as? String ?? ""
+                let lastItemChecked = value["Last Item Checked Out"] as? String ?? ""
+                let totalItemsChecked = value["Total Item's Checked Out"] as? String ?? ""
+                
+                if(admin != "Yes") {
+                    self.users.append(["Name": firstName + " " + lastName, "Last Date Visited": lastDateVisit, "Last Item Checked Out": lastItemChecked, "Email": email, "Total Item's Checked Out": totalItemsChecked, "ID Number": schoolID,  "UID": uid])
+                }
+                
+            }
+            
+            callback(true)
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return usersApproved.count
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! ApprovedUserViewCell
+        
+        let status = usersApproved[indexPath.row]["Status"] as! String //status
+
+        if(status == "1"){
+            cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
+            cell.nameBtn.setTitle(usersApproved[indexPath.row]["Name"] as! String, for: .normal)
+            cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
+        }
+        
+        
+        
+        cell.tapCallback = {
+            self.lastDateVisited = self.usersApproved[indexPath.row]["Last Date Visited"] as! String
+            self.lastItemCheckedOut = self.usersApproved[indexPath.row]["Last Item Checked Out"] as! String
+            self.selectedName = self.usersApproved[indexPath.row]["Name"] as! String
+            self.selectedEmail = self.usersApproved[indexPath.row]["Email"] as! String
+            self.selectedSchoolID = self.usersApproved[indexPath.row]["ID Number"] as! String
+            self.totalItemsCheckedOut = self.usersApproved[indexPath.row]["Total Item's Checked Out"] as! String
+
+            self.performSegue(withIdentifier: "userStatsPopOver", sender: nil)
+        }
+        
+        return cell
+        
+        
+    }
+    
+    @IBAction func unwindToManageUsers(_ unwindSegue: UIStoryboardSegue) {
+        let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+        refresh()
+    }
+    
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(segue.identifier == "userStatsPopOver") {
+            let destinationVC = segue.destination as? selectedUserPopOverViewController
+            destinationVC?.userName = selectedName
+            destinationVC?.userTotalItemsCheckedOut = totalItemsCheckedOut
+            destinationVC?.userLastDateVisited = lastDateVisited
+            destinationVC?.userEmail = selectedEmail
+            destinationVC?.userLastItemCheckedOut = lastItemCheckedOut
+            destinationVC?.userID = selectedSchoolID
+        }
+        
+    }
+
+}

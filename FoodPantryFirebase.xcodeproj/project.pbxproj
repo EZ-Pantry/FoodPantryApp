@@ -42,6 +42,9 @@
 		1CF92CE62423C177001D7E0B /* otherAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF92CE52423C177001D7E0B /* otherAdminViewController.swift */; };
 		1CF92CE824269013001D7E0B /* notificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF92CE724269013001D7E0B /* notificationsViewController.swift */; };
 		790C13C585DC69A8A6659284 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */; };
+		A21748D92440D1B600A89CD2 /* chooseStatsButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21748D82440D1B600A89CD2 /* chooseStatsButtonViewController.swift */; };
+		A21748DB2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21748DA2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift */; };
+		A21748DD2440D97300A89CD2 /* selectedUserPopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21748DC2440D97300A89CD2 /* selectedUserPopOverViewController.swift */; };
 		A239DC0F2413156B003CFF0C /* settingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC0E2413156B003CFF0C /* settingsPageViewController.swift */; };
 		A239DC1124131589003CFF0C /* sendfeedbackcontrolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC1024131589003CFF0C /* sendfeedbackcontrolsViewController.swift */; };
 		A239DC132413159F003CFF0C /* emailFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC122413159F003CFF0C /* emailFeedbackViewController.swift */; };
@@ -143,6 +146,9 @@
 		3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E1892DB996DB72CE1C59838 /* Pods-FoodPantryFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A21748D82440D1B600A89CD2 /* chooseStatsButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseStatsButtonViewController.swift; sourceTree = "<group>"; };
+		A21748DA2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = indivisualStudentStatsViewController.swift; sourceTree = "<group>"; };
+		A21748DC2440D97300A89CD2 /* selectedUserPopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedUserPopOverViewController.swift; sourceTree = "<group>"; };
 		A239DC0E2413156B003CFF0C /* settingsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsPageViewController.swift; sourceTree = "<group>"; };
 		A239DC1024131589003CFF0C /* sendfeedbackcontrolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendfeedbackcontrolsViewController.swift; sourceTree = "<group>"; };
 		A239DC122413159F003CFF0C /* emailFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +307,9 @@
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
+				A21748DA2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift */,
+				A21748DC2440D97300A89CD2 /* selectedUserPopOverViewController.swift */,
+				A21748D82440D1B600A89CD2 /* chooseStatsButtonViewController.swift */,
 				1C2F6BF0243EC52D0002257B /* ApprovedUserViewCell.swift */,
 				A2794DDB24369ADF00E58C13 /* adminAddImageManualViewController.swift */,
 				A2794DD9243431C600E58C13 /* adminAddFAQViewController.swift */,
@@ -702,6 +711,7 @@
 				A239DC2524196FE8003CFF0C /* contactAdminViewController.swift in Sources */,
 				A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */,
 				A24F388D2407497400AACC97 /* ViewStatisticsViewController.swift in Sources */,
+				A21748D92440D1B600A89CD2 /* chooseStatsButtonViewController.swift in Sources */,
 				A24F388B2401CC8400AACC97 /* adminControlsViewController.swift in Sources */,
 				A239DC2D241C9351003CFF0C /* CalendarView.swift in Sources */,
 				A239DC2F241DA0A4003CFF0C /* helpAndSupportViewController.swift in Sources */,
@@ -710,9 +720,11 @@
 				1C2F6BF324400DBB0002257B /* manangeSelectedUserViewController.swift in Sources */,
 				1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */,
 				A2563DD724283D5800C36EAD /* FAQView.swift in Sources */,
+				A21748DD2440D97300A89CD2 /* selectedUserPopOverViewController.swift in Sources */,
 				A239DC232417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift in Sources */,
 				A239DC1F2416EE2B003CFF0C /* adminEditPopUpViewController.swift in Sources */,
 				1CBDDC92240DFA7B00AC53A9 /* manualViewController.swift in Sources */,
+				A21748DB2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift in Sources */,
 				A24F385123EF79F500AACC97 /* logInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -886,7 +898,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E1892DB996DB72CE1C59838 /* Pods-FoodPantryFirebase.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4AYKFWZ2N6;
 				INFOPLIST_FILE = FoodPantryFirebase/Info.plist;
@@ -905,7 +917,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5FFF02738E9C4DCF3A1B49B /* Pods-FoodPantryFirebase.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4AYKFWZ2N6;
 				INFOPLIST_FILE = FoodPantryFirebase/Info.plist;

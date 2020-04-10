@@ -7,6 +7,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 
+var foodItemEnteringName = ""
 class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     //all the a=labels
@@ -58,12 +59,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 //        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        nameLabel.delegate = self;
-        ingredientsLabel.delegate = self;
-        allergiesLabel.delegate = self;
-        typeLabel.delegate = self;
-        quantityLabel.delegate = self;
-        healthyLabel.delegate = self;
+        
         
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
@@ -71,9 +67,10 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         nameLabel.isUserInteractionEnabled = false //cannot edit the food item name
         
         self.view.isUserInteractionEnabled = false
-
         
         
+        print("below what found")
+        print(foodItemEnteringName)
         addMoreBtn.layer.cornerRadius = 15
         addMoreBtn.clipsToBounds = true
         
@@ -191,6 +188,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                     self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
                                     if(newImageURL != ""){
                                         self.foodView.load(url: URL(string: newImageURL)!);
+                                        self.food_url = newImageURL
                                     }
                                     else{
                                         self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
@@ -203,6 +201,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 self.existing = false
                                 if(newImageURL == ""){
                                     self.food_url = image
+                                    print("this was reached")
                                 }
                                 else{
                                     self.food_url = newImageURL;
@@ -238,6 +237,44 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         else{
             self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+               NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        nameLabel.delegate = self;
+        ingredientsLabel.delegate = self;
+        allergiesLabel.delegate = self;
+        typeLabel.delegate = self;
+        quantityLabel.delegate = self;
+        healthyLabel.delegate = self;
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+        
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        self.activeField = textField
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField){
+        activeField = nil
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+            } else {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     
 //    override func viewWillDisappear(_ animated: Bool) {
@@ -375,6 +412,10 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBAction func finishSelected(_ sender: Any) { //same code as above
         
         addItem(next: "finish")
+        print("food url below")
+        print(food_url)
+        print("one received")
+        print(newImageURL)
     }
     
     func addItem(next: String) {
@@ -450,7 +491,14 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 var newAllergies: String = self.allergiesLabel.text!
                 var newType: String = self.typeLabel.text!
                 var newQuantity: String = self.quantityLabel.text!
-                var newURL = food_url
+                var newURL = ""
+                if(newImageURL != ""){
+                    newURL = newImageURL
+                }
+                else{
+                    newURL = food_url
+                }
+                
                 var checkedOut = "0"
                 var newHealthy = self.healthyLabel.text!
                 
