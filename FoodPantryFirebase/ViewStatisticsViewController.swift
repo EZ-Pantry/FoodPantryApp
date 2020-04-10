@@ -98,7 +98,14 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         nextButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         pickerField.isHidden = true;
-        chooseGraphOrTextSegment.isHidden = true;
+        chooseGraphOrTextSegment.isHidden = false;
+        studentNameLbl.isHidden = true;
+        studentIDLbl.isHidden = true;
+        lastItemCheckedOutLbl.isHidden = true;
+        lastDateCheckedOutLbl.isHidden = true;
+        totalItemsCheckedOutlbl.isHidden = true;
+        allergiesLbl.isHidden = true;
+        chooseGraphOrTextSegment.selectedSegmentIndex = -1;//make sure graph is loaded initially
         
     }
     
@@ -127,7 +134,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         print(itemsBarChartView.delegate)
         loadStudentNames();
         pickerField.isHidden = true;
-        chooseGraphOrTextSegment.isHidden = true;
+        chooseGraphOrTextSegment.isHidden = false;
         nextButton.isHidden = true;
         backButton.isHidden = true;
         studentNameLbl.isHidden = true;
