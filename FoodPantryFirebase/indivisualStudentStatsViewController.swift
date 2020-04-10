@@ -1,40 +1,43 @@
 //
-//  manageUsersViewController.swift
+//  indivisualStudentStatsViewController.swift
 //  FoodPantryFirebase
 //
-//  Created by Ashay Parikh on 4/4/20.
+//  Created by Rayaan Siddiqi on 4/10/20.
 //  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
 //
 
-
-import Foundation
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
 
+class indivisualStudentStatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-class manageUsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
-    
+    @IBOutlet weak var searchBar: UISearchBar!
     var PantryName: String = ""
     var ref: DatabaseReference! //reference to the firebase database
     
     var users: [[String: Any]] = []
     
-    var selectedName = ""
-    var selectedUID = ""
-    var selectedStatus = ""
-    var selectedEmail = ""
-    var selectedPassword = ""
+    var usersApproved: [[String: Any]] = []
     
-    @IBOutlet var approvedTableView: UITableView!
+    var searchedUser = [String]()
+    var searching = false
+    
+    var selectedName = ""
+    var selectedSchoolID = ""
+    var selectedEmail = ""
+    var lastDateVisited = ""
+    var lastItemCheckedOut = ""
+    var totalItemsCheckedOut = ""
+    
+    @IBOutlet weak var studentsTableView: UITableView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
 
-        approvedTableView.delegate = self;
-        approvedTableView.dataSource = self;
-        
+        studentsTableView.delegate = self;
+        studentsTableView.dataSource = self;        
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
             
@@ -68,6 +71,11 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
                         let value = snapshot.value as? NSDictionary
                         let status = value?["Account Status"] as? String ?? "" //loads in the code from firebase
                         self.users[i]["Status"] = status
+                        print("status below")
+                        print(status)
+                        if(status == "1"){
+                            self.usersApproved.append(self.users[i])
+                        }
                         myGroup.leave()
                     }) { (error) in
                         RequestError().showError()
@@ -76,7 +84,9 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                 
                 myGroup.notify(queue: .main) {
-                    self.approvedTableView.reloadData()
+                    self.studentsTableView.reloadData()
+                    print(self.users)
+                    print(self.usersApproved)
                 }
             }
         })
@@ -92,9 +102,12 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
                 let admin = value["Admin"] as? String ?? ""
                 let firstName = value["First Name"] as? String ?? ""
                 let lastName = value["Last Name"] as? String ?? ""
+                let lastDateVisit = value["Last Date Visited"] as? String ?? ""
+                let lastItemChecked = value["Last Item Checked Out"] as? String ?? ""
+                let totalItemsChecked = value["Total Item's Checked Out"] as? String ?? ""
                 
                 if(admin != "Yes") {
-                    self.users.append(["Name": firstName + " " + lastName, "UID": uid])
+                    self.users.append(["Name": firstName + " " + lastName, "Last Date Visited": lastDateVisit, "Last Item Checked Out": lastItemChecked, "Total Item's Checked Out": totalItemsChecked,  "UID": uid])
                 }
                 
             }
@@ -116,11 +129,14 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
                 let admin = value["Admin"] as? String ?? ""
                 let firstName = value["First Name"] as? String ?? ""
                 let lastName = value["Last Name"] as? String ?? ""
+                let schoolID = value["ID Number"] as? String ?? ""
                 let email = value["Email Address"] as? String ?? ""
-                let password = value["Password"] as? String ?? ""
+                let lastDateVisit = value["Last Date Visited"] as? String ?? ""
+                let lastItemChecked = value["Last Item Checked Out"] as? String ?? ""
+                let totalItemsChecked = value["Total Item's Checked Out"] as? String ?? ""
                 
                 if(admin != "Yes") {
-                    self.users.append(["Name": firstName + " " + lastName, "UID": uid, "Email": email, "Password": password])
+                    self.users.append(["Name": firstName + " " + lastName, "Last Date Visited": lastDateVisit, "Last Item Checked Out": lastItemChecked, "Email": email, "Total Item's Checked Out": totalItemsChecked, "ID Number": schoolID,  "UID": uid])
                 }
                 
             }
@@ -133,7 +149,7 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return usersApproved.count
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -143,28 +159,25 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! ApprovedUserViewCell
         
-        cell.nameBtn.setTitle(users[indexPath.row]["Name"] as! String, for: .normal)
-        
-        let status = users[indexPath.row]["Status"] as! String //status
+        let status = usersApproved[indexPath.row]["Status"] as! String //status
 
-        if(status == "0") { //not approved - aqua
-            cell.cellView.backgroundColor = UIColor(red: 0/255, green: 92/255, blue: 111/255, alpha: 1)
-        } else if(status == "1") { //approved - orange
-            cell.cellView.backgroundColor = UIColor(red: 241/255, green: 143/255, blue: 0/255, alpha: 1)
-        } else if(status == "2") { //suspended - green
-            cell.cellView.backgroundColor = UIColor(red: 143/255, green: 146/255, blue: 26/255, alpha: 255/255)
+        if(status == "1"){
+            cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
+            cell.nameBtn.setTitle(usersApproved[indexPath.row]["Name"] as! String, for: .normal)
+            cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
         }
         
-        cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
+        
         
         cell.tapCallback = {
-            self.selectedStatus = self.users[indexPath.row]["Status"] as! String
-            self.selectedUID = self.users[indexPath.row]["UID"] as! String
-            self.selectedName = self.users[indexPath.row]["Name"] as! String
-            self.selectedEmail = self.users[indexPath.row]["Email"] as! String
-            self.selectedPassword = self.users[indexPath.row]["Password"] as! String
+            self.lastDateVisited = self.usersApproved[indexPath.row]["Last Date Visited"] as! String
+            self.lastItemCheckedOut = self.usersApproved[indexPath.row]["Last Item Checked Out"] as! String
+            self.selectedName = self.usersApproved[indexPath.row]["Name"] as! String
+            self.selectedEmail = self.usersApproved[indexPath.row]["Email"] as! String
+            self.selectedSchoolID = self.usersApproved[indexPath.row]["ID Number"] as! String
+            self.totalItemsCheckedOut = self.usersApproved[indexPath.row]["Total Item's Checked Out"] as! String
 
-            self.performSegue(withIdentifier: "userPopover", sender: nil)
+            self.performSegue(withIdentifier: "userStatsPopOver", sender: nil)
         }
         
         return cell
@@ -180,15 +193,16 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if(segue.identifier == "userPopover") {
-            let destinationVC = segue.destination as? manageSelectedUserViewController
-            destinationVC?.name = selectedName
-            destinationVC?.status = selectedStatus
-            destinationVC?.uid = selectedUID
-            destinationVC?.email = selectedEmail
-            destinationVC?.password = selectedPassword
+        if(segue.identifier == "userStatsPopOver") {
+            let destinationVC = segue.destination as? selectedUserPopOverViewController
+            destinationVC?.userName = selectedName
+            destinationVC?.userTotalItemsCheckedOut = totalItemsCheckedOut
+            destinationVC?.userLastDateVisited = lastDateVisited
+            destinationVC?.userEmail = selectedEmail
+            destinationVC?.userLastItemCheckedOut = lastItemCheckedOut
+            destinationVC?.userID = selectedSchoolID
         }
         
     }
-    
+
 }

@@ -98,7 +98,14 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         nextButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         pickerField.isHidden = true;
-        chooseGraphOrTextSegment.isHidden = true;
+        chooseGraphOrTextSegment.isHidden = false;
+        studentNameLbl.isHidden = true;
+        studentIDLbl.isHidden = true;
+        lastItemCheckedOutLbl.isHidden = true;
+        lastDateCheckedOutLbl.isHidden = true;
+        totalItemsCheckedOutlbl.isHidden = true;
+        allergiesLbl.isHidden = true;
+        chooseGraphOrTextSegment.selectedSegmentIndex = -1;//make sure graph is loaded initially
         
     }
     
@@ -127,7 +134,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         print(itemsBarChartView.delegate)
         loadStudentNames();
         pickerField.isHidden = true;
-        chooseGraphOrTextSegment.isHidden = true;
+        chooseGraphOrTextSegment.isHidden = false;
         nextButton.isHidden = true;
         backButton.isHidden = true;
         studentNameLbl.isHidden = true;
@@ -208,7 +215,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         //need to set each item with indivisual marker
         let chartDataSet = BarChartDataSet(entries: dataEntries, label: "Items in Food Pantry(Click bars to see more data)")//each column represnents a food item checked out number of times
         
-        chartDataSet.colors = [UIColor.red]
+        chartDataSet.colors = [UIColor.init(displayP3Red: 70/255, green: 50/255, blue: 31/255, alpha: 1)]
         
         let chartData = BarChartData(dataSet: chartDataSet)
         

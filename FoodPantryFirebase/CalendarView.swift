@@ -7,7 +7,7 @@ import FirebaseUI
 import FirebaseDatabase
 struct Colors {
     static var darkGray = #colorLiteral(red: 0.3764705882, green: 0.3647058824, blue: 0.3647058824, alpha: 1)
-    static var darkRed = #colorLiteral(red: 0.5019607843, green: 0.1529411765, blue: 0.1764705882, alpha: 1)
+    static var darkRed = #colorLiteral(red: 0.9451, green: 0.5608, blue: 0, alpha: 1)
 }
 
 struct Style {
@@ -209,7 +209,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         let whiteBgButton = UIButton()
         var midY = frame.height / 2
         var midX = frame.width / 2
-        whiteBgButton.backgroundColor =  UIColor(red: 252/255.0, green: 109/255.0, blue: 109/255.0, alpha: 1.0)
+        whiteBgButton.backgroundColor =  UIColor(red: 241/255.0, green: 143/255.0, blue: 0/255.0, alpha: 1.0)
         whiteBgButton.frame = CGRect(x: midX-175, y: midY + 200, width: 350, height: 350)//background behind labels
         addSubview(whiteBgButton)
         let itemsCheckedOutLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
