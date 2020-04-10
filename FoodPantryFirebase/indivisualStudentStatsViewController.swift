@@ -5,13 +5,13 @@
 //  Created by Rayaan Siddiqi on 4/10/20.
 //  Copyright © 2020 Rayaan Siddiqi. All rights reserved.
 //
-
+ 
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
-
+ 
 class indivisualStudentStatsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+ 
     @IBOutlet weak var searchBar: UISearchBar!
     var PantryName: String = ""
     var ref: DatabaseReference! //reference to the firebase database
@@ -19,6 +19,7 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
     var users: [[String: Any]] = []
     
     var usersApproved: [[String: Any]] = []
+    var usersApprovedNames = [String]()
     
     var searchedUser = [String]()
     var searching = false
@@ -35,16 +36,17 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+ 
         studentsTableView.delegate = self;
-        studentsTableView.dataSource = self;        
+        studentsTableView.dataSource = self;
+        searchBar.delegate = self;
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
             
         
     }
     
-
+ 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -137,6 +139,7 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
                 
                 if(admin != "Yes") {
                     self.users.append(["Name": firstName + " " + lastName, "Last Date Visited": lastDateVisit, "Last Item Checked Out": lastItemChecked, "Email": email, "Total Item's Checked Out": totalItemsChecked, "ID Number": schoolID,  "UID": uid])
+                    self.usersApprovedNames.append(firstName + " " + lastName)
                 }
                 
             }
@@ -149,7 +152,14 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return usersApproved.count
+//        return usersApproved.count
+        
+        if searching {
+            return searchedUser.count
+        } else {
+            return usersApprovedNames.count
+        }
+        
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -160,27 +170,52 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! ApprovedUserViewCell
         
         let status = usersApproved[indexPath.row]["Status"] as! String //status
-
-        if(status == "1"){
-            cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
-            cell.nameBtn.setTitle(usersApproved[indexPath.row]["Name"] as! String, for: .normal)
-            cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
+ 
+        if (searching){
+//            var indexCurrentlyAt =
+            if(status == "1"){
+                cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
+                cell.nameBtn.setTitle(searchedUser[indexPath.row] as! String, for: .normal)
+                cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
+            }
+            
+            
+            
+            cell.tapCallback = {
+                self.lastDateVisited = self.usersApproved[indexPath.row]["Last Date Visited"] as! String
+                self.lastItemCheckedOut = self.usersApproved[indexPath.row]["Last Item Checked Out"] as! String
+                self.selectedName = self.usersApproved[indexPath.row]["Name"] as! String
+                self.selectedEmail = self.usersApproved[indexPath.row]["Email"] as! String
+                self.selectedSchoolID = self.usersApproved[indexPath.row]["ID Number"] as! String
+                self.totalItemsCheckedOut = self.usersApproved[indexPath.row]["Total Item's Checked Out"] as! String
+ 
+                self.performSegue(withIdentifier: "userStatsPopOver", sender: nil)
+            }
+        }
+        else{
+            if(status == "1"){
+                cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
+                cell.nameBtn.setTitle(usersApproved[indexPath.row]["Name"] as! String, for: .normal)
+                cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
+            }
+            
+            
+            
+            cell.tapCallback = {
+                self.lastDateVisited = self.usersApproved[indexPath.row]["Last Date Visited"] as! String
+                self.lastItemCheckedOut = self.usersApproved[indexPath.row]["Last Item Checked Out"] as! String
+                self.selectedName = self.usersApproved[indexPath.row]["Name"] as! String
+                self.selectedEmail = self.usersApproved[indexPath.row]["Email"] as! String
+                self.selectedSchoolID = self.usersApproved[indexPath.row]["ID Number"] as! String
+                self.totalItemsCheckedOut = self.usersApproved[indexPath.row]["Total Item's Checked Out"] as! String
+ 
+                self.performSegue(withIdentifier: "userStatsPopOver", sender: nil)
+            }
         }
         
-        
-        
-        cell.tapCallback = {
-            self.lastDateVisited = self.usersApproved[indexPath.row]["Last Date Visited"] as! String
-            self.lastItemCheckedOut = self.usersApproved[indexPath.row]["Last Item Checked Out"] as! String
-            self.selectedName = self.usersApproved[indexPath.row]["Name"] as! String
-            self.selectedEmail = self.usersApproved[indexPath.row]["Email"] as! String
-            self.selectedSchoolID = self.usersApproved[indexPath.row]["ID Number"] as! String
-            self.totalItemsCheckedOut = self.usersApproved[indexPath.row]["Total Item's Checked Out"] as! String
-
-            self.performSegue(withIdentifier: "userStatsPopOver", sender: nil)
-        }
         
         return cell
+        
         
         
     }
@@ -204,5 +239,23 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
         }
         
     }
-
+ 
 }
+ 
+extension indivisualStudentStatsViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchedUser = usersApprovedNames.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        searching = true
+        studentsTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        studentsTableView.reloadData()
+    }
+    
+}
+
+
