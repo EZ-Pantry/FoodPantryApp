@@ -7,6 +7,9 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    
+    @IBOutlet var verifyButton: UIButton!
     var activeField: UITextField!;
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +20,16 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
         resetButton.titleLabel?.minimumScaleFactor = 0.5
         resetButton.titleLabel?.numberOfLines = 1;
         resetButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+
+        verifyButton.layer.cornerRadius = 15
+        verifyButton.clipsToBounds = true
+        
+        verifyButton.titleLabel?.minimumScaleFactor = 0.5
+        verifyButton.titleLabel?.numberOfLines = 1;
+        verifyButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        emailTextField.delegate = self;
         
         
 //        emailTextField.delegate = self;
@@ -37,7 +50,7 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
                 //above shows alert for successfull sent of message
             }
             else{
-                let alert = UIAlertController(title: "Error Occurred!", message: "Please try again!", preferredStyle: .alert)//displays alert of erRor!
+                let alert = UIAlertController(title: "Error Occurred!", message: "Please enter the correct email!", preferredStyle: .alert)//displays alert of erRor!
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil);
                 //If email does not exist, then error message appears
@@ -45,41 +58,54 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
         } 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-         NotificationCenter.default.addObserver(self, selector: #selector(resetPasswordViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-               NotificationCenter.default.addObserver(self, selector: #selector(resetPasswordViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        emailTextField.delegate = self;
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
+
+    @IBAction func sendEmailNotification(_ sender: Any) {
         
-    func textFieldDidBeginEditing(_ textField: UITextField){
-        self.activeField = textField
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField){
-        activeField = nil
-    }
-
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+        guard let emailaddress = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().signIn(withEmail: emailaddress, password: password){ user, error in
+            
+            if(error != nil) {
+                print(error)
+                //else show error message
+                let alert = UIAlertController(title: "Error Occured!", message: "Please enter the correct email and password!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil);
             } else {
-                self.view.frame.origin.y = 0
-            }
-        }
-    }
+            
+                Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
+                    let user = Auth.auth().currentUser
+                        if(!user!.isEmailVerified) {
+                        user!.sendEmailVerification(completion: { (error) in
+                            print("sent verification")
+                            if(error == nil) {
+                                let alert = UIAlertController(title: "Email Sent", message: "The verification email has been sent. Check your inbox!", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                                self.present(alert, animated: true, completion: nil);
+                            } else {
+                                print(error)
+                                // the user is not available-error display
+                                let alert = UIAlertController(title: "Error", message: "Please try again!", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                                self.present(alert, animated: true, completion: nil);
+                            }
 
-    @objc func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
-    
+
+                        })
+
+                        } else {
+                            let alert = UIAlertController(title: "Already Verified", message: "This account is already verified. If you cannot login, please contact the admin.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil);
+                        }
+                    }
+                }
+            
+            }
+
+        }
+            
     
     @IBAction func dismissBackButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)

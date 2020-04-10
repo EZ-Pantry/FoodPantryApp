@@ -76,6 +76,30 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         //check if checking out is allowed
         self.view.isUserInteractionEnabled = false
 
+        //check if the user is suspended
+        
+        let uid: String = Auth.auth().currentUser!.uid
+        
+        ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+          // Get user value
+          let value = snapshot.value as? NSDictionary
+          let status = value?["Status"] as? String ?? ""
+          
+            if(status == "2") { //suspended
+                self.performSegue(withIdentifier: "BackToHome", sender: self)
+            } else {
+                self.checkCanCheckout() //check if the user can checkout
+            }
+
+          // ...
+          }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
+    
+    }
+    
+    func checkCanCheckout() {
         ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
           let value = snapshot.value as? NSDictionary
@@ -100,8 +124,6 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
             RequestError().showError()
             print(error.localizedDescription)
         }
-        
-    
     }
     
     func generateCurrentTimeStamp () -> String {

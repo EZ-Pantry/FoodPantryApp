@@ -83,6 +83,7 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         refresh()
+        print("done")
     }
     
     

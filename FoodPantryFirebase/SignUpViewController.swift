@@ -209,11 +209,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
                 
+                        self.ref.child(self.pantryName).child("Administration Contacts").child(firstName + " " + lastName).child("Email").setValue(emailaddress)
+                        
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Admin").setValue("Yes")
                         
                         
                             self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
                         
+                            self.ref.child("All Users").child(user!.user.uid).child("Account Status").setValue("1")
+
                             UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
 
                     }
@@ -230,7 +234,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Item Checked Out").setValue(" ")
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Date Visited").setValue(" ")
                         
-                            self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
+                        //0 = Not Confirmed
+                        //1 = Confirmed
+                        //2 = Suspended
+                        //3 = Deleted
+
+                            self.ref.child("All Users").child(user!.user.uid).child("Account Status").setValue("0")
+                        
+                        self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
                         
                             UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")//set the pantry name so we can use this later
                         
@@ -271,16 +282,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
    
     public func sendVerificationMail() {
-        Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
+        let user = Auth.auth().currentUser
+
             if(!user!.isEmailVerified) {
                 user!.sendEmailVerification(completion: { (error) in
                     print("sent verification")
                     if(error == nil) {
                         // Notify the user that the mail has sent or couldn't because of an error.
-                           let alert = UIAlertController(title: "Sign Up Successful!", message: "Please verify your email!", preferredStyle: .alert)
+                           let alert = UIAlertController(title: "Sign Up Successful!", message: "Please verify your email and get approved by the admin!", preferredStyle: .alert)
                                                     
                            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                                self.performSegue(withIdentifier: "toLoginScreen", sender: self)//perform when okay tapped
+                                self.performSegue(withIdentifier: "signedUp", sender: self)//perform when okay tapped
                            }))
                            self.present(alert, animated: true, completion: nil);
                     } else {
@@ -299,7 +311,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             }
            }
         
-       }
 }
 
 
