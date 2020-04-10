@@ -40,7 +40,7 @@
                     </imageView>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.66666666666666663" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.62352941176470589" green="0.69411764705882351" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <color key="tintColor" red="0.72549019607843135" green="0.74901960784313726" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="9eC-bg-EeN" secondAttribute="trailing" constant="16" id="72q-Wt-T3D"/>
