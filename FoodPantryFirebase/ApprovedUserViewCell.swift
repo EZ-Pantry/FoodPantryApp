@@ -11,9 +11,11 @@ import UIKit
 class ApprovedUserViewCell: UITableViewCell {
 
     @IBOutlet var cellView: UIView!
-    @IBOutlet var nameLabel: UILabel!
     
+    @IBOutlet var nameBtn: UIButton!
     
+    var tapCallback: (() -> Void)?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,5 +26,10 @@ class ApprovedUserViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    @IBAction func tapped(_ sender: Any) {
+        tapCallback?()
+    }
+    
+    
 }

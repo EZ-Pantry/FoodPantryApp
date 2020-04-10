@@ -54,7 +54,9 @@ class logInViewController: UIViewController, UITextFieldDelegate {
                 self.present(alert, animated: true, completion: nil);
             } else {
             
-                Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
+                    let user = Auth.auth().currentUser
+
+                
                     if(user!.isEmailVerified) {
                             //check if admin allowed
                             let user = Auth.auth().currentUser
@@ -97,7 +99,7 @@ class logInViewController: UIViewController, UITextFieldDelegate {
                         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                         self.present(alert, animated: true, completion: nil);
                     }
-                }
+                
             
             }
 

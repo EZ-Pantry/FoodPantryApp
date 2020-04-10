@@ -288,7 +288,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
    
     public func sendVerificationMail() {
-        Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
+        let user = Auth.auth().currentUser
+
             if(!user!.isEmailVerified) {
                 user!.sendEmailVerification(completion: { (error) in
                     print("sent verification")
@@ -316,7 +317,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             }
            }
         
-       }
 }
 
 

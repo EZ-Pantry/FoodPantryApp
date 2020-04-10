@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C2F6BF1243EC52D0002257B /* ApprovedUserViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F6BF0243EC52D0002257B /* ApprovedUserViewCell.swift */; };
+		1C2F6BF324400DBB0002257B /* manangeSelectedUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F6BF224400DBB0002257B /* manangeSelectedUserViewController.swift */; };
 		1C38A3792432B4FB00BB7E23 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A36F2432B4FA00BB7E23 /* OpenSans-SemiBold.ttf */; };
 		1C38A37A2432B4FB00BB7E23 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A3702432B4FA00BB7E23 /* OpenSans-Light.ttf */; };
 		1C38A37B2432B4FB00BB7E23 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A3712432B4FA00BB7E23 /* OpenSans-Italic.ttf */; };
@@ -105,6 +106,7 @@
 		128DE22FF4ACEFF0EA0BC003 /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1B7F7AF938DFFB6F1F74C6AB /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1C2F6BF0243EC52D0002257B /* ApprovedUserViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovedUserViewCell.swift; sourceTree = "<group>"; };
+		1C2F6BF224400DBB0002257B /* manangeSelectedUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manangeSelectedUserViewController.swift; sourceTree = "<group>"; };
 		1C38A36F2432B4FA00BB7E23 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		1C38A3702432B4FA00BB7E23 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		1C38A3712432B4FA00BB7E23 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				1CF92CE724269013001D7E0B /* notificationsViewController.swift */,
 				1C63897E2432E008005BB1BC /* EditName.swift */,
 				1C61044D2439819900ED1A9A /* manageUsersViewController.swift */,
+				1C2F6BF224400DBB0002257B /* manangeSelectedUserViewController.swift */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -704,6 +707,7 @@
 				A239DC2F241DA0A4003CFF0C /* helpAndSupportViewController.swift in Sources */,
 				A239DC3324206EDC003CFF0C /* BarcodeScanEntryViewController.swift in Sources */,
 				1C748F322406188800936A05 /* checkoutViewController.swift in Sources */,
+				1C2F6BF324400DBB0002257B /* manangeSelectedUserViewController.swift in Sources */,
 				1CE5C0A223FB330B00ED2C3C /* QRScrapeController.swift in Sources */,
 				A2563DD724283D5800C36EAD /* FAQView.swift in Sources */,
 				A239DC232417068C003CFF0C /* sendFeedBackGoogleFormViewController.swift in Sources */,
