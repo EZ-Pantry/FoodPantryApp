@@ -21,6 +21,7 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
         resetButton.titleLabel?.numberOfLines = 1;
         resetButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
+
         verifyButton.layer.cornerRadius = 15
         verifyButton.clipsToBounds = true
         
@@ -57,6 +58,7 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
         } 
     }
     
+
     @IBAction func sendEmailNotification(_ sender: Any) {
         
         guard let emailaddress = emailTextField.text else { return }
@@ -103,8 +105,7 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
             }
 
         }
-        
-    
+            
     
     @IBAction func dismissBackButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)

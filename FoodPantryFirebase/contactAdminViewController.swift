@@ -5,7 +5,7 @@ import UIKit
 import WebKit
 import MessageUI
 import FirebaseDatabase
-class contactAdminViewController: UIViewController {
+class contactAdminViewController: UIViewController, UITextFieldDelegate {
         
     var emailAt = 0;
     @IBOutlet weak var subjectTextField: UITextField!
@@ -14,6 +14,7 @@ class contactAdminViewController: UIViewController {
     var subjectEntered = ""
     var messageEntered = ""
     var adminEmailAddresses = [String]()
+    var activeField: UITextField!
     var ref: DatabaseReference!
     
     var PantryName: String = ""
@@ -44,6 +45,41 @@ class contactAdminViewController: UIViewController {
         print(messageEntered)
 //        showMailComposer();
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+             NotificationCenter.default.addObserver(self, selector: #selector(contactAdminViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+                   NotificationCenter.default.addObserver(self, selector: #selector(contactAdminViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+            subjectTextField.delegate = self;
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(true)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+        
+            
+        func textFieldDidBeginEditing(_ textField: UITextField){
+            self.activeField = textField
+        }
+
+    //    func textFieldDidEndEditing(_ textField: UITextField){
+    //        activeField = nil
+    //    }
+
+        @objc func keyboardWillShow(notification: NSNotification) {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
+            }
+        }
+
+        @objc func keyboardWillHide(notification: NSNotification) {
+            self.view.frame.origin.y = 0
+        }
     
     var tempData : [[String: Any]] = []
     func getEmailsFromFirebase(){
