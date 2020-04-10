@@ -898,7 +898,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E1892DB996DB72CE1C59838 /* Pods-FoodPantryFirebase.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4AYKFWZ2N6;
 				INFOPLIST_FILE = FoodPantryFirebase/Info.plist;
@@ -917,7 +917,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5FFF02738E9C4DCF3A1B49B /* Pods-FoodPantryFirebase.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4AYKFWZ2N6;
 				INFOPLIST_FILE = FoodPantryFirebase/Info.plist;

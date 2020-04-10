@@ -16,7 +16,7 @@ class calenderFirstViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Food Pantry Stats Calender"//set calendar name
         self.navigationController?.navigationBar.isTranslucent=false
-        self.view.backgroundColor=Style.bgColor
+        self.view.backgroundColor = Style.bgColor
         view.addSubview(calenderView)
         calenderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 70).isActive=true//constraints
         calenderView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive=true

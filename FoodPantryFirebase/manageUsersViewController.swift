@@ -147,12 +147,12 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
         
         let status = users[indexPath.row]["Status"] as! String //status
 
-        if(status == "0") { //not approved - yellow
-            cell.cellView.backgroundColor = UIColor(red: 250/255, green: 239/255, blue: 169/255, alpha: 1)
-        } else if(status == "1") { //approved - blue
-            cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
-        } else if(status == "2") { //suspended - red
-            cell.cellView.backgroundColor = UIColor(red: 255/255, green: 119/255, blue: 119/255, alpha: 255/255)
+        if(status == "0") { //not approved - aqua
+            cell.cellView.backgroundColor = UIColor(red: 0/255, green: 92/255, blue: 111/255, alpha: 1)
+        } else if(status == "1") { //approved - orange
+            cell.cellView.backgroundColor = UIColor(red: 241/255, green: 143/255, blue: 0/255, alpha: 1)
+        } else if(status == "2") { //suspended - green
+            cell.cellView.backgroundColor = UIColor(red: 143/255, green: 146/255, blue: 26/255, alpha: 255/255)
         }
         
         cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
