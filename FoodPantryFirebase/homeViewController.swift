@@ -132,6 +132,8 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 print(error.localizedDescription)
             }
             
+            //self.checkUserStatus()
+            
             self.getPermissionForNotifications();
             
             self.alert.hideLoadingAlert()
@@ -208,9 +210,10 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                       let pantry = value?["Pantry Name"] as? String ?? "" //load in the admin code
                     self.PantryName = pantry
                       UserDefaults.standard.set(pantry, forKey: "Pantry Name")
+        
+                    self.displayAdminMessage()
                     self.getUsersName()//helper function to display user data about last time they came
                     self.sendOutNotification()
-
                 // ...
                 }) { (error) in
                     RequestError().showError()
@@ -219,14 +222,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 
             } else {
                 self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
-                ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
-                    // Get user value
-                    let value = snapshot.value as? NSDictionary
-                    self.adminUpdateLabel.text = (value?["Admin Message"] as? String ?? "") //loads ithe
-                }) { (error) in
-                    RequestError().showError()
-                    print(error.localizedDescription)
-                }
+                self.displayAdminMessage()
                 self.getUsersName()//helper function to display user data about last time they came
                 self.sendOutNotification()
             }
@@ -234,6 +230,55 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             
         }
         
+    }
+    
+    func displayAdminMessage() {
+        ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            self.adminUpdateLabel.text = (value?["Admin Message"] as? String ?? "") //loads ithe
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
+    }
+    
+    func checkUserStatus() {
+        //check if admin allowed
+        
+        if Auth.auth().currentUser != nil {
+        
+            let user = Auth.auth().currentUser
+            ref.child("All Users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+             let status = value?["Account Status"] as? String ?? "" //load in the admin code
+                print("checking")
+                print(status)
+                if(status == "2") { //user is either approved or suspended
+                    let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
+                                                         
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                    }))
+                    self.present(alert, animated: true, completion: nil);
+                    print("displayed")
+                } else if(status == "3") { //user is deleted
+                    try! Auth.auth().signOut()
+                    let alert = UIAlertController(title: "Your Account has Been Deleted", message: "The admin has deleted this account.", preferredStyle: .alert)
+                                             
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                        self.performSegue(withIdentifier: "GoToFirst", sender: self)//performs segue to the home
+                    }))
+                    self.present(alert, animated: true, completion: nil);
+                }
+                
+            // ...
+            }) { (error) in
+                RequestError().showError()
+                print(error.localizedDescription)
+            }
+            
+        }
     }
     
     

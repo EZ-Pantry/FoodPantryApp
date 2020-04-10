@@ -57,7 +57,6 @@ class popUpFromBarChartViewController: UIViewController {
     }
     
     @IBAction func dismissToSearchView(_ sender: UIButton) {
-        print("clicked")
         dismiss(animated: true, completion: nil)
     }
 

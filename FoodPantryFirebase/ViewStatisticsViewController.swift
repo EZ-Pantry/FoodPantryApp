@@ -584,6 +584,9 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if(pickerData.count == 0) {
+            return
+        }
         pickerField.text = pickerData[row]
         var studentNameChosen = pickerData[row];
         for i in 0..<data.count{
