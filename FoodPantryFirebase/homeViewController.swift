@@ -6,6 +6,7 @@ import FirebaseUI
 import FirebaseDatabase
 import MapKit
 import UserNotifications
+import Firebase
 
 class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
@@ -32,6 +33,8 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     var latitude: Double = 45.5088
     var longitude: Double = -73.554
     
+    lazy var functions = Functions.functions()
+    
     override func viewDidLoad() {
 
         
@@ -43,6 +46,26 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         
         
         self.ref = Database.database().reference()
+        
+        functions.httpsCallable("addMessage").call(["text": "yeet"]) { (result, error) in
+          if let error = error as NSError? {
+            if error.domain == FunctionsErrorDomain {
+              let code = FunctionsErrorCode(rawValue: error.code)
+              let message = error.localizedDescription
+              let details = error.userInfo[FunctionsErrorDetailsKey]
+                print(message)
+                print(code)
+                print(details)
+            }
+            // ...
+          }
+            print("we out ***** ******** ******** ******** ******** ******** *****")
+            print(result)
+          if let text = (result?.data as? [String: Any])?["message"] as? String {
+            print(text)
+          }
+        }
+        
                 
         let myGroup = DispatchGroup()
             
