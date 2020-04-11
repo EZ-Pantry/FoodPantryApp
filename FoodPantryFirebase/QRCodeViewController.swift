@@ -24,6 +24,9 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     var PantryName: String = ""
     var ref: DatabaseReference! //reference to the firebase database
     
+    @IBOutlet var scanView: UIView!
+    @IBOutlet var manualView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
@@ -45,6 +48,17 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         checkoutButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         numberTextField.keyboardType = UIKeyboardType.alphabet
+        
+        
+        scanView.layer.borderColor = UIColor.black.cgColor
+        scanView.layer.borderWidth = 7.0
+        scanView.layer.cornerRadius = scanView.frame.height / 8
+        scanView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
+        
+        manualView.layer.borderColor = UIColor.black.cgColor
+        manualView.layer.borderWidth = 7.0
+        manualView.layer.cornerRadius = manualView.frame.height / 8
+        manualView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
         
     }
  

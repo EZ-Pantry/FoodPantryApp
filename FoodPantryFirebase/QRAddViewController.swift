@@ -16,6 +16,8 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
     
     var error = ""
     
+    @IBOutlet var cameraView: UIView!
+    @IBOutlet var manualView: UIView!
     var activeField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,18 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
         addManualButton.titleLabel?.minimumScaleFactor = 0.5
         addManualButton.titleLabel?.numberOfLines = 1;
         addManualButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        
+        cameraView.layer.borderColor = UIColor.black.cgColor
+        cameraView.layer.borderWidth = 7.0
+        cameraView.layer.cornerRadius = cameraView.frame.height / 8
+        cameraView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
+               
+        manualView.layer.borderColor = UIColor.black.cgColor
+        manualView.layer.borderWidth = 7.0
+        manualView.layer.cornerRadius = manualView.frame.height / 8
+        manualView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
