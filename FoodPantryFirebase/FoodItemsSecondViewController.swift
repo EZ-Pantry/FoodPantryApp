@@ -310,6 +310,8 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as! ItemCell
 
+        cell.layer.cornerRadius = cell.frame.height / 6
+        
         if searching {
             cell.setData(text: searchedFoodItem[indexPath.row].trimTitle())
             var img: String = sortedData[indexPath.row]["image"] as! String
@@ -381,6 +383,10 @@ extension FoodItemsSecondViewController: UISearchBarDelegate {
         collectionView.reloadData()
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+    
     
     
 }
@@ -401,8 +407,3 @@ extension UIImageView {
     }
 }
 
-extension UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-    }
-}

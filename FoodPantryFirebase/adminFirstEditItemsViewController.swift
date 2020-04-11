@@ -347,7 +347,7 @@ extension adminFirstEditItemsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as! ItemCell
-
+        cell.layer.cornerRadius = cell.frame.height / 6
         if searching {
             cell.setData(text: searchedFoodItem[indexPath.row])
             var img: String = sortedData[indexPath.row]["image"] as! String
@@ -417,6 +417,10 @@ extension adminFirstEditItemsViewController: UISearchBarDelegate {
         searching = false
         searchBar.text = ""
         collectionView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
     }
     
     @IBAction func unwindToAdminEdit(_ unwindSegue: UIStoryboardSegue) {
