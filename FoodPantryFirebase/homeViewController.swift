@@ -400,7 +400,14 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             
             
             self.mascotURL = value?["School Image"] as? String ?? ""
-            self.schoolImageView.load(url: URL(string: String(self.mascotURL))!)
+            do {
+                let fileUrl = URL(string: self.mascotURL)
+                let data = try Data(contentsOf: fileUrl!)
+                self.schoolImageView.load(url: URL(string: String(self.mascotURL))!)//add this catch statement to prevent a crash when url is invalid/doesn't exits
+            } catch {
+                print("not loadable")
+            }
+            
             
           // ...
           }) { (error) in
