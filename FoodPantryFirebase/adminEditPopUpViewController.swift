@@ -56,7 +56,10 @@ class adminEditPopUpViewController: UIViewController {
         foodType.text = "Healthy: " + String(type)
 
         if(image != "") {
-            foodImage.load(url: URL(string: String(image))!)
+            if(image.verifyUrl){
+                foodImage.load(url: URL(string: String(image))!)
+            }
+            
         } else {
             foodImage.image = UIImage(named: "foodplaceholder.jpeg")
         }
