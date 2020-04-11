@@ -147,8 +147,8 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
         
         let status = users[indexPath.row]["Status"] as! String //status
 
-        if(status == "0") { //not approved - aqua
-            cell.cellView.backgroundColor = UIColor(red: 0/255, green: 92/255, blue: 111/255, alpha: 1)
+        if(status == "0") { //not approved - grey
+            cell.cellView.backgroundColor = UIColor(red: 192/255, green: 177/255, blue: 192/255, alpha: 1)
         } else if(status == "1") { //approved - orange
             cell.cellView.backgroundColor = UIColor(red: 241/255, green: 143/255, blue: 0/255, alpha: 1)
         } else if(status == "2") { //suspended - green

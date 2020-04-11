@@ -207,7 +207,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Name").setValue(lastName)
 
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
-                        self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
+                        //self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
                 
                         self.ref.child(self.pantryName).child("Administration Contacts").child(firstName + " " + lastName).child("Email").setValue(emailaddress)
                         
@@ -227,7 +227,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Name").setValue(lastName)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("ID Number").setValue(schoolIDNumber)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
-                        self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
+                        //self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Allergies").setValue(allergies)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Admin").setValue("No")
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Total Item's Checked Out").setValue("0")
