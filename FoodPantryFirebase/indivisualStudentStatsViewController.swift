@@ -77,6 +77,7 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
                         print(status)
                         if(status == "1"){
                             self.usersApproved.append(self.users[i])
+                            self.usersApprovedNames.append(self.users[i]["Name"] as! String)
                         }
                         myGroup.leave()
                     }) { (error) in
@@ -139,7 +140,7 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
                 
                 if(admin != "Yes") {
                     self.users.append(["Name": firstName + " " + lastName, "Last Date Visited": lastDateVisit, "Last Item Checked Out": lastItemChecked, "Email": email, "Total Item's Checked Out": totalItemsChecked, "ID Number": schoolID,  "UID": uid])
-                    self.usersApprovedNames.append(firstName + " " + lastName)
+                    
                 }
                 
             }
@@ -169,6 +170,8 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! ApprovedUserViewCell
         
+        print("EACH STAT BELOW")
+        print(usersApproved[indexPath.row]["Status"])
         let status = usersApproved[indexPath.row]["Status"] as! String //status
  
         if (searching){
