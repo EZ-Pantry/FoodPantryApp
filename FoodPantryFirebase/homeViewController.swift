@@ -400,13 +400,19 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             
             
             self.mascotURL = value?["School Image"] as? String ?? ""
-            do {
-                let fileUrl = URL(string: self.mascotURL)
-                let data = try Data(contentsOf: fileUrl!)
-                self.schoolImageView.load(url: URL(string: String(self.mascotURL))!)//add this catch statement to prevent a crash when url is invalid/doesn't exits
-            } catch {
-                print("not loadable")
-            }
+            var doesFileExist = self.remoteFileExists(url: self.mascotURL);
+            print("var below")
+            print(doesFileExist)
+            
+            self.schoolImageView.load(url: URL(string: String(self.mascotURL))!)
+            
+//            do {
+//                let fileUrl = URL(string: self.mascotURL)
+//                let data = try Data(contentsOf: fileUrl!)
+//                //add this catch statement to prevent a crash when url is invalid/doesn't exits
+//            } catch {
+//                print("not loadable")
+//            }
             
             
           // ...
@@ -415,7 +421,49 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         }
     }
     
+    func remoteFileExists(url: String) -> Bool {
+        
+        var exists: Bool = false
+        let url: NSURL = NSURL(string: url)!
+        var request: NSMutableURLRequest = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = "HEAD"
+        var response: URLResponse?
+        do{
+            try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: &response)
+        }
+        catch{
+            print("error occured")
+        }
+        
+        if let httpResponse = response as? HTTPURLResponse {
+            
+            if httpResponse.statusCode == 200 {
+                
+                exists =  true
+            }
+            else{
+                exists  = false
+            }
+           
+        }
+            return exists
+    }
     
+    
+//    func fileExistsAt(url : URL, completion: @escaping (Bool) -> Void) {
+//        let checkSession = Foundation.URLSession.shared
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "HEAD"
+//        request.timeoutInterval = 1.0 // Adjust to your needs
+//
+//        let task = checkSession.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+//            if let httpResp: HTTPURLResponse = response as? HTTPURLResponse {
+//                completion(httpResp.statusCode == 200)
+//            }
+//        })
+//
+//        task.resume()
+//    }
     
     func setUpNotications(){
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {didAllow,  error in
