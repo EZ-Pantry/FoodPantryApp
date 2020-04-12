@@ -217,7 +217,13 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 self.nameLabel.text = title.trimTitle()
 
                                 if image != "" {
-                                    self.foodView.load(url: URL(string: image)!);
+                                    if(image.verifyUrl){
+                                        self.foodView.load(url: URL(string: image)!);
+                                    }
+                                    else{
+                                        self.chooseImgButton.isHidden = false;
+                                    }
+                                    
                                 }
                                 
                                 self.adminDirections.text = "New Item\nAdd the Following"
