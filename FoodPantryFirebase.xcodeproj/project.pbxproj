@@ -41,7 +41,7 @@
 		1CF92CE424203228001D7E0B /* LoadingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF92CE324203228001D7E0B /* LoadingBar.swift */; };
 		1CF92CE62423C177001D7E0B /* otherAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF92CE52423C177001D7E0B /* otherAdminViewController.swift */; };
 		1CF92CE824269013001D7E0B /* notificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF92CE724269013001D7E0B /* notificationsViewController.swift */; };
-		790C13C585DC69A8A6659284 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */; };
+		87761707136AA00656957FD9 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2914EE2574B287CDE3254B41 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */; };
 		A21748D92440D1B600A89CD2 /* chooseStatsButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21748D82440D1B600A89CD2 /* chooseStatsButtonViewController.swift */; };
 		A21748DB2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21748DA2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift */; };
 		A21748DD2440D97300A89CD2 /* selectedUserPopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21748DC2440D97300A89CD2 /* selectedUserPopOverViewController.swift */; };
@@ -84,8 +84,8 @@
 		A2794DD82434301500E58C13 /* otherTwoAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2794DD72434301500E58C13 /* otherTwoAdminViewController.swift */; };
 		A2794DDA243431C600E58C13 /* adminAddFAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2794DD9243431C600E58C13 /* adminAddFAQViewController.swift */; };
 		A2794DDC24369ADF00E58C13 /* adminAddImageManualViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2794DDB24369ADF00E58C13 /* adminAddImageManualViewController.swift */; };
-		D50F4E844ACDBE31BD04E0F9 /* Pods_FoodPantryFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */; };
-		F84117738F0E079EE27ACA36 /* Pods_FoodPantryFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7ED3C37AF6642BA667F233 /* Pods_FoodPantryFirebase.framework */; };
+		B113382FF6730334431C3E92 /* Pods_FoodPantryFirebaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CD5DC49A67DEBD0BFDF3AA /* Pods_FoodPantryFirebaseTests.framework */; };
+		E2F3E1156842AC97760F2A41 /* Pods_FoodPantryFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7E7CFA84B65BEB2C530890 /* Pods_FoodPantryFirebase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,8 +106,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		128DE22FF4ACEFF0EA0BC003 /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		1B7F7AF938DFFB6F1F74C6AB /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig"; sourceTree = "<group>"; };
+		0CE9B703E53CFFF6111F9C24 /* Pods-FoodPantryFirebaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		18D6F083D18C5A9D2A644F77 /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1C2F6BF0243EC52D0002257B /* ApprovedUserViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovedUserViewCell.swift; sourceTree = "<group>"; };
 		1C2F6BF224400DBB0002257B /* manangeSelectedUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manangeSelectedUserViewController.swift; sourceTree = "<group>"; };
 		1C38A36F2432B4FA00BB7E23 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -142,10 +142,12 @@
 		1CF92CE324203228001D7E0B /* LoadingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingBar.swift; sourceTree = "<group>"; };
 		1CF92CE52423C177001D7E0B /* otherAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherAdminViewController.swift; sourceTree = "<group>"; };
 		1CF92CE724269013001D7E0B /* notificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notificationsViewController.swift; sourceTree = "<group>"; };
-		2C7ED3C37AF6642BA667F233 /* Pods_FoodPantryFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E1892DB996DB72CE1C59838 /* Pods-FoodPantryFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.debug.xcconfig"; sourceTree = "<group>"; };
-		577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2914EE2574B287CDE3254B41 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		563D35C167003EFA15906799 /* Pods-FoodPantryFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.release.xcconfig"; sourceTree = "<group>"; };
+		68CD5DC49A67DEBD0BFDF3AA /* Pods_FoodPantryFirebaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C7E7CFA84B65BEB2C530890 /* Pods_FoodPantryFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodPantryFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A45F01DBB02C8462BD75CEF /* Pods-FoodPantryFirebaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		934F807F8A4FE17BA4AF187C /* Pods-FoodPantryFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		A21748D82440D1B600A89CD2 /* chooseStatsButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseStatsButtonViewController.swift; sourceTree = "<group>"; };
 		A21748DA2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = indivisualStudentStatsViewController.swift; sourceTree = "<group>"; };
 		A21748DC2440D97300A89CD2 /* selectedUserPopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedUserPopOverViewController.swift; sourceTree = "<group>"; };
@@ -194,9 +196,7 @@
 		A2794DD72434301500E58C13 /* otherTwoAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherTwoAdminViewController.swift; sourceTree = "<group>"; };
 		A2794DD9243431C600E58C13 /* adminAddFAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminAddFAQViewController.swift; sourceTree = "<group>"; };
 		A2794DDB24369ADF00E58C13 /* adminAddImageManualViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminAddImageManualViewController.swift; sourceTree = "<group>"; };
-		C5FFF02738E9C4DCF3A1B49B /* Pods-FoodPantryFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase.release.xcconfig"; sourceTree = "<group>"; };
-		CAB18081389E8C52423833BA /* Pods-FoodPantryFirebaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.release.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.release.xcconfig"; sourceTree = "<group>"; };
-		ED60645AD577D91FDDFED4AB /* Pods-FoodPantryFirebaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebaseTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebaseTests/Pods-FoodPantryFirebaseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CE86F7A5B66A7FBA62CC407C /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,7 +204,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F84117738F0E079EE27ACA36 /* Pods_FoodPantryFirebase.framework in Frameworks */,
+				E2F3E1156842AC97760F2A41 /* Pods_FoodPantryFirebase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D50F4E844ACDBE31BD04E0F9 /* Pods_FoodPantryFirebaseTests.framework in Frameworks */,
+				B113382FF6730334431C3E92 /* Pods_FoodPantryFirebaseTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				790C13C585DC69A8A6659284 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework in Frameworks */,
+				87761707136AA00656957FD9 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,12 +244,12 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
-		46C7F957DEC74F5759629F58 /* Frameworks */ = {
+		597D4D3E1D5F1ECDD2AB9B62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C7ED3C37AF6642BA667F233 /* Pods_FoodPantryFirebase.framework */,
-				577AE7F1E13154850F336D9F /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */,
-				3A3B3D38ADD57F300C900E03 /* Pods_FoodPantryFirebaseTests.framework */,
+				7C7E7CFA84B65BEB2C530890 /* Pods_FoodPantryFirebase.framework */,
+				2914EE2574B287CDE3254B41 /* Pods_FoodPantryFirebase_FoodPantryFirebaseUITests.framework */,
+				68CD5DC49A67DEBD0BFDF3AA /* Pods_FoodPantryFirebaseTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -257,12 +257,12 @@
 		65164E97AA468A43847D0A6C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4E1892DB996DB72CE1C59838 /* Pods-FoodPantryFirebase.debug.xcconfig */,
-				C5FFF02738E9C4DCF3A1B49B /* Pods-FoodPantryFirebase.release.xcconfig */,
-				128DE22FF4ACEFF0EA0BC003 /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig */,
-				1B7F7AF938DFFB6F1F74C6AB /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig */,
-				ED60645AD577D91FDDFED4AB /* Pods-FoodPantryFirebaseTests.debug.xcconfig */,
-				CAB18081389E8C52423833BA /* Pods-FoodPantryFirebaseTests.release.xcconfig */,
+				934F807F8A4FE17BA4AF187C /* Pods-FoodPantryFirebase.debug.xcconfig */,
+				563D35C167003EFA15906799 /* Pods-FoodPantryFirebase.release.xcconfig */,
+				CE86F7A5B66A7FBA62CC407C /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig */,
+				18D6F083D18C5A9D2A644F77 /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig */,
+				0CE9B703E53CFFF6111F9C24 /* Pods-FoodPantryFirebaseTests.debug.xcconfig */,
+				8A45F01DBB02C8462BD75CEF /* Pods-FoodPantryFirebaseTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -275,7 +275,7 @@
 				A24F383823EF66E100AACC97 /* FoodPantryFirebaseUITests */,
 				A24F381523EF66E000AACC97 /* Products */,
 				65164E97AA468A43847D0A6C /* Pods */,
-				46C7F957DEC74F5759629F58 /* Frameworks */,
+				597D4D3E1D5F1ECDD2AB9B62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -387,12 +387,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A24F383E23EF66E100AACC97 /* Build configuration list for PBXNativeTarget "FoodPantryFirebase" */;
 			buildPhases = (
-				1C7D5AD32729A2D43A0809DA /* [CP] Check Pods Manifest.lock */,
+				566789BBE396F00E29C63098 /* [CP] Check Pods Manifest.lock */,
 				A24F381023EF66E000AACC97 /* Sources */,
 				A24F381123EF66E000AACC97 /* Frameworks */,
 				A24F381223EF66E000AACC97 /* Resources */,
-				9BC28EED5BDAECF2C9AC7C47 /* [CP] Embed Pods Frameworks */,
-				DA85FA73EB335F5AB34FF26F /* [CP] Copy Pods Resources */,
+				262754CD7E33DDCC049151B4 /* [CP] Embed Pods Frameworks */,
+				08EFAF5F6ED69092A918C1E8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -407,7 +407,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A24F384123EF66E100AACC97 /* Build configuration list for PBXNativeTarget "FoodPantryFirebaseTests" */;
 			buildPhases = (
-				1FB55D56BD2801F3C8702FBF /* [CP] Check Pods Manifest.lock */,
+				63DE9557DCADCC0AFDA29A0D /* [CP] Check Pods Manifest.lock */,
 				A24F382623EF66E100AACC97 /* Sources */,
 				A24F382723EF66E100AACC97 /* Frameworks */,
 				A24F382823EF66E100AACC97 /* Resources */,
@@ -426,12 +426,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A24F384423EF66E100AACC97 /* Build configuration list for PBXNativeTarget "FoodPantryFirebaseUITests" */;
 			buildPhases = (
-				C15F2D8C94E536206C9C78EC /* [CP] Check Pods Manifest.lock */,
+				1F94AE7504E1EB659AA28CB0 /* [CP] Check Pods Manifest.lock */,
 				A24F383123EF66E100AACC97 /* Sources */,
 				A24F383223EF66E100AACC97 /* Frameworks */,
 				A24F383323EF66E100AACC97 /* Resources */,
-				BFF7325AA0B79115C4BF6312 /* [CP] Embed Pods Frameworks */,
-				B4CF43FFEB5235F22EAF36F9 /* [CP] Copy Pods Resources */,
+				E39BC7568CAAA6927099D30A /* [CP] Embed Pods Frameworks */,
+				BCFCC0CDC3560ABA6B0F589D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -527,102 +527,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1C7D5AD32729A2D43A0809DA /* [CP] Check Pods Manifest.lock */ = {
+		08EFAF5F6ED69092A918C1E8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FoodPantryFirebase-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1FB55D56BD2801F3C8702FBF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FoodPantryFirebaseTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9BC28EED5BDAECF2C9AC7C47 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B4CF43FFEB5235F22EAF36F9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BFF7325AA0B79115C4BF6312 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C15F2D8C94E536206C9C78EC /* [CP] Check Pods Manifest.lock */ = {
+		1F94AE7504E1EB659AA28CB0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -644,21 +566,99 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DA85FA73EB335F5AB34FF26F /* [CP] Copy Pods Resources */ = {
+		262754CD7E33DDCC049151B4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase/Pods-FoodPantryFirebase-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		566789BBE396F00E29C63098 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FoodPantryFirebase-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63DE9557DCADCC0AFDA29A0D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FoodPantryFirebaseTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BCFCC0CDC3560ABA6B0F589D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E39BC7568CAAA6927099D30A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests/Pods-FoodPantryFirebase-FoodPantryFirebaseUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -896,7 +896,7 @@
 		};
 		A24F383F23EF66E100AACC97 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E1892DB996DB72CE1C59838 /* Pods-FoodPantryFirebase.debug.xcconfig */;
+			baseConfigurationReference = 934F807F8A4FE17BA4AF187C /* Pods-FoodPantryFirebase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_STYLE = Automatic;
@@ -915,7 +915,7 @@
 		};
 		A24F384023EF66E100AACC97 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5FFF02738E9C4DCF3A1B49B /* Pods-FoodPantryFirebase.release.xcconfig */;
+			baseConfigurationReference = 563D35C167003EFA15906799 /* Pods-FoodPantryFirebase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_STYLE = Automatic;
@@ -934,7 +934,7 @@
 		};
 		A24F384223EF66E100AACC97 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED60645AD577D91FDDFED4AB /* Pods-FoodPantryFirebaseTests.debug.xcconfig */;
+			baseConfigurationReference = 0CE9B703E53CFFF6111F9C24 /* Pods-FoodPantryFirebaseTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -957,7 +957,7 @@
 		};
 		A24F384323EF66E100AACC97 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAB18081389E8C52423833BA /* Pods-FoodPantryFirebaseTests.release.xcconfig */;
+			baseConfigurationReference = 8A45F01DBB02C8462BD75CEF /* Pods-FoodPantryFirebaseTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -980,7 +980,7 @@
 		};
 		A24F384523EF66E100AACC97 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 128DE22FF4ACEFF0EA0BC003 /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig */;
+			baseConfigurationReference = CE86F7A5B66A7FBA62CC407C /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1001,7 +1001,7 @@
 		};
 		A24F384623EF66E100AACC97 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B7F7AF938DFFB6F1F74C6AB /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig */;
+			baseConfigurationReference = 18D6F083D18C5A9D2A644F77 /* Pods-FoodPantryFirebase-FoodPantryFirebaseUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

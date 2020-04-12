@@ -114,11 +114,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-            } else {
-                self.view.frame.origin.y = 0
+            
+            let first = (self.activeField?.frame.origin.y) ?? -1
+            
+            if(first != -1) {
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
             }
+            
         }
     }
 
@@ -207,7 +213,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Name").setValue(lastName)
 
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
-                        self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
+                        //self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
                 
                         self.ref.child(self.pantryName).child("Administration Contacts").child(firstName + " " + lastName).child("Email").setValue(emailaddress)
                         
@@ -227,7 +233,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Name").setValue(lastName)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("ID Number").setValue(schoolIDNumber)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Email Address").setValue(emailaddress)
-                        self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
+                        //self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Password").setValue(password)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Allergies").setValue(allergies)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Admin").setValue("No")
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Total Item's Checked Out").setValue("0")

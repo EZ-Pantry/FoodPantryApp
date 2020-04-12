@@ -24,6 +24,9 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     var PantryName: String = ""
     var ref: DatabaseReference! //reference to the firebase database
     
+    @IBOutlet var scanView: UIView!
+    @IBOutlet var manualView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
@@ -45,6 +48,17 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         checkoutButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         numberTextField.keyboardType = UIKeyboardType.alphabet
+        
+        
+        scanView.layer.borderColor = UIColor.black.cgColor
+        scanView.layer.borderWidth = 7.0
+        scanView.layer.cornerRadius = scanView.frame.height / 8
+        scanView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
+        
+        manualView.layer.borderColor = UIColor.black.cgColor
+        manualView.layer.borderWidth = 7.0
+        manualView.layer.cornerRadius = manualView.frame.height / 8
+        manualView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
         
     }
  
@@ -75,28 +89,71 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         
         //check if checking out is allowed
         self.view.isUserInteractionEnabled = false
-
-        //check if the user is suspended
         
-        let uid: String = Auth.auth().currentUser!.uid
+        if let user = Auth.auth().currentUser {
         
-        ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-          // Get user value
-          let value = snapshot.value as? NSDictionary
-          let status = value?["Status"] as? String ?? ""
-          
-            if(status == "2") { //suspended
-                self.performSegue(withIdentifier: "BackToHome", sender: self)
-            } else {
-                self.checkCanCheckout() //check if the user can checkout
+            checkUserAgainstDatabase { (notDeleted, error) in
+            
+                if(!notDeleted) { //deleted user
+                    let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                        try! Auth.auth().signOut() //sign out
+                        self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                    }))
+                    self.present(alert, animated: true, completion: nil);
+                                        
+                    //segue
+                } else {
+                    self.checkSuspended()
+                }
             }
-
-          // ...
-          }) { (error) in
-            RequestError().showError()
-            print(error.localizedDescription)
+        } else {
+            let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                self.performSegue(withIdentifier: "GoToFirst", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil);
+            //segue
         }
+        
+        
+    }
     
+    func checkSuspended() {
+        //check if the user is suspended
+               
+               let uid: String = Auth.auth().currentUser!.uid
+               
+               ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                 // Get user value
+                 let value = snapshot.value as? NSDictionary
+                 let status = value?["Status"] as? String ?? ""
+                 
+                   if(status == "2") { //suspended
+                       self.performSegue(withIdentifier: "BackToHome", sender: self)
+                   } else {
+                       self.checkCanCheckout() //check if the user can checkout
+                   }
+
+                 // ...
+                 }) { (error) in
+                   RequestError().showError()
+                   print(error.localizedDescription)
+               }
+           
+    }
+    
+    func checkUserAgainstDatabase(completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+        print(Auth.auth().currentUser)
+      guard let currentUser = Auth.auth().currentUser else { return }
+      currentUser.getIDTokenForcingRefresh(true, completion:  { (idToken, error) in
+        if let error = error {
+          completion(false, error as NSError?)
+          print(error.localizedDescription)
+        } else {
+          completion(true, nil)
+        }
+      })
     }
     
     func checkCanCheckout() {

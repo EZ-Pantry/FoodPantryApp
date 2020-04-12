@@ -8,11 +8,11 @@
 
 import Foundation
 
-import Foundation
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
 import FirebaseAuth
+import Firebase
 
 class manageSelectedUserViewController: UIViewController {
     
@@ -28,8 +28,8 @@ class manageSelectedUserViewController: UIViewController {
     var email: String = ""
     var password: String = ""
     
-    var adminEmail = ""
-    var adminPassword = ""
+//    var adminEmail = ""
+//    var adminPassword = ""
     
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var approveButton: UIButton!
@@ -37,6 +37,7 @@ class manageSelectedUserViewController: UIViewController {
     @IBOutlet var suspendButton: UIButton!
     @IBOutlet var deleteButton: UIButton!
     
+    lazy var functions = Functions.functions()
     
     override func viewDidLoad() {
         
@@ -52,19 +53,19 @@ class manageSelectedUserViewController: UIViewController {
     
         nameLabel.text = name
         
-        //get the admins email + password
-        
-        let userID = Auth.auth().currentUser!.uid
-        
-        ref.child(self.PantryName).child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
-        // Get user value
-        let value = snapshot.value as? NSDictionary
-          self.adminEmail = value?["Email Address"] as? String ?? "" //loads in the code from firebase
-            self.adminPassword = value?["Password"] as? String ?? ""
-        }) { (error) in
-            RequestError().showError()
-            print(error.localizedDescription)
-        }
+//        //get the admins email + password
+//
+//        let userID = Auth.auth().currentUser!.uid
+//
+//        ref.child(self.PantryName).child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+//        // Get user value
+//        let value = snapshot.value as? NSDictionary
+//          self.adminEmail = value?["Email Address"] as? String ?? "" //loads in the code from firebase
+//            self.adminPassword = value?["Password"] as? String ?? ""
+//        }) { (error) in
+//            RequestError().showError()
+//            print(error.localizedDescription)
+//        }
         
         updateButtons(status: self.status)
         
@@ -190,32 +191,69 @@ class manageSelectedUserViewController: UIViewController {
          ref2.removeValue { error, _ in
             
             if(error == nil) {
-            
-            try! Auth.auth().signOut()
-            
-                Auth.auth().signIn(withEmail: self.email, password: self.password){ user, error in
-                    if(error != nil) {
-                        let alert = UIAlertController(title: "Error!", message: "Please try again.", preferredStyle: .alert)//displays alert of erRor!
+                
+                self.functions.httpsCallable("deleteUser").call(["uid": self.uid]) { (result, error) in
+                  if let error = error as NSError? {
+                    if error.domain == FunctionsErrorDomain {
+                      let code = FunctionsErrorCode(rawValue: error.code)
+                      let message = error.localizedDescription
+                      let details = error.userInfo[FunctionsErrorDetailsKey]
+                        print(message)
+                        print(code)
+                        print(details)
+                        //display the error
+                         let alert = UIAlertController(title: "Error!", message: "Please try again.", preferredStyle: .alert)//displays alert of erRor!
+                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil);
+                    }
+                  }
+                    
+                    
+                    let data = result?.data as? [String: Any]
+                    let error = data!["error"] as! String
+                    print(data!)
+                    print(error)
+                    
+                    if(error == "true") {
+                        //display the error
+                         let alert = UIAlertController(title: "Error!", message: "Please try again.", preferredStyle: .alert)//displays alert of erRor!
                         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                         self.present(alert, animated: true, completion: nil);
                     } else {
-                        let user = Auth.auth().currentUser
-
-                        user?.delete { error in
-                            if let error = error {
-                                let alert = UIAlertController(title: "Error!", message: "Please try again.", preferredStyle: .alert)//displays alert of erRor!
-                                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                                self.present(alert, animated: true, completion: nil);
-                            } else {
-                                // Account deleted.
-                        
-                                //sign the admin back in
-                                self.signBackIn()
-                        
-                            }
-                        }
+                        let alert = UIAlertController(title: "Updated!", message: "User has been deleted.", preferredStyle: .alert)//displays alert of erRor!
+                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil);
+                        self.updateButtons(status: "3")
                     }
+                    
+                    
                 }
+            
+//            try! Auth.auth().signOut()
+//
+//                Auth.auth().signIn(withEmail: self.email, password: self.password){ user, error in
+//                    if(error != nil) {
+//                        let alert = UIAlertController(title: "Error!", message: "Please try again.", preferredStyle: .alert)//displays alert of erRor!
+//                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//                        self.present(alert, animated: true, completion: nil);
+//                    } else {
+//                        let user = Auth.auth().currentUser
+//
+//                        user?.delete { error in
+//                            if let error = error {
+//                                let alert = UIAlertController(title: "Error!", message: "Please try again.", preferredStyle: .alert)//displays alert of erRor!
+//                                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//                                self.present(alert, animated: true, completion: nil);
+//                            } else {
+//                                // Account deleted.
+//
+//                                //sign the admin back in
+//                                self.signBackIn()
+//
+//                            }
+//                        }
+//                    }
+//                }
             
             } else {
                 let alert = UIAlertController(title: "Error!", message: "Please try again.", preferredStyle: .alert)//displays alert of erRor!
@@ -225,23 +263,23 @@ class manageSelectedUserViewController: UIViewController {
         }
     }
     
-    func signBackIn() {
-        try! Auth.auth().signOut()
-        
-        Auth.auth().signIn(withEmail: self.adminEmail, password: self.adminPassword){ user, error in
-            if(error != nil) {
-                let alert = UIAlertController(title: "Error!", message: "Please try again.", preferredStyle: .alert)//displays alert of erRor!
-                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil);
-            } else {
-                let alert = UIAlertController(title: "Updated!", message: "User has been deleted.", preferredStyle: .alert)//displays alert of erRor!
-                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil);
-                self.updateButtons(status: "3")
-            }
-        }
-
-    }
+//    func signBackIn() {
+//        try! Auth.auth().signOut()
+//
+//        Auth.auth().signIn(withEmail: self.adminEmail, password: self.adminPassword){ user, error in
+//            if(error != nil) {
+//                let alert = UIAlertController(title: "Error!", message: "Please try again.", preferredStyle: .alert)//displays alert of erRor!
+//                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil);
+//            } else {
+//                let alert = UIAlertController(title: "Updated!", message: "User has been deleted.", preferredStyle: .alert)//displays alert of erRor!
+//                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//                self.present(alert, animated: true, completion: nil);
+//                self.updateButtons(status: "3")
+//            }
+//        }
+//
+//    }
     
     func updateButtons(status: String) {
         print(status)

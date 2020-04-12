@@ -17,6 +17,7 @@ class inquireAboutFoodPantryViewController: UIViewController {
     @IBOutlet weak var messageTextField: UITextView!
     var messageEntered = ""
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +31,8 @@ class inquireAboutFoodPantryViewController: UIViewController {
         messageTextField.layer.borderColor = UIColor(red: 0/255, green: 191/255, blue: 255/255, alpha: 1.0).cgColor
         messageTextField.layer.borderWidth = 1.0;
         messageTextField.layer.cornerRadius = 5.0;
+        
+       
 
     }
 

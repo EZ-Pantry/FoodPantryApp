@@ -10,6 +10,7 @@ class adminQRViewController: UIViewController {
     var alert = LoadingBar()
     var foodPantryQRText = ""
     
+    @IBOutlet var infoLabel: UILabel!
     @IBOutlet var test: UIImageView!
     @IBOutlet weak var saveQRButton: UIButton!
     @IBOutlet weak var QRCodeImageView: UIImageView!
@@ -41,6 +42,11 @@ class adminQRViewController: UIViewController {
         generateButton.titleLabel?.minimumScaleFactor = 0.5
         generateButton.titleLabel?.numberOfLines = 1;
         generateButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        infoLabel.layer.borderColor = UIColor.black.cgColor
+        infoLabel.layer.borderWidth = 4.0
+        infoLabel.layer.cornerRadius = infoLabel.frame.height / 8
+        infoLabel.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
     }
     
     
