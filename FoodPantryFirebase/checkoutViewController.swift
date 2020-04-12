@@ -75,13 +75,22 @@ class checkoutViewController: UITableViewController {
                        let url = data[i]["image"] as! String
                        myGroup.enter()
                        
-                       self.loadImage(url: url, callback: {(loadedImage)-> Void in
+//                       self.loadImage(url: url, callback: {(loadedImage)-> Void in
+//                        print("here")
                         if(url.verifyUrl){
-                            nameToImage[name] = loadedImage
+                            print("valid")
+                            
+                             self.loadImage(url: url, callback: {(loadedImage)-> Void in
+                                 nameToImage[name] = loadedImage
+                                myGroup.leave()
+                             })
+                            
+                        } else {
+                            nameToImage[name] = UIImage(named: "foodplaceholder.png")
                             myGroup.leave()
                         }
                            
-                       })
+//                       })
                    }
                    
                    
