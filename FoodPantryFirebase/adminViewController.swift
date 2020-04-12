@@ -62,11 +62,50 @@ class adminViewController: UIViewController, UITextFieldDelegate {
         allergiesTextField.delegate = self;
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if let user = Auth.auth().currentUser {
+        
+            checkUserAgainstDatabase { (notDeleted, error) in
+            
+                if(!notDeleted) { //deleted user
+                    let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                        try! Auth.auth().signOut() //sign out
+                        self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                    }))
+                    self.present(alert, animated: true, completion: nil);
+                                        
+                    //segue
+                }
+            }
+        } else {
+            let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                self.performSegue(withIdentifier: "GoToFirst", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil);
+            //segue
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    func checkUserAgainstDatabase(completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+           print(Auth.auth().currentUser)
+         guard let currentUser = Auth.auth().currentUser else { return }
+         currentUser.getIDTokenForcingRefresh(true, completion:  { (idToken, error) in
+           if let error = error {
+             completion(false, error as NSError?)
+             print(error.localizedDescription)
+           } else {
+             completion(true, nil)
+           }
+         })
+       }
     
         
     func textFieldDidBeginEditing(_ textField: UITextField){
@@ -79,11 +118,17 @@ class adminViewController: UIViewController, UITextFieldDelegate {
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-            } else {
-                self.view.frame.origin.y = 0
+            
+            let first = (self.activeField?.frame.origin.y) ?? -1
+            
+            if(first != -1) {
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
             }
+            
         }
     }
 

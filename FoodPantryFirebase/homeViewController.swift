@@ -6,6 +6,7 @@ import FirebaseUI
 import FirebaseDatabase
 import MapKit
 import UserNotifications
+import Firebase
 
 class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
@@ -14,7 +15,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var schoolImageView: UIImageView!
     
     @IBOutlet var adminUpdateLabel: UILabel!
-    @IBOutlet weak var schoolNameLbl: UILabel!
     var PantryName: String = ""
     
     var ref: DatabaseReference!
@@ -32,6 +32,8 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     var latitude: Double = 45.5088
     var longitude: Double = -73.554
     
+    @IBOutlet var welcomeView: UIView!
+    
     override func viewDidLoad() {
 
         
@@ -43,6 +45,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         
         
         self.ref = Database.database().reference()
+        
                 
         let myGroup = DispatchGroup()
             
@@ -87,7 +90,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                     print(location)
                     var address: String = location
                     var pantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
-                    self.schoolNameLbl.text = pantryName.uppercased();//upercase the school name
                     self.coordinates(forAddress: location) {
                                        (location) in
                                        guard let location = location else {
@@ -138,8 +140,22 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             
             self.alert.hideLoadingAlert()
             
+        
         }
         
+        adminUpdateLabel.layer.borderColor = UIColor.black.cgColor
+        adminUpdateLabel.layer.borderWidth = 7.0
+        adminUpdateLabel.layer.cornerRadius = adminUpdateLabel.frame.height / 8
+        adminUpdateLabel.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
+        
+        mapView.layer.borderColor = UIColor.black.cgColor
+        mapView.layer.borderWidth = 7.0
+        mapView.layer.cornerRadius = mapView.frame.height / 8
+        
+        welcomeView.layer.borderColor = UIColor.black.cgColor
+        welcomeView.layer.borderWidth = 7.0
+        welcomeView.layer.cornerRadius = welcomeView.frame.height / 8
+        welcomeView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
         
     }
     
@@ -189,6 +205,44 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             self.present(alert, animated: true, completion: nil);//presents the alert for completion
             message = ""
         }
+        
+        //check to see if the user should be logged out
+                if let user = Auth.auth().currentUser {
+                
+                    checkUserAgainstDatabase { (notDeleted, error) in
+                    
+                        if(!notDeleted) { //deleted user
+                            let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                                try! Auth.auth().signOut() //sign out
+                                self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                            }))
+                            self.present(alert, animated: true, completion: nil);
+                                                
+                            //segue
+                        }
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                        self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                    }))
+                    self.present(alert, animated: true, completion: nil);
+                    //segue
+                }
+    }
+    
+    func checkUserAgainstDatabase(completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+        print(Auth.auth().currentUser)
+      guard let currentUser = Auth.auth().currentUser else { return }
+      currentUser.getIDTokenForcingRefresh(true, completion:  { (idToken, error) in
+        if let error = error {
+          completion(false, error as NSError?)
+          print(error.localizedDescription)
+        } else {
+          completion(true, nil)
+        }
+      })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -236,7 +290,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
-            self.adminUpdateLabel.text = (value?["Admin Message"] as? String ?? "") //loads ithe
+            self.adminUpdateLabel.text = "UPDATE\n\n" + (value?["Admin Message"] as? String ?? "") //loads ithe
         }) { (error) in
             RequestError().showError()
             print(error.localizedDescription)
@@ -443,7 +497,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
               let fullName = firstName + " " + lastName
             let lastCheckedOutDate = value?["Last Date Visited"] as? String ?? ""
             let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
-            self.welcomeNameLbl.text = "Welcome, \(fullName)"
+            self.welcomeNameLbl.text = "Welcome to " + self.PantryName.uppercased() + "\n" + fullName
 //              self.lastCheckedOutLbl.text = "Last visited: \(lastCheckedOutDate)"//Display last item user checked out
 //              self.lastItemCheckedOutLbl.text = "Last Checked Out Item: \(lastItemCheckedOut)"//And the last date they visited
               

@@ -259,6 +259,10 @@ extension indivisualStudentStatsViewController: UISearchBarDelegate {
         studentsTableView.reloadData()
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+    
 }
 
 

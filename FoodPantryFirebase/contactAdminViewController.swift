@@ -43,7 +43,7 @@ class contactAdminViewController: UIViewController, UITextFieldDelegate {
         messageEntered = messageTextField.text!
         
         print(messageEntered)
-//        showMailComposer();
+        showMailComposer();
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,17 +63,20 @@ class contactAdminViewController: UIViewController, UITextFieldDelegate {
             self.activeField = textField
         }
 
-    //    func textFieldDidEndEditing(_ textField: UITextField){
-    //        activeField = nil
-    //    }
 
         @objc func keyboardWillShow(notification: NSNotification) {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-                } else {
-                    self.view.frame.origin.y = 0
+                
+                let first = (self.activeField?.frame.origin.y) ?? -1
+                
+                if(first != -1) {
+                    if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                        self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                    } else {
+                        self.view.frame.origin.y = 0
+                    }
                 }
+                
             }
         }
 

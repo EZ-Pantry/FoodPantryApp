@@ -82,6 +82,47 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
         refresh()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        //check if the user is deleted
+        if let user = Auth.auth().currentUser {
+        
+            checkUserAgainstDatabase { (notDeleted, error) in
+            
+                if(!notDeleted) { //deleted user
+                    let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                        try! Auth.auth().signOut() //sign out
+                        self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                    }))
+                    self.present(alert, animated: true, completion: nil);
+                                        
+                    //segue
+                }
+            }
+        } else {
+            let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                self.performSegue(withIdentifier: "GoToFirst", sender: self)
+            }))
+            self.present(alert, animated: true, completion: nil);
+            //segue
+        }
+    }
+    
+    func checkUserAgainstDatabase(completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+        print(Auth.auth().currentUser)
+      guard let currentUser = Auth.auth().currentUser else { return }
+      currentUser.getIDTokenForcingRefresh(true, completion:  { (idToken, error) in
+        if let error = error {
+          completion(false, error as NSError?)
+          print(error.localizedDescription)
+        } else {
+          completion(true, nil)
+        }
+      })
+    }
+    
     func showLoadingAlert() { //shows a loading indicator on the screen
         let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
 
@@ -314,6 +355,8 @@ extension FoodItemsSecondViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as! ItemCell
 
+        cell.layer.cornerRadius = cell.frame.height / 6
+        
         if searching {
             cell.setData(text: searchedFoodItem[indexPath.row].trimTitle())
             var img: String = sortedData[indexPath.row]["image"] as! String
@@ -385,6 +428,10 @@ extension FoodItemsSecondViewController: UISearchBarDelegate {
         collectionView.reloadData()
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+    
     
     
 }
@@ -405,8 +452,3 @@ extension UIImageView {
     }
 }
 
-extension UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-    }
-}

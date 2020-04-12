@@ -13,6 +13,7 @@ class adminAddFAQViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var questionTextField: UITextField!
     @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet var infoLabel: UILabel!
     
     var ref: DatabaseReference!
     var PantryName = ""
@@ -32,7 +33,10 @@ class adminAddFAQViewController: UIViewController, UITextFieldDelegate {
         addButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         
-        
+        infoLabel.layer.borderColor = UIColor.black.cgColor
+        infoLabel.layer.borderWidth = 4.0
+        infoLabel.layer.cornerRadius = infoLabel.frame.height / 8
+        infoLabel.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
         
 
         // Do any additional setup after loading the view.
@@ -90,11 +94,17 @@ class adminAddFAQViewController: UIViewController, UITextFieldDelegate {
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-            } else {
-                self.view.frame.origin.y = 0
+            
+            let first = (self.activeField?.frame.origin.y) ?? -1
+            
+            if(first != -1) {
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
             }
+            
         }
     }
 

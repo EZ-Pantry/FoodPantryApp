@@ -23,6 +23,11 @@ class notificationsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        lastNotification.layer.borderColor = UIColor.black.cgColor
+        lastNotification.layer.borderWidth = 4.0
+        lastNotification.layer.cornerRadius = lastNotification.frame.height / 10
+        lastNotification.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
        
         messageField.delegate = self;
         

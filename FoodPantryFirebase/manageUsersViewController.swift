@@ -13,7 +13,7 @@ import FirebaseUI
 import FirebaseDatabase
 
 
-class manageUsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class manageUsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,  UIPickerViewDelegate, UIPickerViewDataSource, UISearchBarDelegate   {
     
     var PantryName: String = ""
     var ref: DatabaseReference! //reference to the firebase database
@@ -28,6 +28,18 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet var approvedTableView: UITableView!
     
+    //picker view
+    @IBOutlet var pickerField: UITextField!
+    let yourPicker = UIPickerView()
+    var pickerData: [String] = [String]()
+    
+    var displayedUsers: [[String: Any]] = []
+    
+    var currentFilter: String = "-1" //filter - -1 = all users, 0 = not approved, 1 = approved, 2 = suspended
+    
+    //searching
+    @IBOutlet var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -37,10 +49,71 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
         
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
-            
+          
+        //picker view
+               
+        yourPicker.delegate = self
+        yourPicker.dataSource = self
+        pickerField.inputView = yourPicker
+               
+        pickerData = ["All Users", "Not Approved", "Approved", "Suspended"] //sets the values for the picker view
+        
+        //search bar
+        self.searchBar.delegate = self
+        searchBar.returnKeyType = .done;
+        searchBar.enablesReturnKeyAutomatically = false
         
     }
     
+    // Number of columns of data
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return fopr the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
+        return pickerData[row]
+    }
+    
+    //when the picker view is changed
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+       pickerField.text = pickerData[row]
+        
+       let allowedStatus = pickerData[row]
+        if(allowedStatus == "All Users") {
+            currentFilter = "-1"
+        } else if(allowedStatus == "Not Approved") {
+            currentFilter = "0"
+        } else if(allowedStatus == "Approved") {
+            currentFilter = "1"
+        } else if(allowedStatus == "Suspended") {
+            currentFilter = "2"
+        }
+        
+        updateUsersDisplayed(filter: currentFilter)
+        self.searchBar.text = ""
+        
+        
+    }
+    
+    func updateUsersDisplayed(filter: String) {
+        if(filter == "-1") {
+            displayedUsers = users
+        } else {
+            displayedUsers = []
+            for user in users {
+                if(user["Status"] as! String == filter) {
+                    displayedUsers.append(user)
+                }
+            }
+        }
+        self.approvedTableView.reloadData()
+    }
 
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,6 +149,7 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                 
                 myGroup.notify(queue: .main) {
+                    self.updateUsersDisplayed(filter: self.currentFilter)
                     self.approvedTableView.reloadData()
                 }
             }
@@ -133,7 +207,7 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return displayedUsers.count
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -143,12 +217,12 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell") as! ApprovedUserViewCell
         
-        cell.nameBtn.setTitle(users[indexPath.row]["Name"] as! String, for: .normal)
+        cell.nameBtn.setTitle(displayedUsers[indexPath.row]["Name"] as! String, for: .normal)
         
-        let status = users[indexPath.row]["Status"] as! String //status
+        let status = displayedUsers[indexPath.row]["Status"] as! String //status
 
-        if(status == "0") { //not approved - aqua
-            cell.cellView.backgroundColor = UIColor(red: 0/255, green: 92/255, blue: 111/255, alpha: 1)
+        if(status == "0") { //not approved - grey
+            cell.cellView.backgroundColor = UIColor(red: 192/255, green: 177/255, blue: 192/255, alpha: 1)
         } else if(status == "1") { //approved - orange
             cell.cellView.backgroundColor = UIColor(red: 241/255, green: 143/255, blue: 0/255, alpha: 1)
         } else if(status == "2") { //suspended - green
@@ -158,11 +232,11 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
         cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
         
         cell.tapCallback = {
-            self.selectedStatus = self.users[indexPath.row]["Status"] as! String
-            self.selectedUID = self.users[indexPath.row]["UID"] as! String
-            self.selectedName = self.users[indexPath.row]["Name"] as! String
-            self.selectedEmail = self.users[indexPath.row]["Email"] as! String
-            self.selectedPassword = self.users[indexPath.row]["Password"] as! String
+            self.selectedStatus = self.displayedUsers[indexPath.row]["Status"] as! String
+            self.selectedUID = self.displayedUsers[indexPath.row]["UID"] as! String
+            self.selectedName = self.displayedUsers[indexPath.row]["Name"] as! String
+            self.selectedEmail = self.displayedUsers[indexPath.row]["Email"] as! String
+            self.selectedPassword = self.displayedUsers[indexPath.row]["Password"] as! String
 
             self.performSegue(withIdentifier: "userPopover", sender: nil)
         }
@@ -171,6 +245,38 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
         
         
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchText == "") {
+            displayedUsers = users
+        } else {
+            displayedUsers = filterArray(dataValues: users, searchText: searchText)
+        }
+        approvedTableView.reloadData()
+    }
+
+    func filterArray(dataValues: [[String: Any]], searchText: String) -> ([[String: Any]]) {
+        var newValues: [[String: Any]] = []
+        
+        var count = 0
+        for val in dataValues {
+            if ((val["Name"] as! String).contains(searchText)) {
+                newValues.append(dataValues[count])
+            }
+            count += 1
+        }
+        return newValues
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        approvedTableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+    
     
     @IBAction func unwindToManageUsers(_ unwindSegue: UIStoryboardSegue) {
         let sourceViewController = unwindSegue.source
@@ -192,3 +298,4 @@ class manageUsersViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
 }
+

@@ -75,7 +75,6 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
                 self.present(alert, animated: true, completion: nil);
             } else {
             
-                Auth.auth().addStateDidChangeListener { auth, user in //this makes sure that the change is processed
                     let user = Auth.auth().currentUser
                         if(!user!.isEmailVerified) {
                         user!.sendEmailVerification(completion: { (error) in
@@ -101,7 +100,6 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
                             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                             self.present(alert, animated: true, completion: nil);
                         }
-                    }
                 }
             
             }

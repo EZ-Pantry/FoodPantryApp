@@ -16,6 +16,8 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
     
     var error = ""
     
+    @IBOutlet var cameraView: UIView!
+    @IBOutlet var manualView: UIView!
     var activeField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,18 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
         addManualButton.titleLabel?.minimumScaleFactor = 0.5
         addManualButton.titleLabel?.numberOfLines = 1;
         addManualButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        
+        cameraView.layer.borderColor = UIColor.black.cgColor
+        cameraView.layer.borderWidth = 7.0
+        cameraView.layer.cornerRadius = cameraView.frame.height / 8
+        cameraView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
+               
+        manualView.layer.borderColor = UIColor.black.cgColor
+        manualView.layer.borderWidth = 7.0
+        manualView.layer.cornerRadius = manualView.frame.height / 8
+        manualView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,17 +65,21 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
 
         @objc func keyboardWillShow(notification: NSNotification) {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-    //            print("textfeld val below")
-    //            print(self.activeField?.frame.origin.y)
-    //            print("keyborad height")
-    //            print(keyboardSize.height)
-                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-                } else {
-                    self.view.frame.origin.y = 0
+                
+                let first = (self.activeField?.frame.origin.y) ?? -1
+                
+                if(first != -1) {
+                    if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                        self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                    } else {
+                        self.view.frame.origin.y = 0
+                    }
                 }
+                
             }
         }
+    
+    
 
         @objc func keyboardWillHide(notification: NSNotification) {
             self.view.frame.origin.y = 0
