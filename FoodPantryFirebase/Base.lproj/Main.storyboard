@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I3t-8a-fsA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I3t-8a-fsA">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1628,7 +1628,7 @@
                                 </variation>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="otherblackborder" translatesAutoresizingMaskIntoConstraints="NO" id="oYu-ng-4oj">
-                                <rect key="frame" x="30.333333333333343" y="327.66666666666669" width="353.33333333333326" height="241.00000000000051"/>
+                                <rect key="frame" x="30.333333333333343" y="327.66666666666669" width="353.33333333333326" height="241.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oYu-ng-4oj" secondAttribute="height" multiplier="22:15" id="ES6-td-Q0b"/>
                                     <constraint firstAttribute="width" secondItem="oYu-ng-4oj" secondAttribute="height" multiplier="485:411" id="O0f-fb-fUb"/>
@@ -9629,7 +9629,7 @@
             </objects>
             <point key="canvasLocation" x="-2737.68115942029" y="3083.0357142857142"/>
         </scene>
-        <!--User Statistics-->
+        <!--Student Statistics-->
         <scene sceneID="dbg-dF-cLR">
             <objects>
                 <viewController id="VZb-oi-sGp" customClass="indivisualStudentStatsViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
@@ -9713,7 +9713,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gNx-fV-qyv"/>
                     </view>
-                    <navigationItem key="navigationItem" title="User Statistics" id="uFe-1d-g6a"/>
+                    <navigationItem key="navigationItem" title="Student Statistics" id="uFe-1d-g6a"/>
                     <connections>
                         <outlet property="searchBar" destination="0vd-p3-aKp" id="cVl-cm-YXe"/>
                         <outlet property="studentsTableView" destination="gPA-YR-DJR" id="bIQ-fZ-dDy"/>
@@ -9850,20 +9850,6 @@
             <point key="canvasLocation" x="3576.811594202899" y="3977.6785714285711"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="barcode.viewfinder" catalog="system" width="64" height="56"/>
-        <image name="bigblackborder" width="1500" height="1500"/>
-        <image name="blurred3" width="114" height="222"/>
-        <image name="cart" catalog="system" width="64" height="50"/>
-        <image name="cross" width="40" height="40"/>
-        <image name="eZ pantry Logo-png" width="1081" height="1081"/>
-        <image name="gear" catalog="system" width="64" height="58"/>
-        <image name="house.fill" catalog="system" width="64" height="52"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="otherblackborder" width="2197" height="1677"/>
-        <image name="person.crop.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="xmark.octagon" catalog="system" width="64" height="56"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ya6-8G-W4l"/>
         <segue reference="Dwa-lY-C5Y"/>
@@ -9872,4 +9858,18 @@
         <segue reference="ETY-iU-Vqb"/>
         <segue reference="Ona-bs-GLF"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="barcode.viewfinder" catalog="system" width="128" height="114"/>
+        <image name="bigblackborder" width="1500" height="1500"/>
+        <image name="blurred3" width="114" height="222"/>
+        <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="cross" width="40" height="40"/>
+        <image name="eZ pantry Logo-png" width="1081" height="1081"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="otherblackborder" width="2197" height="1677"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="xmark.octagon" catalog="system" width="128" height="112"/>
+    </resources>
 </document>
