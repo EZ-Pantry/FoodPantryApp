@@ -54,6 +54,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        chooseImgButton.isHidden = true;
         
 //        chooseImgButton.isHidden = true;
 //        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -137,12 +138,14 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     }
                     else{
                         self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
+                        chooseImgButton.isHidden = false;
                     }
                    
                 }
                 
                 self.adminDirections.text = "Existing Item\nEdit the Following"
             } else {
+                chooseImgButton.isHidden = false;
                 self.existing = false
                 nameLabel.isUserInteractionEnabled = true
                 self.adminDirections.text = "New Item\nAdd the Following"
@@ -191,6 +194,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                         self.food_url = newImageURL
                                     }
                                     else{
+                                        self.chooseImgButton.isHidden = false;
                                         self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
                                     }
                                 }
