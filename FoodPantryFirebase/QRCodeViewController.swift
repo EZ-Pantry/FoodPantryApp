@@ -18,6 +18,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     
     var checkedOut = "" //format fooditem,quantity;fooditem,quantity
     var barcodes = ""
+    var activeField: UITextField!
     
     let timeDifference: Int = 10
     
@@ -32,6 +33,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         ref = Database.database().reference()
 
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+    
         // Do any additional setup after loading the view.
         selectButton.layer.cornerRadius = 15
         selectButton.clipsToBounds = true
@@ -63,6 +65,10 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     }
  
     override func viewWillAppear(_ animated: Bool) {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(QRCodeViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+               NotificationCenter.default.addObserver(self, selector: #selector(QRCodeViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        numberTextField.delegate = self;
         
         print(checkedOut)
         print(barcodes)
@@ -155,6 +161,36 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         }
       })
     }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(true)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+        
+            
+        func textFieldDidBeginEditing(_ textField: UITextField){
+            self.activeField = textField
+    //        authenticationWithTouchID()
+        }
+
+    //    func textFieldDidEndEditing(_ textField: UITextField){
+    //        activeField = nil
+    //    }
+
+        @objc func keyboardWillShow(notification: NSNotification) {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
+            }
+        }
+
+        @objc func keyboardWillHide(notification: NSNotification) {
+            self.view.frame.origin.y = 0
+        }
     
     func checkCanCheckout() {
         ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in

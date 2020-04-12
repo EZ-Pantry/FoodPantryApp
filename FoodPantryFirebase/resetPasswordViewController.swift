@@ -45,6 +45,7 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
                 //If no error, then email for recovery with instructions is sent-manage email strucutre in firebase
                 print("email successfully sent!")
                 let alert = UIAlertController(title: "Password Reset Email Sent!", message: "Please check your email and follow the directions to reset your password!", preferredStyle: .alert)
+                UserDefaults.standard.set("Bad", forKey: "Times Unlocked")
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil);
                 //above shows alert for successfull sent of message
@@ -80,6 +81,7 @@ class resetPasswordViewController: UIViewController, UITextFieldDelegate {
                             print("sent verification")
                             if(error == nil) {
                                 let alert = UIAlertController(title: "Email Sent", message: "The verification email has been sent. Check your inbox!", preferredStyle: .alert)
+                                UserDefaults.standard.set("Bad", forKey: "Times Unlocked")
                                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                                 self.present(alert, animated: true, completion: nil);
                             } else {

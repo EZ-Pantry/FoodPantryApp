@@ -454,7 +454,13 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             
             
             self.mascotURL = value?["School Image"] as? String ?? ""
-            self.schoolImageView.load(url: URL(string: String(self.mascotURL))!)
+            
+            if(self.mascotURL.verifyUrl){
+                self.schoolImageView.load(url: URL(string: String(self.mascotURL))!)//only displaying image if valid link
+            }
+
+            
+            
             
           // ...
           }) { (error) in
@@ -463,6 +469,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     
+
     
     func setUpNotications(){
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {didAllow,  error in
@@ -640,5 +647,16 @@ extension String {
 
     var emojiScalars: [UnicodeScalar] {
         return filter{ $0.isEmoji }.flatMap { $0.unicodeScalars }
+    }
+}
+extension String {
+    var verifyUrl: Bool {
+        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
+            // it is a link, if the match covers the whole string
+            return match.range.length == self.utf16.count
+        } else {
+            return false
+        }
     }
 }

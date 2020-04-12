@@ -7,6 +7,7 @@ import FirebaseDatabase
 import LocalAuthentication
 class logInViewController: UIViewController, UITextFieldDelegate {
  
+    @IBOutlet weak var useFaceIdButton: UIButton!
     @IBOutlet weak var emailAddressTextField: UITextField!//where user inputs their school email address
     @IBOutlet weak var passwordTextField: UITextField!//where user inputs the password
     @IBOutlet weak var continueButton: UIButton!//where user clicks to continue to home screen
@@ -34,80 +35,80 @@ class logInViewController: UIViewController, UITextFieldDelegate {
         forgotPasswordButton.titleLabel?.minimumScaleFactor = 0.5
         forgotPasswordButton.titleLabel?.numberOfLines = 1;
         forgotPasswordButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        if(UserDefaults.contains("Times Unlocked")){
+            print("in here")
+            var canUseBiometrics = UserDefaults.standard.object(forKey:"Times Unlocked") as! String
+            if(canUseBiometrics == "Good"){
+                useFaceIdButton.isHidden = false
+            }
+            else{
+                useFaceIdButton.isHidden = true
+            }
+        }
+        
  
     }
     
-//    func authenticationWithTouchID() {
-//        let localAuthenticationContext = LAContext()
-//        localAuthenticationContext.localizedFallbackTitle = "Please use your Passcode"
-//
-//        var authorizationError: NSError?
-//        let reason = "Authentication required to access the secure data"
-//
-//        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &authorizationError) {
-//
-//            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, evaluateError in
-//
-//                if success {
-//                    DispatchQueue.main.async() {
-//                        let alert = UIAlertController(title: "Success", message: "Authenticated succesfully!", preferredStyle: UIAlertController.Style.alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                        self.present(alert, animated: true, completion: nil)
-//                    }
-//
-//                } else {
-//                    // Failed to authenticate
-//                    guard let error = evaluateError else {
-//                        return
-//                    }
-//                    print(error)
-//
-//                }
-//            }
-//        } else {
-//
-//            guard let error = authorizationError else {
-//                return
-//            }
-//            print(error)
-//        }
-//    }
-//
-//    func authenticateWithBiometrics(){
-//        let context = LAContext()
-//        var error: NSError?
-//
-//        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-//            let reason = "Identify yourself!"
-//
-//            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
-//                [weak self] success, authenticationError in
-//
-//                DispatchQueue.main.async {
-//                    if success {
-//                        let ac = UIAlertController(title: "Authentication Good", message: "You could  be verified; please try again.", preferredStyle: .alert)
-//                        ac.addAction(UIAlertAction(title: "OK", style: .default))
-//                        self!.present(ac, animated: true)
-//                    } else {
-//                        let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
-//                        ac.addAction(UIAlertAction(title: "OK", style: .default))
-//                        self!.present(ac, animated: true)
-//                    }
-//                }
-//            }
-//        } else {
-//            let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
-//            ac.addAction(UIAlertAction(title: "OK", style: .default))
-//            self.present(ac, animated: true)
-//        }
-//    }
-//
+    @IBAction func useFaceIDButtonTapped(_ sender: UIButton) {
+        authenticationWithTouchID()
+    }
+    
+    
+    func authenticationWithTouchID() {
+        let localAuthenticationContext = LAContext()
+        localAuthenticationContext.localizedFallbackTitle = "Please use your Passcode"
+
+        var authorizationError: NSError?
+        let reason = "Authentication required to access the secure data"
+
+        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &authorizationError) {
+
+            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, evaluateError in
+
+                if success {
+                    DispatchQueue.main.async() {
+                        var canUseBiometrics = UserDefaults.standard.object(forKey:"Times Unlocked") as! String
+                        var emailaddress = UserDefaults.standard.object(forKey:"Latest Email") as! String
+                        var password = UserDefaults.standard.object(forKey:"Latest Password") as! String
+                        if(canUseBiometrics == "Good"){
+                            self.signInUser(email: emailaddress, password: password)
+                        }
+                        else{
+                            print("not")
+                        }
+                    }
+
+                } else {
+                    // Failed to authenticate
+                    guard let error = evaluateError else {
+                        return
+                    }
+                    print(error)
+                    
+
+                }
+            }
+        } else {
+
+            guard let error = authorizationError else {
+                return
+            }
+            print(error)
+        }
+    }
+
     @IBAction func handleContinue(_ sender: UIButton) {
         guard let emailaddress = emailAddressTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
         print(password)
-        Auth.auth().signIn(withEmail: emailaddress, password: password){ user, error in
+        signInUser(email: emailaddress, password: password)
+        
+    }
+    
+    func signInUser(email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password){ user, error in
             
             if(error != nil) {
                 //else show error message
@@ -130,22 +131,29 @@ class logInViewController: UIViewController, UITextFieldDelegate {
                                 if(status != "0") {
                                     
                                     if(status == "2") {
-                                        
+                                        UserDefaults.standard.set("Bad", forKey: "Times Unlocked")
                                         let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
                                                                              
                                         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
                                             
+                                            UserDefaults.standard.set("Good", forKey: "Times Unlocked")
+                                            UserDefaults.standard.set(email, forKey: "Latest Email")
+                                            UserDefaults.standard.set(password, forKey: "Latest Password")
                                             self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
                                         }))
                                         self.present(alert, animated: true, completion: nil);
                                         
                                         
                                     } else {
+                                        UserDefaults.standard.set("Good", forKey: "Times Unlocked")
+                                        UserDefaults.standard.set(email, forKey: "Latest Email")
+                                        UserDefaults.standard.set(password, forKey: "Latest Password")
                                         self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
                                     }
                                     
                                     
                                 } else {
+                                    UserDefaults.standard.set("Bad", forKey: "Times Unlocked")
                                     let alert = UIAlertController(title: "Account Not Approved", message: "This account has not been approved by the admin", preferredStyle: .alert)
                                     alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                                     self.present(alert, animated: true, completion: nil);
@@ -166,11 +174,6 @@ class logInViewController: UIViewController, UITextFieldDelegate {
             }
 
         }
-        
-    }
-    
-    func checkWhetherPasswordNeedsUpdate(){
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
