@@ -205,6 +205,44 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             self.present(alert, animated: true, completion: nil);//presents the alert for completion
             message = ""
         }
+        
+        //check to see if the user should be logged out
+                if let user = Auth.auth().currentUser {
+                
+                    checkUserAgainstDatabase { (notDeleted, error) in
+                    
+                        if(!notDeleted) { //deleted user
+                            let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                                try! Auth.auth().signOut() //sign out
+                                self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                            }))
+                            self.present(alert, animated: true, completion: nil);
+                                                
+                            //segue
+                        }
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                        self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                    }))
+                    self.present(alert, animated: true, completion: nil);
+                    //segue
+                }
+    }
+    
+    func checkUserAgainstDatabase(completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+        print(Auth.auth().currentUser)
+      guard let currentUser = Auth.auth().currentUser else { return }
+      currentUser.getIDTokenForcingRefresh(true, completion:  { (idToken, error) in
+        if let error = error {
+          completion(false, error as NSError?)
+          print(error.localizedDescription)
+        } else {
+          completion(true, nil)
+        }
+      })
     }
     
     override func viewWillAppear(_ animated: Bool) {

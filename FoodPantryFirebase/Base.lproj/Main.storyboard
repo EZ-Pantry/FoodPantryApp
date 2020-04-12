@@ -2075,9 +2075,11 @@
                         <outlet property="pickerField" destination="KgP-1c-5Qc" id="wml-nh-Dvc"/>
                         <outlet property="searchFoodBear" destination="pqI-3A-61J" id="hpI-Le-RYv"/>
                         <segue destination="JOR-ec-tQq" kind="presentation" identifier="toItemPopover" id="BwJ-7g-z4T"/>
+                        <segue destination="fbK-Wh-bz6" kind="unwind" identifier="GoToFirst" unwindAction="unwindToFirst:" id="hNt-Ea-6q8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X1S-VS-FZd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="fbK-Wh-bz6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5495.3125" y="216.796875"/>
         </scene>
@@ -2979,6 +2981,7 @@
                         <outlet property="selectButton" destination="c54-VI-0E2" id="oZQ-fn-nU7"/>
                         <segue destination="LbU-b6-iGh" kind="presentation" identifier="scanSession" modalPresentationStyle="fullScreen" id="Ybh-uf-f4w"/>
                         <segue destination="Cx6-OT-Bas" kind="unwind" identifier="BackToHome" unwindAction="unwindToHome:" id="92q-mC-Kkd"/>
+                        <segue destination="Cx6-OT-Bas" kind="unwind" identifier="GoToFirst" unwindAction="unwindToFirst:" id="Hsb-lu-uSb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iC-48-6u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3957,9 +3960,11 @@
                         <outlet property="schoolIDLabel" destination="YxX-I2-N1S" id="Z3g-Hr-Qkz"/>
                         <outlet property="schoolIDTextField" destination="w0b-Tt-oJi" id="2WV-Iy-qqv"/>
                         <segue destination="6dA-lI-9BW" kind="show" identifier="toAdminControls" id="xqN-P3-9Ua"/>
+                        <segue destination="iR1-u5-rte" kind="unwind" identifier="GoToFirst" unwindAction="unwindToFirst:" id="OqD-rb-aXD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uSO-a8-fXc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="iR1-u5-rte" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="647.82608695652175" y="906.69642857142856"/>
         </scene>
@@ -6841,7 +6846,7 @@
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -6960,7 +6965,7 @@
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -9932,7 +9937,7 @@
         <segue reference="Zke-bH-X19"/>
         <segue reference="tnj-7N-EuA"/>
         <segue reference="EWc-7U-1jR"/>
-        <segue reference="ETY-iU-Vqb"/>
+        <segue reference="ecB-Fx-w8c"/>
         <segue reference="Ona-bs-GLF"/>
     </inferredMetricsTieBreakers>
 </document>

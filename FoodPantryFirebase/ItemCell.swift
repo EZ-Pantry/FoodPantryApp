@@ -11,6 +11,9 @@ class ItemCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 3.0
+        self.layer.cornerRadius = self.frame.height / 8
     }
 
     func setData(text: String) {

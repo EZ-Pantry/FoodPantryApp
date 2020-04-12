@@ -118,16 +118,16 @@ class ViewController: UIViewController {
                             self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
                         }))
                         self.present(alert, animated: true, completion: nil);
-
-                    } else if(status == "3") { //user is deleted
-                        try! Auth.auth().signOut()
-                        let alert = UIAlertController(title: "Your Account has Been Deleted", message: "The admin has deleted this account.", preferredStyle: .alert)
-                                                 
-                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-            
-                        }))
-                        self.present(alert, animated: true, completion: nil);
                     }
+//                    } else if(status == "3") { //user is deleted
+//                        try! Auth.auth().signOut()
+//                        let alert = UIAlertController(title: "Your Account has Been Deleted", message: "The admin has deleted this account.", preferredStyle: .alert)
+//
+//                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+//
+//                        }))
+//                        self.present(alert, animated: true, completion: nil);
+//                    }
                     
                 // ...
                 }) { (error) in
@@ -140,9 +140,36 @@ class ViewController: UIViewController {
             }
             
         } else {
-            print("f")
+            print("not logged in")
         }
         
+        
+        //checking to see if user is logged in, not, or deleted
+        
+//        if let user = Auth.auth().currentUser {
+        
+            checkUserAgainstDatabase { (notDeleted, error) in
+            
+                if(!notDeleted) { //deleted user
+                    let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                        try! Auth.auth().signOut() //sign out
+                        print("signed out")
+                    }))
+                    self.present(alert, animated: true, completion: nil);
+                                        
+                    //segue
+                    
+                }
+            }
+//        } else {
+//            let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+//
+//            }))
+//            self.present(alert, animated: true, completion: nil);
+//            //segue
+//        }
         
     }
     
@@ -154,6 +181,19 @@ class ViewController: UIViewController {
     }
     
     
+}
+
+func checkUserAgainstDatabase(completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+    print(Auth.auth().currentUser)
+  guard let currentUser = Auth.auth().currentUser else { return }
+  currentUser.getIDTokenForcingRefresh(true, completion:  { (idToken, error) in
+    if let error = error {
+      completion(false, error as NSError?)
+      print(error.localizedDescription)
+    } else {
+      completion(true, nil)
+    }
+  })
 }
 
 
