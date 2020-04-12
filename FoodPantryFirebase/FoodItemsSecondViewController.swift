@@ -217,13 +217,11 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                     if(imageURL == "") {
                         self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
                         imageRecieved += 1
-                        continue
                     }
                     else if(!imageURL.verifyUrl){
                         self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
                         imageRecieved += 1
-                        continue
-                    }
+                    } else {
                     
                     self.loadImageFromFirebase(url: imageURL, order: String(i), callback: {(img, order)-> Void in
 
@@ -245,6 +243,7 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                                
                            })
                        }
+                    }
             }
         })
     }

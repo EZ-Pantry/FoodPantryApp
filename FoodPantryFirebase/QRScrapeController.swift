@@ -105,9 +105,15 @@ class QRScrapeController: UIViewController {
                     
                         //self.typeLabel.text = confirmed.substring(to: confirmed.count-1); //removes the comma at the end, puts on the screen
                     
-                    
-                        if url != "" { //only loads the url if there is one
-                            self.foodView.load(url: URL(string: url)!);
+                        if(url != "") {
+                            if(url.verifyUrl){
+                                self.foodView.load(url: URL(string: url)!) //load the image. //add this catch statement to prevent a crash when url is invalid/doesn't exits
+                            } else {
+                                self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
+                            }
+                            
+                        } else {
+                            self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
                         }
                     
                         //self.healthyLabel.text = data[index]["healthy"] as! String //puts healthy info on the screen

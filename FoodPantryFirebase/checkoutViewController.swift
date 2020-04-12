@@ -75,8 +75,6 @@ class checkoutViewController: UITableViewController {
                        let url = data[i]["image"] as! String
                        myGroup.enter()
                        
-//                       self.loadImage(url: url, callback: {(loadedImage)-> Void in
-//                        print("here")
                         if(url.verifyUrl){
                             print("valid")
                             
@@ -90,7 +88,6 @@ class checkoutViewController: UITableViewController {
                             myGroup.leave()
                         }
                            
-//                       })
                    }
                    
                    
