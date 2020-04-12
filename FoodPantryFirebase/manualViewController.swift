@@ -78,7 +78,13 @@ class manualViewController: UIViewController {
                         let url = d["image"] as! String
                         
                         if(url != "") {
-                            self.foodImage.load(url: URL(string: url)!) //load the image
+                            
+                            if(url.verifyUrl) { //proper url
+                                self.foodImage.load(url: URL(string: url)!) //load the image
+                            } else { //not a proper url
+                                self.foodImage.image = UIImage(named: "foodplaceholder.jpeg")
+                            }
+                            
                         } else {
                             self.foodImage.image = UIImage(named: "foodplaceholder.jpeg")
                         }

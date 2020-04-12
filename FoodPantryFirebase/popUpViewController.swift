@@ -49,7 +49,13 @@ class popUpViewController: UIViewController {
 
         
         if(image != "") {
-            foodImage.load(url: URL(string: String(image))!)
+            if(image.verifyUrl){
+                foodImage.load(url: URL(string: String(image))!)
+            }
+            else{
+                foodImage.image = UIImage(named: "foodplaceholder.jpeg")
+            }
+            
         } else {
             foodImage.image = UIImage(named: "foodplaceholder.jpeg")
         }

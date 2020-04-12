@@ -53,7 +53,10 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
         finishButton.titleLabel?.numberOfLines = 1;
         finishButton.titleLabel?.adjustsFontSizeToFitWidth = true
         if(image != "") {
-            itemImageView.load(url: URL(string: String(image))!)
+            if(image.verifyUrl){
+                itemImageView.load(url: URL(string: String(image))!)
+            }
+            
         } else {
             itemImageView.image = UIImage(named: "foodplaceholder.jpeg")
         }
