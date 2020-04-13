@@ -3,7 +3,7 @@
 import UIKit
 import MessageUI
 
-class emailFeedbackViewController: UIViewController {
+class emailFeedbackViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
 
     @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var subjectTextField: UITextField!
@@ -11,6 +11,7 @@ class emailFeedbackViewController: UIViewController {
     var subjectEntered = ""
     var messageEntered = ""
     
+    var activeField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         //make buttons rounded below
@@ -36,6 +37,45 @@ class emailFeedbackViewController: UIViewController {
     
     @IBAction func dismissBackButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+         NotificationCenter.default.addObserver(self, selector: #selector(emailFeedbackViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+               NotificationCenter.default.addObserver(self, selector: #selector(emailFeedbackViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        subjectTextField.delegate = self;
+        messgeTextField.delegate = self;
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+        
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        self.activeField = textField
+    }
+
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            let first = (self.activeField?.frame.origin.y) ?? -1
+            
+            if(first != -1) {
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
+            }
+            
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     
     
