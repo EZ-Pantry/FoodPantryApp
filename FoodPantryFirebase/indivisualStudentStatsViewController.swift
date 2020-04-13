@@ -75,7 +75,7 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
                         self.users[i]["Status"] = status
                         print("status below")
                         print(status)
-                        if(status == "1"){
+                        if(status == "1" || status == "2"){
                             self.usersApproved.append(self.users[i])
                             self.usersApprovedNames.append(self.users[i]["Name"] as! String)
                         }
@@ -176,7 +176,7 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
  
         if (searching){
 //            var indexCurrentlyAt =
-            if(status == "1"){
+            if(status == "1" || status == "2"){
                 cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
                 cell.nameBtn.setTitle(searchedUser[indexPath.row] as! String, for: .normal)
                 cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
@@ -196,7 +196,7 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
             }
         }
         else{
-            if(status == "1"){
+            if(status == "1" || status == "2"){
                 cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
                 cell.nameBtn.setTitle(usersApproved[indexPath.row]["Name"] as! String, for: .normal)
                 cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
