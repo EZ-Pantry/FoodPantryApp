@@ -5,7 +5,7 @@ import UIKit
 import WebKit
 import MessageUI
 import FirebaseDatabase
-class contactAdminViewController: UIViewController, UITextFieldDelegate {
+class contactAdminViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         
     var emailAt = 0;
     @IBOutlet weak var subjectTextField: UITextField!
@@ -50,6 +50,7 @@ class contactAdminViewController: UIViewController, UITextFieldDelegate {
              NotificationCenter.default.addObserver(self, selector: #selector(contactAdminViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
                    NotificationCenter.default.addObserver(self, selector: #selector(contactAdminViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
             subjectTextField.delegate = self;
+            messageTextField.delegate = self;
         }
         
         override func viewWillDisappear(_ animated: Bool) {
