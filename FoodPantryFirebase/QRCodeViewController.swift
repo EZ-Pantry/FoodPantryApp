@@ -208,7 +208,29 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
                 self.view.isUserInteractionEnabled = true
 
             } else {
-                self.performSegue(withIdentifier: "BackToHome", sender: self)
+                let uid: String = Auth.auth().currentUser!.uid
+                
+                //check if the user is an admin
+                self.ref.child(self.PantryName).child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    let value = snapshot.value as? NSDictionary
+                    let isAdmin = value?["Admin"] as? String ?? ""
+                    
+                    if(isAdmin == "yes") { //user is an admin
+                        let currentTime: String = UserDefaults.standard.object(forKey:"UserSession") as? String ?? ""
+                        
+                        if(currentTime == "" || self.tooLate(currentTime: currentTime)) {
+                            //go to scanning barcode
+                            self.performSegue(withIdentifier: "scanSession", sender: self)
+                        }
+                        self.view.isUserInteractionEnabled = true
+                    } else { //user isn't an admin
+                        self.performSegue(withIdentifier: "BackToHome", sender: self)
+                    }
+                }) { (error) in
+                    RequestError().showError()
+                    print(error.localizedDescription)
+                }
             }
             
 

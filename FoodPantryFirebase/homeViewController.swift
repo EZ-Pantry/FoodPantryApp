@@ -14,7 +14,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var schoolImageView: UIImageView!
     
-    @IBOutlet var adminUpdateLabel: UILabel!
+    
     var PantryName: String = ""
     
     var ref: DatabaseReference!
@@ -33,6 +33,10 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     var longitude: Double = -73.554
     
     @IBOutlet var welcomeView: UIView!
+    @IBOutlet var userView: UIView!
+    
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var infoLabel: UILabel!
     
     override func viewDidLoad() {
 
@@ -143,19 +147,19 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         
         }
         
-        adminUpdateLabel.layer.borderColor = UIColor.black.cgColor
-        adminUpdateLabel.layer.borderWidth = 7.0
-        adminUpdateLabel.layer.cornerRadius = adminUpdateLabel.frame.height / 8
-        adminUpdateLabel.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
+        //mapView.layer.borderColor = UIColor.black.cgColor
+        //mapView.layer.borderWidth = 7.0
+        //mapView.layer.cornerRadius = mapView.frame.height / 8
         
-        mapView.layer.borderColor = UIColor.black.cgColor
-        mapView.layer.borderWidth = 7.0
-        mapView.layer.cornerRadius = mapView.frame.height / 8
+        //welcomeView.layer.borderColor = UIColor.black.cgColor
+        //welcomeView.layer.borderWidth = 1.0
+        //welcomeView.layer.cornerRadius = welcomeView.frame.height / 8
+        //welcomeView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
         
-        welcomeView.layer.borderColor = UIColor.black.cgColor
-        welcomeView.layer.borderWidth = 7.0
-        welcomeView.layer.cornerRadius = welcomeView.frame.height / 8
-        welcomeView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
+        //userView.layer.borderColor = UIColor.black.cgColor
+        //userView.layer.borderWidth = 1.0
+        //userView.layer.cornerRadius = welcomeView.frame.height / 8
+        //userView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
         
     }
     
@@ -265,7 +269,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                     self.PantryName = pantry
                       UserDefaults.standard.set(pantry, forKey: "Pantry Name")
         
-                    self.displayAdminMessage()
                     self.getUsersName()//helper function to display user data about last time they came
                     self.sendOutNotification()
                 // ...
@@ -276,7 +279,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 
             } else {
                 self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
-                self.displayAdminMessage()
                 self.getUsersName()//helper function to display user data about last time they came
                 self.sendOutNotification()
             }
@@ -284,17 +286,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             
         }
         
-    }
-    
-    func displayAdminMessage() {
-        ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            self.adminUpdateLabel.text = "UPDATE\n\n" + (value?["Admin Message"] as? String ?? "") //loads ithe
-        }) { (error) in
-            RequestError().showError()
-            print(error.localizedDescription)
-        }
     }
     
     func checkUserStatus() {
@@ -495,11 +486,20 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             let firstName = value?["First Name"] as? String ?? ""
               let lastName = value?["Last Name"] as? String ?? ""
               let fullName = firstName + " " + lastName
+            let admin = value?["Admin"] as? String ?? ""
             let lastCheckedOutDate = value?["Last Date Visited"] as? String ?? ""
             let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
-            self.welcomeNameLbl.text = "Welcome to " + self.PantryName.uppercased() + "\n" + fullName
-//              self.lastCheckedOutLbl.text = "Last visited: \(lastCheckedOutDate)"//Display last item user checked out
-//              self.lastItemCheckedOutLbl.text = "Last Checked Out Item: \(lastItemCheckedOut)"//And the last date they visited
+            self.welcomeNameLbl.text = "Welcome to the " + self.PantryName.uppercased() + "\nFood Pantry"
+            self.nameLabel.text = fullName
+
+            //displays important information
+            if(admin == "Yes") { //user is an admin
+                self.getApprovedUsers()
+            } else { //user is a student
+                self.infoLabel.text = "Last Visited: " + lastCheckedOutDate + "\n\nLast Checked Out Item: " + lastItemCheckedOut
+            }
+            
+            //new users, food items ran out
               
               //all code with snapshot must be in here
             // ...
@@ -508,6 +508,96 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
           }
           
       }
+    
+    func setItemsRanOut(notApprovedUserCount: String) {
+        ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
+                               // Get user value
+                    
+            var itemsRunningOut: Int = 0
+                    
+                    for child in snapshot.children { //iterates through all the food items
+                        let snap = child as! DataSnapshot
+                        let uid = snap.key
+                        let value: [String: Any] = snap.value as! [String : Any]
+                        let quantity = value["Quantity"] as? String ?? ""
+                        
+                        if(Int(quantity) ?? 5 <= 5) {
+                            itemsRunningOut += 1
+                        }
+                        
+                    }
+            
+                print(itemsRunningOut)
+            
+                self.infoLabel.text = "Students not approved: " + String(notApprovedUserCount) + "\n\nFood items running out: " + String(itemsRunningOut)
+                    
+                }) { (error) in
+                    RequestError().showError()
+                    print(error.localizedDescription)
+                }
+    }
+    
+    func getApprovedUsers() {
+        getUserUID(callback: {(uidList)-> Void in //gets data from firebase
+        
+                let myGroup = DispatchGroup()
+                print("getting status")
+                
+                var count: Int = 0
+            
+                for i in 0..<uidList.count {
+                    myGroup.enter()
+                    self.ref.child("All Users").child(uidList[i]).observeSingleEvent(of: .value, with: { (snapshot) in
+                                   // Get user value
+                        let value = snapshot.value as? NSDictionary
+                        let status = value?["Account Status"] as? String ?? "" //loads in the code from firebase
+                        
+                        if(status == "0") {
+                            count += 1
+                        }
+                        
+                        myGroup.leave()
+                    }) { (error) in
+                        RequestError().showError()
+                        print(error.localizedDescription)
+                    }
+                }
+                
+                myGroup.notify(queue: .main) {
+                    self.setItemsRanOut(notApprovedUserCount: String(count))
+                }
+            
+        })
+    }
+    
+    func getUserUID(callback: @escaping (_ uidList: [String])->Void) {
+        ref.child(self.PantryName).child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
+                       // Get user value
+            
+            var uidList: [String] = []
+            
+            for child in snapshot.children { //iterates through all the food items
+                let snap = child as! DataSnapshot
+                let uid = snap.key
+                let value: [String: Any] = snap.value as! [String : Any]
+                let admin = value["Admin"] as? String ?? ""
+//                let firstName = value["First Name"] as? String ?? ""
+//                let lastName = value["Last Name"] as? String ?? ""
+//                let email = value["Email Address"] as? String ?? ""
+//                let password = value["Password"] as? String ?? ""
+                
+                if(admin != "Yes") {
+                    uidList.append(uid)
+                }
+                
+            }
+            
+            callback(uidList)
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
+    }
     
     
     @IBAction func logOutUser(_ sender: UIButton) {

@@ -354,14 +354,14 @@ extension adminFirstEditItemsViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as! ItemCell
         cell.layer.cornerRadius = cell.frame.height / 6
         if searching {
-            cell.setData(text: searchedFoodItem[indexPath.row])
+            cell.setData(text: (searchedFoodItem[indexPath.row]).trimTitle())
             var img: String = sortedData[indexPath.row]["image"] as! String
             if(sortedData[indexPath.row]["view"] != nil) {
                 cell.itemImageView.image = sortedData[indexPath.row]["view"] as! UIImage
             }
             
         } else {
-            cell.setData(text: foodItems[indexPath.row])
+            cell.setData(text: (foodItems[indexPath.row]).trimTitle())
             let url: String = data[indexPath.row]["image"] as! String
             let id: String = data[indexPath.row]["id"] as! String
             
