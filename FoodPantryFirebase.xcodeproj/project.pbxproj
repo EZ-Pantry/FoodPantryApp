@@ -46,6 +46,8 @@
 		A21748D92440D1B600A89CD2 /* chooseStatsButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21748D82440D1B600A89CD2 /* chooseStatsButtonViewController.swift */; };
 		A21748DB2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21748DA2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift */; };
 		A21748DD2440D97300A89CD2 /* selectedUserPopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21748DC2440D97300A89CD2 /* selectedUserPopOverViewController.swift */; };
+		A223919724481430008C87B5 /* passwordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A223919624481430008C87B5 /* passwordResetViewController.swift */; };
+		A22391992448143F008C87B5 /* emailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22391982448143F008C87B5 /* emailVerificationViewController.swift */; };
 		A239DC0F2413156B003CFF0C /* settingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC0E2413156B003CFF0C /* settingsPageViewController.swift */; };
 		A239DC1124131589003CFF0C /* sendfeedbackcontrolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC1024131589003CFF0C /* sendfeedbackcontrolsViewController.swift */; };
 		A239DC132413159F003CFF0C /* emailFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC122413159F003CFF0C /* emailFeedbackViewController.swift */; };
@@ -153,6 +155,8 @@
 		A21748D82440D1B600A89CD2 /* chooseStatsButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseStatsButtonViewController.swift; sourceTree = "<group>"; };
 		A21748DA2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = indivisualStudentStatsViewController.swift; sourceTree = "<group>"; };
 		A21748DC2440D97300A89CD2 /* selectedUserPopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedUserPopOverViewController.swift; sourceTree = "<group>"; };
+		A223919624481430008C87B5 /* passwordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = passwordResetViewController.swift; sourceTree = "<group>"; };
+		A22391982448143F008C87B5 /* emailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailVerificationViewController.swift; sourceTree = "<group>"; };
 		A239DC0E2413156B003CFF0C /* settingsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsPageViewController.swift; sourceTree = "<group>"; };
 		A239DC1024131589003CFF0C /* sendfeedbackcontrolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendfeedbackcontrolsViewController.swift; sourceTree = "<group>"; };
 		A239DC122413159F003CFF0C /* emailFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailFeedbackViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +313,8 @@
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
+				A223919624481430008C87B5 /* passwordResetViewController.swift */,
+				A22391982448143F008C87B5 /* emailVerificationViewController.swift */,
 				A21748DA2440D2AF00A89CD2 /* indivisualStudentStatsViewController.swift */,
 				A21748DC2440D97300A89CD2 /* selectedUserPopOverViewController.swift */,
 				A21748D82440D1B600A89CD2 /* chooseStatsButtonViewController.swift */,
@@ -678,6 +684,7 @@
 				A239DC1D2416CE77003CFF0C /* adminFirstEditItemsViewController.swift in Sources */,
 				A2794DDC24369ADF00E58C13 /* adminAddImageManualViewController.swift in Sources */,
 				A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */,
+				A223919724481430008C87B5 /* passwordResetViewController.swift in Sources */,
 				1CF92CE62423C177001D7E0B /* otherAdminViewController.swift in Sources */,
 				A239DC1124131589003CFF0C /* sendfeedbackcontrolsViewController.swift in Sources */,
 				1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */,
@@ -706,6 +713,7 @@
 				A239DC2B241C9338003CFF0C /* WeekdaysView.swift in Sources */,
 				A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */,
 				A2794DDA243431C600E58C13 /* adminAddFAQViewController.swift in Sources */,
+				A22391992448143F008C87B5 /* emailVerificationViewController.swift in Sources */,
 				1CBD0225241B118600AC53A9 /* RequestError.swift in Sources */,
 				A239DC29241C930C003CFF0C /* MonthView.swift in Sources */,
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
