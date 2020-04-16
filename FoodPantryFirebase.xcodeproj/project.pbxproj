@@ -25,6 +25,7 @@
 		1C68022D2401E5C1002D0C38 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022B2401E5C1002D0C38 /* ItemCell.xib */; };
 		1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022F2401E825002D0C38 /* GoogleService-Info.plist */; };
 		1C748F322406188800936A05 /* checkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C748F312406188800936A05 /* checkoutViewController.swift */; };
+		1C86D4892447B9B3003D4107 /* adminNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C86D4882447B9B3003D4107 /* adminNotificationsViewController.swift */; };
 		1CBD01C52414095400AC53A9 /* chooseUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */; };
 		1CBD01C724140B7700AC53A9 /* chooseSchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */; };
 		1CBD0225241B118600AC53A9 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD0224241B118600AC53A9 /* RequestError.swift */; };
@@ -126,6 +127,7 @@
 		1C68022B2401E5C1002D0C38 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 		1C68022F2401E825002D0C38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C748F312406188800936A05 /* checkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutViewController.swift; sourceTree = "<group>"; };
+		1C86D4882447B9B3003D4107 /* adminNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminNotificationsViewController.swift; sourceTree = "<group>"; };
 		1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseUserViewController.swift; sourceTree = "<group>"; };
 		1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseSchoolViewController.swift; sourceTree = "<group>"; };
 		1CBD0224241B118600AC53A9 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				1C63897E2432E008005BB1BC /* EditName.swift */,
 				1C61044D2439819900ED1A9A /* manageUsersViewController.swift */,
 				1C2F6BF224400DBB0002257B /* manangeSelectedUserViewController.swift */,
+				1C86D4882447B9B3003D4107 /* adminNotificationsViewController.swift */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				1CBF1C55242009EE0064F7D1 /* CheckoutCell1TableViewCell.swift in Sources */,
 				1CBD01C52414095400AC53A9 /* chooseUserViewController.swift in Sources */,
 				A24F388723FF500F00AACC97 /* popUpViewController.swift in Sources */,
+				1C86D4892447B9B3003D4107 /* adminNotificationsViewController.swift in Sources */,
 				A239DC312420538E003CFF0C /* adminQRViewController.swift in Sources */,
 				A239DC0F2413156B003CFF0C /* settingsPageViewController.swift in Sources */,
 				1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */,
