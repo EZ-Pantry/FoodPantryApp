@@ -398,6 +398,10 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                        } else { //good status, returns the title
                             let title = foods["title"] as! String ?? ""
                             let url = foods["image"] as! String ?? ""
+                        
+                            print(title)
+                            print(url)
+                        
                            completion(title, false, url)
                        }
                    } catch {
@@ -482,6 +486,12 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     
                     self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy.filterEmoji);
                     
+                    //add the new barcode
+                    
+                    if(!self.manualEnter) {
+                        self.ref.child(self.PantryName).child("Barcodes").child(self.barcode).setValue(key)
+                    }
+                    
                     myGroup.leave() //all done, can leave the group
                   // ...
                   }) { (error) in
@@ -541,7 +551,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 
                 if(!manualEnter) {
                     let uid = refChild.key!
-                    self.ref.child(self.PantryName).child("Barcodes").setValue([barcode: uid])
+                    self.ref.child(self.PantryName).child("Barcodes").child(self.barcode).setValue(uid)
                 }
             
                 refChild.updateChildValues(dic as [NSObject : AnyObject]) { (error, ref) in
