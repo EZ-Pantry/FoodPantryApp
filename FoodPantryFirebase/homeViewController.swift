@@ -47,7 +47,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         //this isn't helpful when you sign in with your account, delete the app, and then get brought
         //to the home screen and an error pops up saying that pantry name doesn't exist
         
-        
         self.ref = Database.database().reference()
         
                 
@@ -739,6 +738,32 @@ extension String {
         return filter{ $0.isEmoji }.flatMap { $0.unicodeScalars }
     }
 }
+
+extension UIImage {
+    func load(url: String) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: URL(string: url)!) {
+                self = UIImage(data: data)
+            }
+        }
+    }
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 extension String {
     var verifyUrl: Bool {
         let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
@@ -748,5 +773,38 @@ extension String {
         } else {
             return false
         }
+//        let req = NSMutableURLRequest(url: NSURL(string: self) as! URL)
+//        req.httpMethod = "HEAD"
+//           req.timeoutInterval = 1.0 // Adjust to your needs
+//
+//        var response : URLResponse?
+//
+//        do {
+//            try NSURLConnection.sendSynchronousRequest(req as URLRequest, returning: &response)
+//        } catch {
+//            return false
+//        }
+//        print((response as? HTTPURLResponse)?.statusCode)
+//        return ((response as? HTTPURLResponse)?.statusCode ?? -1) == 200
+//
+//        var exists: Bool = false
+//        let url: NSURL = NSURL(string: self)!
+//        var request: NSMutableURLRequest = NSMutableURLRequest(url: url as URL)
+//        request.httpMethod = "HEAD"
+//        var response: URLResponse?
+//        do {
+//            try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: nil)
+//            if let httpResponse = response as? HTTPURLResponse {
+//
+//                if httpResponse.statusCode == 200 {
+//                    return true
+//                }
+//                return false
+//
+//            }
+//        } catch {
+//            return false
+//        }
+//        return false
     }
 }

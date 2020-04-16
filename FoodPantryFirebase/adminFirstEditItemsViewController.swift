@@ -206,7 +206,7 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: URL(string: url)!) {
                 let image = UIImage(data: data)
-                callback(image!, order) //returns a ui image
+                callback(image ?? UIImage(named: "foodplaceholder.jpeg")!, order) //returns a ui image
             }
         }
     }
@@ -223,7 +223,6 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     }
     
     func refresh() {
-        var imageRecieved: Int = 0
         //showLoadingAlert()
         foodItems = []
         
@@ -237,44 +236,49 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
         getDataFromFirebase(callback: {(success)-> Void in //gets data from firebase
             if(success) { //same as the code in the viewDidLoad()
                 print("got data")
+                let myGroup = DispatchGroup()
+
                 for i in 0..<self.data.count {
-                    
+                    myGroup.enter()
                     let imageURL = self.data[i]["image"] as! String
                                        
                     if(imageURL == "") {
                         self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
-                        imageRecieved += 1
-                        continue
+                        myGroup.leave()
+
                     }
                     else if(!imageURL.verifyUrl){
                         self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
-                        imageRecieved += 1
-                        continue
-                    }
+                        myGroup.leave()
+
+                    } else {
                     
                     self.loadImageFromFirebase(url: imageURL, order: String(i), callback: {(img, order)-> Void in
                                
                                for i in 0..<self.data.count {
                                    if (self.data[i]["id"] as! String == order) {
                                        self.data[i]["view"] = img
-                                        imageRecieved += 1
+                                    myGroup.leave()
+
                                    }
                                }
                                
-                        if(imageRecieved == self.data.count) {
-                            DispatchQueue.main.async {
-                                //let top: UIViewController = UIApplication.topViewController()!
-                                //top.dismiss(animated: false)
-                                self.collectionView.reloadData()
-                                self.pickerField.text = "All Items"
-                                print("refreshed")
-                                print(self.data)
-                            }
-                        }
                         
                                
                            })
                        }
+                    }
+                
+                myGroup.notify(queue: .main) {
+                        //let top: UIViewController = UIApplication.topViewController()!
+                        //top.dismiss(animated: false)
+                        self.collectionView.reloadData()
+                        self.pickerField.text = "All Items"
+                        print("refreshed")
+                        print(self.data)
+                }
+                
+
             }
         })
     }
