@@ -3,6 +3,7 @@
 
 import UIKit
 import FirebaseUI
+var changeImageName = ""
 class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var itemNameTextField: UITextField!
@@ -14,6 +15,7 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var itemQuantityTextField: UITextField!
     //data of the food item, set in another view controller
     
+    @IBOutlet weak var changeImageButton: UIButton!
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var finishButton: UIButton!
     
@@ -52,16 +54,33 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
         finishButton.titleLabel?.minimumScaleFactor = 0.5
         finishButton.titleLabel?.numberOfLines = 1;
         finishButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        
+        changeImageButton.layer.cornerRadius = 15
+        changeImageButton.clipsToBounds = true
+        
+        changeImageButton.titleLabel?.minimumScaleFactor = 0.5
+        changeImageButton.titleLabel?.numberOfLines = 1;
+        changeImageButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         if(image != "") {
-            if(image.verifyUrl){
-                itemImageView.load(url: URL(string: String(image))!)
+            if(newImageURLFromChanged == ""){
+                if(image.verifyUrl){
+                    itemImageView.load(url: URL(string: String(image))!)
+                }
             }
+            else{
+                itemImageView.load(url: URL(string: String(newImageURLFromChanged))!)
+            }
+            
             
         } else {
             itemImageView.image = UIImage(named: "foodplaceholder.jpeg")
         }
         
         itemNameTextField.text = name;
+        changeImageName = name;
+        newImageURLFromChanged = ""
         itemInfoTextField.text = information;
         itemAllergiesTextField.text = allergies;
         itemTypeTextField.text = type;
@@ -81,6 +100,20 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
     override func viewWillAppear(_ animated: Bool) {
          NotificationCenter.default.addObserver(self, selector: #selector(ediItemInfoViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
                NotificationCenter.default.addObserver(self, selector: #selector(ediItemInfoViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        if(image != "") {
+            if(newImageURLFromChanged == ""){
+                if(image.verifyUrl){
+                    itemImageView.load(url: URL(string: String(image))!)
+                }
+            }
+            else{
+                itemImageView.load(url: URL(string: String(newImageURLFromChanged))!)
+            }
+            
+            
+        } else {
+            itemImageView.image = UIImage(named: "foodplaceholder.jpeg")
+        }
         itemNameTextField.delegate = self;
         itemInfoTextField.delegate = self;
         itemAllergiesTextField.delegate = self;
@@ -175,6 +208,13 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
                     self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Type").setValue(editedType);
                     self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Healthy").setValue(editedHealthy);
                     self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("Quantity").setValue(editedQuantity);
+                    
+                    if(self.image != "") {
+                        if(newImageURLFromChanged != ""){
+                            self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.itemBeingEditedID).child("URL").setValue(newImageURLFromChanged);
+                        }
+                    }
+                    
                 }
                 c += 1
                 myGroup.leave()
