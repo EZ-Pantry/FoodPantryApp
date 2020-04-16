@@ -198,18 +198,34 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
           let value = snapshot.value as? NSDictionary
           let checkout = value?["CanCheckout"] as? String ?? ""
           
-            if(checkout == "yes") {
-                let currentTime: String = UserDefaults.standard.object(forKey:"UserSession") as? String ?? ""
-                
-                if(currentTime == "" || self.tooLate(currentTime: currentTime)) {
-                    //go to scanning barcode
-                    self.performSegue(withIdentifier: "scanSession", sender: self)
-                }
-                self.view.isUserInteractionEnabled = true
 
-            } else {
-                self.performSegue(withIdentifier: "BackToHome", sender: self)
-            }
+                let uid: String = Auth.auth().currentUser!.uid
+                
+                //check if the user is an admin
+                self.ref.child(self.PantryName).child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    let value = snapshot.value as? NSDictionary
+                    var isAdmin = value?["Admin"] as? String ?? ""
+                    isAdmin = isAdmin.lowercased()
+                    if(isAdmin == "yes") { //user is an admin
+                        //doesn't have to verify
+                        self.view.isUserInteractionEnabled = true
+                    } else if(checkout == "yes"){ //user isn't an admin but can still checkout
+                        let currentTime: String = UserDefaults.standard.object(forKey:"UserSession") as? String ?? ""
+                        
+                        if(currentTime == "" || self.tooLate(currentTime: currentTime)) {
+                            //go to scanning barcode
+                            self.performSegue(withIdentifier: "scanSession", sender: self)
+                        }
+                        self.view.isUserInteractionEnabled = true
+                    } else {
+                        self.performSegue(withIdentifier: "BackToHome", sender: self)
+                    }
+                }) { (error) in
+                    RequestError().showError()
+                    print(error.localizedDescription)
+                }
+        
             
 
           // ...

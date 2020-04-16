@@ -45,6 +45,9 @@ class adminEditPopUpViewController: UIViewController {
         super.viewDidLoad()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
         ref = Database.database().reference()
+        
+        popOverView.layer.cornerRadius = 15
+        popOverView.clipsToBounds = true
 
         //sets the labels on the screen
         foodName.text = name.trimTitle()

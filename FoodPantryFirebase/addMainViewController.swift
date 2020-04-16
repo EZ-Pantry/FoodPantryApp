@@ -52,15 +52,13 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()//data which can be selected via pickerView
     
+    //the new food title
+    
+    var newFoodTitle = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        chooseImgButton.isHidden = true;
-        
-//        chooseImgButton.isHidden = true;
-//        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(addMainViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        
+
         
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
@@ -117,6 +115,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                          
                 //update screen
                 self.existing = true
+                self.food_title = food_data["name"] as! String
                 self.nameLabel.text = (food_data["name"] as! String).trimTitle()
                 self.ingredientsLabel.text = food_data["information"] as! String
                 self.allergiesLabel.text = food_data["allergies"] as! String
@@ -163,7 +162,13 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                         
                         self.getFoodDataFromFirebase(callback: {(data, items)-> Void in //get data from the database
                             
+                            print(items)
+                            print(title)
+                            
                             if(items.contains(title)) { //food item already exists
+                                
+                                print("found item")
+                                
                                 self.existing = true
                                 let index: Int = items.firstIndex(of: title)! //gets index of the food item
                                 
@@ -202,6 +207,9 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 self.adminDirections.text = "Existing Item\nEdit the Following"
                                 
                             } else { //new item
+                                
+                                print("new item")
+                                
                                 self.existing = false
                                 if(newImageURL == ""){
                                     self.food_url = image
@@ -238,6 +246,15 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 
                 
     }
+    
+    
+    @IBAction func nameLabelChanged(_ sender: Any) {
+        
+        self.food_title = self.nameLabel.text ?? ""
+        
+    }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
@@ -295,34 +312,6 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.view.frame.origin.y = 0
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//            super.viewWillDisappear(true)
-//            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-//            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-//        }
-//
-//        func textFieldDidBeginEditing(_ textField: UITextField){
-//            print("switched")
-//            self.activeField = textField
-//        }
-//
-//        func textFieldDidEndEditing(_ textField: UITextField){
-//            activeField = nil
-//        }
-//
-//        @objc func keyboardWillShow(notification: NSNotification) {
-//            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-//                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-//                } else {
-//                    self.view.frame.origin.y = 0
-//                }
-//            }
-//        }
-//
-//        @objc func keyboardWillHide(notification: NSNotification) {
-//            self.view.frame.origin.y = 0
-//        }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -447,10 +436,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 
                 myGroup.enter()
                 
-                let key = food_data["key"] as! String
-                
-                print("key")
-                print(key)
+                let key = food_data["key"] as! String //gets the uid of the food item
+
                 
                 self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
                     
@@ -504,7 +491,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             } else { //need to add in a new food item
                 //create new data
                 
-                var newTitle = self.nameLabel.text!
+                var newTitle = food_title
                 var newIngredients: String = self.ingredientsLabel.text!
                 var newAllergies: String = self.allergiesLabel.text!
                 var newType: String = self.typeLabel.text!
