@@ -15,6 +15,7 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var foodTitle: UITextField!
     
     var error = ""
+    var message = ""
     
     @IBOutlet var cameraView: UIView!
     @IBOutlet var manualView: UIView!
@@ -88,6 +89,8 @@ class QRAddViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         if error != "" {
             errorLabel.text = error
+        } else if message != "" {
+            errorLabel.text = message
         }
         
         foodTitle.text = ""

@@ -39,6 +39,14 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()//data which can be selected via pickerView
     
+    //for type
+    let yourPicker2 = UIPickerView()
+    var pickerData2: [String] = [String]()//data which can be selected via pickerView
+    
+    //for allergy
+    let yourPicker3 = UIPickerView()
+    var pickerData3: [String] = [String]()//data which can be selected via pickerView
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
@@ -94,6 +102,18 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         itemHealthyTextField.inputView = yourPicker
         pickerData = ["Yes", "No"]
+        
+        yourPicker2.delegate = self
+        yourPicker2.dataSource = self
+        
+        itemTypeTextField.inputView = yourPicker2
+        pickerData2 = ["Snack", "Breakfast", "Lunch", "Dinner", "Drink"]
+        
+        yourPicker3.delegate = self
+        yourPicker3.dataSource = self
+        
+        itemAllergiesTextField.inputView = yourPicker3
+        pickerData3 = ["None", "Dairy", "Eggs", "Peanuts", "Tree Nuts", "Shellfish", "Wheat", "Soy", "Fish", "Other"]
                 
 
     }
@@ -133,9 +153,6 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.activeField = textField
     }
 
-//    func textFieldDidEndEditing(_ textField: UITextField){
-//        activeField = nil
-//    }
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -163,16 +180,36 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        
+        if(pickerView == yourPicker) {
+            return pickerData.count
+        } else if(pickerView == yourPicker2) {
+            return pickerData2.count
+        }
+        return pickerData3.count
+        
     }
     
     // The data to return fopr the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
-        return pickerData[row]
+        if(pickerView == yourPicker) {
+            return pickerData[row]
+        } else if(pickerView == yourPicker2) {
+            return pickerData2[row]
+        }
+        return pickerData3[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-     itemHealthyTextField.text = pickerData[row]
+     
+        if(pickerView == yourPicker) {
+            itemHealthyTextField.text = pickerData[row]
+        } else if(pickerView == yourPicker2) {
+            itemTypeTextField.text = pickerData2[row]
+        } else {
+             itemAllergiesTextField.text = pickerData3[row]
+        }
+        
     }
     
     

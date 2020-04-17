@@ -18,51 +18,44 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()
     
+    //picker view for deciding filtering of the food items
+    @IBOutlet var pickerField2: UITextField!
+    let yourPicker2 = UIPickerView()
+    var pickerData2: [String] = [String]()
     
-    var foodItemsNameDataArray = [String]() //names of all the food items
-    var storage: Storage! //storage
-
-    var foodItemsImageArray = [UIImage]() //array of images of all the food items, loaded in the beginning
     var ref: DatabaseReference! //ref to db
-    
-    var searchedFoodItem = [String]() //array of food items that have been searched
-    var searchedFoodItemImage = [String]() //same as above, but images
-    var searchedFoodItemQuantity = [String]() //same as above, but max quantities
-    
-    var searching = false //if the user is searching for a food item
     
     //properties of the item cell
     var estimateWidth = 160.0
     var cellMarginSize = 16.0
     
-    //all the food item names/titles
-    var foodItems: [String] = []
-    
-    //all the data for the food items
-    var data : [[String: Any]] =  []
-    
+   //all the data for the food items
+    var allData : [[String: Any]] =  []
     //sorted data
-    var sortedData : [[String: Any]] =  []
+    var changedData : [[String: Any]] =  []
     
     //selected food items after they have been searched for
     var selectedFoodItem: [String: Any]?
         
     var PantryName: String = ""
     
+    var currentFilter = "No Order"
+    var currentSorter = "All Items"
+    
+    var searchText: String = "" //what the user searched for
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
         ref = Database.database().reference()
-        //initialize storage below
-        storage = Storage.storage()
-        
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.searchFoodBear.delegate = self
         
+        self.searchFoodBear.delegate = self
+        self.searchFoodBear.returnKeyType = .done;
+        self.searchFoodBear.enablesReturnKeyAutomatically = false
         
         //picker view
         
@@ -70,7 +63,15 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
         yourPicker.dataSource = self
         pickerField.inputView = yourPicker
         
-        pickerData = ["All Items", "A-Z", "Z-A"] //sets the values for the picker view
+        pickerData = ["No Order", "Quantity", "A-Z", "Z-A"] //sets the values for the picker view
+        
+        //picker view 2
+               
+        yourPicker2.delegate = self
+        yourPicker2.dataSource = self
+        pickerField2.inputView = yourPicker2
+               
+        pickerData2 = ["All Items", "Healthy", "Not Healthy", "Snack", "Breakfast", "Lunch", "Dinner", "Drink"] //sets the values for the picker view
         
         // Register cells
         self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
@@ -120,42 +121,72 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
+        if(pickerView == yourPicker) { return pickerData.count }
+        return pickerData2.count    }
     
     // The data to return fopr the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
-        return pickerData[row]
+        if(pickerView == yourPicker) { return pickerData[row] }
+        return pickerData2[row]
     }
     
     //when the picker view is changed
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-       pickerField.text = pickerData[row]
-    
-        if(pickerData[row] == "A-Z") { //sorted a to z
-            sortAtoZ()
-        } else if(pickerData[row] == "Z-A") { //sorted z to a
-            sortZtoA()
-        }
+       if(pickerView == yourPicker) {
+           pickerField.text = pickerData[row]
+           currentSorter = pickerData[row]
+       } else {
+           pickerField2.text = pickerData2[row]
+           currentFilter = pickerData2[row]
+       }
+       
+       applyFilterSort(filter: currentFilter, sort: currentSorter)
         
     }
     
-    //sorts the food items alphabetically using swifts sorting operators
-    func sortAtoZ() {
-        data = data.sorted { ($0["name"] as! String).lowercased() < ($1["name"] as! String).lowercased() }
-        foodItems = foodItems.sorted { $0.lowercased() < $1.lowercased() }
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+    func applyFilterSort(filter: String, sort: String) {
+        
+        //apply sort first
+        
+        if(searchText == "") {
+             changedData = allData
+         } else {
+             changedData = filterArray(dataValues: allData, searchText: searchText)
+         }
+                
+        if(sort == "No Order") {
+            //do nothing
+        } else if(sort == "Quantity") {
+            changedData = changedData.sorted { Int($0["quantity"] as! String) ?? 0 > Int($1["quantity"] as! String) ?? 0 }
+        } else if(sort == "A-Z") {
+            changedData = changedData.sorted { ($0["name"] as! String).lowercased() < ($1["name"] as! String).lowercased() }
+        } else if(sort == "Z-A") {
+            changedData = changedData.sorted { ($0["name"] as! String).lowercased() > ($1["name"] as! String).lowercased() }
         }
+        
+        //apply filter next
+        
+        if(filter == "All Items") {
+            //do nothing
+        } else if(filter == "Healthy") {
+            changedData = changedData.filter { ($0["healthy"] as! String).lowercased() == "yes" }
+        } else if(filter == "Not Healthy") {
+            changedData = changedData.filter { ($0["healthy"] as! String).lowercased() == "no" }
+        } else if(filter == "Snack") {
+            changedData = changedData.filter { ($0["type"] as! String).lowercased() == "snack" }
+        } else if(filter == "Breakfast") {
+            changedData = changedData.filter { ($0["type"] as! String).lowercased() == "breakfast" }
+        } else if(filter == "Lunch") {
+            changedData = changedData.filter { ($0["type"] as! String).lowercased() == "lunch" }
+        } else if(filter == "Dinner") {
+            changedData = changedData.filter { ($0["type"] as! String).lowercased() == "dinner" }
+        } else if(filter == "Drink") {
+            changedData = changedData.filter { ($0["type"] as! String).lowercased() == "drink" }
+        }
+        
+        collectionView.reloadData()
+        
     }
-    
-    func sortZtoA() {
-           data = data.sorted { ($0["name"] as! String).lowercased() > ($1["name"] as! String).lowercased() }
-           foodItems = foodItems.sorted { $0.lowercased() > $1.lowercased() }
-           DispatchQueue.main.async {
-               self.collectionView.reloadData()
-           }
-       }
     
     //gets data from firebase (found in other views)
     
@@ -166,7 +197,6 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
         self.ref.child(self.PantryName).child("Inventory").child("Food Items").observeSingleEvent(of: .value, with: { (snapshot) in
             
             var tempData : [[String: Any]] = []
-            var tempNames: [String] = []
             var c: Int = 0
             for child in snapshot.children { //iterates through all the food items
                 let snap = child as! DataSnapshot
@@ -185,13 +215,11 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
                 
                 //adds to array
                 tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "type": type, "allergies": allergies, "id": id, "uid": key])
-                tempNames.append(name)
                 c += 1 //increments id count
             }
             
             //sets to instance field
-            self.data = tempData
-            self.foodItems = tempNames
+            self.allData = tempData
             
             
              callback(true)
@@ -223,63 +251,58 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     }
     
     func refresh() {
-        //showLoadingAlert()
-        foodItems = []
-        
-        //all the data for the food items
-        data =  []
-        
-        //sorted data
-        sortedData =  []
-        searching = false
-        
+        showLoadingAlert()
         getDataFromFirebase(callback: {(success)-> Void in //gets data from firebase
             if(success) { //same as the code in the viewDidLoad()
-                print("got data")
                 let myGroup = DispatchGroup()
-
-                for i in 0..<self.data.count {
+                
+                
+                
+                for i in 0..<self.allData.count {
                     myGroup.enter()
-                    let imageURL = self.data[i]["image"] as! String
+                    let imageURL = self.allData[i]["image"] as! String
                                        
                     if(imageURL == "") {
-                        self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
+                        self.allData[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
                         myGroup.leave()
-
+                        
                     }
                     else if(!imageURL.verifyUrl){
-                        self.data[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
+                        print(imageURL)
+                        print("not verified")
+                        self.allData[i]["view"] = UIImage(named: "foodplaceholder.jpeg")
                         myGroup.leave()
-
                     } else {
-                    
+                    print(imageURL)
+                    print("good")
+                        
                     self.loadImageFromFirebase(url: imageURL, order: String(i), callback: {(img, order)-> Void in
-                               
-                               for i in 0..<self.data.count {
-                                   if (self.data[i]["id"] as! String == order) {
-                                       self.data[i]["view"] = img
-                                    myGroup.leave()
 
+                               for i in 0..<self.allData.count {
+                                   if (self.allData[i]["id"] as! String == order) {
+                                       self.allData[i]["view"] = img
                                    }
                                }
-                               
-                        
-                               
+                            myGroup.leave()
+
+
                            })
                        }
                     }
-                
                 myGroup.notify(queue: .main) {
-                        //let top: UIViewController = UIApplication.topViewController()!
-                        //top.dismiss(animated: false)
-                        self.collectionView.reloadData()
-                        self.pickerField.text = "All Items"
-                        print("refreshed")
-                        print(self.data)
+                     self.dismiss(animated: false)
+                    
+                    self.searchText = ""
+                    self.currentFilter = "No Order"
+                    self.currentSorter = "All Items"
+                    self.pickerField2.text = "All Items"
+                    self.pickerField.text = "No Order"
+                    self.applyFilterSort(filter: self.currentFilter, sort: self.currentSorter)
+                    
+                     self.collectionView.reloadData()
                 }
-                
 
-            }
+                 }
         })
     }
     
@@ -305,20 +328,10 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //handle clicking of element
 
-        if(searching) { //searching
-            let index = indexPath[1] //gets the row value
-            selectedFoodItem = sortedData[index] //since searchinng, the data for the item cells is mirrored in sorted data
-        } else { //not searching for a food item
-            let index = indexPath[1]
-            selectedFoodItem = data[index] //data is based on the selected food item
-        }
-        
-        
+        let index = indexPath[1]
+        selectedFoodItem = changedData[index] //data is based on the selected food item
+               
         self.performSegue(withIdentifier: "toItemPopover2", sender: self) //shows pop up view
-    }
-    
-    @IBAction func unwindToFoodItemsSecond(_ unwindSegue: UIStoryboardSegue) {
-        
     }
     
     //segue handler
@@ -346,35 +359,20 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
 extension adminFirstEditItemsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if searching {
-            return searchedFoodItem.count
-        } else {
-
-            return foodItems.count
-        }
+        return changedData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as! ItemCell
+
         cell.layer.cornerRadius = cell.frame.height / 6
-        if searching {
-            cell.setData(text: (searchedFoodItem[indexPath.row]).trimTitle())
-            var img: String = sortedData[indexPath.row]["image"] as! String
-            if(sortedData[indexPath.row]["view"] != nil) {
-                cell.itemImageView.image = sortedData[indexPath.row]["view"] as! UIImage
-            }
+        
+        cell.setData(text: (self.changedData[indexPath.row]["name"] as! String).trimTitle())
             
-        } else {
-            cell.setData(text: (foodItems[indexPath.row]).trimTitle())
-            let url: String = data[indexPath.row]["image"] as! String
-            let id: String = data[indexPath.row]["id"] as! String
-            
-            if(data[indexPath.row]["view"] != nil) {
-                cell.itemImageView.image = data[indexPath.row]["view"] as! UIImage
-            }
-            
-                
-            }
+        if(self.changedData[indexPath.row]["view"] != nil) {
+            cell.itemImageView.image = self.changedData[indexPath.row]["view"] as! UIImage
+        }
+    
         return cell
     }
     
@@ -402,29 +400,31 @@ extension adminFirstEditItemsViewController: UICollectionViewDelegateFlowLayout 
 extension adminFirstEditItemsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        (searchedFoodItem, sortedData) = filterArray(items: foodItems, dataValues: data, searchText: searchText)
-        searching = true
+        self.searchText = searchText
+        
+        applyFilterSort(filter: currentFilter, sort: currentSorter)
+        
         collectionView.reloadData()
     }
 
-    func filterArray(items: [String], dataValues: [[String: Any]], searchText: String) -> ([String], [[String: Any]]) {
-        var newItems: [String] = []
+    func filterArray(dataValues: [[String: Any]], searchText: String) -> ([[String: Any]]) {
         var newValues: [[String: Any]] = []
         
         var count = 0
-        for item in items {
-            if (item.contains(searchText)) {
-                newItems.append(items[count])
+        for item in dataValues {
+            if ((item["name"] as! String).contains(searchText)) {
                 newValues.append(dataValues[count])
             }
             count += 1
         }
-        return (newItems, newValues)
+        return newValues
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searching = false
         searchBar.text = ""
+        changedData = allData
+        applyFilterSort(filter: currentFilter, sort: currentSorter)
+
         collectionView.reloadData()
     }
     
@@ -435,9 +435,7 @@ extension adminFirstEditItemsViewController: UISearchBarDelegate {
     @IBAction func unwindToAdminEdit(_ unwindSegue: UIStoryboardSegue) {
         let sourceViewController = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
-        pickerField.text = "view did segue"
         refresh()
-        pickerField.text = "view did refresh"
 
     }
     

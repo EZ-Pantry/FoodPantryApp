@@ -55,8 +55,8 @@ class adminEditPopUpViewController: UIViewController {
         foodInformation.text = "Information: " + String(information)
         foodCheckedout.text = "Total Checked out: " + String(checkedout)
         foodHealthy.text = "Healthy: " + String(healthy)
-        foodAllergy.text = "Healthy: " + String(allergies)
-        foodType.text = "Healthy: " + String(type)
+        foodAllergy.text = "Allergy: " + String(allergies)
+        foodType.text = "Type: " + String(type)
 
         if(image != "") {
             if(image.verifyUrl){

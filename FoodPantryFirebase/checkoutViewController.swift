@@ -124,7 +124,7 @@ class checkoutViewController: UITableViewController {
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: URL(string: url)!) {
                 let image = UIImage(data: data)
-                callback(image!) //returns a ui image
+                callback(image ?? UIImage(imageLiteralResourceName: "foodplaceholder.png")) //returns a ui image
             }
         }
     }
@@ -194,6 +194,35 @@ class checkoutViewController: UITableViewController {
               }
             
         }
+        
+        //delete barcodes from firebase
+        
+        //first, check to see if this food item has already been scanned
+               
+        var str: String = barcodes
+        
+        print(barcodes)
+        
+        //splits up the string into items and their quantities
+        while str.count > 0 {
+            myGroup.enter()
+            var upc = str.substring(to: str.indexDistance(of: ",")!)
+            
+            if(upc.substring(to: 2) == "00") { //don't need the double 0, is stored with only one 0 in firebase
+                upc = upc.substring(from: 1)
+            }
+            
+            let ref = self.ref.child(self.PantryName).child("Barcodes").child(upc)
+            ref.removeValue { error, _ in
+                if(error != nil) {
+                     RequestError().showError()
+                }
+                print("deleted")
+                myGroup.leave()
+            }
+            str = str.substring(from: str.indexDistance(of: ",")! + 1)
+        }
+        
         
         if(self.items.count > 0) {
         

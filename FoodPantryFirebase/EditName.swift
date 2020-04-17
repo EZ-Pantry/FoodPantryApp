@@ -13,12 +13,16 @@ extension String {
     
     public func trimTitle() -> String {
         
-        let comma: Int = self.indexDistance(of: ",") ?? -1 //get the index of the food item
+        let noCommas: String = self.replacingOccurrences(of: ",", with: "", options: NSString.CompareOptions.literal, range: nil)
         
-        if(comma >= 1) {
-            return self.substring(to: comma)
-        }
-        return self
+        return noCommas
+        
+//        let comma: Int = self.indexDistance(of: ",") ?? -1 //get the index of the food item
+//
+//        if(comma >= 1) {
+//            return self.substring(to: comma)
+//        }
+//        return self
         
     }
     

@@ -22,9 +22,9 @@ class popUpViewController: UIViewController {
     var quantity = ""
     var information = ""
     var checkedout = ""
-    var healthy = ""
+    var healthy = "1"
     var image = ""
-    var allergies = ""
+    var allergies = "2"
     var type = ""
     
     override func viewDidLoad() {
@@ -36,10 +36,13 @@ class popUpViewController: UIViewController {
         //sets the labels on the screen
         foodName.text = name.trimTitle()
         
+        print(healthy)
+        print(allergies)
+        
         if(Int(quantity) ?? 0 == 0) {
             foodQuantity.text = "Out of Stock"
         } else {
-            foodQuantity.text = "Quantity:\n" + String(quantity)
+            foodQuantity.text = "Quantity: " + String(quantity)
         }
         foodInformation.text = "Information:\n" + String(information)
         foodHealthy.text = "Healthy:\n" + String(healthy)

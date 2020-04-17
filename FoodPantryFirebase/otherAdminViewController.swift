@@ -14,6 +14,7 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var checkoutSwitch: UISwitch!
     @IBOutlet var adminCode: UITextField!
     @IBOutlet var saveButton: UIButton!
+    @IBOutlet var maxFood: UITextField!
     
     @IBOutlet var pantryCode: UITextField!
     @IBOutlet var location: UITextField!
@@ -61,11 +62,17 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-            } else {
-                self.view.frame.origin.y = 0
+            
+            let first = (self.activeField?.frame.origin.y) ?? -1
+            
+            if(first != -1) {
+                if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                    self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                } else {
+                    self.view.frame.origin.y = 0
+                }
             }
+            
         }
     }
 
@@ -97,6 +104,9 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
             let pantryCode = value?["Pantry Code"] as? String ?? ""
             self.pantryCode.text = pantryCode
             
+            let maxChecked = value?["Max Food Checked Out"] as? String ?? ""
+            self.maxFood.text = maxChecked
+            
             self.view.isUserInteractionEnabled = true
             // ...
             }) { (error) in
@@ -120,6 +130,10 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
         
         if(newPantryCode.count >= 1) {
             self.ref.child(self.PantryName).child("Pantry Code").setValue(newPantryCode);
+        }
+        
+        if(Int(maxFood.text ?? "0") ?? 0 > 0) {
+            self.ref.child(self.PantryName).child("Max Food Checked Out").setValue(maxFood.text);
         }
         
         self.ref.child(self.PantryName).child("Location").setValue(newLocation);

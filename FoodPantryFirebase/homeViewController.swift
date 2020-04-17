@@ -490,6 +490,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             let lastItemCheckedOut = value?["Last Item Checked Out"] as? String ?? ""
             self.welcomeNameLbl.text = "Welcome to the " + self.PantryName.uppercased() + "\nFood Pantry"
             self.nameLabel.text = fullName
+            self.nameLabel.underlined()
 
             //displays important information
             if(admin == "Yes") { //user is an admin
@@ -760,6 +761,20 @@ extension UIImageView {
                 }
             }
         }
+    }
+}
+
+extension UILabel {
+
+    // Next step here
+    func underlined(){
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = UIColor.black.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
     }
 }
 
