@@ -5,29 +5,15 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 import Charts
-class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, ChartViewDelegate {
-
-    @IBOutlet weak var totalStatsButton: UIButton!//see total statistics
-    
-    @IBOutlet weak var indivisualStudentButton: UIButton!//see indivisual student stats
+class ViewStatisticsViewController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var chooseGraphOrTextSegment: UISegmentedControl!//segment control to choose text or graph format
     
-    @IBOutlet weak var studentNameLbl: UILabel!//main header
-
-    
-    @IBOutlet weak var studentIDLbl: UILabel!
-    @IBOutlet weak var lastItemCheckedOutLbl: UILabel!
-    @IBOutlet weak var lastDateCheckedOutLbl: UILabel!
-    @IBOutlet weak var pickerField: UITextField!
-    @IBOutlet weak var allergiesLbl: UILabel!
-    @IBOutlet weak var totalItemsCheckedOutlbl: UILabel!
     @IBOutlet weak var chartView: LineChartView!
             
 
     var ref: DatabaseReference!
     
-    @IBOutlet weak var backButton: UIButton!
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()//where the choosable students names go
     var datesData: [String] = [String]()//where the dates of checking out go array
@@ -36,7 +22,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     var yAxisDataNumVisits: [Int] = [Int]()//y axis on graph data array
     var lineChartEntry = [ChartDataEntry]()//line Chart object array to plot points of entry
     
-    @IBOutlet weak var nextButton: UIButton!
     
     var indexAtDataArray = 0;//this will be used to keep track of where at in array when back/next button is clicked
     
@@ -52,15 +37,12 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
 
     @IBOutlet weak var itemsBarChartView: BarChartView!
     
+    @IBOutlet var infoView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         itemsBarChartView.delegate = self
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
-
-        yourPicker.delegate = self
-        yourPicker.dataSource = self
-        
-        pickerField.inputView = yourPicker
         
         
         ref = Database.database().reference()
@@ -68,45 +50,17 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         loadInXandYAxis();
         loadItemsData();
-        totalStatsButton.layer.cornerRadius = 10
-        totalStatsButton.clipsToBounds = true
+      
         
-        totalStatsButton.titleLabel?.minimumScaleFactor = 0.5
-        totalStatsButton.titleLabel?.numberOfLines = 1;
-        totalStatsButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        
-        
-        indivisualStudentButton.layer.cornerRadius = 10
-        indivisualStudentButton.clipsToBounds = true
-        
-        indivisualStudentButton.titleLabel?.minimumScaleFactor = 0.5
-        indivisualStudentButton.titleLabel?.numberOfLines = 1;
-        indivisualStudentButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        
-        backButton.layer.cornerRadius = 10
-        backButton.clipsToBounds = true
-        
-        backButton.titleLabel?.minimumScaleFactor = 0.5
-        backButton.titleLabel?.numberOfLines = 1;
-        backButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        
-        nextButton.layer.cornerRadius = 10
-        nextButton.clipsToBounds = true
-        
-        nextButton.titleLabel?.minimumScaleFactor = 0.5
-        nextButton.titleLabel?.numberOfLines = 1;
-        nextButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        
-        pickerField.isHidden = true;
+       
         chooseGraphOrTextSegment.isHidden = false;
-        studentNameLbl.isHidden = true;
-        studentIDLbl.isHidden = true;
-        lastItemCheckedOutLbl.isHidden = true;
-        lastDateCheckedOutLbl.isHidden = true;
-        totalItemsCheckedOutlbl.isHidden = true;
-        allergiesLbl.isHidden = true;
+       
         chooseGraphOrTextSegment.selectedSegmentIndex = -1;//make sure graph is loaded initially
         
+        infoView.layer.borderColor = UIColor.black.cgColor
+        infoView.layer.borderWidth = 7.0
+        infoView.layer.cornerRadius = chartView.frame.height / 8
+        infoView.layer.backgroundColor = UIColor(red: 192/255, green: 177/255, blue: 192/255, alpha: 1).cgColor
     }
     
     
@@ -115,14 +69,7 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     var editedstudentsVisitedNumberArray: [Double] = [Double]()//the last 5 days of students visited
     var editeditemsCheckedOutNumberAray: [Double] = [Double]()//the last 5 days of items checked out
     @IBAction func totalStatsButtonTapped(_ sender: UIButton) {
-        pickerField.isHidden = true;
         chooseGraphOrTextSegment.isHidden = false;
-        studentNameLbl.isHidden = true;
-        studentIDLbl.isHidden = true;
-        lastItemCheckedOutLbl.isHidden = true;
-        lastDateCheckedOutLbl.isHidden = true;
-        totalItemsCheckedOutlbl.isHidden = true;
-        allergiesLbl.isHidden = true;
         chooseGraphOrTextSegment.selectedSegmentIndex = -1;//make sure graph is loaded initially
         
         
@@ -133,36 +80,16 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         print("delegate here")
         print(itemsBarChartView.delegate)
         loadStudentNames();
-        pickerField.isHidden = true;
         chooseGraphOrTextSegment.isHidden = false;
-        nextButton.isHidden = true;
-        backButton.isHidden = true;
-        studentNameLbl.isHidden = true;
-        studentIDLbl.isHidden = true;
-        lastItemCheckedOutLbl.isHidden = true;
-        lastDateCheckedOutLbl.isHidden = true;
-        totalItemsCheckedOutlbl.isHidden = true;
         chartView.isHidden = true;
         itemsBarChartView.isHidden = true;
         
     }
     @IBAction func indivisualStudentButtonTapped(_ sender: UIButton) {
         //changing what is able to be seen depending on which button is clicked
-        pickerField.isHidden = false;
         chooseGraphOrTextSegment.isHidden = true;
-        nextButton.isHidden = true;
         chartView.isHidden = true;
         itemsBarChartView.isHidden = true;
-        studentNameLbl.isHidden = false;
-        studentNameLbl.text = ""
-        studentIDLbl.isHidden = false;
-        studentIDLbl.text = ""
-        lastItemCheckedOutLbl.isHidden = false;
-        lastItemCheckedOutLbl.text = ""
-        lastDateCheckedOutLbl.isHidden = false;
-        totalItemsCheckedOutlbl.isHidden = false;
-        allergiesLbl.isHidden = false;
-        
         sortWhetherUser();//function which sorts out all students names only in pickerview
         
     }
@@ -185,17 +112,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func doBarGraph(){
-        backButton.isHidden = true;
-        nextButton.isHidden = true;
         setChartForItemsData()
         chartView.isHidden = true;
         itemsBarChartView.isHidden = false;
-        studentNameLbl.isHidden = true;
-        studentIDLbl.isHidden = true;
-        lastItemCheckedOutLbl.isHidden = true;
-        lastDateCheckedOutLbl.isHidden = true;
-        totalItemsCheckedOutlbl.isHidden = true;
-        allergiesLbl.isHidden = true;
+        
     }
     var months: [String]!
     func setChartForItemsData(){
@@ -284,96 +204,26 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
 
     
     func doLineGraph(){
-        backButton.isHidden = true;
-        nextButton.isHidden = true;
         updateGraph()
         chartView.isHidden = false;
         itemsBarChartView.isHidden = true;
-        studentNameLbl.isHidden = true;
-        studentIDLbl.isHidden = true;
-        lastItemCheckedOutLbl.isHidden = true;
-        lastDateCheckedOutLbl.isHidden = true;
-        totalItemsCheckedOutlbl.isHidden = true;
-        allergiesLbl.isHidden = true;
     }
     
     func doTextData(){
-        backButton.isHidden = false;
-        nextButton.isHidden = false;
         chartView.isHidden = true;
         itemsBarChartView.isHidden = true;
-        studentNameLbl.isHidden = false;
-        studentNameLbl.text = ""
-        studentIDLbl.isHidden = false;
-        studentIDLbl.text = ""
-        lastItemCheckedOutLbl.isHidden = false;
-        lastItemCheckedOutLbl.text = ""
         //display date at top and students visited nd number of items checked out at bottom
-        backButton.isHidden = true;
         print(chartData.count)
         showCorrespondingTextStatisticsData();
     }
     
     
-    @IBAction func backButtonClicked(_ sender: UIButton) {
-        //moves one spot back in array to show previous day data
-        checkIfAvailableBack();
-        showCorrespondingTextStatisticsData();
-        
-    }
-    
-    @IBAction func nextButtonClicked(_ sender: UIButton) {
-        checkIfAvialableNext();
-        showCorrespondingTextStatisticsData();
-    }
-    
-    func checkIfAvialableNext(){
-        //purpose to check if you can advance ahead
-        indexAtDataArray += 1;
-        if(indexAtDataArray-1 != -1 && indexAtDataArray+1 != chartData.count){
-            nextButton.isHidden = false;
-            backButton.isHidden = false;
-            
-        }
-        else if(indexAtDataArray-1 != -1 && indexAtDataArray+1 == chartData.count){
-            nextButton.isHidden = true;
-            backButton.isHidden = false;
-            
-        }
-        else if(indexAtDataArray-1 == -1){
-            nextButton.isHidden = false;
-            backButton.isHidden = true;
-        }
-        print("inside the next: \(indexAtDataArray)")
-    }
-    
-    func checkIfAvailableBack(){
-        indexAtDataArray -= 1;
-        if(indexAtDataArray+1 != chartData.count && indexAtDataArray-1 != -1){
-            nextButton.isHidden = false;
-            backButton.isHidden = false;
-        }
-        else if(indexAtDataArray+1 != chartData.count && indexAtDataArray-1 == -1){
-            nextButton.isHidden = false;
-            backButton.isHidden = true;
-        }
-        else if(indexAtDataArray+1 == chartData.count){
-            nextButton.isHidden = true;
-            backButton.isHidden = false;
-        }
-        print("inside the next: \(indexAtDataArray)")
-    }
-    
     func showCorrespondingTextStatisticsData(){
         if(canDisplayMap){
             //displaying what the graph shows in text format
-            studentNameLbl.text = "Date: \(chartData[indexAtDataArray]["date"]! as! String)";
-            studentIDLbl.text = "Students Visited: \(chartData[indexAtDataArray]["studentsVisited"]!)";
-            lastItemCheckedOutLbl.text = "Items Checked out: \(chartData[indexAtDataArray]["itemsCheckedOut"]!)";
         }
         else{
-            studentNameLbl.isHidden = false;
-            studentNameLbl.text = "NO DATA TO DISPLAY"
+          
         }
         
     }
@@ -403,10 +253,10 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             }
 
             let line1 = LineChartDataSet(entries: lineChartEntry, label: "Students Visited") //Here we convert lineChartEntry to a LineChartDataSet
-            line1.colors = [NSUIColor.blue] //Sets the color to blue
+            line1.colors = [NSUIColor.init(red: 0, green: 92/255, blue: 111/255, alpha: 1)] //Sets the color to blue
             
             let line2 = LineChartDataSet(entries: lineChartEntry2, label: "Items Checked Out") //Here we convert lineChartEntry to a LineChartDataSet
-            line2.colors = [NSUIColor.red] //Sets the color to blue
+            line2.colors = [NSUIColor.init(red: 241/255, green: 143/255, blue: 0, alpha: 1)] //Sets the color to blue
             
             
             let Days = ["5 Days", "4 Days", "3 Days", "2 Days", "1 Day"]
@@ -426,10 +276,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             
 
             chartView.data = data //finally - it adds the chart data to the chart and causes an update
-        }
-        else{
-            studentNameLbl.isHidden = false;
-            studentNameLbl.text = "NO DATA TO DISPLAY"
         }
         
     }
@@ -594,7 +440,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
         if(pickerData.count == 0) {
             return
         }
-        pickerField.text = pickerData[row]
         var studentNameChosen = pickerData[row];
         for i in 0..<data.count{
             if(self.data[i]["name"] as! String == studentNameChosen){
@@ -607,13 +452,6 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 var allergies = self.data[i]["allergies"]
                 var studentEmail = self.data[i]["Email"]
                 var studentPassword = self.data[i]["Password"]
-                
-                studentNameLbl.text = studentName! as! String;
-                studentIDLbl.text = "ID: \(studentIDNumber!)"
-                lastItemCheckedOutLbl.text = "Last Item Checked Out: \(lastItemCheckedOut!)"
-                lastDateCheckedOutLbl.text = "Last Date Checked Out: \(lastDateCheckedOut!)"
-                totalItemsCheckedOutlbl.text = "Total Items Checked Out: \(totalItemsCheckedOut!)"
-                allergiesLbl.text = "Allergies: \(allergies!)"
             }
         }
         
