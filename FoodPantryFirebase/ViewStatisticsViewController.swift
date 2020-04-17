@@ -60,7 +60,7 @@ class ViewStatisticsViewController: UIViewController, ChartViewDelegate {
         infoView.layer.borderColor = UIColor.black.cgColor
         infoView.layer.borderWidth = 7.0
         infoView.layer.cornerRadius = chartView.frame.height / 8
-        infoView.layer.backgroundColor = UIColor(red: 192/255, green: 177/255, blue: 192/255, alpha: 1).cgColor
+        infoView.layer.backgroundColor = UIColor(red: 236/255, green: 239/255, blue: 242/255, alpha: 1).cgColor
     }
     
     
@@ -254,10 +254,11 @@ class ViewStatisticsViewController: UIViewController, ChartViewDelegate {
 
             let line1 = LineChartDataSet(entries: lineChartEntry, label: "Students Visited") //Here we convert lineChartEntry to a LineChartDataSet
             line1.colors = [NSUIColor.init(red: 0, green: 92/255, blue: 111/255, alpha: 1)] //Sets the color to blue
+            line1.lineWidth = 5
             
             let line2 = LineChartDataSet(entries: lineChartEntry2, label: "Items Checked Out") //Here we convert lineChartEntry to a LineChartDataSet
             line2.colors = [NSUIColor.init(red: 241/255, green: 143/255, blue: 0, alpha: 1)] //Sets the color to blue
-            
+            line2.lineWidth = 5
             
             let Days = ["5 Days", "4 Days", "3 Days", "2 Days", "1 Day"]
             chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values:Days)
