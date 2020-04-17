@@ -291,7 +291,7 @@ class QRScrapeController: UIViewController {
                         str = str.substring(from: str.indexDistance(of: "$")! + 1)
                         let quantity = str.substring(to: str.indexDistance(of: ";")!)
                     
-                        text += "Food: " + food + ", Quantity: " + quantity + "\n\n"
+                        text += "Food: " + food.trimTitle() + ", Quantity: " + quantity + "\n\n"
                         str = str.substring(from: str.indexDistance(of: ";")! + 1)
                     }
                     //makes the format "Food: Item" next line "Quantity: number"

@@ -52,6 +52,14 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     let yourPicker = UIPickerView()
     var pickerData: [String] = [String]()//data which can be selected via pickerView
     
+    //for type
+    let yourPicker2 = UIPickerView()
+    var pickerData2: [String] = [String]()//data which can be selected via pickerView
+    
+    //for allergy
+    let yourPicker3 = UIPickerView()
+    var pickerData3: [String] = [String]()//data which can be selected via pickerView
+    
     //the new food title
     
     var newFoodTitle = ""
@@ -110,6 +118,18 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         healthyLabel.inputView = yourPicker
         pickerData = ["Yes", "No"]
         
+        yourPicker2.delegate = self
+        yourPicker2.dataSource = self
+        
+        typeLabel.inputView = yourPicker2
+        pickerData2 = ["Snack", "Breakfast", "Lunch", "Dinner", "Drink"]
+        
+        yourPicker3.delegate = self
+        yourPicker3.dataSource = self
+        
+        allergiesLabel.inputView = yourPicker3
+        pickerData3 = ["None", "Dairy", "Eggs", "Peanuts", "Tree Nuts", "Shellfish", "Wheat", "Soy", "Fish", "Other"]
+        
         if (manualEnter) { //manually entered food item
             if(found) { //item exists in the db
                          
@@ -143,6 +163,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 }
                 
                 self.adminDirections.text = "Existing Item\nEdit the Following"
+                
+                self.addItem(next: "addmore")
             } else {
                 chooseImgButton.isHidden = false;
                 self.existing = false
@@ -162,8 +184,6 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                         
                         self.getFoodDataFromFirebase(callback: {(data, items)-> Void in //get data from the database
                             
-                            print(items)
-                            print(title)
                             
                             if(items.contains(title)) { //food item already exists
                                 
@@ -205,6 +225,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 }
                                 
                                 self.adminDirections.text = "Existing Item\nEdit the Following"
+                                
+                                self.addItem(next: "addmore")
                                 
                             } else { //new item
                                 
@@ -319,16 +341,32 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        if(pickerView == yourPicker) {
+            return pickerData.count
+        } else if(pickerView == yourPicker2) {
+            return pickerData2.count
+        }
+        return pickerData3.count
     }
     
     // The data to return fopr the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
-        return pickerData[row]
+        if(pickerView == yourPicker) {
+            return pickerData[row]
+        } else if(pickerView == yourPicker2) {
+            return pickerData2[row]
+        }
+        return pickerData3[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-     healthyLabel.text = pickerData[row]
+      if(pickerView == yourPicker) {
+            healthyLabel.text = pickerData[row]
+      } else if(pickerView == yourPicker2) {
+            typeLabel.text = pickerData2[row]
+        } else {
+            allergiesLabel.text = pickerData3[row]
+        }
     }
     
     func getFoodDataFromFirebase(callback: @escaping (_ data: [[String: Any]], _ names: [String])->Void) { //returns a dict of all the food items in the database and their data, and a list of the names of the food items
@@ -423,10 +461,6 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBAction func finishSelected(_ sender: Any) { //same code as above
         
         addItem(next: "finish")
-        print("food url below")
-        print(food_url)
-        print("one received")
-        print(newImageURL)
     }
     
     func addItem(next: String) {
@@ -586,6 +620,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                destinationVC?.error = errorMessage
            } else if segue.identifier == "addMore"{
                 let destinationVC = segue.destination as? QRAddViewController
+                destinationVC?.message = "Food Item Added!"
             }
        }
     
