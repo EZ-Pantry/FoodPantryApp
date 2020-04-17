@@ -4964,7 +4964,6 @@
                                 <segments>
                                     <segment title="Line Graph"/>
                                     <segment title="Calendar View"/>
-                                    <segment title="Text "/>
                                     <segment title="Bar Graph"/>
                                 </segments>
                                 <connections>

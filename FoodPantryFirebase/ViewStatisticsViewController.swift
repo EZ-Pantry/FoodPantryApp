@@ -177,11 +177,11 @@ class ViewStatisticsViewController: UIViewController, UIPickerViewDelegate, UIPi
             self.performSegue(withIdentifier: "toCalendar", sender: self)
         }
         else if(getIndex == 2){
-            doTextData()
-        }
-        else if(getIndex == 3){
             doBarGraph();
         }
+//        else if(getIndex == 3){
+//            doBarGraph();
+//        }
     }
     
     func doBarGraph(){
