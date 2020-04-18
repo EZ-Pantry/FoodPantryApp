@@ -86,11 +86,31 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
     override func viewWillAppear(_ animated: Bool) {
         //This view will appear function notifies the view controller that its view is about to be added to a view hierarchy.
         //Hence that problem of the view not being reloaded is fixed, and the view is loaded everytime the tab bar clicks to a certain view
-        refresh()
+        self.ref.child(self.PantryName).child("Running").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let maintenance = value?["Maintenance"] as? String ?? ""
+            
+            if(maintenance.lowercased() == "yes") {
+                //app under maintenance
+                
+                let alert = UIAlertController(title: "The app is under maintenance!", message: "Please try again later.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                    try! Auth.auth().signOut() //sign out
+                    self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                }))
+                self.present(alert, animated: true, completion: nil);
+            } else {
+                self.checkUserDeleted()
+            }
+            
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
+    func checkUserDeleted() {
         //check if the user is deleted
         if let user = Auth.auth().currentUser {
         
@@ -105,6 +125,8 @@ class FoodItemsSecondViewController: UIViewController,  UIPickerViewDelegate, UI
                     self.present(alert, animated: true, completion: nil);
                                         
                     //segue
+                } else {
+                    self.refresh()
                 }
             }
         } else {

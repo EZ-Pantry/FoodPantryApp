@@ -96,6 +96,32 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         //check if checking out is allowed
         self.view.isUserInteractionEnabled = false
         
+        self.ref.child(self.PantryName).child("Running").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let maintenance = value?["Maintenance"] as? String ?? ""
+            
+            if(maintenance.lowercased() == "yes") {
+                //app under maintenance
+                
+                let alert = UIAlertController(title: "The app is under maintenance!", message: "Please try again later.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                    try! Auth.auth().signOut() //sign out
+                    self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                }))
+                self.present(alert, animated: true, completion: nil);
+            } else {
+                self.checkUserDeleted()
+            }
+            
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
+        
+        
+    }
+    
+    func checkUserDeleted() {
         if let user = Auth.auth().currentUser {
         
             checkUserAgainstDatabase { (notDeleted, error) in
@@ -121,7 +147,6 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
             self.present(alert, animated: true, completion: nil);
             //segue
         }
-        
         
     }
     
