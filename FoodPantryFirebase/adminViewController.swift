@@ -63,29 +63,53 @@ class adminViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+       self.ref.child(self.PantryName).child("Running").observeSingleEvent(of: .value, with: { (snapshot) in
+           let value = snapshot.value as? NSDictionary
+           let maintenance = value?["Maintenance"] as? String ?? ""
+           
+           if(maintenance.lowercased() == "yes") {
+               //app under maintenance
+               
+               let alert = UIAlertController(title: "The app is under maintenance!", message: "Please try again later.", preferredStyle: .alert)
+               alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                   try! Auth.auth().signOut() //sign out
+                   self.performSegue(withIdentifier: "GoToFirst", sender: self)
+               }))
+               self.present(alert, animated: true, completion: nil);
+           } else {
+               self.checkUserDeleted()
+           }
+           
+       }) { (error) in
+           RequestError().showError()
+           print(error.localizedDescription)
+       }
+    }
+    
+    func checkUserDeleted() {
         if let user = Auth.auth().currentUser {
-        
-            checkUserAgainstDatabase { (notDeleted, error) in
-            
-                if(!notDeleted) { //deleted user
-                    let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                        try! Auth.auth().signOut() //sign out
-                        self.performSegue(withIdentifier: "GoToFirst", sender: self)
-                    }))
-                    self.present(alert, animated: true, completion: nil);
-                                        
-                    //segue
-                }
-            }
-        } else {
-            let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                self.performSegue(withIdentifier: "GoToFirst", sender: self)
-            }))
-            self.present(alert, animated: true, completion: nil);
-            //segue
-        }
+               
+                   checkUserAgainstDatabase { (notDeleted, error) in
+                   
+                       if(!notDeleted) { //deleted user
+                           let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
+                           alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                               try! Auth.auth().signOut() //sign out
+                               self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                           }))
+                           self.present(alert, animated: true, completion: nil);
+                                               
+                           //segue
+                       }
+                   }
+               } else {
+                   let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
+                   alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                       self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                   }))
+                   self.present(alert, animated: true, completion: nil);
+                   //segue
+               }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         ref = Database.database().reference()
-
+        
         //check for connection
         let monitor = NWPathMonitor()
         
@@ -66,6 +66,8 @@ class ViewController: UIViewController {
         signupButton.titleLabel?.minimumScaleFactor = 0.5
         signupButton.titleLabel?.numberOfLines = 1;
         signupButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        
     }
     
     
@@ -94,83 +96,90 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("here")
-        if let user = Auth.auth().currentUser {
-            //checks if the user is already signed if
-            //If so, then the user is directed directly to the home screen to prevent them from having to sign in multiple times
-            if(authUser!.isEmailVerified){
-                
-                //check if admin allowed
-                let user = Auth.auth().currentUser
-                ref.child("All Users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                let value = snapshot.value as? NSDictionary
-                 let status = value?["Account Status"] as? String ?? "" //load in the admin code
-                    print("checking")
-                    print(status)
-                    if(status == "1") { //user is either approved or suspended
-                        self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
-                    } else if (status == "2") {
-                        let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
-                                                             
-                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                            
-                            self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
-                        }))
-                        self.present(alert, animated: true, completion: nil);
-                    }
-//                    } else if(status == "3") { //user is deleted
-//                        try! Auth.auth().signOut()
-//                        let alert = UIAlertController(title: "Your Account has Been Deleted", message: "The admin has deleted this account.", preferredStyle: .alert)
-//
-//                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-//
-//                        }))
-//                        self.present(alert, animated: true, completion: nil);
-//                    }
-                    
-                // ...
-                }) { (error) in
-                    RequestError().showError()
-                    print(error.localizedDescription)
-                }
-                
+       
+        
+        //check if the app is up
+        
+        self.ref.child("Running").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let maintenance = value?["Maintenance"] as? String ?? ""
+            
+            if(maintenance.lowercased() == "yes") {
+                //app under maintenance
+                let alert = UIAlertController(title: "The app is under maintenance!", message: "Please try again later.", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil);
             } else {
-                print("not verified")
+                self.checkUserDeleted()
             }
             
-        } else {
-            print("not logged in")
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
         }
         
         
-        //checking to see if user is logged in, not, or deleted
+    }
+    
+    func checkLoggedIn() {
+        if let user = Auth.auth().currentUser {
+                   //checks if the user is already signed if
+                   //If so, then the user is directed directly to the home screen to prevent them from having to sign in multiple times
+                   if(authUser!.isEmailVerified){
+                       
+                       //check if admin allowed
+                       let user = Auth.auth().currentUser
+                       ref.child("All Users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                       // Get user value
+                       let value = snapshot.value as? NSDictionary
+                        let status = value?["Account Status"] as? String ?? "" //load in the admin code
+                           print("checking")
+                           print(status)
+                           if(status == "1") { //user is either approved or suspended
+                               self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
+                           } else if (status == "2") {
+                               let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
+                                                                    
+                               alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                                   
+                                   self.performSegue(withIdentifier: "toHomeScreen", sender: self)//performs segue to the home screen to show user data with map
+                               }))
+                               self.present(alert, animated: true, completion: nil);
+                           }
+                           
+                       // ...
+                       }) { (error) in
+                           RequestError().showError()
+                           print(error.localizedDescription)
+                       }
+                       
+                   } else {
+                       print("not verified")
+                   }
+                   
+               } else {
+                   print("not logged in")
+               }
+    }
+    
+    //checking to see if user is logged in, not, or deleted
+
+    func checkUserDeleted() {
+        checkUserAgainstDatabase { (notDeleted, error) in
         
-//        if let user = Auth.auth().currentUser {
-        
-            checkUserAgainstDatabase { (notDeleted, error) in
-            
-                if(!notDeleted) { //deleted user
-                    let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                        try! Auth.auth().signOut() //sign out
-                        print("signed out")
-                    }))
-                    self.present(alert, animated: true, completion: nil);
-                                        
-                    //segue
-                    
-                }
+            if(!notDeleted) { //deleted user
+                let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                    try! Auth.auth().signOut() //sign out
+                    print("signed out")
+                }))
+                self.present(alert, animated: true, completion: nil);
+                                    
+                //segue
+                
+            } else {
+                self.checkLoggedIn()
             }
-//        } else {
-//            let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-//
-//            }))
-//            self.present(alert, animated: true, completion: nil);
-//            //segue
-//        }
-        
+        }
     }
     
     @IBAction func unwindToFirst(_ unwindSegue: UIStoryboardSegue) {

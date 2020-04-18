@@ -50,101 +50,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self.ref = Database.database().reference()
         
                 
-        let myGroup = DispatchGroup()
-            
-        alert.showLoadingAlert()
         
-        if(!UserDefaults.contains("Pantry Name")) {
-            
-            myGroup.enter()
-            let uid = Auth.auth().currentUser!.uid
-            
-            ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                let value = snapshot.value as? NSDictionary
-                let pantry = value?["Pantry Name"] as? String ?? "" //load in the admin code
-              self.PantryName = pantry
-                UserDefaults.standard.set(pantry, forKey: "Pantry Name")
-                myGroup.leave()
-            // ...
-            }) { (error) in
-                RequestError().showError()
-                print(error.localizedDescription)
-            }
-            
-        } else {
-             myGroup.enter()
-            self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
-             myGroup.leave()
-        }
-        
-        myGroup.notify(queue: .main) {
-           
-            self.mapView.delegate = self
-            
-            
-            self.setUpNotications();
-            //input any address and within 200 meters are shown
-                        
-            self.getPantryLocation(callback: {(success, location)-> Void in
-                
-                if(success) {
-                    print("location")
-                    print(location)
-                    var address: String = location
-                    var pantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
-                    self.coordinates(forAddress: location) {
-                                       (location) in
-                                       guard let location = location else {
-                                           // Handle error here.
-                                           return
-                                       }
-                        self.longitude = location.longitude
-                        self.latitude = location.latitude
-                        
-                                       self.openMapForPlace(lat: location.latitude, long: location.longitude)//helper function to show the zooming in of map into address inputed which corresponds with school
-                                        let annotation = MKPointAnnotation()
-                                            annotation.title = address
-                                            //You can also add a subtitle that displays under the annotation such as
-//                                            annotation.subtitle = address
-                                            annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-                                            self.mapView.addAnnotation(annotation)
-                                   }
-                    
-                    
-                    self.mapView.isZoomEnabled = true;
-                    self.mapView.isScrollEnabled = true;
-                    self.mapView.isUserInteractionEnabled = true;
-                }
-               
-            })
-            
-                        
-            self.getUsersName()//helper function to display user data about last time they came
-            self.displayMascotURL();
-            
-            //replace school name below
-            let userID = Auth.auth().currentUser?.uid
-            self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                let value = snapshot.value as? NSDictionary
-                var adminValue = value?["Admin"] as? String ?? "" //loads in the code from firebase
-                if(adminValue == "Yes"){
-                    self.sendOutNotification();
-                }
-                
-              }) { (error) in
-                print(error.localizedDescription)
-            }
-            
-            //self.checkUserStatus()
-            
-            self.getPermissionForNotifications();
-            
-            self.alert.hideLoadingAlert()
-            
-        
-        }
         
         //mapView.layer.borderColor = UIColor.black.cgColor
         //mapView.layer.borderWidth = 7.0
@@ -160,6 +66,104 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         //userView.layer.cornerRadius = welcomeView.frame.height / 8
         //userView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
         
+    }
+    
+    func intro() {
+        let myGroup = DispatchGroup()
+                    
+                //alert.showLoadingAlert()
+                 self.view.isUserInteractionEnabled = false
+                if(!UserDefaults.contains("Pantry Name")) {
+                    
+                    myGroup.enter()
+                    let uid = Auth.auth().currentUser!.uid
+                    
+                    ref.child("All Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                        // Get user value
+                        let value = snapshot.value as? NSDictionary
+                        let pantry = value?["Pantry Name"] as? String ?? "" //load in the admin code
+                      self.PantryName = pantry
+                        UserDefaults.standard.set(pantry, forKey: "Pantry Name")
+                        myGroup.leave()
+                    // ...
+                    }) { (error) in
+                        RequestError().showError()
+                        print(error.localizedDescription)
+                    }
+                    
+                } else {
+                     myGroup.enter()
+                    self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+                     myGroup.leave()
+                }
+                
+                myGroup.notify(queue: .main) {
+                   
+                    self.mapView.delegate = self
+                    
+                    
+                    self.setUpNotications();
+                    //input any address and within 200 meters are shown
+                                
+                    self.getPantryLocation(callback: {(success, location)-> Void in
+                        
+                        if(success) {
+                            print("location")
+                            print(location)
+                            var address: String = location
+                            var pantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
+                            self.coordinates(forAddress: location) {
+                                               (location) in
+                                               guard let location = location else {
+                                                   // Handle error here.
+                                                   return
+                                               }
+                                self.longitude = location.longitude
+                                self.latitude = location.latitude
+                                
+                                               self.openMapForPlace(lat: location.latitude, long: location.longitude)//helper function to show the zooming in of map into address inputed which corresponds with school
+                                                let annotation = MKPointAnnotation()
+                                                    annotation.title = address
+                                                    //You can also add a subtitle that displays under the annotation such as
+        //                                            annotation.subtitle = address
+                                                    annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+                                                    self.mapView.addAnnotation(annotation)
+                                           }
+                            
+                            
+                            self.mapView.isZoomEnabled = true;
+                            self.mapView.isScrollEnabled = true;
+                            self.mapView.isUserInteractionEnabled = true;
+                        }
+                       
+                    })
+                    
+                                
+                    self.getUsersName()//helper function to display user data about last time they came
+                    self.displayMascotURL();
+                    
+                    //replace school name below
+                    let userID = Auth.auth().currentUser?.uid
+                    self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+                        // Get user value
+                        let value = snapshot.value as? NSDictionary
+                        var adminValue = value?["Admin"] as? String ?? "" //loads in the code from firebase
+                        if(adminValue == "Yes"){
+                            self.sendOutNotification();
+                        }
+                        
+                      }) { (error) in
+                        print(error.localizedDescription)
+                    }
+                    
+                    //self.checkUserStatus()
+                    
+                    self.getPermissionForNotifications();
+                    
+                    //self.alert.hideLoadingAlert()
+                    self.view.isUserInteractionEnabled = true
+                
+                }
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
@@ -209,30 +213,57 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             message = ""
         }
         
-        //check to see if the user should be logged out
-                if let user = Auth.auth().currentUser {
+        self.ref.child(self.PantryName).child("Running").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let maintenance = value?["Maintenance"] as? String ?? ""
+            
+            if(maintenance.lowercased() == "yes") {
+                //app under maintenance
                 
-                    checkUserAgainstDatabase { (notDeleted, error) in
-                    
-                        if(!notDeleted) { //deleted user
-                            let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                                try! Auth.auth().signOut() //sign out
-                                self.performSegue(withIdentifier: "GoToFirst", sender: self)
-                            }))
-                            self.present(alert, animated: true, completion: nil);
-                                                
-                            //segue
-                        }
-                    }
-                } else {
-                    let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                        self.performSegue(withIdentifier: "GoToFirst", sender: self)
-                    }))
-                    self.present(alert, animated: true, completion: nil);
-                    //segue
-                }
+                let alert = UIAlertController(title: "The app is under maintenance!", message: "Please try again later.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                    try! Auth.auth().signOut() //sign out
+                    self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                }))
+                self.present(alert, animated: true, completion: nil);
+            } else {
+                self.checkUserDeleted()
+            }
+            
+        }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
+        
+    }
+    
+    func checkUserDeleted() {
+        //check to see if the user should be logged out
+                       if let user = Auth.auth().currentUser {
+                       
+                           checkUserAgainstDatabase { (notDeleted, error) in
+                           
+                               if(!notDeleted) { //deleted user
+                                   let alert = UIAlertController(title: "Error", message: "Your account has been deleted by the admin.", preferredStyle: .alert)
+                                   alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                                       try! Auth.auth().signOut() //sign out
+                                       self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                                   }))
+                                   self.present(alert, animated: true, completion: nil);
+                                                       
+                                   //segue
+                               } else {
+                                self.intro()
+                            }
+                           }
+                       } else {
+                           let alert = UIAlertController(title: "Error", message: "You are unauthorized to use this app", preferredStyle: .alert)
+                           alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                               self.performSegue(withIdentifier: "GoToFirst", sender: self)
+                           }))
+                           self.present(alert, animated: true, completion: nil);
+                           //segue
+                       }
     }
     
     func checkUserAgainstDatabase(completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
