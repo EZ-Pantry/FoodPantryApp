@@ -23,9 +23,10 @@
 		1C63897F2432E008005BB1BC /* EditName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C63897E2432E008005BB1BC /* EditName.swift */; };
 		1C68022C2401E5C1002D0C38 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C68022A2401E5C1002D0C38 /* ItemCell.swift */; };
 		1C68022D2401E5C1002D0C38 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022B2401E5C1002D0C38 /* ItemCell.xib */; };
-		1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C68022F2401E825002D0C38 /* GoogleService-Info.plist */; };
 		1C748F322406188800936A05 /* checkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C748F312406188800936A05 /* checkoutViewController.swift */; };
 		1C86D4892447B9B3003D4107 /* adminNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C86D4882447B9B3003D4107 /* adminNotificationsViewController.swift */; };
+		1C86D48E244BFA84003D4107 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C86D48D244BFA84003D4107 /* PushNotificationManager.swift */; };
+		1C86D490244BFDE3003D4107 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C86D48F244BFDE1003D4107 /* GoogleService-Info.plist */; };
 		1CBD01C52414095400AC53A9 /* chooseUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */; };
 		1CBD01C724140B7700AC53A9 /* chooseSchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */; };
 		1CBD0225241B118600AC53A9 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD0224241B118600AC53A9 /* RequestError.swift */; };
@@ -128,9 +129,11 @@
 		1C63897E2432E008005BB1BC /* EditName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditName.swift; sourceTree = "<group>"; };
 		1C68022A2401E5C1002D0C38 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		1C68022B2401E5C1002D0C38 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
-		1C68022F2401E825002D0C38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1C748F312406188800936A05 /* checkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkoutViewController.swift; sourceTree = "<group>"; };
 		1C86D4882447B9B3003D4107 /* adminNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminNotificationsViewController.swift; sourceTree = "<group>"; };
+		1C86D48C244BF605003D4107 /* EZ Pantry.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "EZ Pantry.entitlements"; sourceTree = "<group>"; };
+		1C86D48D244BFA84003D4107 /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
+		1C86D48F244BFDE1003D4107 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1CBD01C42414095400AC53A9 /* chooseUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseUserViewController.swift; sourceTree = "<group>"; };
 		1CBD01C624140B7700AC53A9 /* chooseSchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseSchoolViewController.swift; sourceTree = "<group>"; };
 		1CBD0224241B118600AC53A9 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
@@ -300,12 +303,13 @@
 		A24F381623EF66E000AACC97 /* FoodPantryFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				1C86D48F244BFDE1003D4107 /* GoogleService-Info.plist */,
+				1C86D48C244BF605003D4107 /* EZ Pantry.entitlements */,
 				1C38A36E2432B4FA00BB7E23 /* fonts */,
 				1CBDDC97240DFAEA00AC53A9 /* addMainViewController.swift */,
 				1CBDDC95240DFAD300AC53A9 /* QRAddViewController.swift */,
 				1CBDDC93240DFABD00AC53A9 /* addItemViewController.swift */,
 				1CBDDC91240DFA7B00AC53A9 /* manualViewController.swift */,
-				1C68022F2401E825002D0C38 /* GoogleService-Info.plist */,
 				1C68022A2401E5C1002D0C38 /* ItemCell.swift */,
 				1C68022B2401E5C1002D0C38 /* ItemCell.xib */,
 				1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */,
@@ -370,6 +374,7 @@
 				1C61044D2439819900ED1A9A /* manageUsersViewController.swift */,
 				1C2F6BF224400DBB0002257B /* manangeSelectedUserViewController.swift */,
 				1C86D4882447B9B3003D4107 /* adminNotificationsViewController.swift */,
+				1C86D48D244BFA84003D4107 /* PushNotificationManager.swift */,
 			);
 			path = FoodPantryFirebase;
 			sourceTree = "<group>";
@@ -512,7 +517,7 @@
 				1C38A37A2432B4FB00BB7E23 /* OpenSans-Light.ttf in Resources */,
 				1C38A3792432B4FB00BB7E23 /* OpenSans-SemiBold.ttf in Resources */,
 				1C38A37D2432B4FB00BB7E23 /* OpenSans-LightItalic.ttf in Resources */,
-				1C6802302401E825002D0C38 /* GoogleService-Info.plist in Resources */,
+				1C86D490244BFDE3003D4107 /* GoogleService-Info.plist in Resources */,
 				1C38A3812432B4FB00BB7E23 /* OpenSans-Regular.ttf in Resources */,
 				A24F384D23EF759800AACC97 /* Main.storyboard in Resources */,
 				A24F382123EF66E100AACC97 /* Assets.xcassets in Resources */,
@@ -722,6 +727,7 @@
 				A239DC29241C930C003CFF0C /* MonthView.swift in Sources */,
 				A24F384F23EF79E800AACC97 /* SignUpViewController.swift in Sources */,
 				1CBDDC98240DFAEA00AC53A9 /* addMainViewController.swift in Sources */,
+				1C86D48E244BFA84003D4107 /* PushNotificationManager.swift in Sources */,
 				1CF92CE424203228001D7E0B /* LoadingBar.swift in Sources */,
 				A24F388923FF52E700AACC97 /* adminViewController.swift in Sources */,
 				A239DC2524196FE8003CFF0C /* contactAdminViewController.swift in Sources */,
@@ -915,15 +921,18 @@
 			baseConfigurationReference = 934F807F8A4FE17BA4AF187C /* Pods-FoodPantryFirebase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4AYKFWZ2N6;
+				CODE_SIGN_ENTITLEMENTS = "FoodPantryFirebase/EZ Pantry.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hiren Parikh (C67YD9LJ4M)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 556QETAHMA;
 				INFOPLIST_FILE = FoodPantryFirebase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RayaanSiddiqi.FoodPantryFirebase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AshayParikh.EZPantry;
 				PRODUCT_NAME = "EZ Pantry";
+				PROVISIONING_PROFILE_SPECIFIER = "EZ Pantry Provisioning Profile for Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -934,15 +943,18 @@
 			baseConfigurationReference = 563D35C167003EFA15906799 /* Pods-FoodPantryFirebase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4AYKFWZ2N6;
+				CODE_SIGN_ENTITLEMENTS = "FoodPantryFirebase/EZ Pantry.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hiren Parikh (C67YD9LJ4M)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 556QETAHMA;
 				INFOPLIST_FILE = FoodPantryFirebase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.RayaanSiddiqi.FoodPantryFirebase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AshayParikh.EZPantry;
 				PRODUCT_NAME = "EZ Pantry";
+				PROVISIONING_PROFILE_SPECIFIER = "EZ Pantry Provisioning Profile for Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -5,7 +5,6 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 import MapKit
-import UserNotifications
 import Firebase
 
 class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
@@ -142,23 +141,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                     self.getUsersName()//helper function to display user data about last time they came
                     self.displayMascotURL();
                     
-                    //replace school name below
-                    let userID = Auth.auth().currentUser?.uid
-                    self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-                        // Get user value
-                        let value = snapshot.value as? NSDictionary
-                        var adminValue = value?["Admin"] as? String ?? "" //loads in the code from firebase
-                        if(adminValue == "Yes"){
-                            self.sendOutNotification();
-                        }
-                        
-                      }) { (error) in
-                        print(error.localizedDescription)
-                    }
-                    
                     //self.checkUserStatus()
-                    
-                    self.getPermissionForNotifications();
                     
                     //self.alert.hideLoadingAlert()
                     self.view.isUserInteractionEnabled = true
@@ -300,7 +283,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                       UserDefaults.standard.set(pantry, forKey: "Pantry Name")
         
                     self.getUsersName()//helper function to display user data about last time they came
-                    self.sendOutNotification()
                 // ...
                 }) { (error) in
                     RequestError().showError()
@@ -310,52 +292,12 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             } else {
                 self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
                 self.getUsersName()//helper function to display user data about last time they came
-                self.sendOutNotification()
             }
             
             
         }
         
     }
-    
-    func checkUserStatus() {
-        //check if admin allowed
-        
-        if Auth.auth().currentUser != nil {
-        
-            let user = Auth.auth().currentUser
-            ref.child("All Users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-             let status = value?["Account Status"] as? String ?? "" //load in the admin code
-                print("checking")
-                print(status)
-                if(status == "2") { //user is either approved or suspended
-                    let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
-                                                         
-                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                    }))
-                    self.present(alert, animated: true, completion: nil);
-                    print("displayed")
-                } else if(status == "3") { //user is deleted
-                    try! Auth.auth().signOut()
-                    let alert = UIAlertController(title: "Your Account has Been Deleted", message: "The admin has deleted this account.", preferredStyle: .alert)
-                                             
-                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                        self.performSegue(withIdentifier: "GoToFirst", sender: self)//performs segue to the home
-                    }))
-                    self.present(alert, animated: true, completion: nil);
-                }
-                
-            // ...
-            }) { (error) in
-                RequestError().showError()
-                print(error.localizedDescription)
-            }
-            
-        }
-    }
-    
     
     
     
@@ -372,43 +314,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             print(error.localizedDescription)
             callback(false, "")
         }
-    }
-    
-    func getPermissionForNotifications(){
-        //standard- getting permissions from user to send push notifications
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) {
-            (granted, error) in
-            if granted {
-                print("yes")
-            } else {
-                print("No")
-            }
-        }
-    }
-    
-    func sendOutNotification(){
-        //notification will be sent every 24 hours=not redundant
-        getDataFromFirebase(callback: {(success)-> Void in //gets data from firebase
-            if(success) {
-                for x in 0..<self.foodItemsOfLowQuantityNumbers.count{
-                    var quantityOfItem = self.foodItemsOfLowQuantityNumbers[x]
-                    if(quantityOfItem < 10){
-                        //checking if quantity of item was less than 10, indicates a notification must be send
-                        if(!self.stringOfLowFoodItems.contains(self.foodItemsOfLowQuantity[x]["name"] as! String)){
-                            self.stringOfLowFoodItems.append(self.foodItemsOfLowQuantity[x]["name"] as! String)
-                        }
-                    }
-                }
-                if(self.foodItemsOfLowQuantity.count != 0){
-                    print("func called")
-                    self.prepareNotification();
-                }
-                
-                
-                                
-            }
-        })
-        
     }
     
     func getDataFromFirebase(callback: @escaping (_ success: Bool)->Void) {
@@ -441,28 +346,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         })
     }
     
-    
-    
-    func prepareNotification(){
-        // The UNMutableNotificationContent object contains the data of the notification.
-        let content = UNMutableNotificationContent()
-        content.title = "Check Food Items Inventory"
-        content.subtitle = "Looks like there are some items less than 10 quantity"
-        var stringOfItemsBelowQuantity = ""
-        for i in 0..<self.stringOfLowFoodItems.count{
-            stringOfItemsBelowQuantity = self.stringOfLowFoodItems[i] + ", " + stringOfItemsBelowQuantity
-        }
-        content.body = "Items: \(stringOfItemsBelowQuantity)"
-                
-                
-        // An UNNotificationRequest is generated which will trigger at the timeinterval of 180 seconds.
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: false)
-        let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
-                
-        // Notification is scheduled for delivery.
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-                
-    }
     
     
     

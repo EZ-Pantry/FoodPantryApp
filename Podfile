@@ -8,10 +8,13 @@ target 'FoodPantryFirebase' do
   # Pods for FoodPantryFirebase
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
+pod 'Firebase/Analytics'
 pod 'FirebaseUI'
 pod 'Firebase/Storage'
 pod 'Firebase/Firestore'
 pod 'Firebase/Functions'
+pod 'Firebase/Core'
+pod 'Firebase/Messaging'
 pod 'Charts'
 
   target 'FoodPantryFirebaseTests' do
