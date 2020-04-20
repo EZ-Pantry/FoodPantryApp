@@ -225,8 +225,6 @@ class manageSelectedUserViewController: UIViewController {
                         self.present(alert, animated: true, completion: nil);
                         self.updateButtons(status: "3")
                     }
-                    
-                    
                 }
             
 //            try! Auth.auth().signOut()
