@@ -4,7 +4,12 @@
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
+import UIKit
+import FirebaseDatabase
+import MapKit
+import Firebase
 import LocalAuthentication
+
 class logInViewController: UIViewController, UITextFieldDelegate {
  
     @IBOutlet weak var useFaceIdButton: UIButton!
@@ -130,27 +135,42 @@ class logInViewController: UIViewController, UITextFieldDelegate {
                               
                                 if(status != "0") {
                                     
-                                    if(status == "2") {
-                                        UserDefaults.standard.set("Bad", forKey: "Times Unlocked")
-                                        let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
-                                                                             
-                                        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
-                                            
-                                            UserDefaults.standard.set("Good", forKey: "Times Unlocked")
-                                            UserDefaults.standard.set(email, forKey: "Latest Email")
-                                            UserDefaults.standard.set(password, forKey: "Latest Password")
-                                            self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
-                                        }))
-                                        self.present(alert, animated: true, completion: nil);
-                                        
-                                        
-                                    } else {
-                                        UserDefaults.standard.set("Good", forKey: "Times Unlocked")
-                                        UserDefaults.standard.set(email, forKey: "Latest Email")
-                                        UserDefaults.standard.set(password, forKey: "Latest Password")
-                                        self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
-                                    }
+                                    //set firebase notification token
                                     
+                                    InstanceID.instanceID().instanceID { (result, error) in
+                                      if let error = error {
+                                        print("Error fetching remote instance ID: \(error)")
+                                      } else if let result = result {
+                                        print("Remote instance ID token: \(result.token)")
+                                        self.ref.child("All Users").child(user!.uid).child("Token").setValue(result.token) { //save to firebase
+                                          (error:Error?, ref:DatabaseReference) in
+                                          if let error = error {
+                                            print("Data could not be saved: \(error).")
+                                          } else {
+                                            if(status == "2") {
+                                                UserDefaults.standard.set("Bad", forKey: "Times Unlocked")
+                                                let alert = UIAlertController(title: "Your Account has Been Suspended", message: "The admin has suspended this account.", preferredStyle: .alert)
+                                                                                     
+                                                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action: UIAlertAction!) in
+                                                    
+                                                    UserDefaults.standard.set("Good", forKey: "Times Unlocked")
+                                                    UserDefaults.standard.set(email, forKey: "Latest Email")
+                                                    UserDefaults.standard.set(password, forKey: "Latest Password")
+                                                    self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
+                                                }))
+                                                self.present(alert, animated: true, completion: nil);
+                                                
+                                                
+                                            } else {
+                                                UserDefaults.standard.set("Good", forKey: "Times Unlocked")
+                                                UserDefaults.standard.set(email, forKey: "Latest Email")
+                                                UserDefaults.standard.set(password, forKey: "Latest Password")
+                                                self.performSegue(withIdentifier: "toHome", sender: self)//performs segue to the home screen to show user data with map
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
                                     
                                 } else {
                                     UserDefaults.standard.set("Bad", forKey: "Times Unlocked")

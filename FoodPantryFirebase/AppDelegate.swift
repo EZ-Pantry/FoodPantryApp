@@ -99,6 +99,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
     let userInfo = notification.request.content.userInfo
 
+    //https://firebase.google.com/docs/cloud-messaging/ios/client#method_swizzling_in_firebase_messaging
+    
     // With swizzling disabled you must let Messaging know about the message, for Analytics
     // Messaging.messaging().appDidReceiveMessage(userInfo)
     // Print message ID.
