@@ -143,15 +143,8 @@ class notificationsViewController: UIViewController, UITextFieldDelegate {
                 }
               }
                 
-                
                 let data = result?.data as? [String: Any]
-                
-                print(data)
-                
                 let error = data?["error"] as? String
-                print(data!)
-                print(error)
-                
                 if(error == "true") {
                     //display the error
                      let alert = UIAlertController(title: "Error!", message: "Some students may not have recieved the notification.", preferredStyle: .alert)//displays alert of erRor!

@@ -1,11 +1,13 @@
 //  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
 
+import Foundation
 
 import UIKit
 import FirebaseUI
-import Firebase
 import FirebaseDatabase
-var isAccountVerified = 0;
+import FirebaseAuth
+import Firebase
+
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var firstNameField: UITextField!
@@ -30,6 +32,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     var userType = ""
     
     var activeField: UITextField!
+    
+    lazy var functions = Functions.functions()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -226,6 +230,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 
                             UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")
 
+                        self.sendVerificationMail();
+                        
                     }
                     else if (self.userType == "student"){
                         //Else a regular student account
@@ -250,12 +256,25 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         self.ref.child("All Users").child(user!.user.uid).child("Pantry Name").setValue(self.pantryName);
                         
                             UserDefaults.standard.set(self.pantryName, forKey: "Pantry Name")//set the pantry name so we can use this later
+                        //send actual notification
+                        self.functions.httpsCallable("sendNewUserMessage").call(["pantry": self.pantryName, "name": firstName + " " + lastName]) { (result, error) in
+                          if let error = error as NSError? {
+                            if error.domain == FunctionsErrorDomain {
+                              let code = FunctionsErrorCode(rawValue: error.code)
+                              let message = error.localizedDescription
+                              let details = error.userInfo[FunctionsErrorDetailsKey]
+                                print(message)
+                                print(code)
+                                print(details)
+                            }
+                          }
+                            
+                            self.sendVerificationMail()
+                            
+                        }
                         
                     }
-                    
-                    print("sending")
-                    
-                    self.sendVerificationMail();
+                                        
                 }  else{
                     let firebaseError = error!.localizedDescription
                     let alert = UIAlertController(title: "Error Signing Up", message: firebaseError, preferredStyle: .alert)
