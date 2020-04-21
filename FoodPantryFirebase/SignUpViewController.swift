@@ -8,7 +8,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import Firebase
 
-class SignUpViewController: UIViewController, UITextFieldDelegate {
+class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet var firstNameField: UITextField!
     @IBOutlet var lastNameField: UITextField!
@@ -35,6 +35,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     lazy var functions = Functions.functions()
     
+    //for healthy or not healthy
+    let yourPicker = UIPickerView()
+    var pickerData: [String] = [String]()//data which can be selected via pickerView
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Create rounded butons
@@ -58,39 +62,38 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         firstNameErrorLabel.isHidden = true
         lastNameErrorLabel.isHidden = true
         idErrorLabel.isHidden = true
+        
+        yourPicker.delegate = self
+        yourPicker.dataSource = self
+        
+        allergiesTextField.inputView = yourPicker
+        pickerData = ["None", "Dairy", "Eggs", "Peanuts", "Tree Nuts", "Shellfish", "Wheat", "Soy", "Fish", "Other"]
     }
     
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        activeTextField = textField;
-//    }
-//
-//    @objc func keyboardDidShow(notification: Notification) {
-//
-//        let info:NSDictionary = notification.userInfo! as NSDictionary
-//        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-//        let keyboardY = self.view.frame.size.height - keyboardSize.height
-//
-//        print("info below")
-//        print(activeTextField.frame.origin.y)
-//        let editingTextFieldY:CGFloat! = activeTextField.frame.origin.y
-//
-//        if self.view.frame.origin.y >= 0 {
-//        //Checking if the textfield is really hidden behind the keyboard
-//            if editingTextFieldY > keyboardY - activeTextField.frame.height {
-//            UIView.animate(withDuration: 0.25, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-//                self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY! - (keyboardY - 60)), width: self.view.bounds.width,height: self.view.bounds.height)
-//                }, completion: nil)
-//            }
-//        }
-//
-//    }
-//
-//    @objc func keyboardWillHide(notification: Notification) {
-//        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-//                self.view.frame = CGRect(x: 0, y: 0,width: self.view.bounds.width, height: self.view.bounds.height)
-//            }, completion: nil)
-//
-//    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        return pickerData.count
+
+        
+    }
+    
+    // The data to return fopr the row and component (column) that's being passed in
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String {
+            return pickerData[row]
+
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+     
+        allergiesTextField.text = pickerData[row]
+ 
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
          NotificationCenter.default.addObserver(self, selector: #selector(SignUpViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
