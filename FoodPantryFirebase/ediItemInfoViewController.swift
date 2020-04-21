@@ -223,6 +223,7 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
             
             for child in snapshot.children {
                 myGroup.enter()
+                self.view.isUserInteractionEnabled = false;
                 let snap = child as! DataSnapshot
                 let key = snap.key
                 let value: [String: Any] = snap.value as! [String : Any]
@@ -254,10 +255,13 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
                     
                 }
                 c += 1
+                
                 myGroup.leave()
             }
             
-            myGroup.notify(queue: .main) { //https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing/46852224
+            myGroup.notify(queue: .main) {
+                //https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing/46852224
+                self.view.isUserInteractionEnabled = true;
                 self.performSegue(withIdentifier: "GoBack", sender: self)
 
             }

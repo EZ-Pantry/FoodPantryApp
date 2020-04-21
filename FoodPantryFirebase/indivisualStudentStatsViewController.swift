@@ -68,6 +68,7 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
                 
                 for i in 0..<self.users.count {
                     myGroup.enter()
+                    self.view.isUserInteractionEnabled = false;
                     self.ref.child("All Users").child(self.users[i]["UID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                    // Get user value
                         let value = snapshot.value as? NSDictionary
@@ -87,6 +88,7 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
                 }
                 
                 myGroup.notify(queue: .main) {
+                    self.view.isUserInteractionEnabled = true;
                     self.studentsTableView.reloadData()
                     print(self.users)
                     print(self.usersApproved)
