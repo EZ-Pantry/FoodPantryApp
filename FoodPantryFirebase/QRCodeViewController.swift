@@ -117,7 +117,6 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
             checkoutButton.isHidden = false
         }
         
-    
         
         
     }

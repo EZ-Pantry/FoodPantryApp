@@ -52,8 +52,7 @@ class confirmUserViewController: UIViewController {
     }
     
     @IBAction func yesButtonClicked(_ sender: UIButton) {
-        userAdminIsCheckingAsUID = userUID;
-        print(userAdminIsCheckingAsUID)
+        userAdminIsCheckingAsUID = userUID;//admin has selected that user-save UID
     }
     
     @IBAction func noButtonClicked(_ sender: UIButton) {

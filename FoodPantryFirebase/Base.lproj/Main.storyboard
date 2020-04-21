@@ -3504,7 +3504,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iC-48-6u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Cx6-OT-Bas" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3244.9275362318845" y="604.6875"/>
+            <point key="canvasLocation" x="3246" y="605"/>
         </scene>
         <!--Scan-->
         <scene sceneID="eYv-dY-9jL">
@@ -3582,7 +3582,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSs-GD-aRI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5614" y="1604"/>
+            <point key="canvasLocation" x="5735" y="1715"/>
         </scene>
         <!--Is this it?-->
         <scene sceneID="qId-50-BL1">
@@ -3806,7 +3806,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QqQ-IE-S6l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="XgS-iv-fc3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4691" y="1558"/>
+            <point key="canvasLocation" x="4691" y="1645"/>
         </scene>
         <!--Add or Checkout-->
         <scene sceneID="Nmc-jI-BFb">
@@ -11702,8 +11702,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="3Qs-b0-Rjn"/>
-        <segue reference="Zke-bH-X19"/>
-        <segue reference="tnj-7N-EuA"/>
+        <segue reference="Dwa-lY-C5Y"/>
+        <segue reference="H9f-l5-90A"/>
         <segue reference="VrP-rx-HIg"/>
         <segue reference="EuT-4I-1uS"/>
         <segue reference="Ona-bs-GLF"/>
