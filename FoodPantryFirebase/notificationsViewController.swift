@@ -2,10 +2,11 @@
 
 import Foundation
 
-import Foundation
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
+import FirebaseAuth
+import Firebase
 
 class notificationsViewController: UIViewController, UITextFieldDelegate {
     var ref: DatabaseReference! //reference to the firebase database
@@ -18,6 +19,8 @@ class notificationsViewController: UIViewController, UITextFieldDelegate {
     var fullName = ""
     
     @IBOutlet weak var sendButton: UIButton!
+    
+    lazy var functions = Functions.functions()
     
     var activeField: UITextField!
     override func viewDidLoad() {
@@ -85,15 +88,21 @@ class notificationsViewController: UIViewController, UITextFieldDelegate {
         activeField = nil
     }
 
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
-                self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
-            } else {
-                self.view.frame.origin.y = 0
-            }
-        }
-    }
+     @objc func keyboardWillShow(notification: NSNotification) {
+               if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                   
+                   let first = (self.activeField?.frame.origin.y) ?? -1
+                   
+                   if(first != -1) {
+                       if (self.activeField?.frame.origin.y)! >= keyboardSize.height {
+                           self.view.frame.origin.y = keyboardSize.height - (self.activeField?.frame.origin.y)!
+                       } else {
+                           self.view.frame.origin.y = 0
+                       }
+                   }
+                   
+               }
+           }
 
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
@@ -116,6 +125,42 @@ class notificationsViewController: UIViewController, UITextFieldDelegate {
             self.ref.child(self.PantryName).child("Admin Message").setValue(message);
             
             lastNotification.text = message
+            
+            //send actual notification
+            self.functions.httpsCallable("sendAdminMessage").call(["message": self.messageField.text!.filterEmoji]) { (result, error) in
+              if let error = error as NSError? {
+                if error.domain == FunctionsErrorDomain {
+                  let code = FunctionsErrorCode(rawValue: error.code)
+                  let message = error.localizedDescription
+                  let details = error.userInfo[FunctionsErrorDetailsKey]
+                    print(message)
+                    print(code)
+                    print(details)
+                    //display the error
+                     let alert = UIAlertController(title: "Error!", message: "Notification not sent. Please try again.", preferredStyle: .alert)//displays alert of erRor!
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil);
+                }
+              }
+                
+                
+                let data = result?.data as? [String: Any]
+                let error = data!["error"] as! String
+                print(data!)
+                print(error)
+                
+                if(error == "true") {
+                    //display the error
+                     let alert = UIAlertController(title: "Error!", message: "Some students may not have recieved the notification.", preferredStyle: .alert)//displays alert of erRor!
+                     alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                     self.present(alert, animated: true, completion: nil);
+                } else {
+                    let alert = UIAlertController(title: "Notification sent!", message: "All students should recieve the notification.", preferredStyle: .alert)//displays alert of erRor!
+                    alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil);
+                }
+            }
+            
         }
         
     }
