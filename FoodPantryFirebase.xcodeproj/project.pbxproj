@@ -66,6 +66,8 @@
 		A239DC312420538E003CFF0C /* adminQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC302420538E003CFF0C /* adminQRViewController.swift */; };
 		A239DC3324206EDC003CFF0C /* BarcodeScanEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC3224206EDC003CFF0C /* BarcodeScanEntryViewController.swift */; };
 		A239DC412423F5DA003CFF0C /* popUpFromBarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A239DC402423F5DA003CFF0C /* popUpFromBarChartViewController.swift */; };
+		A24D058C244F7F09009936A6 /* adminSelectUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24D058B244F7F09009936A6 /* adminSelectUserViewController.swift */; };
+		A24D058E244F80F9009936A6 /* confirmUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24D058D244F80F9009936A6 /* confirmUserViewController.swift */; };
 		A24F381823EF66E000AACC97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381723EF66E000AACC97 /* AppDelegate.swift */; };
 		A24F381A23EF66E000AACC97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381923EF66E000AACC97 /* SceneDelegate.swift */; };
 		A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F381B23EF66E000AACC97 /* ViewController.swift */; };
@@ -177,6 +179,8 @@
 		A239DC302420538E003CFF0C /* adminQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminQRViewController.swift; sourceTree = "<group>"; };
 		A239DC3224206EDC003CFF0C /* BarcodeScanEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanEntryViewController.swift; sourceTree = "<group>"; };
 		A239DC402423F5DA003CFF0C /* popUpFromBarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popUpFromBarChartViewController.swift; sourceTree = "<group>"; };
+		A24D058B244F7F09009936A6 /* adminSelectUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminSelectUserViewController.swift; sourceTree = "<group>"; };
+		A24D058D244F80F9009936A6 /* confirmUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = confirmUserViewController.swift; sourceTree = "<group>"; };
 		A24F381423EF66E000AACC97 /* EZ Pantry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EZ Pantry.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24F381723EF66E000AACC97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A24F381923EF66E000AACC97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -313,10 +317,12 @@
 				1CE5C0A323FB335100ED2C3C /* QRScannerController.swift */,
 				1CE5C0A123FB330B00ED2C3C /* QRScrapeController.swift */,
 				1CE5C09F23FB32E700ED2C3C /* QRCodeViewController.swift */,
+				A24D058B244F7F09009936A6 /* adminSelectUserViewController.swift */,
 				A24F381723EF66E000AACC97 /* AppDelegate.swift */,
 				A24F381923EF66E000AACC97 /* SceneDelegate.swift */,
 				A24F381B23EF66E000AACC97 /* ViewController.swift */,
 				A24F384B23EF759800AACC97 /* Main.storyboard */,
+				A24D058D244F80F9009936A6 /* confirmUserViewController.swift */,
 				A223919A2448C8D9008C87B5 /* changeImageInventoryViewController.swift */,
 				A223919624481430008C87B5 /* passwordResetViewController.swift */,
 				A22391982448143F008C87B5 /* emailVerificationViewController.swift */,
@@ -688,11 +694,13 @@
 				1CBDDC94240DFABD00AC53A9 /* addItemViewController.swift in Sources */,
 				A239DC1D2416CE77003CFF0C /* adminFirstEditItemsViewController.swift in Sources */,
 				A2794DDC24369ADF00E58C13 /* adminAddImageManualViewController.swift in Sources */,
+				A24D058E244F80F9009936A6 /* confirmUserViewController.swift in Sources */,
 				A24F381C23EF66E000AACC97 /* ViewController.swift in Sources */,
 				A223919B2448C8D9008C87B5 /* changeImageInventoryViewController.swift in Sources */,
 				A223919724481430008C87B5 /* passwordResetViewController.swift in Sources */,
 				1CF92CE62423C177001D7E0B /* otherAdminViewController.swift in Sources */,
 				A239DC1124131589003CFF0C /* sendfeedbackcontrolsViewController.swift in Sources */,
+				A24D058C244F7F09009936A6 /* adminSelectUserViewController.swift in Sources */,
 				1CE5C0A423FB335100ED2C3C /* QRScannerController.swift in Sources */,
 				A239DC212416F0D5003CFF0C /* ediItemInfoViewController.swift in Sources */,
 				1CE5C0A023FB32E700ED2C3C /* QRCodeViewController.swift in Sources */,
