@@ -6,6 +6,7 @@ import FirebaseUI
 import FirebaseDatabase
 import MapKit
 import Firebase
+import UserNotifications
 
 class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
@@ -213,6 +214,67 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             RequestError().showError()
             print(error.localizedDescription)
         }
+        
+    }
+    
+    func foodItemAdminNotification() {
+        let userID = Auth.auth().currentUser?.uid
+        self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            var adminValue = value?["Admin"] as? String ?? "" //loads in the code from firebase
+            if(adminValue == "Yes"){
+                self.sendOutNotification();
+            }
+            
+          }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func prepareNotification(){
+        // The UNMutableNotificationContent object contains the data of the notification.
+        let content = UNMutableNotificationContent()
+        content.title = "Please Check The Inventory!"
+        content.subtitle = "It look like some food items are running out."
+        var stringOfItemsBelowQuantity = ""
+        for i in 0..<self.stringOfLowFoodItems.count{
+            stringOfItemsBelowQuantity = self.stringOfLowFoodItems[i].trimTitle() + ", " + stringOfItemsBelowQuantity
+        }
+        content.body = "Items: \(stringOfItemsBelowQuantity)"
+                
+                
+        // An UNNotificationRequest is generated which will trigger at the timeinterval of 180 seconds.
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: false)
+        let request = UNNotificationRequest(identifier: "notification.id.01", content: content, trigger: trigger)
+                
+        // Notification is scheduled for delivery.
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                
+    }
+    
+    func sendOutNotification(){
+        //notification will be sent every 24 hours=not redundant
+        getDataFromFirebase(callback: {(success)-> Void in //gets data from firebase
+            if(success) {
+                for x in 0..<self.foodItemsOfLowQuantityNumbers.count{
+                    var quantityOfItem = self.foodItemsOfLowQuantityNumbers[x]
+                    if(quantityOfItem < 5){
+                        //checking if quantity of item was less than 5, indicates a notification must be send
+                        if(!self.stringOfLowFoodItems.contains(self.foodItemsOfLowQuantity[x]["name"] as! String)){
+                            self.stringOfLowFoodItems.append(self.foodItemsOfLowQuantity[x]["name"] as! String)
+                        }
+                    }
+                }
+                if(self.foodItemsOfLowQuantity.count != 0){
+                    print("func called")
+                    self.prepareNotification();
+                }
+                
+                
+                                
+            }
+        })
         
     }
     
