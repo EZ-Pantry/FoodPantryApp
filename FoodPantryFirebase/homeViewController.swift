@@ -13,7 +13,6 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var schoolImageView: UIImageView!
     
-    
     var PantryName: String = ""
     
     var ref: DatabaseReference!

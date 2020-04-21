@@ -132,7 +132,8 @@ class logInViewController: UIViewController, UITextFieldDelegate {
                             // Get user value
                             let value = snapshot.value as? NSDictionary
                              let status = value?["Account Status"] as? String ?? "" //load in the admin code
-                              
+                              let PantryName = value?["Pantry Name"] as? String ?? ""
+                                
                                 if(status != "0") {
                                     
                                     //set firebase notification token
@@ -142,7 +143,7 @@ class logInViewController: UIViewController, UITextFieldDelegate {
                                         print("Error fetching remote instance ID: \(error)")
                                       } else if let result = result {
                                         print("Remote instance ID token: \(result.token)")
-                                        self.ref.child("All Users").child(user!.uid).child("Token").setValue(result.token) { //save to firebase
+                                        self.ref.child(PantryName).child("Users").child(user!.uid).child("Token").setValue(result.token) { //save to firebase
                                           (error:Error?, ref:DatabaseReference) in
                                           if let error = error {
                                             print("Data could not be saved: \(error).")
