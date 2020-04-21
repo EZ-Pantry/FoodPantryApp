@@ -6,6 +6,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 
+var canShowPopUpForStudents = true;
 class QRCodeViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var numberTextField: UITextField! //quantity text field on the screen
@@ -62,35 +63,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         manualView.layer.cornerRadius = manualView.frame.height / 8
         manualView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
         
-        ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
-          // Get user value
-          let value = snapshot.value as? NSDictionary
-          
-
-                let uid: String = Auth.auth().currentUser!.uid
-                
-                //check if the user is an admin
-                self.ref.child(self.PantryName).child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let value = snapshot.value as? NSDictionary
-                    var isAdmin = value?["Admin"] as? String ?? ""
-                    isAdmin = isAdmin.lowercased()
-                    if(isAdmin == "yes") { //user is an admin
-                        //doesn't have to verify
-                        self.performSegue(withIdentifier: "adminSelectStudent", sender: nil)
-                    }
-                }) { (error) in
-                    RequestError().showError()
-                    print(error.localizedDescription)
-                }
         
-            
-
-          // ...
-          }) { (error) in
-            RequestError().showError()
-            print(error.localizedDescription)
-        }
     }
  
     override func viewWillAppear(_ animated: Bool) {
@@ -116,7 +89,36 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         } else {
             checkoutButton.isHidden = false
         }
+        ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
+          // Get user value
+          let value = snapshot.value as? NSDictionary
+          
+
+                let uid: String = Auth.auth().currentUser!.uid
+                
+                //check if the user is an admin
+                self.ref.child(self.PantryName).child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    let value = snapshot.value as? NSDictionary
+                    var isAdmin = value?["Admin"] as? String ?? ""
+                    isAdmin = isAdmin.lowercased()
+                    if(isAdmin == "yes" && canShowPopUpForStudents) { //user is an admin
+                        //doesn't have to verify
+                        canShowPopUpForStudents = false;
+                        self.performSegue(withIdentifier: "adminSelectStudent", sender: nil)
+                    }
+                }) { (error) in
+                    RequestError().showError()
+                    print(error.localizedDescription)
+                }
         
+            
+
+          // ...
+          }) { (error) in
+            RequestError().showError()
+            print(error.localizedDescription)
+        }
         
         
     }

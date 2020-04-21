@@ -313,6 +313,7 @@ class checkoutViewController: UITableViewController {
               
               
           }
+          canShowPopUpForStudents = true;//admin can now checkout as other users if they would like to 
           myGroup.leave()
         // ...
         }) { (error) in

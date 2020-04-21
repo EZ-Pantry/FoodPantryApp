@@ -3498,7 +3498,7 @@
                         <segue destination="LbU-b6-iGh" kind="presentation" identifier="scanSession" modalPresentationStyle="fullScreen" id="Ybh-uf-f4w"/>
                         <segue destination="Cx6-OT-Bas" kind="unwind" identifier="BackToHome" unwindAction="unwindToHome:" id="92q-mC-Kkd"/>
                         <segue destination="Cx6-OT-Bas" kind="unwind" identifier="GoToFirst" unwindAction="unwindToFirst:" id="Hsb-lu-uSb"/>
-                        <segue destination="dlC-gK-U8I" kind="show" identifier="adminSelectStudent" id="3lZ-qg-7j4"/>
+                        <segue destination="dlC-gK-U8I" kind="presentation" identifier="adminSelectStudent" id="3lZ-qg-7j4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1iC-48-6u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -11534,13 +11534,13 @@
         <!--Select a Student-->
         <scene sceneID="EXJ-UM-lUP">
             <objects>
-                <viewController id="dlC-gK-U8I" customClass="adminSelectUserViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="dlC-gK-U8I" customClass="adminSelectUserViewController" customModule="EZ_Pantry" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fDR-8n-XEh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="3sm-85-TGA">
-                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="LrG-dI-VWL"/>
                                     <constraint firstAttribute="height" constant="56" id="v7b-3W-rWj"/>
@@ -11548,7 +11548,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zEc-PV-4aE">
-                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="customCell" rowHeight="100" id="D5n-uK-udg" customClass="ApprovedUserViewCell" customModule="EZ_Pantry" customModuleProvider="target">
@@ -11702,9 +11702,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="3Qs-b0-Rjn"/>
-        <segue reference="Dwa-lY-C5Y"/>
+        <segue reference="Zke-bH-X19"/>
         <segue reference="H9f-l5-90A"/>
-        <segue reference="VrP-rx-HIg"/>
+        <segue reference="ZbA-Fj-Lae"/>
         <segue reference="EuT-4I-1uS"/>
         <segue reference="Ona-bs-GLF"/>
     </inferredMetricsTieBreakers>
