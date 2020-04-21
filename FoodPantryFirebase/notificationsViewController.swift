@@ -127,7 +127,7 @@ class notificationsViewController: UIViewController, UITextFieldDelegate {
             lastNotification.text = message
             
             //send actual notification
-            self.functions.httpsCallable("sendAdminMessage").call(["message": self.messageField.text!.filterEmoji]) { (result, error) in
+            self.functions.httpsCallable("sendAdminMessage").call(["pantry": self.PantryName, "message": self.messageField.text!.filterEmoji]) { (result, error) in
               if let error = error as NSError? {
                 if error.domain == FunctionsErrorDomain {
                   let code = FunctionsErrorCode(rawValue: error.code)
@@ -145,7 +145,10 @@ class notificationsViewController: UIViewController, UITextFieldDelegate {
                 
                 
                 let data = result?.data as? [String: Any]
-                let error = data!["error"] as! String
+                
+                print(data)
+                
+                let error = data?["error"] as? String
                 print(data!)
                 print(error)
                 
