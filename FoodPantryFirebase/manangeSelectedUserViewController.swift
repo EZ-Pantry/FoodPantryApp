@@ -14,6 +14,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import Firebase
 
+
 class manageSelectedUserViewController: UIViewController {
     
     var PantryName: String = ""
@@ -27,9 +28,6 @@ class manageSelectedUserViewController: UIViewController {
     var uid: String = ""
     var email: String = ""
     var password: String = ""
-    
-//    var adminEmail = ""
-//    var adminPassword = ""
     
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var approveButton: UIButton!
@@ -133,31 +131,79 @@ class manageSelectedUserViewController: UIViewController {
         
         self.ref.child("All Users").child(self.uid).child("Account Status").setValue("1")
         
-        let alert = UIAlertController(title: "Updated!", message: "User has been approved.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil);
-        
-        updateButtons(status: "1")
-
-    }
+        self.functions.httpsCallable("sendUserApproved").call(["pantry": self.PantryName, "uid": self.uid]) { (result, error) in
+              if let error = error as NSError? {
+                if error.domain == FunctionsErrorDomain {
+                  let code = FunctionsErrorCode(rawValue: error.code)
+                  let message = error.localizedDescription
+                  let details = error.userInfo[FunctionsErrorDetailsKey]
+                    print(message)
+                    print(code)
+                    print(details)
+                    //display the error
+       
+                }
+              }
+            
+            let alert = UIAlertController(title: "Updated!", message: "User has been approved.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil);
+                  
+            self.updateButtons(status: "1")
+                
+            }
+        }
     
     @IBAction func resumeUser(_ sender: Any) {
         self.ref.child("All Users").child(self.uid).child("Account Status").setValue("1")
         
-        let alert = UIAlertController(title: "Updated!", message: "User is no longer suspended.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil);
-        updateButtons(status: "1")
-    }
+        self.functions.httpsCallable("sendUserResumed").call(["pantry": self.PantryName, "uid": self.uid]) { (result, error) in
+               if let error = error as NSError? {
+                 if error.domain == FunctionsErrorDomain {
+                   let code = FunctionsErrorCode(rawValue: error.code)
+                   let message = error.localizedDescription
+                   let details = error.userInfo[FunctionsErrorDetailsKey]
+                     print(message)
+                     print(code)
+                     print(details)
+                     //display the error
+        
+                 }
+               }
+             
+            let alert = UIAlertController(title: "Updated!", message: "User is no longer suspended.", preferredStyle: .alert)
+             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+             self.present(alert, animated: true, completion: nil);
+            self.updateButtons(status: "1")
+                 
+             }
+         }
     
     @IBAction func suspendUser(_ sender: Any) {
         
         self.ref.child("All Users").child(self.uid).child("Account Status").setValue("2")
         
-        let alert = UIAlertController(title: "Updated!", message: "User has been suspended.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil);
-        updateButtons(status: "2")
+        self.functions.httpsCallable("sendUserSuspended").call(["pantry": self.PantryName, "uid": self.uid]) { (result, error) in
+                      if let error = error as NSError? {
+                        if error.domain == FunctionsErrorDomain {
+                          let code = FunctionsErrorCode(rawValue: error.code)
+                          let message = error.localizedDescription
+                          let details = error.userInfo[FunctionsErrorDetailsKey]
+                            print(message)
+                            print(code)
+                            print(details)
+                            //display the error
+               
+                        }
+                      }
+                    
+                      let alert = UIAlertController(title: "Updated!", message: "User has been suspended.", preferredStyle: .alert)
+                     alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                     self.present(alert, animated: true, completion: nil);
+            self.updateButtons(status: "2")
+                        
+        }
+        
     }
     
     @IBAction func deleteUser(_ sender: Any) {

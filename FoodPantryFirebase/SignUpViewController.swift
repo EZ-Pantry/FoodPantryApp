@@ -269,7 +269,23 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                             }
                           }
                             
-                            self.sendVerificationMail()
+                            InstanceID.instanceID().instanceID { (result, error) in
+                              if let error = error {
+                                print("Error fetching remote instance ID: \(error)")
+                              } else if let result = result {
+                                print("Remote instance ID token: \(result.token)")
+                                self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Token").setValue(result.token) { //save to firebase
+                                  (error:Error?, ref:DatabaseReference) in
+                                  if let error = error {
+                                    print("Data could not be saved: \(error).")
+                                  } else {
+                                    self.sendVerificationMail()
+                                  }
+                                }
+                              }
+                            }
+                            
+    
                             
                         }
                         
