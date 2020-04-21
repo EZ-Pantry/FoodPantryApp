@@ -19,6 +19,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet var typeLabel: UITextField!
     @IBOutlet var quantityLabel: UITextField!
     @IBOutlet var healthyLabel: UITextField!
+    @IBOutlet var checkableLabel: UITextField!
+    
     @IBOutlet var finishBtn: UIButton!
     @IBOutlet var cancelBtn: UIButton!
     @IBOutlet weak var chooseImgButton: UIButton!
@@ -146,6 +148,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 self.allergiesLabel.text = food_data["allergies"] as! String
                 self.typeLabel.text = food_data["type"] as! String
                 self.healthyLabel.text = food_data["healthy"] as! String
+                self.checkableLabel.text = food_data["checkable"] as! String
+
                 let url = food_data["image"] as! String
                 self.food_url = url
                 
@@ -205,12 +209,15 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                                 let allergies = data[index]["allergies"] as! String
                                 let type = data[index]["type"] as! String
                                 let healthy = data[index]["healthy"] as! String
+                                let checkable = data[index]["checkable"] as! String
+
                                 //put on screen
                                 self.nameLabel.text = title.trimTitle()
                                 self.ingredientsLabel.text = ingredients
                                 self.allergiesLabel.text = allergies
                                 self.typeLabel.text = type
                                 self.healthyLabel.text = healthy
+                                self.checkableLabel.text = checkable
 
                                 self.food_url = url
                                 
@@ -398,10 +405,12 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 let type = value["Type"] as? String ?? ""
                 let info = value["Information"] as? String ?? ""
                 let allergies = value["Allergies"] as? String ?? ""
+                let checkable = value["Max Checked Out"] as? String ?? ""
+
                 let id = String(c)
                 
                 //adds to the arrays
-                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "allergies": allergies, "type": type, "id": id, "key": key])
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "allergies": allergies, "type": type, "id": id, "key": key, "checkable": checkable])
                 tempNames.append(name)
                 c += 1 //increments id counter
             }
@@ -495,7 +504,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     var newQuantity = Int(additionalQuantity)! + Int(currentQuantity)!
                     var newQuantity2 = String(newQuantity)
                     var newHealthy = self.healthyLabel.text!
-                    
+                    var newCheckable = self.checkableLabel.text!
+
                     //check for blanks
                     if(newIngredients == "") {
                         newIngredients = "not listed"
@@ -525,6 +535,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     
                     self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Healthy").setValue(newHealthy.filterEmoji);
                     
+                    self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(key).child("Max Checked Out").setValue(newCheckable.filterEmoji);
+
                     //add the new barcode
                     
                     if(!self.manualEnter) {
@@ -545,6 +557,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 var newAllergies: String = self.allergiesLabel.text!
                 var newType: String = self.typeLabel.text!
                 var newQuantity: String = self.quantityLabel.text!
+                var newCheckable: String = self.checkableLabel.text!
                 var newURL = ""
                 if(newImageURL != ""){
                     newURL = newImageURL
@@ -583,7 +596,8 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 dic.setValue(newURL.filterEmoji, forKey: "URL")
                 dic.setValue(checkedOut.filterEmoji, forKey: "Checked Out")
                 dic.setValue(newHealthy.filterEmoji, forKey: "Healthy")
-                
+                dic.setValue(newCheckable.filterEmoji, forKey: "Max Checked Out")
+
                 myGroup.enter()
                 
                 let refChild = self.ref.child(self.PantryName).child("Inventory").child("Food Items").childByAutoId()

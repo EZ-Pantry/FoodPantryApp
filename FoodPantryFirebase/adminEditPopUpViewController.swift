@@ -33,6 +33,7 @@ class adminEditPopUpViewController: UIViewController {
     var allergies = ""
     var type = ""
     var timesCheckedOut = 0
+    var checkableAmount = ""
     
     var uid = ""
     
@@ -53,7 +54,7 @@ class adminEditPopUpViewController: UIViewController {
         foodName.text = name.trimTitle()
         foodQuantity.text = "Quantity: " + String(quantity)
         foodInformation.text = "Information: " + String(information)
-        foodCheckedout.text = "Total Checked out: " + String(checkedout)
+        foodCheckedout.text = "Checked Out: " + String(checkedout)
         foodHealthy.text = "Healthy: " + String(healthy)
         foodAllergy.text = "Allergy: " + String(allergies)
         foodType.text = "Type: " + String(type)
@@ -136,6 +137,8 @@ class adminEditPopUpViewController: UIViewController {
             destinationVC?.image = (image as? String)!
             destinationVC?.type = (type as? String)!
             destinationVC?.allergies = (allergies as? String)!
+            destinationVC?.uid = (uid as? String)!
+            destinationVC?.checkableAmount = (checkableAmount as? String)!
 
         }
     }
