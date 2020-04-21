@@ -6,6 +6,8 @@ import Foundation
 import UIKit
 import FirebaseUI
 import FirebaseDatabase
+import FirebaseAuth
+import Firebase
 
 var foodItemEnteringName = ""
 class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
@@ -63,6 +65,9 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //the new food title
     
     var newFoodTitle = ""
+    
+    lazy var functions = Functions.functions()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -597,8 +602,30 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                         myGroup.leave() //all done, can leave the group
                     }
                 }
+            
+                //send notification to all users
+            
+                myGroup.enter()
+            
+            self.functions.httpsCallable("sendNewFoodMessage").call(["pantry": self.PantryName, "name": newTitle.filterEmoji]) { (result, error) in
+                    if let error = error as NSError? {
+                        if error.domain == FunctionsErrorDomain {
+                            let code = FunctionsErrorCode(rawValue: error.code)
+                            let message = error.localizedDescription
+                            let details = error.userInfo[FunctionsErrorDetailsKey]
+                            print(message)
+                            print(code)
+                            print(details)
+                        }
+                    }
+                
+                myGroup.leave()
+              
+              
+                }
                 
             }
+        
             
             myGroup.notify(queue: .main) { //all loops finished, can do the call back
                 
