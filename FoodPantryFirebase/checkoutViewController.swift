@@ -225,10 +225,16 @@ class checkoutViewController: UITableViewController {
         
         
         if(self.items.count > 0) {
-        
+        var userID = ""
         myGroup.enter()
-        let userID = Auth.auth().currentUser?.uid
-        self.ref.child(self.PantryName).child("Users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+        if(userAdminIsCheckingAsUID == ""){
+            userID = Auth.auth().currentUser?.uid as! String
+        }
+        else{
+            userID = userAdminIsCheckingAsUID;
+        }
+        
+            self.ref.child(self.PantryName).child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
             let value = snapshot.value as? NSDictionary
             //UPDATE Statistics Node
@@ -239,13 +245,13 @@ class checkoutViewController: UITableViewController {
             print("total student has: ")
             print(totalItemsStudentHasCheckedOut)
             totalItemsStudentHasCheckedOut += totalQuantityChanged;//number of items checked out would go here
-            self.ref.child(self.PantryName).child("Users").child(userID!).child("Total Item's Checked Out").setValue(String(totalItemsStudentHasCheckedOut))
+                self.ref.child(self.PantryName).child("Users").child(userID).child("Total Item's Checked Out").setValue(String(totalItemsStudentHasCheckedOut))
             
             
             
-            self.ref.child(self.PantryName).child("Users").child(userID!).child("Last Date Visited").setValue(self.fullyFormatedDate)
+                self.ref.child(self.PantryName).child("Users").child(userID).child("Last Date Visited").setValue(self.fullyFormatedDate)
             
-            self.ref.child(self.PantryName).child("Users").child(userID!).child("Last Item Checked Out").setValue(self.items[self.items.count-1])
+                self.ref.child(self.PantryName).child("Users").child(userID).child("Last Item Checked Out").setValue(self.items[self.items.count-1])
             
             myGroup.leave()
           // ...
@@ -307,6 +313,7 @@ class checkoutViewController: UITableViewController {
               
               
           }
+          canShowPopUpForStudents = true;//admin can now checkout as other users if they would like to 
           myGroup.leave()
         // ...
         }) { (error) in
