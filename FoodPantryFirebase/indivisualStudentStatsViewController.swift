@@ -178,12 +178,14 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
  
         if (searching){
 //            var indexCurrentlyAt =
-            if(status == "1" || status == "2"){
-                cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
-                cell.nameBtn.setTitle(searchedUser[indexPath.row] as! String, for: .normal)
-                cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
+            if(status == "1"){
+                cell.cellView.backgroundColor = UIColor(red: 241/255, green: 143/255, blue: 0/255, alpha: 1)
+            } else if(status == "2") {
+                cell.cellView.backgroundColor = UIColor(red: 143/255, green: 146/255, blue: 26/255, alpha: 255/255)
             }
             
+            cell.nameBtn.setTitle(usersApproved[indexPath.row]["Name"] as! String, for: .normal)
+            cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
             
             
             cell.tapCallback = {
@@ -198,11 +200,14 @@ class indivisualStudentStatsViewController: UIViewController, UITableViewDelegat
             }
         }
         else{
-            if(status == "1" || status == "2"){
-                cell.cellView.backgroundColor = UIColor(red: 133/255, green: 140/255, blue: 225/255, alpha: 1)
-                cell.nameBtn.setTitle(usersApproved[indexPath.row]["Name"] as! String, for: .normal)
-                cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
+            if(status == "1"){
+                cell.cellView.backgroundColor = UIColor(red: 241/255, green: 143/255, blue: 0/255, alpha: 1)
+            } else if(status == "2") {
+                cell.cellView.backgroundColor = UIColor(red: 143/255, green: 146/255, blue: 26/255, alpha: 255/255)
             }
+            
+            cell.nameBtn.setTitle(usersApproved[indexPath.row]["Name"] as! String, for: .normal)
+            cell.cellView.layer.cornerRadius = cell.cellView.frame.height / 2
             
             
             

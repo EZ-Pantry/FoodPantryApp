@@ -23,6 +23,8 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     var barcodes = ""
     
+    var adminStudentUID = "" //the uid of the student the admin has chosen if the admin is checking out
+    
     //all the supported types
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
     AVMetadataObject.ObjectType.code39,
@@ -140,6 +142,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             destinationVC?.quantity = "1" //send the quantity of items (default)
             destinationVC?.checkedOut = checkedOut //send the current items checkout out
             destinationVC?.barcodes = barcodes //send the current barcodes checkout out
+            destinationVC?.adminStudentUID = adminStudentUID //send the student id if an admin is checking out
         }
     }
 

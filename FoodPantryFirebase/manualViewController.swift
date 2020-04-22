@@ -28,6 +28,9 @@ class manualViewController: UIViewController {
     var PantryName: String = ""
     
     var barcodes = ""
+    
+    var adminStudentUID = "" //the uid of the student the admin has chosen if the admin is checking out
+
 
     
     override func viewDidLoad() {
@@ -165,12 +168,19 @@ class manualViewController: UIViewController {
             destinationVC?.error = error
             destinationVC?.checkedOut = checkedOut
             destinationVC?.barcodes = barcodes
+            destinationVC?.adminStudentUID = adminStudentUID
+            
+            if(adminStudentUID != "") { //uid is set to a value, meaning an admin is checking out
+                destinationVC?.adminChoseStudent = true
+            }
+            
         } else if(segue.identifier == "GoToScrape") {
             let destinationVC = segue.destination as? QRScrapeController
             destinationVC?.checkedOut = checkedOut
             destinationVC?.manualEnter = true
             destinationVC?.manualTitle = foodTitle
             destinationVC?.barcodes = barcodes
+            destinationVC?.adminStudentUID = adminStudentUID
         }
     }
     

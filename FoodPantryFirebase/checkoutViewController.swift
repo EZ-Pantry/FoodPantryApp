@@ -1,6 +1,5 @@
 //  Copyright © 2020 Ashay Parikh, Rayaan Siddiqi. All rights reserved.
 
-
 import Foundation
 import UIKit
 import FirebaseUI
@@ -23,6 +22,7 @@ class checkoutViewController: UITableViewController {
     
     var data: [[String: Any]] = []
 
+    var adminStudentUID = "" //the uid of the student the admin has chosen if the admin is checking out
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -227,11 +227,11 @@ class checkoutViewController: UITableViewController {
         if(self.items.count > 0) {
         var userID = ""
         myGroup.enter()
-        if(userAdminIsCheckingAsUID == ""){
+        if(adminStudentUID == ""){
             userID = Auth.auth().currentUser?.uid as! String
         }
         else{
-            userID = userAdminIsCheckingAsUID;
+            userID = adminStudentUID;
         }
         
             self.ref.child(self.PantryName).child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -313,7 +313,6 @@ class checkoutViewController: UITableViewController {
               
               
           }
-          canShowPopUpForStudents = true;//admin can now checkout as other users if they would like to 
           myGroup.leave()
         // ...
         }) { (error) in
@@ -426,6 +425,11 @@ class checkoutViewController: UITableViewController {
                 destinationVC?.checkedOut = foodItems;
                 destinationVC?.barcodes = barcodes;
                 destinationVC?.error = "";
+                
+                if(adminStudentUID != "") { //uid is set to a value, meaning an admin is checking out
+                    destinationVC?.adminChoseStudent = true
+                }
+            
             }
 
         }

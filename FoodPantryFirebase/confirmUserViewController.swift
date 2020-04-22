@@ -7,7 +7,6 @@
 //
 
 import UIKit
-var userAdminIsCheckingAsUID = ""
 class confirmUserViewController: UIViewController {
 
     @IBOutlet weak var noButton: UIButton!
@@ -52,9 +51,7 @@ class confirmUserViewController: UIViewController {
     }
     
     @IBAction func yesButtonClicked(_ sender: UIButton) {
-        userAdminIsCheckingAsUID = userUID;//admin has selected that user-save UID
-        print("below")
-        print(userAdminIsCheckingAsUID)
+         self.performSegue(withIdentifier: "GoToQR", sender: self)
     }
     
     @IBAction func noButtonClicked(_ sender: UIButton) {
@@ -64,6 +61,17 @@ class confirmUserViewController: UIViewController {
     @IBAction func dismissBackTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+           if segue.identifier == "GoToQR"{
+                let destinationVC = segue.destination as? QRCodeViewController
+                destinationVC?.adminStudentUID = userUID;
+                destinationVC?.adminChoseStudent = true;
+
+           }
+
+        }
     
 
 }

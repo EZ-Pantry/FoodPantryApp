@@ -35,6 +35,9 @@ class QRScrapeController: UIViewController {
 
     var loadingBar = LoadingBar()
     
+    var adminStudentUID = "" //the uid of the student the admin has chosen if the admin is checking out
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -481,8 +484,13 @@ class QRScrapeController: UIViewController {
             destinationVC?.error = errorMessage
             destinationVC?.checkedOut = checkedOut
             destinationVC?.barcodes = barcodes
+            destinationVC?.adminStudentUID = adminStudentUID
+            if(adminStudentUID != "") { //uid is set to a value, meaning an admin is checking out
+                destinationVC?.adminChoseStudent = true
+            }
         } else {
             
+            //add the barcode to the string list of barcodes
             if(barcode != "") {
                 barcodes += barcode + ","
             }
@@ -492,10 +500,17 @@ class QRScrapeController: UIViewController {
                 destinationVC?.checkedOut = checkedOut
                 destinationVC?.barcodes = barcodes
                 destinationVC?.error = "";
+                destinationVC?.adminStudentUID = adminStudentUID
+                
+                if(adminStudentUID != "") { //uid is set to a value, meaning an admin is checking out
+                    destinationVC?.adminChoseStudent = true
+                }
+                
             } else if(segue.identifier == "checkOut") {
                 let destinationVC = segue.destination as? checkoutViewController
                 destinationVC?.foodItems = checkedOut
                 destinationVC?.barcodes = barcodes
+                destinationVC?.adminStudentUID = adminStudentUID
             }
         }
     }

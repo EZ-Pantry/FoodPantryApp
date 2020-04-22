@@ -6,7 +6,6 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 
-var canShowPopUpForStudents = true;
 class QRCodeViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var numberTextField: UITextField! //quantity text field on the screen
@@ -28,6 +27,9 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var scanView: UIView!
     @IBOutlet var manualView: UIView!
+    
+    var adminStudentUID = ""
+    var adminChoseStudent: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,20 +65,15 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         manualView.layer.cornerRadius = manualView.frame.height / 8
         manualView.layer.backgroundColor = UIColor(displayP3Red: 247/255, green: 188/255, blue: 102/255, alpha: 1).cgColor
         
+        numberTextField.delegate = self;
+        numberTextField.text = ""
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(QRCodeViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(QRCodeViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
  
     override func viewWillAppear(_ animated: Bool) {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(QRCodeViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-               NotificationCenter.default.addObserver(self, selector: #selector(QRCodeViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        numberTextField.delegate = self;
-        
-        print(checkedOut)
-        print(barcodes)
-        print(error)
-        
-        numberTextField.text = ""
         
         if error != "" { //redirected from a different view and there is an error
             errorLabel.text = error + "\nPlease try again.";
@@ -89,37 +86,6 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         } else {
             checkoutButton.isHidden = false
         }
-        ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
-          // Get user value
-          let value = snapshot.value as? NSDictionary
-          
-
-                let uid: String = Auth.auth().currentUser!.uid
-                
-                //check if the user is an admin
-                self.ref.child(self.PantryName).child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let value = snapshot.value as? NSDictionary
-                    var isAdmin = value?["Admin"] as? String ?? ""
-                    isAdmin = isAdmin.lowercased()
-                    if(isAdmin == "yes" && canShowPopUpForStudents) { //user is an admin
-                        //doesn't have to verify
-                        canShowPopUpForStudents = false;
-                        self.performSegue(withIdentifier: "adminSelectStudent", sender: nil)
-                    }
-                }) { (error) in
-                    RequestError().showError()
-                    print(error.localizedDescription)
-                }
-        
-            
-
-          // ...
-          }) { (error) in
-            RequestError().showError()
-            print(error.localizedDescription)
-        }
-        
         
     }
     
@@ -152,8 +118,7 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         
         
     }
-    
-    var areAdmin = ""
+        
     func checkUserDeleted() {
         if let user = Auth.auth().currentUser {
         
@@ -229,12 +194,9 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
             
         func textFieldDidBeginEditing(_ textField: UITextField){
             self.activeField = textField
-    //        authenticationWithTouchID()
         }
 
-    //    func textFieldDidEndEditing(_ textField: UITextField){
-    //        activeField = nil
-    //    }
+
 
          @objc func keyboardWillShow(notification: NSNotification) {
                    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -271,10 +233,14 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
                     let value = snapshot.value as? NSDictionary
                     var isAdmin = value?["Admin"] as? String ?? ""
                     isAdmin = isAdmin.lowercased()
-                    self.areAdmin = isAdmin.lowercased()
                     if(isAdmin == "yes") { //user is an admin
-                        //doesn't have to verify
-                        self.view.isUserInteractionEnabled = true
+                        //check if the user has chosen a student
+                        
+                        if(self.adminChoseStudent) { //admins all good
+                            self.view.isUserInteractionEnabled = true
+                        } else {
+                            self.performSegue(withIdentifier: "adminSelectStudent", sender: nil)
+                        }
                     } else if(checkout == "yes"){ //user isn't an admin but can still checkout
                         let currentTime: String = UserDefaults.standard.object(forKey:"UserSession") as? String ?? ""
                         
@@ -358,29 +324,55 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
             destinationVC?.manualTitle = title
             destinationVC?.checkedOut = checkedOut
             destinationVC?.barcodes = barcodes
+            destinationVC?.adminStudentUID = adminStudentUID
+            adminStudentUID = ""
             checkedOut = "" //reset
             barcodes = "" //reset
             error = ""
+            adminChoseStudent = false
+            
+            numberTextField.text = ""
+
         } else if(segue.identifier == "camera") { //person wants to scan barcode
             let destinationVC = segue.destination as? QRScannerController
             destinationVC?.checkedOut = checkedOut
             destinationVC?.barcodes = barcodes
+            destinationVC?.adminStudentUID = adminStudentUID
+            adminStudentUID = ""
             checkedOut = "" //reset
             barcodes = "" //reset
             error = ""
+            adminChoseStudent = false
+            
+            numberTextField.text = ""
+
         } else if(segue.identifier == "GoToCheckout") { //person wants to scan barcode
             let destinationVC = segue.destination as? checkoutViewController
             destinationVC?.foodItems = checkedOut
             destinationVC?.barcodes = barcodes
+            destinationVC?.adminStudentUID = adminStudentUID
+            adminStudentUID = ""
             checkedOut = "" //reset
             barcodes = "" //reset
             error = ""
+            adminChoseStudent = false
+            
+            numberTextField.text = ""
+
         } else if(segue.identifier == "scanSession") { //person wants to scan barcode
             let destinationVC = segue.destination as? BarcodeScanEntryViewController
             //don't reset fooditems, barcodes, or errors
         } else if(segue.identifier == "BackToHome") { //person wants to scan barcode
             let destinationVC = segue.destination as? homeViewController
             destinationVC?.message = "The admin has disabled checking out. Please try again later or contact them for more information."
+            adminStudentUID = ""
+            checkedOut = "" //reset
+            barcodes = "" //reset
+            error = ""
+            adminChoseStudent = false
+            
+            numberTextField.text = ""
+
         }
     }
     
