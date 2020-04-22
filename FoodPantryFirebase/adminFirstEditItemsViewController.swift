@@ -211,10 +211,11 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
                 let type = value["Type"] as? String ?? ""
                 let info = value["Information"] as? String ?? ""
                 let allergies = value["Allergies"] as? String ?? ""
+                let checkable = value["Max Checked Out"] as? String ?? ""
                 let id = String(c)
                 
                 //adds to array
-                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "type": type, "allergies": allergies, "id": id, "uid": key])
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "type": type, "allergies": allergies, "id": id, "uid": key, "checkable": checkable])
                 c += 1 //increments id count
             }
             
@@ -347,6 +348,8 @@ class adminFirstEditItemsViewController: UIViewController,  UIPickerViewDelegate
             destinationVC?.type = (selectedFoodItem?["type"] as? String)!
             destinationVC?.allergies = (selectedFoodItem?["allergies"] as? String)!
             destinationVC?.uid = (selectedFoodItem?["uid"] as? String)!
+            destinationVC?.checkableAmount = (selectedFoodItem?["checkable"] as? String)!
+
         }
     }
     

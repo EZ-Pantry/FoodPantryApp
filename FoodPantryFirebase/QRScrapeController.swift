@@ -117,7 +117,7 @@ class QRScrapeController: UIViewController {
                         }
                                         
                         //check to see how many times this item has been checked out in this current session
-                        self.checkTooMany()
+                        self.checkTooMany(foodItemUid: data[index]["uid"] as! String)
                     }
                 } else { //no item found, go back to the qrcodeview screen
                     self.errorMessage = "Food item not found in the inventory.";
@@ -210,7 +210,6 @@ class QRScrapeController: UIViewController {
                         var quantity = value?["Quantity"] as? String ?? "" //got the uid
                         var type = value?["Type"] as? String ?? "" //got the uid
                         var url = value?["URL"] as? String ?? "" //got the uid
-
                         
                         self.maxQuantity = Int(quantity) ?? 0//sets to var
                         
@@ -237,7 +236,7 @@ class QRScrapeController: UIViewController {
                                                 
                            //check to see how many times this item has been checked out in this current session
                                 
-                            self.checkTooMany()
+                            self.checkTooMany(foodItemUid: uid)
                         }
                         }
 
@@ -262,16 +261,16 @@ class QRScrapeController: UIViewController {
     }
     
     //check if the user has checked out too many food items
-    func checkTooMany() {
+    func checkTooMany(foodItemUid: String) {
         var count: Int = self.timesCheckedOut(item: self.food_title, current: self.checkedOut)
             
         //now, we get the uid of the food item based on the barcode
-        self.ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(foodItemUid).observeSingleEvent(of: .value, with: { (snapshot) in
           // Get user value
           let value = snapshot.value as? NSDictionary
             let maxCheckedOut = value!["Max Food Checked Out"] as? String ?? ""
             
-            if(count >= Int(maxCheckedOut) ?? 0) {
+            if(count > Int(maxCheckedOut) ?? 0) {
                     self.errorMessage = "This food item has been added too many times.";
                     self.performSegue(withIdentifier: "barcodeError", sender: self)
                 } else {
@@ -354,7 +353,7 @@ class QRScrapeController: UIViewController {
                 let id = String(c)
                 
                 //adds to the arrays
-                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "allergies": allergies, "id": id])
+                tempData.append(["name": name, "quantity": quantity, "amountCheckedOut": checked, "information": info, "healthy": healthy, "image": url, "allergies": allergies, "id": id, "uid": key])
                 tempNames.append(name)
                 c += 1 //increments id counter
             }
