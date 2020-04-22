@@ -228,6 +228,10 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
             guard let editedQuantity = self.itemQuantityTextField.text else { return }
             guard let editedCheckable = self.itemCheckableTextField.text else { return }
                     
+        if editedInfo == "" {
+            return
+        }
+        
             self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.uid).child("Name").setValue(editedName);
             self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.uid).child("Information").setValue(editedInfo);
             self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.uid).child("Allergies").setValue(editedAllergies);

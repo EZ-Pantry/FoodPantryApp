@@ -506,21 +506,10 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     var newHealthy = self.healthyLabel.text!
                     var newCheckable = self.checkableLabel.text!
 
+                    
                     //check for blanks
-                    if(newIngredients == "") {
-                        newIngredients = "not listed"
-                    }
-                    
-                    if(newAllergies == "") {
-                        newAllergies = "not listed"
-                    }
-                    
-                    if(newType == "") {
-                        newType = "not listed"
-                    }
-                    
-                    if(newHealthy == "") {
-                        newHealthy = "not listed"
+                    if(newIngredients == "" || newAllergies == "" || newType == "" || newHealthy == "" || newQuantity2 == "" || newCheckable == "") {
+                        return
                     }
                     
                     //now update
@@ -570,22 +559,10 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 var newHealthy = self.healthyLabel.text!
                 
                 //check for blanks
-                if(newIngredients == "") {
-                    newIngredients = "not listed"
+                if(newIngredients == "" || newAllergies == "" || newType == "" || newHealthy == "" || newQuantity == "" || newCheckable == "" || newTitle == "") {
+                    return
                 }
-                
-                if(newAllergies == "") {
-                    newAllergies = "not listed"
-                }
-                
-                if(newType == "") {
-                    newType = "not listed"
-                }
-            
-                if(newHealthy == "") {
-                    newHealthy = "not listed"
-                }
-            
+        
                 
                 let dic = NSMutableDictionary()
                 dic.setValue(newTitle.filterEmoji, forKey: "Name")
