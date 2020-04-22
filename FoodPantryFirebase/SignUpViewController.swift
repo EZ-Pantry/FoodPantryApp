@@ -208,7 +208,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         }
         
         if allergies == "" || allergies.containsEmoji {
-            allergies = "none"
+            allergies = "None"
         }
         
         if(!userError){
