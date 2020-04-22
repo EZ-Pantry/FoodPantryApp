@@ -83,6 +83,7 @@ class ViewStatisticsViewController: UIViewController, ChartViewDelegate {
         chooseGraphOrTextSegment.isHidden = false;
         chartView.isHidden = true;
         itemsBarChartView.isHidden = true;
+        self.chooseGraphOrTextSegment.selectedSegmentIndex = UISegmentedControl.noSegment
         
     }
     @IBAction func indivisualStudentButtonTapped(_ sender: UIButton) {

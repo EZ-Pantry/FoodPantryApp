@@ -59,10 +59,31 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         
         ref = Database.database().reference()
         
-        loadInFirebaseTextDataAboutStatistics();
-        initializeView()
+        let myGroup = DispatchGroup()
+            
+        myGroup.enter()
+        self.isUserInteractionEnabled = false;
+        self.loadInFirebaseTextDataAboutStatistics(callback: {(success)-> Void in
+             
+             if(success) {
+                //do creation of QR
+                self.initializeView()
+                self.myCollectionView.reloadData()
+                myGroup.leave()
+             } else {
+                RequestError().showError()
+            }
+            
+         })
+        
+        myGroup.notify(queue: .main) {
+            self.isUserInteractionEnabled = true;
+        }
+        
+        
         monthView.btnLeft.isEnabled = true;
         
+        self.isUserInteractionEnabled = false;
         let formatter : DateFormatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"//in month/day/year format
         //        MM-dd-yyyy- no need
@@ -250,7 +271,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     //all firebaes handling below
     var dataLoadedIn : [[String: Any]] =  []
-    func loadInFirebaseTextDataAboutStatistics(){
+    func loadInFirebaseTextDataAboutStatistics(callback: @escaping (_ success: Bool)-> Void){
         //get the dates and items/students visited with those dates
         self.ref.child("Conant High School").child("Statistics").child("Total Visits").observeSingleEvent(of: .value, with: { (snapshot) in
 
@@ -269,11 +290,13 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
                 c += 1
             }
             self.dataLoadedIn = tempData;
+            callback(true)
             
             
         }) { (error) in
             RequestError().showError()
             print(error.localizedDescription)
+            callback(false);
         }
         
     }
