@@ -27,7 +27,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     var message = ""
     
     //for the map alert
-    var installedNavigationApps : [String] = ["Apple Maps", "Google Maps"] // Apple Maps is always installed
+    var installedNavigationApps : [String] = ["Apple Maps"] // Apple Maps is always installed
     var latitude: Double = 45.5088
     var longitude: Double = -73.554
     
@@ -161,17 +161,10 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     func openMapButtonAction() {
 
         let appleURL = "http://maps.apple.com/?daddr=\(self.latitude),\(self.longitude)"
-        let googleURL = "comgooglemaps://?daddr=\(self.latitude),\(self.longitude)&directionsmode=driving"
 
-        let googleItem = ("Google Map", URL(string:googleURL)!)
         var installedNavigationApps = [("Apple Maps", URL(string:appleURL)!)]
 
-        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
-            installedNavigationApps.append(googleItem)
-        }
-        
-
-        let alert = UIAlertController(title: "Selection", message: "Select Navigation App", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Selection", message: "Select Navigation App", preferredStyle: .alert)
         for app in installedNavigationApps {
             let button = UIAlertAction(title: app.0, style: .default, handler: { _ in
                 UIApplication.shared.open(app.1, options: [:], completionHandler: nil)
@@ -180,6 +173,7 @@ class homeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancel)
+                
         present(alert, animated: true)
     }
 
@@ -794,4 +788,14 @@ extension String {
 //        }
 //        return false
     }
+}
+
+extension UIViewController {
+  public func addActionSheetForiPad(actionSheet: UIAlertController) {
+    if let popoverPresentationController = actionSheet.popoverPresentationController {
+      popoverPresentationController.sourceView = self.view
+      popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+      popoverPresentationController.permittedArrowDirections = []
+    }
+  }
 }
