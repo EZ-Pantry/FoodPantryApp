@@ -67,6 +67,7 @@ class adminSelectUserViewController: UIViewController, UITableViewDelegate, UITa
                     
                     for i in 0..<self.users.count {
                         myGroup.enter()
+                        self.view.isUserInteractionEnabled = false;
                         self.ref.child("All Users").child(self.users[i]["UID"] as! String).observeSingleEvent(of: .value, with: { (snapshot) in
                                        // Get user value
                             let value = snapshot.value as? NSDictionary
@@ -79,6 +80,7 @@ class adminSelectUserViewController: UIViewController, UITableViewDelegate, UITa
                                 self.usersApprovedNames.append(self.users[i]["Name"] as! String)
                             }
                             myGroup.leave()
+                            self.view.isUserInteractionEnabled = true;
                         }) { (error) in
                             RequestError().showError()
                             print(error.localizedDescription)

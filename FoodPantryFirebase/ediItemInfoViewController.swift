@@ -244,6 +244,7 @@ class ediItemInfoViewController: UIViewController, UIPickerViewDelegate, UIPicke
                 if(newImageURLFromChanged != ""){
                     self.ref.child(self.PantryName).child("Inventory").child("Food Items").child(self.uid).child("URL").setValue(newImageURLFromChanged);
                 }
+
             }
         
             self.view.isUserInteractionEnabled = true;

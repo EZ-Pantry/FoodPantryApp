@@ -60,6 +60,7 @@ class adminQRViewController: UIViewController {
             
         alert.showLoadingAlert()
         myGroup.enter()
+        self.view.isUserInteractionEnabled = false;
             self.retreiveQRTextFromFirebase(callback: {(success, QRText)-> Void in
              
              if(success) {
@@ -73,6 +74,7 @@ class adminQRViewController: UIViewController {
          })
         
         myGroup.notify(queue: .main) {
+            self.view.isUserInteractionEnabled = true;
             self.alert.hideLoadingAlert()
         }
     }

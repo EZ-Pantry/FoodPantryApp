@@ -487,6 +487,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 //update the current data in firebase
                 
                 myGroup.enter()
+                self.view.isUserInteractionEnabled = false
                 
                 let key = food_data["key"] as! String //gets the uid of the food item
 
@@ -533,6 +534,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     }
                     
                     myGroup.leave() //all done, can leave the group
+                    self.view.isUserInteractionEnabled = true;
                   // ...
                   }) { (error) in
                     RequestError().showError()
@@ -576,6 +578,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 dic.setValue(newCheckable.filterEmoji, forKey: "Max Checked Out")
 
                 myGroup.enter()
+                self.view.isUserInteractionEnabled = false;
                 
                 let refChild = self.ref.child(self.PantryName).child("Inventory").child("Food Items").childByAutoId()
                 
@@ -588,15 +591,18 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     if(error != nil){
                         RequestError().showError()
                         myGroup.leave() //all done, can leave the group
+                        self.view.isUserInteractionEnabled = true;
                     } else{
                         print("\n\n\n\n\nAdded successfully...")
                         myGroup.leave() //all done, can leave the group
+                        self.view.isUserInteractionEnabled = true;
                     }
                 }
             
                 //send notification to all users
             
                 myGroup.enter()
+                self.view.isUserInteractionEnabled = false;
             
             self.functions.httpsCallable("sendNewFoodMessage").call(["pantry": self.PantryName, "name": newTitle.filterEmoji]) { (result, error) in
                     if let error = error as NSError? {
@@ -611,6 +617,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                     }
                 
                 myGroup.leave()
+                self.view.isUserInteractionEnabled = true;
               
               
                 }
@@ -621,6 +628,7 @@ class addMainViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             myGroup.notify(queue: .main) { //all loops finished, can do the call back
                 
                 if(next == "finish") {
+                    self.view.isUserInteractionEnabled = true;
                     self.performSegue(withIdentifier: "BackToHome", sender: self)
                 } else if(next == "addmore") {
                     self.performSegue(withIdentifier: "addMore", sender: self)

@@ -64,6 +64,7 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
         let myGroup = DispatchGroup()
         
         myGroup.enter()
+        self.view.isUserInteractionEnabled = false;
         self.retreiveQRTextFromFirebase(callback: {(success, QRTextFromFirebase)-> Void in
              
         if(success) {
@@ -76,6 +77,7 @@ class BarcodeScanEntryViewController: UIViewController, AVCaptureMetadataOutputO
             
          })
         myGroup.notify(queue: .main) {
+            self.view.isUserInteractionEnabled = true;
             self.showMessage()
         }
     }

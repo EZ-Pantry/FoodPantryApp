@@ -167,6 +167,7 @@ class QRScrapeController: UIViewController {
                 let myGroup = DispatchGroup()
                 
                 myGroup.enter()
+                self.view.isUserInteractionEnabled = false;
                 
                 var uid = ""
                 
@@ -184,7 +185,7 @@ class QRScrapeController: UIViewController {
                 }
                 
                  myGroup.notify(queue: .main) {
-                    
+                    self.view.isUserInteractionEnabled = true;
                     if(uid == "") { //the uid doesn'te exist
                         self.errorMessage = "This food item cannot be scanned. Please manually enter the item.";
                         self.performSegue(withIdentifier: "barcodeError", sender: self)
