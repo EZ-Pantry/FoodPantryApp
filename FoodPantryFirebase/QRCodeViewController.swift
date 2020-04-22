@@ -94,6 +94,9 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         //check if checking out is allowed
         self.view.isUserInteractionEnabled = false
         
+        print(adminStudentUID)
+        print(adminChoseStudent)
+        
         self.ref.child(self.PantryName).child("Running").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             let maintenance = value?["Maintenance"] as? String ?? ""
@@ -365,13 +368,6 @@ class QRCodeViewController: UIViewController, UITextFieldDelegate {
         } else if(segue.identifier == "BackToHome") { //person wants to scan barcode
             let destinationVC = segue.destination as? homeViewController
             destinationVC?.message = "The admin has disabled checking out. Please try again later or contact them for more information."
-            adminStudentUID = ""
-            checkedOut = "" //reset
-            barcodes = "" //reset
-            error = ""
-            adminChoseStudent = false
-            
-            numberTextField.text = ""
 
         }
     }

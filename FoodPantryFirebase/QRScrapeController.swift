@@ -83,31 +83,7 @@ class QRScrapeController: UIViewController {
                         var url = data[index]["image"] as! String //url for the image of the food item
                         var foodAllergy = data[index]["allergies"] as! String
                         
-                        //self.ingredientsLabel.text = ingredients //puts on the screen
-                        
-                        //determines allergies based on the information in ingredients
-                        var allergies = ["corn", "egg", "fish", "milk", "nut", "soy", "wheat"]
-                    
-                        var confirmed = ""
-                        
-                        //checks to see if the title or ingredients contain an allergy
-                        for allergy in allergies {
-                            if self.manualTitle.contains(allergy) { //title
-                                confirmed += allergy + ","
-                            }  else if(ingredients.contains(allergy)) { //ingredients
-                                confirmed += allergy + ","
-                            } else if(foodAllergy.contains(allergy)) { //ingredients
-                                confirmed += allergy + ","
-                            }
-                        }
-                    
-                        //none confirmed
-                        if confirmed == "" {
-                            confirmed = "none,"
-                        }
-                    
-                        //self.typeLabel.text = confirmed.substring(to: confirmed.count-1); //removes the comma at the end, puts on the screen
-                    
+
                         if(url != "") {
                             if(url.verifyUrl){
                                 self.foodView.load(url: URL(string: url)!) //load the image. //add this catch statement to prevent a crash when url is invalid/doesn't exits
@@ -118,9 +94,16 @@ class QRScrapeController: UIViewController {
                         } else {
                             self.foodView.image = UIImage(named: "foodplaceholder.jpeg")
                         }
-                                        
-                        //check to see how many times this item has been checked out in this current session
-                        self.checkTooMany(foodItemUid: data[index]["uid"] as! String)
+                                      
+                        
+                        var userUID = Auth.auth().currentUser?.uid
+                        
+                        if(self.adminStudentUID != "") {
+                            userUID = self.adminStudentUID
+                        }
+                        
+                        self.checkAllergy(foodAllergy: foodAllergy, userUID: userUID!, foodItemUID: data[index]["uid"] as! String)
+                        
                     }
                 } else { //no item found, go back to the qrcodeview screen
                     self.errorMessage = "Food item not found in the inventory.";
@@ -129,8 +112,6 @@ class QRScrapeController: UIViewController {
                 
             })
             
-            self.view.isUserInteractionEnabled = true
-
         } else { //user entered a barcode
         
             ref = Database.database().reference() //reference to database
@@ -188,7 +169,6 @@ class QRScrapeController: UIViewController {
                 }
                 
                  myGroup.notify(queue: .main) {
-                    self.view.isUserInteractionEnabled = true;
                     if(uid == "") { //the uid doesn'te exist
                         self.errorMessage = "This food item cannot be scanned. Please manually enter the item.";
                         self.performSegue(withIdentifier: "barcodeError", sender: self)
@@ -225,21 +205,25 @@ class QRScrapeController: UIViewController {
                             self.nameLabel.text = name.trimTitle();
                         
                             //even more setting
-                            //self.ingredientsLabel.text = information
                                                 
                             if allergies == "" {
                                 allergies = "none"
                             }
                         
-                            //self.typeLabel.text = allergies
                         
                             if url != "" {
                                 self.foodView.load(url: URL(string: url)!);
                             }
-                                                
-                           //check to see how many times this item has been checked out in this current session
+                                 
+                            
+                            var userUID = Auth.auth().currentUser?.uid
+                            
+                            if(self.adminStudentUID != "") {
+                                userUID = self.adminStudentUID
+                            }
+                            
+                            self.checkAllergy(foodAllergy: allergies, userUID: userUID!, foodItemUID: uid)
                                 
-                            self.checkTooMany(foodItemUid: uid)
                         }
                         }
 
@@ -249,7 +233,6 @@ class QRScrapeController: UIViewController {
 
                     }
                     
-                     self.view.isUserInteractionEnabled = true
                     
                 }
                 }
@@ -262,6 +245,44 @@ class QRScrapeController: UIViewController {
         }
         
     }
+    
+    
+    //check if the user should be checking out this food item
+    
+    func checkAllergy(foodAllergy: String, userUID: String, foodItemUID: String) {
+        
+        self.ref.child(self.PantryName).child("Users").child(userUID).observeSingleEvent(of: .value, with: { (snapshot) in
+        // Get user value
+        let value = snapshot.value as? NSDictionary
+        let userAllergy = value!["Allergies"] as? String ?? ""
+            
+            print(foodAllergy)
+            print(userAllergy)
+        
+            if(userAllergy != "None" && userAllergy == foodAllergy) {
+                let alert = UIAlertController(title: "Warning!", message: "Student may be allergic to this food item. Do you want to check out this item?", preferredStyle: .alert)
+                                         
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                    self.checkTooMany(foodItemUid: foodItemUID) 
+                }))
+                
+                alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action: UIAlertAction!) in //go back to QR Code View
+                    self.performSegue(withIdentifier: "addMore", sender: self)
+                }))
+                self.present(alert, animated: true, completion: nil);
+                
+                
+            } else {
+                self.checkTooMany(foodItemUid: foodItemUID)
+            }
+        }) { (error) in
+                   print(error.localizedDescription)
+                   RequestError().showError()
+
+        }
+    }
+    
+    
     
     //check if the user has checked out too many food items
     func checkTooMany(foodItemUid: String) {
@@ -300,6 +321,9 @@ class QRScrapeController: UIViewController {
                     //makes the format "Food: Item" next line "Quantity: number"
             
                     self.currentLabel.text = text //puts on the screen
+                
+                    self.view.isUserInteractionEnabled = true
+
                 }
             
           }) { (error) in
@@ -488,6 +512,16 @@ class QRScrapeController: UIViewController {
             if(adminStudentUID != "") { //uid is set to a value, meaning an admin is checking out
                 destinationVC?.adminChoseStudent = true
             }
+        } else if(segue.identifier == "GoBack") {
+            let destinationVC = segue.destination as? QRCodeViewController
+            destinationVC?.checkedOut = checkedOut
+            destinationVC?.barcodes = barcodes
+            destinationVC?.error = "";
+            destinationVC?.adminStudentUID = adminStudentUID
+            
+            if(adminStudentUID != "") { //uid is set to a value, meaning an admin is checking out
+                destinationVC?.adminChoseStudent = true
+            }
         } else {
             
             //add the barcode to the string list of barcodes
@@ -511,7 +545,7 @@ class QRScrapeController: UIViewController {
                 destinationVC?.foodItems = checkedOut
                 destinationVC?.barcodes = barcodes
                 destinationVC?.adminStudentUID = adminStudentUID
-            }
+            } 
         }
     }
 

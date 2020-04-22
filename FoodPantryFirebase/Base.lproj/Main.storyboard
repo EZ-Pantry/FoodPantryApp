@@ -3578,9 +3578,11 @@
                         <outlet property="messageLabel" destination="U3e-VN-1Et" id="8gm-VT-3lR"/>
                         <outlet property="topBar" destination="xYG-cH-nUS" id="vm2-bo-xVu"/>
                         <segue destination="efu-PH-rx6" kind="presentation" identifier="GoToScrape" modalPresentationStyle="fullScreen" id="H9f-l5-90A"/>
+                        <segue destination="q1y-DS-8IF" kind="unwind" identifier="GoToCode" unwindAction="unwindToQRCode:" id="Q7h-AQ-z41"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSs-GD-aRI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="q1y-DS-8IF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5735" y="1715"/>
         </scene>
@@ -4115,6 +4117,7 @@
                         <outlet property="nameLabel" destination="ycr-q6-vtA" id="Qrb-gw-QA9"/>
                         <segue destination="Bbg-FS-YR1" kind="unwind" identifier="barcodeError" unwindAction="unwindToQRCode:" id="7oS-ae-X9Y"/>
                         <segue destination="Bbg-FS-YR1" kind="unwind" identifier="addMore" unwindAction="unwindToQRCode:" id="Qyw-lA-RNW"/>
+                        <segue destination="Bbg-FS-YR1" kind="unwind" identifier="GoBack" unwindAction="unwindToQRCode:" id="EPf-UK-UtD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpF-Ej-BoC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -4135,7 +4138,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngj-8w-6Ju">
-                                    <rect key="frame" x="97.666666666666686" y="20" width="218.66666666666663" height="71"/>
+                                    <rect key="frame" x="97.666666666666671" y="20" width="218.66666666666663" height="71"/>
                                     <color key="backgroundColor" red="0.0" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ngj-8w-6Ju" secondAttribute="height" multiplier="77:25" id="IXv-MW-Fuk"/>
@@ -4166,7 +4169,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USd-ft-9Pk">
-                                    <rect key="frame" x="97.666666666666686" y="116" width="218.66666666666663" height="70.666666666666686"/>
+                                    <rect key="frame" x="97.666666666666671" y="116" width="218.66666666666663" height="70.666666666666686"/>
                                     <color key="backgroundColor" red="0.0" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="USd-ft-9Pk" secondAttribute="height" multiplier="77:25" id="RzL-be-Nea"/>
@@ -12419,7 +12422,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3Qs-b0-Rjn"/>
-        <segue reference="Zke-bH-X19"/>
+        <segue reference="Dwa-lY-C5Y"/>
         <segue reference="H9f-l5-90A"/>
         <segue reference="EWc-7U-1jR"/>
         <segue reference="EuT-4I-1uS"/>

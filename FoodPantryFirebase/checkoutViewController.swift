@@ -425,6 +425,7 @@ class checkoutViewController: UITableViewController {
                 destinationVC?.checkedOut = foodItems;
                 destinationVC?.barcodes = barcodes;
                 destinationVC?.error = "";
+                destinationVC?.adminStudentUID = adminStudentUID;
                 
                 if(adminStudentUID != "") { //uid is set to a value, meaning an admin is checking out
                     destinationVC?.adminChoseStudent = true

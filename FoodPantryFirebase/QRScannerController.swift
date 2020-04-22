@@ -127,7 +127,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         }
     }
     @IBAction func dismissView(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.performSegue(withIdentifier: "GoToCode", sender: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -143,6 +143,16 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             destinationVC?.checkedOut = checkedOut //send the current items checkout out
             destinationVC?.barcodes = barcodes //send the current barcodes checkout out
             destinationVC?.adminStudentUID = adminStudentUID //send the student id if an admin is checking out
+        } else if segue.identifier == "GoToCode" {
+                let destinationVC = segue.destination as? QRCodeViewController
+                destinationVC?.checkedOut = checkedOut;
+                destinationVC?.barcodes = barcodes;
+                destinationVC?.error = "";
+                
+                if(adminStudentUID != "") { //uid is set to a value, meaning an admin is checking out
+                    destinationVC?.adminChoseStudent = true
+                    
+                }
         }
     }
 
