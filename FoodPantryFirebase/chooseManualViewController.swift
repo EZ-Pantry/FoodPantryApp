@@ -31,14 +31,13 @@ class chooseManualViewController: UIViewController {
         super.viewDidLoad()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
-        // Do any additional setup after loading the view.
         
         ref = Database.database().reference()
         
         //make buttons round
         self.yesButton.layer.cornerRadius = 15
         self.yesButton.clipsToBounds = true
-        
+        //make buttons round
         yesButton.titleLabel?.minimumScaleFactor = 0.5
         yesButton.titleLabel?.numberOfLines = 1;
         yesButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -46,6 +45,7 @@ class chooseManualViewController: UIViewController {
         self.noButton.layer.cornerRadius = 15
         self.noButton.clipsToBounds = true
         
+        //make sure button text fits all screen sizes
         noButton.titleLabel?.minimumScaleFactor = 0.5
         noButton.titleLabel?.numberOfLines = 1;
         noButton.titleLabel?.adjustsFontSizeToFitWidth = true

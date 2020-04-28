@@ -11,13 +11,13 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
     var ref: DatabaseReference! //reference to the firebase database
     var PantryName: String = ""
     
-    @IBOutlet var checkoutSwitch: UISwitch!
-    @IBOutlet var adminCode: UITextField!
-    @IBOutlet var saveButton: UIButton!
-    @IBOutlet var maxFood: UITextField!
+    @IBOutlet var checkoutSwitch: UISwitch!//kill switch for checkouts
+    @IBOutlet var adminCode: UITextField!//the administrator code
+    @IBOutlet var saveButton: UIButton!//save
+    @IBOutlet var maxFood: UITextField!//maximum # of food items which can be checked out
     
-    @IBOutlet var pantryCode: UITextField!
-    @IBOutlet var location: UITextField!
+    @IBOutlet var pantryCode: UITextField!//pantry code to sign up
+    @IBOutlet var location: UITextField!//pantry location
     
     var activeField: UITextField!
     
@@ -27,10 +27,11 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
         ref = Database.database().reference()
         self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
 
+       //make rounded buttons
        saveButton.layer.cornerRadius = 15
        saveButton.clipsToBounds = true
         
-        
+        //make sure button text fits all screen sizes
         saveButton.titleLabel?.minimumScaleFactor = 0.5
         saveButton.titleLabel?.numberOfLines = 1;
         saveButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -47,6 +48,7 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
         location.delegate = self;
     }
     override func viewWillDisappear(_ animated: Bool) {
+        //remove observers
         super.viewWillDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -84,6 +86,7 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
         //check if checking out is allowed
         self.view.isUserInteractionEnabled = false
                
+        //load in firebase data->admins code, pantry location, pantry code, max # of items to be checked out
         ref.child(self.PantryName).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
@@ -120,6 +123,7 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func saveAdminCode(_ sender: Any) {
         
+        //save new admin field reponses to pantry defaults
         let newAdminCode = adminCode.text?.filterEmoji ?? ""
         let newPantryCode = pantryCode.text?.filterEmoji ?? ""
         let newLocation = location.text?.filterEmoji ?? ""
@@ -145,7 +149,7 @@ class otherAdminViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func checkoutChanged(_ sender: Any) {
-        
+        //change if food is allowed to be checked out at pantry
         if(checkoutSwitch.isOn) {
             self.ref.child(self.PantryName).child("CanCheckout").setValue("yes");
         } else {

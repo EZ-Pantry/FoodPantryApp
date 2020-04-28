@@ -16,9 +16,11 @@ class passwordResetViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //make buttons rounded
         resetPasswordButton.layer.cornerRadius = 15
         resetPasswordButton.clipsToBounds = true
         
+        //make sure button text fits all screens
         resetPasswordButton.titleLabel?.minimumScaleFactor = 0.5
         resetPasswordButton.titleLabel?.numberOfLines = 1;
         resetPasswordButton.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -66,12 +68,8 @@ class passwordResetViewController: UIViewController, UITextFieldDelegate {
             
         func textFieldDidBeginEditing(_ textField: UITextField){
             self.activeField = textField
-    //        authenticationWithTouchID()
         }
 
-    //    func textFieldDidEndEditing(_ textField: UITextField){
-    //        activeField = nil
-    //    }
 
          @objc func keyboardWillShow(notification: NSNotification) {
                    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I3t-8a-fsA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I3t-8a-fsA">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1635,7 +1635,7 @@
                                 </variation>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eZ pantry Logo-png-1" translatesAutoresizingMaskIntoConstraints="NO" id="46a-nl-Rlq">
-                                <rect key="frame" x="125.66666666666669" y="113" width="162.66666666666663" height="128"/>
+                                <rect key="frame" x="125.66666666666667" y="113" width="162.66666666666663" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="46a-nl-Rlq" secondAttribute="height" multiplier="5:4" id="3pU-Lm-fuK"/>
                                     <constraint firstAttribute="width" secondItem="46a-nl-Rlq" secondAttribute="height" multiplier="33:26" id="85k-bu-6uK"/>
@@ -2000,7 +2000,7 @@
                                         </variation>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RMk-BT-PEw">
-                                        <rect key="frame" x="116.33333333333331" y="8" width="181.33333333333337" height="99"/>
+                                        <rect key="frame" x="116.33333333333333" y="8" width="181.33333333333337" height="99"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="RMk-BT-PEw" secondAttribute="height" multiplier="212:133" id="fQf-41-rYg"/>
                                             <constraint firstAttribute="width" secondItem="RMk-BT-PEw" secondAttribute="height" multiplier="222:121" id="uop-3V-Dzt"/>
@@ -3876,7 +3876,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-ko-YwO">
-                                <rect key="frame" x="82.666666666666686" y="162.33333333333337" width="248.66666666666663" height="248.66666666666663"/>
+                                <rect key="frame" x="82.666666666666671" y="162.33333333333337" width="248.66666666666663" height="248.66666666666663"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Teo-ko-YwO" secondAttribute="height" multiplier="1:1" id="s9m-U6-T4s"/>
                                     <constraint firstAttribute="width" secondItem="Teo-ko-YwO" secondAttribute="height" multiplier="1:1" id="vQf-v9-bTH"/>
@@ -4052,15 +4052,15 @@
                                 <exclude reference="Mcs-AB-bgj"/>
                                 <exclude reference="lIx-ih-xab"/>
                                 <exclude reference="pEX-zl-Qyp"/>
+                                <exclude reference="FR6-j8-uIT"/>
+                                <exclude reference="TXb-av-SWr"/>
+                                <exclude reference="e4O-Dv-agr"/>
                                 <exclude reference="Jes-YR-x6C"/>
                                 <exclude reference="SnR-iG-uyc"/>
                                 <exclude reference="f6L-pL-NNL"/>
                                 <exclude reference="oFr-Zb-4t8"/>
                                 <exclude reference="pVC-tb-oUH"/>
                                 <exclude reference="wBm-pH-MWf"/>
-                                <exclude reference="FR6-j8-uIT"/>
-                                <exclude reference="TXb-av-SWr"/>
-                                <exclude reference="e4O-Dv-agr"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -4079,10 +4079,10 @@
                                 <include reference="LeV-I0-W73"/>
                                 <include reference="lIx-ih-xab"/>
                                 <include reference="pEX-zl-Qyp"/>
+                                <include reference="e4O-Dv-agr"/>
                                 <include reference="SnR-iG-uyc"/>
                                 <include reference="oFr-Zb-4t8"/>
                                 <include reference="pVC-tb-oUH"/>
-                                <include reference="e4O-Dv-agr"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -4100,11 +4100,11 @@
                                 <include reference="pyB-cS-eTL"/>
                                 <include reference="8mu-KN-PYO"/>
                                 <include reference="Mcs-AB-bgj"/>
+                                <include reference="FR6-j8-uIT"/>
+                                <include reference="TXb-av-SWr"/>
                                 <include reference="Jes-YR-x6C"/>
                                 <include reference="f6L-pL-NNL"/>
                                 <include reference="wBm-pH-MWf"/>
-                                <include reference="FR6-j8-uIT"/>
-                                <include reference="TXb-av-SWr"/>
                             </mask>
                         </variation>
                     </view>
@@ -4138,7 +4138,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngj-8w-6Ju">
-                                    <rect key="frame" x="97.666666666666686" y="20" width="218.66666666666663" height="71"/>
+                                    <rect key="frame" x="97.666666666666671" y="20" width="218.66666666666663" height="71"/>
                                     <color key="backgroundColor" red="0.0" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="ngj-8w-6Ju" secondAttribute="height" multiplier="77:25" id="IXv-MW-Fuk"/>
@@ -4169,7 +4169,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USd-ft-9Pk">
-                                    <rect key="frame" x="97.666666666666686" y="116" width="218.66666666666663" height="70.666666666666686"/>
+                                    <rect key="frame" x="97.666666666666671" y="116" width="218.66666666666663" height="70.666666666666686"/>
                                     <color key="backgroundColor" red="0.0" green="0.36078431370000003" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="USd-ft-9Pk" secondAttribute="height" multiplier="77:25" id="RzL-be-Nea"/>
@@ -6479,7 +6479,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Healthy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bnL-To-EHJ">
-                                <rect key="frame" x="84.666666666666686" y="472.66666666666669" width="244.66666666666663" height="34.666666666666686"/>
+                                <rect key="frame" x="84.666666666666671" y="472.66666666666669" width="244.66666666666663" height="34.666666666666686"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bnL-To-EHJ" secondAttribute="height" multiplier="155:22" id="B6P-Zg-g4A"/>
                                 </constraints>
@@ -6532,7 +6532,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NpH-AQ-b4a">
-                                <rect key="frame" x="87" y="307" width="245.66666666666663" height="34"/>
+                                <rect key="frame" x="86.999999999999986" y="307" width="245.66666666666663" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NpH-AQ-b4a" secondAttribute="height" multiplier="152:21" id="Bhc-NA-5al"/>
                                 </constraints>
@@ -6541,7 +6541,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allergies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-7E-YY4">
-                                <rect key="frame" x="87" y="224.33333333333334" width="245.66666666666663" height="33.666666666666657"/>
+                                <rect key="frame" x="86.999999999999986" y="224.33333333333334" width="245.66666666666663" height="33.666666666666657"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ial-7E-YY4" secondAttribute="height" multiplier="152:21" id="zet-Ok-7gz"/>
                                 </constraints>
@@ -6559,7 +6559,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aNh-k3-7Pp">
-                                <rect key="frame" x="84.666666666666686" y="68.666666666666671" width="244.66666666666663" height="23.666666666666671"/>
+                                <rect key="frame" x="84.666666666666671" y="68.666666666666671" width="244.66666666666663" height="23.666666666666671"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aNh-k3-7Pp" secondAttribute="height" multiplier="31:3" id="zoK-SP-eGs"/>
                                 </constraints>
@@ -6568,7 +6568,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4lu-wh-Ioo">
-                                <rect key="frame" x="117.66666666666669" y="644.66666666666663" width="178.66666666666663" height="88.333333333333371"/>
+                                <rect key="frame" x="117.66666666666667" y="644.66666666666663" width="178.66666666666663" height="88.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4lu-wh-Ioo" secondAttribute="height" multiplier="204:101" id="AFs-7j-XhE"/>
                                     <constraint firstAttribute="width" secondItem="4lu-wh-Ioo" secondAttribute="height" multiplier="89:44" id="f9p-TX-Ya2"/>
@@ -6605,7 +6605,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Food Name" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6IT-TH-PKA">
-                                <rect key="frame" x="87" y="97.333333333333329" width="245.66666666666663" height="33.999999999999986"/>
+                                <rect key="frame" x="86.999999999999986" y="97.333333333333329" width="245.66666666666663" height="33.999999999999986"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6IT-TH-PKA" secondAttribute="height" multiplier="152:21" id="2sx-pt-xv8"/>
                                 </constraints>
@@ -6619,7 +6619,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sc3-qS-LHa">
-                                <rect key="frame" x="84.666666666666686" y="390" width="244.66666666666663" height="34.666666666666686"/>
+                                <rect key="frame" x="84.666666666666671" y="390" width="244.66666666666663" height="34.666666666666686"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sc3-qS-LHa" secondAttribute="height" multiplier="155:22" id="Niy-5y-VUy"/>
                                 </constraints>
@@ -6726,7 +6726,7 @@
                                 </variation>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Checkable Amount" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gBA-TK-wFz">
-                                <rect key="frame" x="86.333333333333314" y="603.33333333333337" width="241.33333333333337" height="33.333333333333371"/>
+                                <rect key="frame" x="86.333333333333329" y="603.33333333333337" width="241.33333333333337" height="33.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gBA-TK-wFz" secondAttribute="height" multiplier="137:17" id="bym-84-KEa"/>
                                     <constraint firstAttribute="width" secondItem="gBA-TK-wFz" secondAttribute="height" multiplier="152:21" id="gZ7-av-IqL"/>
@@ -6952,13 +6952,6 @@
                                 <exclude reference="SeH-Kl-oJc"/>
                                 <exclude reference="Ukj-02-60h"/>
                                 <exclude reference="piA-J8-twm"/>
-                                <exclude reference="0fW-Cw-awc"/>
-                                <exclude reference="Ern-Vu-9Fl"/>
-                                <exclude reference="Oh6-2C-vWP"/>
-                                <exclude reference="ekd-0f-Wox"/>
-                                <exclude reference="gyw-Sx-jOk"/>
-                                <exclude reference="jWU-Ic-Vfz"/>
-                                <exclude reference="mC4-ps-GvT"/>
                                 <exclude reference="2YD-eK-HMU"/>
                                 <exclude reference="6yj-os-xjl"/>
                                 <exclude reference="A5t-wb-WAv"/>
@@ -6969,6 +6962,13 @@
                                 <exclude reference="mtW-GK-Sxj"/>
                                 <exclude reference="oRY-eC-cNE"/>
                                 <exclude reference="xs3-uA-Ch9"/>
+                                <exclude reference="0fW-Cw-awc"/>
+                                <exclude reference="Ern-Vu-9Fl"/>
+                                <exclude reference="Oh6-2C-vWP"/>
+                                <exclude reference="ekd-0f-Wox"/>
+                                <exclude reference="gyw-Sx-jOk"/>
+                                <exclude reference="jWU-Ic-Vfz"/>
+                                <exclude reference="mC4-ps-GvT"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -6998,18 +6998,18 @@
                                 <exclude reference="glP-2F-WGa"/>
                                 <exclude reference="oFl-60-LiU"/>
                                 <include reference="piA-J8-twm"/>
-                                <include reference="Ern-Vu-9Fl"/>
-                                <include reference="Oh6-2C-vWP"/>
-                                <include reference="ekd-0f-Wox"/>
-                                <include reference="jWU-Ic-Vfz"/>
-                                <exclude reference="lEm-ni-gR8"/>
-                                <exclude reference="zrm-oH-y3L"/>
                                 <include reference="2YD-eK-HMU"/>
                                 <include reference="6yj-os-xjl"/>
                                 <exclude reference="QAX-Fx-Gnw"/>
                                 <include reference="SPT-8X-qCT"/>
                                 <exclude reference="VAP-3l-BAg"/>
                                 <include reference="buU-Ae-zPX"/>
+                                <include reference="Ern-Vu-9Fl"/>
+                                <include reference="Oh6-2C-vWP"/>
+                                <include reference="ekd-0f-Wox"/>
+                                <include reference="jWU-Ic-Vfz"/>
+                                <exclude reference="lEm-ni-gR8"/>
+                                <exclude reference="zrm-oH-y3L"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -7040,11 +7040,6 @@
                                 <include reference="SeH-Kl-oJc"/>
                                 <exclude reference="glP-2F-WGa"/>
                                 <exclude reference="oFl-60-LiU"/>
-                                <include reference="0fW-Cw-awc"/>
-                                <include reference="gyw-Sx-jOk"/>
-                                <exclude reference="lEm-ni-gR8"/>
-                                <include reference="mC4-ps-GvT"/>
-                                <exclude reference="zrm-oH-y3L"/>
                                 <include reference="A5t-wb-WAv"/>
                                 <exclude reference="QAX-Fx-Gnw"/>
                                 <exclude reference="VAP-3l-BAg"/>
@@ -7053,6 +7048,11 @@
                                 <include reference="mtW-GK-Sxj"/>
                                 <include reference="oRY-eC-cNE"/>
                                 <include reference="xs3-uA-Ch9"/>
+                                <include reference="0fW-Cw-awc"/>
+                                <include reference="gyw-Sx-jOk"/>
+                                <exclude reference="lEm-ni-gR8"/>
+                                <include reference="mC4-ps-GvT"/>
+                                <exclude reference="zrm-oH-y3L"/>
                             </mask>
                         </variation>
                     </view>
@@ -11557,7 +11557,7 @@
                                 <rect key="frame" x="25" y="98" width="364" height="680"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sC6-Hw-EJj">
-                                        <rect key="frame" x="56.666666666666686" y="55" width="250.66666666666663" height="26"/>
+                                        <rect key="frame" x="56.666666666666671" y="55" width="250.66666666666663" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="sC6-Hw-EJj" secondAttribute="height" multiplier="106:11" id="HMI-V3-TUT"/>
                                         </constraints>
@@ -12501,21 +12501,6 @@
             <point key="canvasLocation" x="4918.840579710145" y="906.69642857142856"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="barcode.viewfinder" catalog="system" width="64" height="56"/>
-        <image name="blurred3" width="114" height="222"/>
-        <image name="cart" catalog="system" width="64" height="50"/>
-        <image name="cross" width="40" height="40"/>
-        <image name="eZ pantry Logo-png" width="1081" height="1081"/>
-        <image name="eZ pantry Logo-png-1" width="1042" height="1027"/>
-        <image name="exclamationmark.square" catalog="system" width="64" height="56"/>
-        <image name="gear" catalog="system" width="64" height="58"/>
-        <image name="house.fill" catalog="system" width="64" height="52"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="paperbackground" width="1184" height="792"/>
-        <image name="person.crop.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="xmark.octagon" catalog="system" width="64" height="56"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3Qs-b0-Rjn"/>
         <segue reference="Dwa-lY-C5Y"/>
@@ -12524,4 +12509,19 @@
         <segue reference="EuT-4I-1uS"/>
         <segue reference="Ona-bs-GLF"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="barcode.viewfinder" catalog="system" width="128" height="114"/>
+        <image name="blurred3" width="114" height="222"/>
+        <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="cross" width="40" height="40"/>
+        <image name="eZ pantry Logo-png" width="1081" height="1081"/>
+        <image name="eZ pantry Logo-png-1" width="1042" height="1027"/>
+        <image name="exclamationmark.square" catalog="system" width="128" height="114"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="paperbackground" width="1184" height="792"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="xmark.octagon" catalog="system" width="128" height="112"/>
+    </resources>
 </document>

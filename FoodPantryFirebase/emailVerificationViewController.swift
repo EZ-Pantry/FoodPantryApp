@@ -17,17 +17,18 @@ class emailVerificationViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //create rounded buttons
         sendEmailVerificationButton.layer.cornerRadius = 15
         sendEmailVerificationButton.clipsToBounds = true
-        
+        //make sure button text fits all screen sizes
         sendEmailVerificationButton.titleLabel?.minimumScaleFactor = 0.5
         sendEmailVerificationButton.titleLabel?.numberOfLines = 1;
         sendEmailVerificationButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //add observers
          NotificationCenter.default.addObserver(self, selector: #selector(emailVerificationViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
                NotificationCenter.default.addObserver(self, selector: #selector(emailVerificationViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         emailAddressTextField.delegate = self;
@@ -57,6 +58,7 @@ class emailVerificationViewController: UIViewController, UITextFieldDelegate {
                         user!.sendEmailVerification(completion: { (error) in
                             print("sent verification")
                             if(error == nil) {
+                                //email verification link is sent again
                                 let alert = UIAlertController(title: "Email Sent", message: "The verification email has been sent. Check your inbox!", preferredStyle: .alert)
                                 UserDefaults.standard.set("Bad", forKey: "Times Unlocked")
                                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
@@ -91,12 +93,8 @@ class emailVerificationViewController: UIViewController, UITextFieldDelegate {
             
         func textFieldDidBeginEditing(_ textField: UITextField){
             self.activeField = textField
-    //        authenticationWithTouchID()
         }
 
-    //    func textFieldDidEndEditing(_ textField: UITextField){
-    //        activeField = nil
-    //    }
 
          @objc func keyboardWillShow(notification: NSNotification) {
                    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {

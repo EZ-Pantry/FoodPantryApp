@@ -12,7 +12,7 @@ import LocalAuthentication
 
 class logInViewController: UIViewController, UITextFieldDelegate {
  
-    @IBOutlet weak var useFaceIdButton: UIButton!
+    @IBOutlet weak var useFaceIdButton: UIButton!//face ID/touch ID button
     @IBOutlet weak var emailAddressTextField: UITextField!//where user inputs their school email address
     @IBOutlet weak var passwordTextField: UITextField!//where user inputs the password
     @IBOutlet weak var continueButton: UIButton!//where user clicks to continue to home screen
@@ -25,6 +25,7 @@ class logInViewController: UIViewController, UITextFieldDelegate {
         
         super.viewDidLoad()
         
+        //firebase reference
         ref = Database.database().reference()
 
         //Create rounded buttons
@@ -32,17 +33,18 @@ class logInViewController: UIViewController, UITextFieldDelegate {
         continueButton.clipsToBounds = true
         
         
-        
+        //make sure that text of buttons fits on all screens
         continueButton.titleLabel?.minimumScaleFactor = 0.5
         continueButton.titleLabel?.numberOfLines = 1;
         continueButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        
+        //make sure that text of buttons fits on all screens
         forgotPasswordButton.titleLabel?.minimumScaleFactor = 0.5
         forgotPasswordButton.titleLabel?.numberOfLines = 1;
         forgotPasswordButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
         if(UserDefaults.contains("Times Unlocked")){
-            print("in here")
+            //If the user has already (one time) logged in manually with email & password,
+            //they can then use the FACE ID/TOUCH ID feature, the next time they sign in
             var canUseBiometrics = UserDefaults.standard.object(forKey:"Times Unlocked") as! String
             if(canUseBiometrics == "Good"){
                 useFaceIdButton.isHidden = false
@@ -62,7 +64,7 @@ class logInViewController: UIViewController, UITextFieldDelegate {
     
     func authenticationWithTouchID() {
         let localAuthenticationContext = LAContext()
-        localAuthenticationContext.localizedFallbackTitle = "Please use your Passcode"
+        localAuthenticationContext.localizedFallbackTitle = "Please use your Passcode"//if failed attempts are too many, then they manually enter their phone password
 
         var authorizationError: NSError?
         let reason = "Authentication required to access the secure data"
@@ -74,7 +76,7 @@ class logInViewController: UIViewController, UITextFieldDelegate {
                 if success {
                     DispatchQueue.main.async() {
                         var canUseBiometrics = UserDefaults.standard.object(forKey:"Times Unlocked") as! String
-                        var emailaddress = UserDefaults.standard.object(forKey:"Latest Email") as! String
+                        var emailaddress = UserDefaults.standard.object(forKey:"Latest Email") as! String//used to auth sign in
                         var password = UserDefaults.standard.object(forKey:"Latest Password") as! String
                         if(canUseBiometrics == "Good"){
                             self.signInUser(email: emailaddress, password: password)
@@ -198,13 +200,16 @@ class logInViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //set up the textfield view move up functions
          NotificationCenter.default.addObserver(self, selector: #selector(logInViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
                NotificationCenter.default.addObserver(self, selector: #selector(logInViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        //assign delegates
         emailAddressTextField.delegate = self;
         passwordTextField.delegate = self;
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        //remove observers->avoid nil error
         super.viewWillDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -213,12 +218,8 @@ class logInViewController: UIViewController, UITextFieldDelegate {
         
     func textFieldDidBeginEditing(_ textField: UITextField){
         self.activeField = textField
-//        authenticationWithTouchID()
     }
 
-//    func textFieldDidEndEditing(_ textField: UITextField){
-//        activeField = nil
-//    }
 
      @objc func keyboardWillShow(notification: NSNotification) {
                if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {

@@ -10,13 +10,14 @@ import Firebase
 
 class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    @IBOutlet var firstNameField: UITextField!
-    @IBOutlet var lastNameField: UITextField!
+    @IBOutlet var firstNameField: UITextField!//users name
+    @IBOutlet var lastNameField: UITextField!//users lastname
     @IBOutlet weak var schoolID: UITextField!//where user enters their school ID #(i.e 912111)
     @IBOutlet weak var emailTextField: UITextField!//where user enters their email address(jake@students.d211.org)
     @IBOutlet weak var passwordTextField: UITextField!//where user enters their password they want to use w/account
     @IBOutlet weak var allergiesTextField: UITextField!//where user enters any allergies they have
     
+    //below are labels with error messages for each sector
     @IBOutlet var emailErrorLabel: UILabel!
     @IBOutlet var passwordErrorLabel: UILabel!
     @IBOutlet var firstNameErrorLabel: UILabel!
@@ -31,7 +32,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     var pantryName: String = ""//The pantry which user belongs to
     var userType = ""
     
-    var activeField: UITextField!
+    var activeField: UITextField!//determines which textfield is being edited off of
     
     lazy var functions = Functions.functions()
     
@@ -45,9 +46,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         continueButton.layer.cornerRadius = 15
         continueButton.clipsToBounds = true
         
+        //Create rounded butons
         continueButton.titleLabel?.minimumScaleFactor = 0.5
         continueButton.titleLabel?.numberOfLines = 1;
         continueButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        //database reference
         ref = Database.database().reference()
         
 
@@ -55,6 +59,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             informationHeader.isHidden = true
             allergiesTextField.isHidden = true
             schoolID.isHidden = true
+            //specific fields are shown depending on user tyoe
         }
         
         emailErrorLabel.isHidden = true
@@ -66,6 +71,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         yourPicker.delegate = self
         yourPicker.dataSource = self
         
+        //allergies are able to selected through Pickerview
         allergiesTextField.inputView = yourPicker
         pickerData = ["None", "Dairy", "Eggs", "Peanuts", "Tree Nuts", "Shellfish", "Wheat", "Soy", "Fish", "Other"]
     }
@@ -96,8 +102,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //set up the textfield view move up functions
          NotificationCenter.default.addObserver(self, selector: #selector(SignUpViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
                NotificationCenter.default.addObserver(self, selector: #selector(SignUpViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        //asign delgates
         firstNameField.delegate = self;
         lastNameField.delegate = self;
         emailTextField.delegate = self;
@@ -106,6 +114,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         schoolID.delegate = self;
     }
     override func viewWillDisappear(_ animated: Bool) {
+        //makessure to remove observer to avoid nil error
         super.viewWillDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -141,6 +150,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     //validation methods
     
     func isValidEmail(_ email: String) -> Bool {
+        //checks if email is valid with the proper naming convention
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
 
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -148,6 +158,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
     
     func isValidPassword(_ password: String) -> Bool {
+        //if password is greater than 8 characters, its good
         return password.count >= 8
     }
     
@@ -160,12 +171,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         guard var password = passwordTextField.text else { return }//get users password
         guard var allergies = allergiesTextField.text else { return }//get users allergies
         
-        firstName = firstName.trimmingCharacters(in: .whitespaces)
+         firstName = firstName.trimmingCharacters(in: .whitespaces)//trim the blanks (white space)
          lastName = lastName.trimmingCharacters(in: .whitespaces)
          emailaddress = emailaddress.trimmingCharacters(in: .whitespaces)
         
         var userError = false
         
+        //error chekcs to make sure fields are properly filled in
         if firstName == "" || firstName.containsEmoji {
             firstNameErrorLabel.isHidden = false
             userError = true
@@ -181,7 +193,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         }
         
         
-        
+        //error chekcs to make sure fields are properly filled in
         if (schoolIDNumber.count != 6 && schoolIDNumber.count != 9) && userType == "student" {
             idErrorLabel.isHidden = false
             userError = true
@@ -192,21 +204,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         if(schoolIDNumber.count == 9) {
             schoolIDNumber = schoolIDNumber.substring(from: 3);
         }
-        
+        //error chekcs to make sure fields are properly filled in
         if !isValidEmail(emailaddress) || emailaddress.containsEmoji {
             emailErrorLabel.isHidden = false
             userError = true
         } else {
             emailErrorLabel.isHidden = true
         }
-        
+        //error chekcs to make sure fields are properly filled in
         if !isValidPassword(password) || password.containsEmoji {
             passwordErrorLabel.isHidden = false
             userError = true
         } else {
             passwordErrorLabel.isHidden = true
         }
-        
+        //error chekcs to make sure fields are properly filled in
         if allergies == "" || allergies.containsEmoji {
             allergies = "None"
         }
@@ -216,6 +228,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                 if error == nil && user != nil {
                     if(self.userType == "admin"){
                         //If correct admin code was entered, create a new administrator account who can access the admin page
+                        //set firebase nodes depending on user type
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("First Name").setValue(firstName)
                         self.ref.child(self.pantryName).child("Users").child(user!.user.uid).child("Last Name").setValue(lastName)
 
@@ -349,6 +362,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                 
                 })
             } else {
+                //display alert they are good to go and they can sign in
                 let alert = UIAlertController(title: "Your Email is Already Verified, Continue to Login", message: "Please try again!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil);

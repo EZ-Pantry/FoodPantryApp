@@ -10,9 +10,9 @@ import UIKit
 import FirebaseUI
 class FAQViewController: UIViewController {
 
-    var ref: DatabaseReference!
+    var ref: DatabaseReference!//reference to the database
     
-    var stringOfFAQData : [[String: Any]] =  []
+    var stringOfFAQData : [[String: Any]] =  []//quesitons and answers arary
     var alert = LoadingBar()
     var PantryName = ""
     
@@ -77,24 +77,13 @@ class FAQViewController: UIViewController {
     var items: [FAQItem] = []
     func loadQuestionsAndAnswers(){
         for x in 0..<stringOfFAQData.count{
-            let item = FAQItem(question: stringOfFAQData[x]["question"] as! String, answer: stringOfFAQData[x]["answer"] as! String)
+            let item = FAQItem(question: stringOfFAQData[x]["question"] as! String, answer: stringOfFAQData[x]["answer"] as! String)//add the question and answer to their own containers
             items.append(item)
         }
 
-        let faqView = FAQView(frame: view.frame, title: "Top Questions", items: items)//set the title
+        let faqView = FAQView(frame: view.frame, title: "Top Questions", items: items)//set the title for the FAQ page
         
         view.addSubview(faqView)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

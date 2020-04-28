@@ -33,10 +33,6 @@ class chooseUserViewController: UIViewController, UITextFieldDelegate {
         ref = Database.database().reference()
         
         
-        
-
-//        self.PantryName = UserDefaults.standard.object(forKey:"Pantry Name") as! String
-        
         studentBtn.layer.cornerRadius = 15
         studentBtn.clipsToBounds = true
         
@@ -76,11 +72,13 @@ class chooseUserViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //add observers to notify when to move view up and down on textfield location 
          NotificationCenter.default.addObserver(self, selector: #selector(chooseUserViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
                NotificationCenter.default.addObserver(self, selector: #selector(chooseUserViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         adminCode.delegate = self;
     }
     override func viewWillDisappear(_ animated: Bool) {
+        //remove observers
         super.viewWillDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
