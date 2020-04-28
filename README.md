@@ -135,7 +135,7 @@ Made by two high school juniors: Rayaan Siddiqi and Ashay Parikh
 
 Reach out to us at one of the following places!
 
-- Website at <a href="https://ezpantry.org`</a>
+- Website at <a href="https://ezpantry.org"</a>
 
 ---
 
