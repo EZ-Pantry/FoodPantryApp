@@ -25,7 +25,7 @@ Available on the App Store: `app store link`
 Made by two high school juniors: Rayaan Siddiqi and Ashay Parikh
 | <a href="https://rayaansiddiqi.com" target="_blank">**Rayaan Siddiqi**</a> | <a href="https://ashayp.com" target="_blank">**Ashay Parikh**</a>| 
 | :---: |:---:
-| [![Rayaan Siddiqi](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](https://rayaansiddiqi.com)    | [![Ashay Parikh](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](https://ashayp.com) | 
+| [Rayaan Siddiqi](https://rayaansiddiqi.com)    | [Ashay Parikh](https://ashayp.com) | 
 | <a href="https://rayaansiddiqi.com" target="_blank">`https://rayaansiddiqi.com`</a> | <a href="https://ashayp.com" target="_blank">`https://ashayp.com`</a> | 
 
 
